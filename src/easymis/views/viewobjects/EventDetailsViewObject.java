@@ -2,7 +2,6 @@ package easymis.views.viewobjects;
 
 import easymis.models.entity.enumeration.BookingStatus;
 import easymis.models.entity.enumeration.EventCategory;
-import java.sql.Date;
 
 /**
  *
@@ -10,7 +9,7 @@ import java.sql.Date;
  */
 public class EventDetailsViewObject {
     
-    private Date eventDate;
+    private String eventDate;
     
     private String fullName;
     
@@ -20,11 +19,11 @@ public class EventDetailsViewObject {
     
     private String bookingId;
     
-    private Date bookingDate;
+    private String bookingDate;
     
     private EventCategory eventCategory;
 
-    public EventDetailsViewObject(Date eventDate, String fullName, BookingStatus bookingStatus, String eventType, String bookingId, Date bookingDate, EventCategory eventCategory) {
+    public EventDetailsViewObject(String eventDate, String fullName, BookingStatus bookingStatus, String eventType, String bookingId, String bookingDate, EventCategory eventCategory) {
         this.eventDate = eventDate;
         this.fullName = fullName;
         this.bookingStatus = bookingStatus;
@@ -34,7 +33,7 @@ public class EventDetailsViewObject {
         this.eventCategory = eventCategory;
     }
 
-    public Date getEventDate() {
+    public String getEventDate() {
         return eventDate;
     }
 
@@ -54,7 +53,7 @@ public class EventDetailsViewObject {
         return  bookingId;
     }
 
-    public Date getBookingDate() {
+    public String getBookingDate() {
         return bookingDate;
     }
 

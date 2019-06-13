@@ -14,11 +14,13 @@ import easymis.models.entity.enumeration.EventCategory;
 import easymis.models.entity.utils.EventCategoryUtils;
 import easymis.models.repository.EventRepository;
 import easymis.utils.AlertHelper;
+import easymis.utils.AlertMessages;
 import easymis.utils.DateHelper;
 import easymis.views.viewobjects.EventDetailsViewObject;
 import java.net.URL;
 import java.sql.Date;
 import java.util.List;
+import java.util.Optional;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -27,6 +29,9 @@ import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
@@ -180,28 +185,27 @@ public class EventBookingViewController implements Initializable {
 
     @FXML
     private void blockEvent(ActionEvent event) {
-        if (event != null) {
-            manageEventCreation(BookingStatus.BLOCKED);
+        if (event != null && validateMandatory()) {
+            showBookingConfirmation(BookingStatus.BLOCKED);
         }
     }
 
     @FXML
     private void bookEvent(ActionEvent event) {
-        if (event != null) {
-            manageEventCreation(BookingStatus.BOOKED);
+        if (event != null && validateMandatory()) {
+            showBookingConfirmation(BookingStatus.BOOKED);
         }
     }
 
     public void manageEventCreation(BookingStatus bookingStatus) {
-        if (validateMandatory()) {
-            EventDetails eventDetail = getEventDetails(bookingStatus);
-            TransactionStatus status = EventRepository.getUniqueInstance().create(eventDetail);
-            AlertHelper.showMessage(status);
-            lblEventCategory.setText(eventDetail.getEventCategory().toString());
-            if (status.isSuccess()) {
-                disableAllFields(true);
-            }
+        EventDetails eventDetail = getEventDetails(bookingStatus);
+        TransactionStatus status = EventRepository.getUniqueInstance().create(eventDetail);
+        AlertHelper.showMessage(status);
+        lblEventCategory.setText(eventDetail.getEventCategory().toString());
+        if (status.isSuccess()) {
+            disableAllFields(true);
         }
+
     }
 
     private EventDetails getEventDetails(BookingStatus bookingStatus) {
@@ -246,7 +250,7 @@ public class EventBookingViewController implements Initializable {
             errorMessage.append(" Address Line 1,");
             isValid = false;
         }
-        if (primaryMobileNumber.getText() == null || "".equals(addressLine1.getText())) {
+        if (primaryMobileNumber.getText() == null || "".equals(primaryMobileNumber.getText())) {
             errorMessage.append(" Mobile Number,");
             isValid = false;
         }
@@ -278,31 +282,53 @@ public class EventBookingViewController implements Initializable {
         disableAllFields(false);
         clearFields();
     }
-    
+
     @FXML
     private void bookEventInUpdate(ActionEvent event) {
-        EventDetails eventDetail = getEventDetailsForUpdate(BookingStatus.BOOKED);
-        manageEventUpdate(eventDetail, true);
+        if (validateMandatoryFieldsInUpdate()) {
+            Alert alert = new Alert(AlertType.CONFIRMATION);
+            alert.setHeaderText("");
+            alert.setTitle(getConfirmationDialogTitle(BookingStatus.BOOKED));
+            alert.setContentText(getConfirmationDialogContent(BookingStatus.BOOKED));
+
+            Optional<ButtonType> option = alert.showAndWait();
+            if (option.get() == null) {
+            } else if (option.get() == ButtonType.OK) {
+                EventDetails eventDetail = getEventDetailsForUpdate(BookingStatus.BOOKED);
+                manageEventUpdate(eventDetail, true);
+            }
+        }
     }
 
     @FXML
     private void updateEvent(ActionEvent event) {
-        BookingStatus currentBookingStatus = BookingStatus.valueOf(updBookingStatus.getText());
-        EventDetails eventDetail = getEventDetailsForUpdate(currentBookingStatus);
-        manageEventUpdate(eventDetail, false);
-    }
-    
-    private void manageEventUpdate(EventDetails eventDetail, boolean isNewBooking){
         if (validateMandatoryFieldsInUpdate()) {
-            
-            TransactionStatus status = EventRepository.getUniqueInstance().update(eventDetail, isNewBooking);
-            AlertHelper.showMessage(status);
-            lblEventCategory1.setText(eventDetail.getEventCategory().toString());
-            if (status.isSuccess()) {
-                disableAllFieldsInUpdate(true);
-                updBookingStatus.setText(eventDetail.getBookingStatus().toString());
+            BookingStatus currentBookingStatus = BookingStatus.fromValue(updBookingStatus.getText());
+            Alert alert = new Alert(AlertType.CONFIRMATION);
+            alert.setHeaderText("");
+            alert.setTitle(getConfirmationDialogTitle(currentBookingStatus));
+            alert.setContentText(getConfirmationDialogContent(currentBookingStatus));
+
+            Optional<ButtonType> option = alert.showAndWait();
+            if (option.get() == null) {
+            } else if (option.get() == ButtonType.OK) {
+                EventDetails eventDetail = getEventDetailsForUpdate(currentBookingStatus);
+                manageEventUpdate(eventDetail, false);
             }
+
         }
+    }
+
+    private void manageEventUpdate(EventDetails eventDetail, boolean isNewBooking) {
+
+        TransactionStatus status = EventRepository.getUniqueInstance().update(eventDetail, isNewBooking);
+        AlertHelper.showMessage(status);
+        lblEventCategory1.setText(eventDetail.getEventCategory().toString());
+        if (status.isSuccess()) {
+            disableAllFieldsInUpdate(true);
+            updBookingStatus.setText(eventDetail.getBookingStatus().toString());
+        }
+
     }
 
     private void initializeEventTableColumnFields() {
@@ -313,19 +339,19 @@ public class EventBookingViewController implements Initializable {
         col_bookingId.setCellValueFactory(new PropertyValueFactory<>("bookingId"));
         col_BookingDate.setCellValueFactory(new PropertyValueFactory<>("bookingDate"));
         col_EventCategory.setCellValueFactory(new PropertyValueFactory<>("eventCategory"));
-        eventTable.setRowFactory( tv -> {
+        eventTable.setRowFactory(tv -> {
             TableRow<EventDetailsViewObject> row = new TableRow<>();
             row.setOnMouseClicked(event -> {
                 if (event.getClickCount() == 2 && (!row.isEmpty())) {
                     EventDetailsViewObject rowData = row.getItem();
-                    if(rowData != null){
-                     populateDetailsForUpdate(rowData.getBookingId());
-                     tabPane.getSelectionModel().select(panelTabUpdateEvent);
+                    if (rowData != null) {
+                        populateDetailsForUpdate(rowData.getBookingId());
+                        tabPane.getSelectionModel().select(panelTabUpdateEvent);
                     }
                 }
             });
             return row;
-});
+        });
     }
 
     public EventHandler<KeyEvent> onBookingIdChange() {
@@ -367,12 +393,12 @@ public class EventBookingViewController implements Initializable {
                 updEventDate.setDisable(true);
                 if (BookingStatus.BOOKED.equals(event.getBookingStatus())) {
                     updBtnBook.setDisable(true);
-                }else{
+                } else {
                     updBtnBook.setDisable(false);
                 }
-                if(BookingStatus.BLOCKING_CANCELLED.equals(event.getBookingStatus()) || BookingStatus.BOOKING_CANCELLED.equals(event.getBookingStatus())){
+                if (BookingStatus.BLOCKING_CANCELLED.equals(event.getBookingStatus()) || BookingStatus.BOOKING_CANCELLED.equals(event.getBookingStatus())) {
                     updCancelButton.setDisable(true);
-                }else{
+                } else {
                     updCancelButton.setDisable(false);
                 }
                 btnUpdate.setDisable(false);
@@ -385,7 +411,7 @@ public class EventBookingViewController implements Initializable {
         disableAllFieldsInUpdate(false);
         clearAllFieldsInUpdate();
     }
-    
+
     private void disableAllFields(boolean flag) {
         firstName.setDisable(flag);
         lastName.setDisable(flag);
@@ -479,7 +505,7 @@ public class EventBookingViewController implements Initializable {
         updBookingId.clear();
         updBookingStatus.setText("");
     }
-    
+
     @FXML
     private void onWeddingSelection(ActionEvent event) {
     }
@@ -558,7 +584,7 @@ public class EventBookingViewController implements Initializable {
         eventDetails.setNicaSelected(updNiceHall.isSelected());
         eventDetails.setAcSelected(updAcRequired.isSelected());
         eventDetails.setAdditionalACSelected(updAdditionalAC.isSelected());
-            eventDetails.setBookingStatus(bookingStatus);
+        eventDetails.setBookingStatus(bookingStatus);
         eventDetails.setEventCategory(EventCategoryUtils.getEventCategory(buildEventCategoryDetailForUpdate()));
         eventDetails.setPrimaryMobile(updPrimaryMobile.getText());
         eventDetails.setAlternateMobile(updAlternateMobile.getText());
@@ -580,15 +606,27 @@ public class EventBookingViewController implements Initializable {
 
     @FXML
     private void cancelEvent(ActionEvent event) {
-        BookingStatus newBookngStatus = null;
-        BookingStatus currentBookingStatus = BookingStatus.valueOf(updBookingStatus.getText());
-        if(BookingStatus.BOOKED.equals(currentBookingStatus)){
-            newBookngStatus = BookingStatus.BOOKING_CANCELLED;
-        }else if(BookingStatus.BLOCKED.equals(currentBookingStatus)){
-            newBookngStatus = BookingStatus.BLOCKING_CANCELLED;
+
+        if (validateMandatoryFieldsInUpdate()) {
+            BookingStatus newBookngStatus = null;
+            BookingStatus currentBookingStatus = BookingStatus.fromValue(updBookingStatus.getText());
+            if (BookingStatus.BOOKED.equals(currentBookingStatus)) {
+                newBookngStatus = BookingStatus.BOOKING_CANCELLED;
+            } else if (BookingStatus.BLOCKED.equals(currentBookingStatus)) {
+                newBookngStatus = BookingStatus.BLOCKING_CANCELLED;
+            }
+            Alert alert = new Alert(AlertType.CONFIRMATION);
+            alert.setHeaderText("");
+            alert.setTitle(getConfirmationDialogTitle(newBookngStatus));
+            alert.setContentText(getConfirmationDialogContent(newBookngStatus));
+
+            Optional<ButtonType> option = alert.showAndWait();
+            if (option.get() == null) {
+            } else if (option.get() == ButtonType.OK) {
+                EventDetails eventDetail = getEventDetailsForUpdate(newBookngStatus);
+                manageEventUpdate(eventDetail, false);
+            }
         }
-        EventDetails eventDetail = getEventDetailsForUpdate(newBookngStatus);
-        manageEventUpdate(eventDetail, false);
     }
 
     @FXML
@@ -606,11 +644,74 @@ public class EventBookingViewController implements Initializable {
 
     @FXML
     private void onAddEventTabSelection(Event event) {
-        
+
     }
 
     @FXML
     private void onUpdateEventTabSelection(Event event) {
-        
+
+    }
+
+    private void showBookingConfirmation(BookingStatus bookingStatus) {
+
+        Alert alert = new Alert(AlertType.CONFIRMATION);
+        alert.setHeaderText("");
+        alert.setTitle(getConfirmationDialogTitle(bookingStatus));
+        alert.setContentText(getConfirmationDialogContent(bookingStatus));
+
+        // option != null.
+        Optional<ButtonType> option = alert.showAndWait();
+
+        handleOkClickOnConfirmationPopup(option, bookingStatus);
+    }
+
+    private String getConfirmationDialogTitle(BookingStatus bookingStatus) {
+        String title = "";
+        if (null != bookingStatus) {
+            switch (bookingStatus) {
+                case BOOKED:
+                    title = AlertMessages.BOOKING_CONFIRMATION_TITLE;
+                    break;
+                case BLOCKED:
+                    title = AlertMessages.BLOCKING_CONFIRMATION_TITLE;
+                    break;
+                case BLOCKING_CANCELLED:
+                case BOOKING_CANCELLED:
+                    title = AlertMessages.CANCELLATION_CONFIRMATION_TITLE;
+                    break;
+                default:
+                    break;
+            }
+        }
+        return title;
+    }
+
+    private String getConfirmationDialogContent(BookingStatus bookingStatus) {
+        String content = "";
+        if (null != bookingStatus) {
+            switch (bookingStatus) {
+                case BOOKED:
+                    content = AlertMessages.BOOKING_CONFIRMATION_CONTENT;
+                    break;
+                case BLOCKED:
+                    content = AlertMessages.BLOCKING_CONFIRMATION_CONTENT;
+                    break;
+                case BLOCKING_CANCELLED:
+                case BOOKING_CANCELLED:
+                    content = AlertMessages.CANCELLATION_CONFIRMATION_CONTENT;
+                    break;
+                default:
+                    break;
+            }
+        }
+        return content;
+    }
+
+    private void handleOkClickOnConfirmationPopup(Optional<ButtonType> option, BookingStatus bookingStatus) {
+
+        if (option.get() == null) {
+        } else if (option.get() == ButtonType.OK) {
+            manageEventCreation(bookingStatus);
+        }
     }
 }

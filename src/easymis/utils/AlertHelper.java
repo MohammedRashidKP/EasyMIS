@@ -12,6 +12,7 @@ import javafx.scene.control.ButtonType;
 public class AlertHelper {
     public static void showErrorMessage(String errorMessage){
         Alert alert = new Alert(Alert.AlertType.ERROR, errorMessage, ButtonType.OK);
+        alert.setHeaderText("");
             alert.show();
     }
     
@@ -19,6 +20,7 @@ public class AlertHelper {
         if(message == null)
             message = "Operation Completed Successfully";
         Alert alert = new Alert(Alert.AlertType.INFORMATION, message, ButtonType.OK);
+        alert.setHeaderText("");
             alert.show();
     }
     

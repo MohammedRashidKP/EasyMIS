@@ -2,6 +2,7 @@ package easymis.controllers.assembler;
 
 import easymis.models.entity.EventDetails;
 import easymis.models.entity.enumeration.EventType;
+import easymis.utils.DateHelper;
 import easymis.views.viewobjects.EventDetailsViewObject;
 import java.util.ArrayList;
 import java.util.List;
@@ -21,8 +22,8 @@ public class EventDetailsAssembler {
             fullName.append(" ").append(eventDetails.getLastName());
         }
         String eventType = resolveEventType(eventDetails);
-        EventDetailsViewObject eventDetailsViewObject = new EventDetailsViewObject(eventDetails.getEventDate(), fullName.toString(), eventDetails.getBookingStatus(), 
-                eventType, eventDetails.getBookingId(), eventDetails.getCreatedDate(), eventDetails.getEventCategory());
+        EventDetailsViewObject eventDetailsViewObject = new EventDetailsViewObject(DateHelper.format(eventDetails.getEventDate()) , fullName.toString(), eventDetails.getBookingStatus(), 
+                eventType, eventDetails.getBookingId(), DateHelper.format(eventDetails.getCreatedDate()), eventDetails.getEventCategory());
         return eventDetailsViewObject;
     }
 

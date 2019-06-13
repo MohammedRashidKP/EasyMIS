@@ -1,7 +1,6 @@
 package easymis.models.repository;
 
 import easymis.models.entity.EventDetails;
-import easymis.models.entity.TransactionStatus;
 import easymis.models.entity.enumeration.BookingStatus;
 import easymis.utils.DateHelper;
 import easymis.utils.IDateUtils;
@@ -12,6 +11,7 @@ import java.io.InputStream;
 import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Properties;
 import java.util.logging.Level;
@@ -82,14 +82,17 @@ public class EventRepositoryTest {
     @Test
     public void testCreate() {
         System.out.println("create");
-        EventDetails eventDetails = getEventDetails();
-        eventDetails.setBookingStatus(BookingStatus.BOOKED);
-        EventRepository instance = EventRepository.getUniqueInstance();
-        TransactionStatus expResult = null;
-        TransactionStatus result = instance.create(eventDetails);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        LocalDate date = LocalDate.now();
+        for(int i=0; i< 15000; i++){
+            EventDetails eventDetails = getEventDetails();
+            date.plusDays(1);
+            eventDetails.setBookingStatus(BookingStatus.BOOKED);
+            eventDetails.setEventDate(java.sql.Date.valueOf(date));
+            eventDetails.setCreatedDate(java.sql.Date.valueOf(date));
+            EventRepository instance = EventRepository.getUniqueInstance();
+            instance.create(eventDetails);
+        
+    }
     }
 
     /**

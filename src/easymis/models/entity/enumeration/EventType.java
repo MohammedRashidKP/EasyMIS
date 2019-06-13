@@ -5,5 +5,25 @@ package easymis.models.entity.enumeration;
  * @author RashidKP
  */
 public enum EventType {
-   WEDDING, MEHANDI, RECEPTION, NORMAL_AC, ADDITIONAL_AC, ISHA_HALL_AC, NICA_LONGUE_AC; 
+   WEDDING("Wedding"),
+   MEHANDI("Mehandi"),
+   RECEPTION("Reception"), 
+   NORMAL_AC("AC"),
+   ADDITIONAL_AC("Additional AC"),
+   ISHA_HALL_AC("Isha Hall"),
+   NICA_LONGUE_AC("Nica Longue");
+   
+   private String value;
+    EventType(final String value){
+        this.value = value;
+    }
+    
+    public String getValue(){
+        return value;
+    }
+    
+    @Override
+    public String toString(){
+        return this.getValue();
+    }
 }

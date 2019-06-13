@@ -146,8 +146,8 @@ public class DashboardController implements Initializable {
 
     private String calculateAverageMonthlyBooking(int totalBooking) {
         int averageMonthlyBooking = totalBooking/12;
-        if(averageMonthlyBooking ==0)
-            averageMonthlyBooking =1;
+        if(averageMonthlyBooking == 0)
+            averageMonthlyBooking = 1;
         return String.valueOf(averageMonthlyBooking);
     }
 
