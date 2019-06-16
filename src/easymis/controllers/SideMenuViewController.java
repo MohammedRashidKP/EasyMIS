@@ -58,22 +58,27 @@ public class SideMenuViewController implements Initializable {
 
     @FXML
     private void openExpenses(ActionEvent event) {
+        switchPane(Constants.EXPENSES_VIEW);
     }
 
     @FXML
     private void openReports(ActionEvent event) {
+        switchPane(Constants.REPORT_VIEW);
     }
 
     @FXML
     private void openEmployees(ActionEvent event) {
+        switchPane(Constants.EMPLOYEE_VIEW);
     }
 
     @FXML
     private void openInventory(ActionEvent event) {
+        switchPane(Constants.INVENTORY_VIEW);
     }
 
     @FXML
     private void openSettings(ActionEvent event) {
+        switchPane(Constants.SETTINGS_VIEW);
     }
     
     private void switchPane(String pane){

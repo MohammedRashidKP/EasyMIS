@@ -227,12 +227,7 @@
                         <Font name="System Bold" size="18.0" />
                      </font>
                   </Text>
-                  <Text fill="DARKSLATEGRAY" fontSmoothingType="LCD" layoutX="128.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Avg Booking">
-                     <font>
-                        <Font name="System Bold" size="14.0" />
-                     </font>
-                  </Text>
-                  <Text fill="DARKSLATEGRAY" fontSmoothingType="LCD" layoutX="128.0" layoutY="35.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Monthly">
+                  <Text fill="DARKSLATEGRAY" fontSmoothingType="LCD" layoutX="128.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Monthly Booking">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>

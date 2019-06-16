@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXTabPane?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.StackPane?>
+
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="680.0" prefWidth="1220.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="easymis.controllers.EmployeeController">
+   <children>
+      <AnchorPane prefHeight="680.0" prefWidth="1200.0">
+         <children>
+            <AnchorPane layoutX="23.0" layoutY="24.0" prefHeight="629.0" prefWidth="1140.0" styleClass="card" stylesheets="@styles.css" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="30.0">
+               <children>
+                  <Pane prefHeight="69.0" prefWidth="1179.0" styleClass="blue-gradient" />
+                  <JFXTabPane fx:id="tabPane" layoutY="32.0" prefHeight="600.0" prefWidth="1180.0">
+                     <tabs>
+                        <Tab fx:id="panelTabAllEvents" onSelectionChanged="#onAllEventsTabSelection" text="Completed Events">
+                          <content>
+                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="1221.0">
+                                 <children>
+                                    <TableView fx:id="eventTable" prefHeight="563.0" prefWidth="533.0" AnchorPane.bottomAnchor="12.0" AnchorPane.leftAnchor="12.0" AnchorPane.rightAnchor="12.0" AnchorPane.topAnchor="12.0">
+                                      <columns>
+                                          <TableColumn fx:id="col_bookingId" prefWidth="99.0" text="Booking ID" />
+                                        <TableColumn fx:id="col_EventDate" prefWidth="121.0" text="Event Date" />
+                                        <TableColumn fx:id="col_fullName" prefWidth="172.0" text="Full Name" />
+                                          <TableColumn fx:id="col_BookingStatus" prefWidth="123.0" text="Booking Status" />
+                                          <TableColumn fx:id="col_eventType" prefWidth="412.0" text="Event Type" />
+                                          <TableColumn fx:id="col_BookingDate" prefWidth="126.0" text="Booking Date" />
+                                          <TableColumn fx:id="col_EventCategory" prefWidth="102.0" text="Event Category" />
+                                      </columns>
+                                    </TableView>
+                                 </children>
+                              </AnchorPane>
+                          </content>
+                        </Tab>
+                        <Tab fx:id="panelTabUpdateEvent" onSelectionChanged="#onUpdateEventTabSelection" text="Expenses" />
+                     </tabs>
+                  </JFXTabPane>
+               </children>
+            </AnchorPane>
+         </children>
+      </AnchorPane>
+   </children>
+</StackPane>

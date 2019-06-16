@@ -4,7 +4,9 @@
 <?import com.jfoenix.controls.JFXDatePicker?>
 <?import com.jfoenix.controls.JFXTabPane?>
 <?import com.jfoenix.controls.JFXTextField?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
 <?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TableColumn?>
@@ -47,52 +49,52 @@
                           <content>
                             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                  <children>
-                                    <JFXTextField fx:id="firstName" layoutX="108.0" layoutY="79.0" prefHeight="25.0" prefWidth="240.0" promptText="First Name" AnchorPane.leftAnchor="110.0" AnchorPane.topAnchor="70.0">
+                                    <JFXTextField fx:id="firstName" labelFloat="true" layoutX="108.0" layoutY="79.0" prefHeight="25.0" prefWidth="240.0" promptText="First Name" unFocusColor="#a8a7ab" AnchorPane.leftAnchor="110.0" AnchorPane.topAnchor="70.0">
                                        <font>
                                           <Font size="15.0" />
                                        </font>
                                     </JFXTextField>
-                                    <JFXTextField fx:id="lastName" layoutX="493.0" layoutY="78.0" prefHeight="25.0" prefWidth="240.0" promptText="Last Name" AnchorPane.leftAnchor="500.0" AnchorPane.topAnchor="70.0">
+                                    <JFXTextField fx:id="lastName" labelFloat="true" layoutX="493.0" layoutY="78.0" prefHeight="25.0" prefWidth="240.0" promptText="Last Name" unFocusColor="#a8a7ab" AnchorPane.leftAnchor="500.0" AnchorPane.topAnchor="70.0">
                                        <font>
                                           <Font size="15.0" />
                                        </font>
                                     </JFXTextField>
-                                    <JFXTextField fx:id="addressLine1" layoutX="117.0" layoutY="153.0" prefHeight="25.0" prefWidth="240.0" promptText="Address Line 1" AnchorPane.leftAnchor="110.0" AnchorPane.topAnchor="120.0">
+                                    <JFXTextField fx:id="addressLine1" labelFloat="true" layoutX="117.0" layoutY="153.0" prefHeight="25.0" prefWidth="240.0" promptText="Address Line 1" unFocusColor="#a8a7ab" AnchorPane.leftAnchor="110.0" AnchorPane.topAnchor="120.0">
                                        <font>
                                           <Font size="15.0" />
                                        </font>
                                     </JFXTextField>
-                                    <JFXTextField fx:id="addressLine2" layoutX="502.0" layoutY="152.0" prefHeight="25.0" prefWidth="243.0" promptText="Address Line 2" AnchorPane.leftAnchor="500.0" AnchorPane.topAnchor="120.0">
+                                    <JFXTextField fx:id="addressLine2" labelFloat="true" layoutX="502.0" layoutY="152.0" prefHeight="25.0" prefWidth="243.0" promptText="Address Line 2" unFocusColor="#a8a7ab" AnchorPane.leftAnchor="500.0" AnchorPane.topAnchor="120.0">
                                        <font>
                                           <Font size="15.0" />
                                        </font>
                                     </JFXTextField>
-                                    <JFXTextField fx:id="addressLine3" layoutX="107.0" layoutY="217.0" prefHeight="25.0" prefWidth="240.0" promptText="Address Line 3" AnchorPane.leftAnchor="110.0" AnchorPane.topAnchor="170.0">
+                                    <JFXTextField fx:id="addressLine3" labelFloat="true" layoutX="107.0" layoutY="217.0" prefHeight="25.0" prefWidth="240.0" promptText="Address Line 3" unFocusColor="#a8a7ab" AnchorPane.leftAnchor="110.0" AnchorPane.topAnchor="170.0">
                                        <font>
                                           <Font size="15.0" />
                                        </font>
                                     </JFXTextField>
-                                    <JFXTextField fx:id="district" layoutX="492.0" layoutY="216.0" prefHeight="25.0" prefWidth="240.0" promptText="District" AnchorPane.leftAnchor="500.0" AnchorPane.topAnchor="170.0">
+                                    <JFXTextField fx:id="district" labelFloat="true" layoutX="492.0" layoutY="216.0" prefHeight="25.0" prefWidth="240.0" promptText="District" unFocusColor="#a8a7ab" AnchorPane.leftAnchor="500.0" AnchorPane.topAnchor="170.0">
                                        <font>
                                           <Font size="15.0" />
                                        </font>
                                     </JFXTextField>
-                                    <JFXTextField fx:id="state" layoutX="116.0" layoutY="291.0" prefHeight="25.0" prefWidth="240.0" promptText="State" AnchorPane.leftAnchor="110.0" AnchorPane.topAnchor="220.0">
+                                    <JFXTextField fx:id="state" labelFloat="true" layoutX="116.0" layoutY="291.0" prefHeight="25.0" prefWidth="240.0" promptText="State" unFocusColor="#a8a7ab" AnchorPane.leftAnchor="110.0" AnchorPane.topAnchor="220.0">
                                        <font>
                                           <Font size="15.0" />
                                        </font>
                                     </JFXTextField>
-                                    <JFXTextField fx:id="pinCode" layoutX="501.0" layoutY="290.0" prefHeight="25.0" prefWidth="240.0" promptText="Pin Code" AnchorPane.leftAnchor="500.0" AnchorPane.topAnchor="220.0">
+                                    <JFXTextField fx:id="pinCode" labelFloat="true" layoutX="501.0" layoutY="290.0" prefHeight="25.0" prefWidth="240.0" promptText="Pin Code" unFocusColor="#a8a7ab" AnchorPane.leftAnchor="500.0" AnchorPane.topAnchor="220.0">
                                        <font>
                                           <Font size="15.0" />
                                        </font>
                                     </JFXTextField>
-                                    <JFXTextField fx:id="primaryMobileNumber" layoutX="120.0" layoutY="230.0" prefHeight="25.0" prefWidth="240.0" promptText="Primary Mobile Number" AnchorPane.leftAnchor="110.0" AnchorPane.topAnchor="270.0">
+                                    <JFXTextField fx:id="primaryMobileNumber" labelFloat="true" layoutX="120.0" layoutY="230.0" prefHeight="25.0" prefWidth="240.0" promptText="Primary Mobile Number" unFocusColor="#a8a7ab" AnchorPane.leftAnchor="110.0" AnchorPane.topAnchor="270.0">
                                        <font>
                                           <Font size="15.0" />
                                        </font>
                                     </JFXTextField>
-                                    <JFXTextField fx:id="alternateMobileNumber" layoutX="511.0" layoutY="230.0" prefHeight="25.0" prefWidth="240.0" promptText="Alternate Mobile Number" AnchorPane.leftAnchor="500.0" AnchorPane.topAnchor="270.0">
+                                    <JFXTextField fx:id="alternateMobileNumber" labelFloat="true" layoutX="511.0" layoutY="230.0" prefHeight="25.0" prefWidth="240.0" promptText="Alternate Mobile Number" unFocusColor="#a8a7ab" AnchorPane.leftAnchor="500.0" AnchorPane.topAnchor="270.0">
                                        <font>
                                           <Font size="15.0" />
                                        </font>
@@ -132,7 +134,7 @@
                                           <Font name="System Bold" size="15.0" />
                                        </font>
                                     </CheckBox>
-                                    <JFXDatePicker fx:id="eventDate" defaultColor="#3a84c3" layoutX="110.0" layoutY="28.0" pickOnBounds="false" promptText="Event Date" AnchorPane.topAnchor="30.0">
+                                    <JFXDatePicker fx:id="eventDate" defaultColor="#0868bc" layoutX="110.0" layoutY="28.0" pickOnBounds="false" promptText="Event Date" AnchorPane.topAnchor="30.0">
                                        <effect>
                                           <Glow />
                                        </effect>
@@ -152,8 +154,20 @@
                                                 <Font size="18.0" />
                                              </font>
                                           </Label>
+                                          <JFXButton buttonType="RAISED" layoutX="38.0" layoutY="169.0" prefHeight="38.0" prefWidth="136.0" style="-fx-background-color: #3a84c3;" text="Get Cost" textFill="WHITE">
+                                             <font>
+                                                <Font name="System Bold" size="17.0" />
+                                             </font>
+                                          </JFXButton>
+                                          <FontAwesomeIconView fill="WHITE" glyphName="INR" layoutX="158.0" layoutY="197.0" size="20" />
                                        </children>
                                     </Pane>
+                                    <CheckBox fx:id="ishaHall1" contentDisplay="CENTER" graphicTextGap="20.0" layoutX="820.0" layoutY="391.0" lineSpacing="10.0" mnemonicParsing="false" onAction="#onIshaHallSelection" text="Advance amount paid">
+                                       <font>
+                                          <Font name="System Bold" size="15.0" />
+                                       </font>
+                                    </CheckBox>
+                                    <ComboBox layoutX="651.0" layoutY="458.0" prefHeight="25.0" prefWidth="32.0" />
                                  </children>
                               </AnchorPane>
                           </content>
