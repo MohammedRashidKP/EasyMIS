@@ -97,6 +97,15 @@
                         <FontAwesomeIconView fill="WHITE" fontSmoothingType="LCD" glyphName="SEARCH" layoutX="50.0" layoutY="47.0" size="36" />
                      </children>
                   </AnchorPane>
+                  <AnchorPane layoutX="314.0" layoutY="194.0" prefHeight="20.0" prefWidth="106.0" style="-fx-background-color: #3A84C3;" styleClass="card">
+                     <children>
+                        <Text fx:id="receptionAvailability1" fill="WHITE" fontSmoothingType="LCD" layoutX="5.0" layoutY="15.0" strokeType="OUTSIDE" strokeWidth="0.0">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </Text>
+                     </children>
+                  </AnchorPane>
                </children>
             </AnchorPane>
             <AnchorPane layoutX="643.0" layoutY="415.0" prefHeight="408.0" prefWidth="563.0" style="-fx-background-color: #ffffff;" styleClass="card">
@@ -141,7 +150,14 @@
                         <Font name="System Bold" size="14.0" />
                      </font>
                   </Text>
-                  <JFXTextArea fx:id="diamondNotifications" disable="true" editable="false" layoutX="15.0" layoutY="110.0" prefHeight="269.0" prefWidth="533.0" />
+                  <JFXTextArea fx:id="diamondNotifications" disable="true" editable="false" layoutX="15.0" layoutY="87.0" prefHeight="214.0" prefWidth="532.0" />
+                  <JFXButton buttonType="RAISED" layoutX="437.0" layoutY="306.0" prefHeight="37.0" prefWidth="106.0" style="-fx-background-color: #3A84C3;" text="Sync" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="16.0" />
+                     </font>
+                  </JFXButton>
+                  <FontAwesomeIconView fill="WHITE" glyphName="REFRESH" layoutX="515.0" layoutY="335.0" size="24" />
+                  <FontAwesomeIconView fill="WHITE" glyphName="DIAMOND" layoutX="220.0" layoutY="99.0" size="24" />
                </children></AnchorPane>
             <AnchorPane layoutX="31.0" layoutY="213.0" prefHeight="159.0" prefWidth="266.0" style="-fx-background-color: #ffffff;" styleClass="card">
                <children>

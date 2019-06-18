@@ -49,99 +49,99 @@
                           <content>
                             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                  <children>
-                                    <JFXTextField fx:id="firstName" labelFloat="true" layoutX="108.0" layoutY="79.0" prefHeight="25.0" prefWidth="240.0" promptText="First Name" unFocusColor="#a8a7ab" AnchorPane.leftAnchor="110.0" AnchorPane.topAnchor="70.0">
+                                    <JFXTextField fx:id="firstName" labelFloat="true" layoutX="108.0" layoutY="79.0" prefHeight="25.0" prefWidth="240.0" promptText="First Name" unFocusColor="#a8a7ab" AnchorPane.leftAnchor="110.0" AnchorPane.topAnchor="90.0">
                                        <font>
                                           <Font size="15.0" />
                                        </font>
                                     </JFXTextField>
-                                    <JFXTextField fx:id="lastName" labelFloat="true" layoutX="493.0" layoutY="78.0" prefHeight="25.0" prefWidth="240.0" promptText="Last Name" unFocusColor="#a8a7ab" AnchorPane.leftAnchor="500.0" AnchorPane.topAnchor="70.0">
+                                    <JFXTextField fx:id="lastName" labelFloat="true" layoutX="493.0" layoutY="78.0" prefHeight="25.0" prefWidth="240.0" promptText="Last Name" unFocusColor="#a8a7ab" AnchorPane.leftAnchor="500.0" AnchorPane.topAnchor="90.0">
                                        <font>
                                           <Font size="15.0" />
                                        </font>
                                     </JFXTextField>
-                                    <JFXTextField fx:id="addressLine1" labelFloat="true" layoutX="117.0" layoutY="153.0" prefHeight="25.0" prefWidth="240.0" promptText="Address Line 1" unFocusColor="#a8a7ab" AnchorPane.leftAnchor="110.0" AnchorPane.topAnchor="120.0">
+                                    <JFXTextField fx:id="addressLine1" labelFloat="true" layoutX="117.0" layoutY="153.0" prefHeight="25.0" prefWidth="240.0" promptText="Address Line 1" unFocusColor="#a8a7ab" AnchorPane.leftAnchor="110.0" AnchorPane.topAnchor="140.0">
                                        <font>
                                           <Font size="15.0" />
                                        </font>
                                     </JFXTextField>
-                                    <JFXTextField fx:id="addressLine2" labelFloat="true" layoutX="502.0" layoutY="152.0" prefHeight="25.0" prefWidth="243.0" promptText="Address Line 2" unFocusColor="#a8a7ab" AnchorPane.leftAnchor="500.0" AnchorPane.topAnchor="120.0">
+                                    <JFXTextField fx:id="addressLine2" labelFloat="true" layoutX="502.0" layoutY="152.0" prefHeight="25.0" prefWidth="243.0" promptText="Address Line 2" unFocusColor="#a8a7ab" AnchorPane.leftAnchor="500.0" AnchorPane.topAnchor="140.0">
                                        <font>
                                           <Font size="15.0" />
                                        </font>
                                     </JFXTextField>
-                                    <JFXTextField fx:id="addressLine3" labelFloat="true" layoutX="107.0" layoutY="217.0" prefHeight="25.0" prefWidth="240.0" promptText="Address Line 3" unFocusColor="#a8a7ab" AnchorPane.leftAnchor="110.0" AnchorPane.topAnchor="170.0">
+                                    <JFXTextField fx:id="addressLine3" labelFloat="true" layoutX="107.0" layoutY="217.0" prefHeight="25.0" prefWidth="240.0" promptText="Address Line 3" unFocusColor="#a8a7ab" AnchorPane.leftAnchor="110.0" AnchorPane.topAnchor="190.0">
                                        <font>
                                           <Font size="15.0" />
                                        </font>
                                     </JFXTextField>
-                                    <JFXTextField fx:id="district" labelFloat="true" layoutX="492.0" layoutY="216.0" prefHeight="25.0" prefWidth="240.0" promptText="District" unFocusColor="#a8a7ab" AnchorPane.leftAnchor="500.0" AnchorPane.topAnchor="170.0">
+                                    <JFXTextField fx:id="district" labelFloat="true" layoutX="492.0" layoutY="216.0" prefHeight="25.0" prefWidth="240.0" promptText="District" unFocusColor="#a8a7ab" AnchorPane.leftAnchor="500.0" AnchorPane.topAnchor="190.0">
                                        <font>
                                           <Font size="15.0" />
                                        </font>
                                     </JFXTextField>
-                                    <JFXTextField fx:id="state" labelFloat="true" layoutX="116.0" layoutY="291.0" prefHeight="25.0" prefWidth="240.0" promptText="State" unFocusColor="#a8a7ab" AnchorPane.leftAnchor="110.0" AnchorPane.topAnchor="220.0">
+                                    <JFXTextField fx:id="state" labelFloat="true" layoutX="116.0" layoutY="291.0" prefHeight="25.0" prefWidth="240.0" promptText="State" unFocusColor="#a8a7ab" AnchorPane.leftAnchor="110.0" AnchorPane.topAnchor="240.0">
                                        <font>
                                           <Font size="15.0" />
                                        </font>
                                     </JFXTextField>
-                                    <JFXTextField fx:id="pinCode" labelFloat="true" layoutX="501.0" layoutY="290.0" prefHeight="25.0" prefWidth="240.0" promptText="Pin Code" unFocusColor="#a8a7ab" AnchorPane.leftAnchor="500.0" AnchorPane.topAnchor="220.0">
+                                    <JFXTextField fx:id="pinCode" labelFloat="true" layoutX="501.0" layoutY="290.0" prefHeight="25.0" prefWidth="240.0" promptText="Pin Code" unFocusColor="#a8a7ab" AnchorPane.leftAnchor="500.0" AnchorPane.topAnchor="240.0">
                                        <font>
                                           <Font size="15.0" />
                                        </font>
                                     </JFXTextField>
-                                    <JFXTextField fx:id="primaryMobileNumber" labelFloat="true" layoutX="120.0" layoutY="230.0" prefHeight="25.0" prefWidth="240.0" promptText="Primary Mobile Number" unFocusColor="#a8a7ab" AnchorPane.leftAnchor="110.0" AnchorPane.topAnchor="270.0">
+                                    <JFXTextField fx:id="primaryMobileNumber" labelFloat="true" layoutX="120.0" layoutY="230.0" prefHeight="25.0" prefWidth="240.0" promptText="Primary Mobile Number" unFocusColor="#a8a7ab" AnchorPane.leftAnchor="110.0" AnchorPane.topAnchor="290.0">
                                        <font>
                                           <Font size="15.0" />
                                        </font>
                                     </JFXTextField>
-                                    <JFXTextField fx:id="alternateMobileNumber" labelFloat="true" layoutX="511.0" layoutY="230.0" prefHeight="25.0" prefWidth="240.0" promptText="Alternate Mobile Number" unFocusColor="#a8a7ab" AnchorPane.leftAnchor="500.0" AnchorPane.topAnchor="270.0">
+                                    <JFXTextField fx:id="alternateMobileNumber" labelFloat="true" layoutX="511.0" layoutY="230.0" prefHeight="25.0" prefWidth="240.0" promptText="Alternate Mobile Number" unFocusColor="#a8a7ab" AnchorPane.leftAnchor="500.0" AnchorPane.topAnchor="290.0">
                                        <font>
                                           <Font size="15.0" />
                                        </font>
                                     </JFXTextField>
-                                    <CheckBox fx:id="wedding" contentDisplay="CENTER" graphicTextGap="20.0" layoutX="120.0" layoutY="384.0" lineSpacing="10.0" mnemonicParsing="false" onAction="#onWeddingSelection" text="Wedding" AnchorPane.leftAnchor="110.0" AnchorPane.topAnchor="380.0">
+                                    <CheckBox fx:id="wedding" contentDisplay="CENTER" graphicTextGap="20.0" layoutX="110.0" layoutY="410.0" lineSpacing="10.0" mnemonicParsing="false" onAction="#onWeddingSelection" text="Wedding" AnchorPane.leftAnchor="110.0" AnchorPane.topAnchor="410.0">
                                        <font>
                                           <Font name="System Bold" size="15.0" />
                                        </font>
                                     </CheckBox>
-                                    <CheckBox fx:id="mehandi" contentDisplay="CENTER" graphicTextGap="20.0" layoutX="120.0" layoutY="424.0" lineSpacing="10.0" mnemonicParsing="false" onAction="#onMehandiSelection" text="Mehandi" AnchorPane.leftAnchor="110.0" AnchorPane.topAnchor="420.0">
+                                    <CheckBox fx:id="mehandi" contentDisplay="CENTER" graphicTextGap="20.0" layoutX="109.0" layoutY="450.0" lineSpacing="10.0" mnemonicParsing="false" onAction="#onMehandiSelection" text="Mehandi" AnchorPane.leftAnchor="110.0" AnchorPane.topAnchor="450.0">
                                        <font>
                                           <Font name="System Bold" size="15.0" />
                                        </font>
                                     </CheckBox>
-                                    <CheckBox fx:id="reception" contentDisplay="CENTER" graphicTextGap="20.0" layoutX="122.0" layoutY="380.0" lineSpacing="10.0" mnemonicParsing="false" onAction="#onReceptionSelection" text="Reception" AnchorPane.leftAnchor="110.0" AnchorPane.topAnchor="460.0">
+                                    <CheckBox fx:id="reception" contentDisplay="CENTER" graphicTextGap="20.0" layoutX="108.0" layoutY="488.0" lineSpacing="10.0" mnemonicParsing="false" onAction="#onReceptionSelection" text="Reception" AnchorPane.leftAnchor="110.0" AnchorPane.topAnchor="490.0">
                                        <font>
                                           <Font name="System Bold" size="15.0" />
                                        </font>
                                     </CheckBox>
-                                    <CheckBox fx:id="acRequired" contentDisplay="CENTER" graphicTextGap="20.0" layoutX="500.0" layoutY="499.0" lineSpacing="10.0" mnemonicParsing="false" onAction="#onAcRequiredSelection" text="A/C Required" AnchorPane.leftAnchor="500.0" AnchorPane.topAnchor="499.0">
+                                    <CheckBox fx:id="acRequired" contentDisplay="CENTER" graphicTextGap="20.0" layoutX="505.0" layoutY="410.0" lineSpacing="10.0" mnemonicParsing="false" onAction="#onAcRequiredSelection" text="A/C Required" AnchorPane.leftAnchor="500.0" AnchorPane.topAnchor="410.0">
                                        <font>
                                           <Font name="System Bold" size="15.0" />
                                        </font>
                                     </CheckBox>
-                                    <CheckBox fx:id="ishaHall" contentDisplay="CENTER" graphicTextGap="20.0" layoutX="527.0" layoutY="380.0" lineSpacing="10.0" mnemonicParsing="false" onAction="#onIshaHallSelection" text="Isha Hall - A/C" AnchorPane.leftAnchor="500.0" AnchorPane.topAnchor="380.0">
+                                    <CheckBox fx:id="ishaHall" contentDisplay="CENTER" graphicTextGap="20.0" layoutX="501.0" layoutY="490.0" lineSpacing="10.0" mnemonicParsing="false" onAction="#onIshaHallSelection" text="Isha Hall - A/C" AnchorPane.leftAnchor="500.0" AnchorPane.topAnchor="490.0">
                                        <font>
                                           <Font name="System Bold" size="15.0" />
                                        </font>
                                     </CheckBox>
-                                    <CheckBox fx:id="niceHall" contentDisplay="CENTER" graphicTextGap="20.0" layoutX="500.0" layoutY="420.0" lineSpacing="10.0" mnemonicParsing="false" onAction="#onNicaHallSelection" text="Nica Hall - A/C" AnchorPane.leftAnchor="500.0" AnchorPane.topAnchor="420.0">
+                                    <CheckBox fx:id="niceHall" contentDisplay="CENTER" graphicTextGap="20.0" layoutX="500.0" layoutY="519.0" lineSpacing="10.0" mnemonicParsing="false" onAction="#onNicaHallSelection" text="Nica Hall - A/C" AnchorPane.leftAnchor="500.0" AnchorPane.topAnchor="530.0">
                                        <font>
                                           <Font name="System Bold" size="15.0" />
                                        </font>
                                     </CheckBox>
-                                    <CheckBox fx:id="additionalAC" contentDisplay="CENTER" graphicTextGap="20.0" layoutX="500.0" layoutY="460.0" lineSpacing="10.0" mnemonicParsing="false" onAction="#onAdditionalAcSelection" text="Additional A/C" AnchorPane.leftAnchor="500.0" AnchorPane.topAnchor="460.0">
+                                    <CheckBox fx:id="additionalAC" contentDisplay="CENTER" graphicTextGap="20.0" layoutX="500.0" layoutY="440.0" lineSpacing="10.0" mnemonicParsing="false" onAction="#onAdditionalAcSelection" text="Additional A/C" AnchorPane.leftAnchor="500.0" AnchorPane.topAnchor="450.0">
                                        <font>
                                           <Font name="System Bold" size="15.0" />
                                        </font>
                                     </CheckBox>
-                                    <JFXDatePicker fx:id="eventDate" defaultColor="#0868bc" layoutX="110.0" layoutY="28.0" pickOnBounds="false" promptText="Event Date" AnchorPane.topAnchor="30.0">
+                                    <JFXDatePicker fx:id="eventDate" defaultColor="#0868bc" layoutX="110.0" layoutY="28.0" pickOnBounds="false" promptText="Event Date" AnchorPane.leftAnchor="110.0" AnchorPane.topAnchor="30.0">
                                        <effect>
                                           <Glow />
                                        </effect>
                                     </JFXDatePicker>
-                                    <JFXButton fx:id="btnBlock" buttonType="RAISED" layoutX="900.0" layoutY="489.0" onAction="#blockEvent" prefHeight="40.0" prefWidth="70.0" style="-fx-background-color: #ffd700;" styleClass="block-button" text="Block" />
-                                    <JFXButton fx:id="btnBook" buttonType="RAISED" layoutX="981.0" layoutY="489.0" onAction="#bookEvent" prefHeight="40.0" prefWidth="70.0" style="-fx-background-color: #008000;" styleClass="book-button" text="Book" />
-                                    <JFXButton fx:id="btnReset" buttonType="RAISED" layoutX="820.0" layoutY="489.0" onAction="#resetEventDetails" prefHeight="40.0" prefWidth="70.0" style="-fx-background-color: #3a84c3;" styleClass="block-button" text="Reset" />
+                                    <JFXButton fx:id="btnBlock" buttonType="RAISED" layoutX="900.0" layoutY="489.0" onAction="#blockEvent" prefHeight="40.0" prefWidth="70.0" style="-fx-background-color: #ffd700;" styleClass="block-button" text="Block" AnchorPane.leftAnchor="900.0" AnchorPane.topAnchor="490.0" />
+                                    <JFXButton fx:id="btnBook" buttonType="RAISED" layoutX="900.0" layoutY="440.0" onAction="#bookEvent" prefHeight="40.0" prefWidth="70.0" style="-fx-background-color: #008000;" styleClass="book-button" text="Book" AnchorPane.leftAnchor="900.0" AnchorPane.topAnchor="440.0" />
+                                    <JFXButton fx:id="btnReset" buttonType="RAISED" layoutX="900.0" layoutY="390.0" onAction="#resetEventDetails" prefHeight="40.0" prefWidth="70.0" style="-fx-background-color: #3a84c3;" styleClass="block-button" text="Reset" AnchorPane.leftAnchor="900.0" AnchorPane.topAnchor="390.0" />
                                     <Pane layoutX="878.0" layoutY="106.0" prefHeight="212.0" prefWidth="204.0" style="-fx-border-color: GREEN; -fx-border-width: 3;">
                                        <children>
                                           <Label fx:id="totalAmount" layoutX="60.0" layoutY="99.0" text="0.00">
@@ -162,12 +162,18 @@
                                           <FontAwesomeIconView fill="WHITE" glyphName="INR" layoutX="158.0" layoutY="197.0" size="20" />
                                        </children>
                                     </Pane>
-                                    <CheckBox fx:id="ishaHall1" contentDisplay="CENTER" graphicTextGap="20.0" layoutX="820.0" layoutY="391.0" lineSpacing="10.0" mnemonicParsing="false" onAction="#onIshaHallSelection" text="Advance amount paid">
+                                    <ComboBox layoutX="653.0" layoutY="408.0" prefHeight="25.0" prefWidth="32.0" AnchorPane.leftAnchor="650.0" AnchorPane.topAnchor="450.0" />
+                                    <JFXTextField fx:id="primaryMobileNumber1" labelFloat="true" layoutX="110.0" layoutY="310.0" prefHeight="25.0" prefWidth="240.0" promptText="Reciept Number" unFocusColor="#a8a7ab" AnchorPane.leftAnchor="110.0" AnchorPane.topAnchor="340.0">
                                        <font>
-                                          <Font name="System Bold" size="15.0" />
+                                          <Font size="15.0" />
                                        </font>
-                                    </CheckBox>
-                                    <ComboBox layoutX="651.0" layoutY="458.0" prefHeight="25.0" prefWidth="32.0" />
+                                    </JFXTextField>
+                                    <JFXTextField fx:id="primaryMobileNumber11" labelFloat="true" layoutX="484.0" layoutY="318.0" prefHeight="25.0" prefWidth="240.0" promptText="Advance Amount Paid" unFocusColor="#a8a7ab" AnchorPane.leftAnchor="500.0" AnchorPane.topAnchor="340.0">
+                                       <font>
+                                          <Font size="15.0" />
+                                       </font>
+                                    </JFXTextField>
+                                    <ComboBox layoutX="230.0" layoutY="454.0" prefHeight="25.0" prefWidth="31.0" AnchorPane.leftAnchor="230.0" AnchorPane.topAnchor="490.0" />
                                  </children>
                               </AnchorPane>
                           </content>
@@ -176,62 +182,62 @@
                            <content>
                               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                  <children>
-                                    <JFXTextField fx:id="updBookingId" layoutX="124.0" layoutY="30.0" prefHeight="25.0" prefWidth="240.0" promptText="Booking ID" AnchorPane.leftAnchor="110.0">
+                                    <JFXTextField fx:id="updBookingId" labelFloat="true" layoutX="124.0" layoutY="30.0" prefHeight="25.0" prefWidth="240.0" promptText="Booking ID" unFocusColor="#a8a7ab" AnchorPane.leftAnchor="110.0" AnchorPane.topAnchor="20.0">
                                        <font>
                                           <Font size="15.0" />
                                        </font>
                                     </JFXTextField>
-                                    <JFXDatePicker fx:id="updEventDate" defaultColor="#3a84c3" layoutX="500.0" layoutY="33.0" pickOnBounds="false" promptText="Event Date" AnchorPane.topAnchor="33.0">
+                                    <JFXDatePicker fx:id="updEventDate" defaultColor="#3a84c3" layoutX="500.0" layoutY="33.0" pickOnBounds="false" promptText="Event Date" AnchorPane.leftAnchor="500.0" AnchorPane.topAnchor="20.0">
                                        <effect>
                                           <Glow />
                                        </effect>
                                     </JFXDatePicker>
-                                    <JFXTextField fx:id="updFirstName" layoutX="108.0" layoutY="79.0" prefHeight="25.0" prefWidth="240.0" promptText="First Name" AnchorPane.leftAnchor="110.0" AnchorPane.topAnchor="70.0">
+                                    <JFXTextField fx:id="updFirstName" labelFloat="true" layoutX="108.0" layoutY="79.0" prefHeight="25.0" prefWidth="240.0" promptText="First Name" unFocusColor="#a8a7ab" AnchorPane.leftAnchor="110.0" AnchorPane.topAnchor="70.0">
                                        <font>
                                           <Font size="15.0" />
                                        </font>
                                     </JFXTextField>
-                                    <JFXTextField fx:id="updLastName" layoutX="493.0" layoutY="78.0" prefHeight="25.0" prefWidth="240.0" promptText="Last Name" AnchorPane.leftAnchor="500.0" AnchorPane.topAnchor="70.0">
+                                    <JFXTextField fx:id="updLastName" labelFloat="true" layoutX="493.0" layoutY="78.0" prefHeight="25.0" prefWidth="240.0" promptText="Last Name" unFocusColor="#a8a7ab" AnchorPane.leftAnchor="500.0" AnchorPane.topAnchor="70.0">
                                        <font>
                                           <Font size="15.0" />
                                        </font>
                                     </JFXTextField>
-                                    <JFXTextField fx:id="updAddressLine1" layoutX="117.0" layoutY="153.0" prefHeight="25.0" prefWidth="240.0" promptText="Address Line 1" AnchorPane.leftAnchor="110.0" AnchorPane.topAnchor="120.0">
+                                    <JFXTextField fx:id="updAddressLine1" labelFloat="true" layoutX="117.0" layoutY="153.0" prefHeight="25.0" prefWidth="240.0" promptText="Address Line 1" unFocusColor="#a8a7ab" AnchorPane.leftAnchor="110.0" AnchorPane.topAnchor="120.0">
                                        <font>
                                           <Font size="15.0" />
                                        </font>
                                     </JFXTextField>
-                                    <JFXTextField fx:id="updAddressLine2" layoutX="502.0" layoutY="152.0" prefHeight="25.0" prefWidth="243.0" promptText="Address Line 2" AnchorPane.leftAnchor="500.0" AnchorPane.topAnchor="120.0">
+                                    <JFXTextField fx:id="updAddressLine2" labelFloat="true" layoutX="502.0" layoutY="152.0" prefHeight="25.0" prefWidth="243.0" promptText="Address Line 2" unFocusColor="#a8a7ab" AnchorPane.leftAnchor="500.0" AnchorPane.topAnchor="120.0">
                                        <font>
                                           <Font size="15.0" />
                                        </font>
                                     </JFXTextField>
-                                    <JFXTextField fx:id="updAddressLine3" layoutX="107.0" layoutY="217.0" prefHeight="25.0" prefWidth="240.0" promptText="Address Line 3" AnchorPane.leftAnchor="110.0" AnchorPane.topAnchor="170.0">
+                                    <JFXTextField fx:id="updAddressLine3" labelFloat="true" layoutX="107.0" layoutY="217.0" prefHeight="25.0" prefWidth="240.0" promptText="Address Line 3" unFocusColor="#a8a7ab" AnchorPane.leftAnchor="110.0" AnchorPane.topAnchor="170.0">
                                        <font>
                                           <Font size="15.0" />
                                        </font>
                                     </JFXTextField>
-                                    <JFXTextField fx:id="updDistrict" layoutX="492.0" layoutY="216.0" prefHeight="25.0" prefWidth="240.0" promptText="District" AnchorPane.leftAnchor="500.0" AnchorPane.topAnchor="170.0">
+                                    <JFXTextField fx:id="updDistrict" labelFloat="true" layoutX="492.0" layoutY="216.0" prefHeight="25.0" prefWidth="240.0" promptText="District" unFocusColor="#a8a7ab" AnchorPane.leftAnchor="500.0" AnchorPane.topAnchor="170.0">
                                        <font>
                                           <Font size="15.0" />
                                        </font>
                                     </JFXTextField>
-                                    <JFXTextField fx:id="updState" layoutX="116.0" layoutY="291.0" prefHeight="25.0" prefWidth="240.0" promptText="State" AnchorPane.leftAnchor="110.0" AnchorPane.topAnchor="220.0">
+                                    <JFXTextField fx:id="updState" labelFloat="true" layoutX="116.0" layoutY="291.0" prefHeight="25.0" prefWidth="240.0" promptText="State" unFocusColor="#a8a7ab" AnchorPane.leftAnchor="110.0" AnchorPane.topAnchor="220.0">
                                        <font>
                                           <Font size="15.0" />
                                        </font>
                                     </JFXTextField>
-                                    <JFXTextField fx:id="updPinCode" layoutX="501.0" layoutY="290.0" prefHeight="25.0" prefWidth="240.0" promptText="Pin Code" AnchorPane.leftAnchor="500.0" AnchorPane.topAnchor="220.0">
+                                    <JFXTextField fx:id="updPinCode" labelFloat="true" layoutX="501.0" layoutY="290.0" prefHeight="25.0" prefWidth="240.0" promptText="Pin Code" unFocusColor="#a8a7ab" AnchorPane.leftAnchor="500.0" AnchorPane.topAnchor="220.0">
                                        <font>
                                           <Font size="15.0" />
                                        </font>
                                     </JFXTextField>
-                                    <JFXTextField fx:id="updPrimaryMobile" layoutX="120.0" layoutY="230.0" prefHeight="25.0" prefWidth="240.0" promptText="Primary Mobile Number" AnchorPane.leftAnchor="110.0" AnchorPane.topAnchor="270.0">
+                                    <JFXTextField fx:id="updPrimaryMobile" labelFloat="true" layoutX="120.0" layoutY="230.0" prefHeight="25.0" prefWidth="240.0" promptText="Primary Mobile Number" unFocusColor="#a8a7ab" AnchorPane.leftAnchor="110.0" AnchorPane.topAnchor="270.0">
                                        <font>
                                           <Font size="15.0" />
                                        </font>
                                     </JFXTextField>
-                                    <JFXTextField fx:id="updAlternateMobile" layoutX="511.0" layoutY="230.0" prefHeight="25.0" prefWidth="240.0" promptText="Alternate Mobile Number" AnchorPane.leftAnchor="500.0" AnchorPane.topAnchor="270.0">
+                                    <JFXTextField fx:id="updAlternateMobile" labelFloat="true" layoutX="511.0" layoutY="230.0" prefHeight="25.0" prefWidth="240.0" promptText="Alternate Mobile Number" unFocusColor="#a8a7ab" AnchorPane.leftAnchor="500.0" AnchorPane.topAnchor="270.0">
                                        <font>
                                           <Font size="15.0" />
                                        </font>
@@ -251,30 +257,30 @@
                                           <Font name="System Bold" size="15.0" />
                                        </font>
                                     </CheckBox>
-                                    <CheckBox fx:id="updAcRequired" contentDisplay="CENTER" graphicTextGap="20.0" layoutX="500.0" layoutY="499.0" lineSpacing="10.0" mnemonicParsing="false" text="A/C Required" AnchorPane.leftAnchor="500.0" AnchorPane.topAnchor="499.0">
+                                    <CheckBox fx:id="updAcRequired" contentDisplay="CENTER" graphicTextGap="20.0" layoutX="499.0" layoutY="380.0" lineSpacing="10.0" mnemonicParsing="false" text="A/C Required" AnchorPane.leftAnchor="500.0" AnchorPane.topAnchor="380.0">
                                        <font>
                                           <Font name="System Bold" size="15.0" />
                                        </font>
                                     </CheckBox>
-                                    <CheckBox fx:id="updIshaHall" contentDisplay="CENTER" graphicTextGap="20.0" layoutX="527.0" layoutY="380.0" lineSpacing="10.0" mnemonicParsing="false" text="Isha Hall - A/C" AnchorPane.leftAnchor="500.0" AnchorPane.topAnchor="380.0">
+                                    <CheckBox fx:id="updIshaHall" contentDisplay="CENTER" graphicTextGap="20.0" layoutX="501.0" layoutY="460.0" lineSpacing="10.0" mnemonicParsing="false" text="Isha Hall - A/C" AnchorPane.leftAnchor="500.0" AnchorPane.topAnchor="460.0">
                                        <font>
                                           <Font name="System Bold" size="15.0" />
                                        </font>
                                     </CheckBox>
-                                    <CheckBox fx:id="updNiceHall" contentDisplay="CENTER" graphicTextGap="20.0" layoutX="500.0" layoutY="420.0" lineSpacing="10.0" mnemonicParsing="false" text="Nica Hall - A/C" AnchorPane.leftAnchor="500.0" AnchorPane.topAnchor="420.0">
+                                    <CheckBox fx:id="updNiceHall" contentDisplay="CENTER" graphicTextGap="20.0" layoutX="500.0" layoutY="500.0" lineSpacing="10.0" mnemonicParsing="false" text="Nica Hall - A/C" AnchorPane.leftAnchor="500.0" AnchorPane.topAnchor="500.0">
                                        <font>
                                           <Font name="System Bold" size="15.0" />
                                        </font>
                                     </CheckBox>
-                                    <CheckBox fx:id="updAdditionalAC" contentDisplay="CENTER" graphicTextGap="20.0" layoutX="500.0" layoutY="460.0" lineSpacing="10.0" mnemonicParsing="false" text="Additional A/C" AnchorPane.leftAnchor="500.0" AnchorPane.topAnchor="460.0">
+                                    <CheckBox fx:id="updAdditionalAC" contentDisplay="CENTER" graphicTextGap="20.0" layoutX="499.0" layoutY="420.0" lineSpacing="10.0" mnemonicParsing="false" text="Additional A/C" AnchorPane.leftAnchor="500.0" AnchorPane.topAnchor="420.0">
                                        <font>
                                           <Font name="System Bold" size="15.0" />
                                        </font>
                                     </CheckBox>
-                                    <JFXButton fx:id="updBtnBook" buttonType="RAISED" disable="true" layoutX="871.0" layoutY="490.0" onAction="#bookEventInUpdate" prefHeight="40.0" prefWidth="70.0" style="-fx-background-color: #ffd700;" styleClass="block-button" text="Book" />
-                                    <JFXButton fx:id="btnUpdate" buttonType="RAISED" disable="true" layoutX="982.0" layoutY="41.0" onAction="#updateEvent" prefHeight="40.0" prefWidth="100.0" style="-fx-background-color: #008000;" styleClass="book-button" text="Update" />
-                                    <JFXButton fx:id="updBtnReset" buttonType="RAISED" layoutX="878.0" layoutY="41.0" onAction="#resetDetailsInUpdate" prefHeight="40.0" prefWidth="70.0" style="-fx-background-color: #3a84c3;" styleClass="block-button" text="Reset" />
-                                    <Pane layoutX="878.0" layoutY="106.0" prefHeight="212.0" prefWidth="204.0" style="-fx-border-color: GREEN; -fx-border-width: 3;">
+                                    <JFXButton fx:id="updBtnBook" buttonType="RAISED" disable="true" layoutX="878.0" layoutY="381.0" onAction="#bookEventInUpdate" prefHeight="40.0" prefWidth="70.0" style="-fx-background-color: #ffd700;" styleClass="block-button" text="Book" AnchorPane.leftAnchor="880.0" AnchorPane.topAnchor="380.0" />
+                                    <JFXButton fx:id="btnUpdate" buttonType="RAISED" disable="true" layoutX="896.0" layoutY="37.0" onAction="#updateEvent" prefHeight="40.0" prefWidth="100.0" style="-fx-background-color: #008000;" styleClass="book-button" text="Update" AnchorPane.leftAnchor="880.0" AnchorPane.topAnchor="40.0" />
+                                    <JFXButton fx:id="updBtnReset" buttonType="RAISED" layoutX="880.0" layoutY="86.0" onAction="#resetDetailsInUpdate" prefHeight="40.0" prefWidth="70.0" style="-fx-background-color: #3a84c3;" styleClass="block-button" text="Reset" AnchorPane.leftAnchor="880.0" />
+                                    <Pane layoutX="878.0" layoutY="137.0" prefHeight="212.0" prefWidth="204.0" style="-fx-border-color: GREEN; -fx-border-width: 3;" AnchorPane.leftAnchor="880.0">
                                        <children>
                                           <Label fx:id="totalAmount1" layoutX="60.0" layoutY="99.0" text="0.00">
                                              <font>
@@ -288,17 +294,40 @@
                                           </Label>
                                        </children>
                                     </Pane>
-                                    <Label layoutX="110.0" layoutY="322.0" prefHeight="29.0" prefWidth="72.0" text="Status: ">
+                                    <Label layoutX="110.0" layoutY="507.0" prefHeight="29.0" prefWidth="72.0" text="Status: " AnchorPane.leftAnchor="110.0">
                                        <font>
                                           <Font size="15.0" />
                                        </font>
                                     </Label>
-                                    <Label fx:id="updBookingStatus" layoutX="166.0" layoutY="322.0" prefHeight="29.0" prefWidth="238.0">
+                                    <Label fx:id="updBookingStatus" layoutX="161.0" layoutY="507.0" prefHeight="29.0" prefWidth="238.0">
                                        <font>
                                           <Font name="System Italic" size="15.0" />
                                        </font>
                                     </Label>
-                                    <JFXButton fx:id="updCancelButton" buttonType="RAISED" disable="true" layoutX="972.0" layoutY="490.0" onAction="#cancelEvent" prefHeight="40.0" prefWidth="133.0" style="-fx-background-color: red;" styleClass="book-button" text="Cancel Event" />
+                                    <JFXButton fx:id="updCancelButton" buttonType="RAISED" disable="true" layoutX="878.0" layoutY="432.0" onAction="#cancelEvent" prefHeight="41.0" prefWidth="112.0" style="-fx-background-color: red;" styleClass="book-button" text="Cancel Event" AnchorPane.leftAnchor="880.0" AnchorPane.topAnchor="430.0" />
+                                    <ComboBox layoutX="660.0" layoutY="418.0" prefHeight="25.0" prefWidth="32.0" AnchorPane.leftAnchor="650.0" AnchorPane.topAnchor="420.0" />
+                                    <ComboBox layoutX="320.0" layoutY="458.0" prefHeight="25.0" prefWidth="12.0" AnchorPane.leftAnchor="230.0" AnchorPane.topAnchor="460.0" />
+                                    <JFXButton buttonType="RAISED" layoutX="878.0" layoutY="489.0" prefHeight="41.0" prefWidth="101.0" style="-fx-background-color: #3a84c3;" text="Print" textFill="WHITE" AnchorPane.leftAnchor="880.0" AnchorPane.topAnchor="480.0">
+                                       <font>
+                                          <Font name="System Bold" size="16.0" />
+                                       </font>
+                                    </JFXButton>
+                                    <FontAwesomeIconView fill="WHITE" glyphName="PRINT" layoutX="953.0" layoutY="509.0" size="24" />
+                                    <JFXTextField fx:id="updPrimaryMobile1" labelFloat="true" layoutX="120.0" layoutY="304.0" prefHeight="25.0" prefWidth="240.0" promptText="Primary Mobile Number" unFocusColor="#a8a7ab" AnchorPane.leftAnchor="110.0" AnchorPane.topAnchor="270.0">
+                                       <font>
+                                          <Font size="15.0" />
+                                       </font>
+                                    </JFXTextField>
+                                    <JFXTextField fx:id="updPrimaryMobile11" labelFloat="true" layoutX="110.0" layoutY="307.0" prefHeight="25.0" prefWidth="240.0" promptText="Reciept Number" unFocusColor="#a8a7ab" AnchorPane.leftAnchor="110.0" AnchorPane.topAnchor="320.0">
+                                       <font>
+                                          <Font size="15.0" />
+                                       </font>
+                                    </JFXTextField>
+                                    <JFXTextField fx:id="updAlternateMobile1" labelFloat="true" layoutX="503.0" layoutY="321.0" prefHeight="25.0" prefWidth="240.0" promptText="Advance Amount Paid" unFocusColor="#a8a7ab" AnchorPane.leftAnchor="500.0" AnchorPane.topAnchor="320.0">
+                                       <font>
+                                          <Font size="15.0" />
+                                       </font>
+                                    </JFXTextField>
                                  </children>
                               </AnchorPane>
                            </content>
