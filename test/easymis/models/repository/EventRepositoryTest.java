@@ -1,6 +1,6 @@
 package easymis.models.repository;
 
-import easymis.models.entity.EventDetails;
+import easymis.models.entity.Booking;
 import easymis.models.entity.enumeration.BookingStatus;
 import easymis.utils.DateHelper;
 import easymis.utils.IDateUtils;
@@ -84,7 +84,7 @@ public class EventRepositoryTest {
         System.out.println("create");
         LocalDate date = LocalDate.now();
         for(int i=0; i< 15000; i++){
-            EventDetails eventDetails = getEventDetails();
+            Booking eventDetails = getEventDetails();
             date.plusDays(1);
             eventDetails.setBookingStatus(BookingStatus.BOOKED);
             eventDetails.setEventDate(java.sql.Date.valueOf(date));
@@ -102,8 +102,8 @@ public class EventRepositoryTest {
     public void testFetchAllEvents() {
         System.out.println("fetchAllEvents");
         EventRepository instance = null;
-        List<EventDetails> expResult = null;
-        List<EventDetails> result = instance.fetchAllEvents();
+        List<Booking> expResult = null;
+        List<Booking> result = instance.fetchAllEvents();
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
@@ -117,8 +117,8 @@ public class EventRepositoryTest {
         System.out.println("fetchEventsOnDate");
         Date eventDate = null;
         EventRepository instance = null;
-        List<EventDetails> expResult = null;
-        List<EventDetails> result = instance.fetchByEventDate(eventDate);
+        List<Booking> expResult = null;
+        List<Booking> result = instance.fetchByEventDate(eventDate);
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
@@ -132,26 +132,20 @@ public class EventRepositoryTest {
         System.out.println("fetchExistingMehandiEventOnDate");
         Date eventDateDate = null;
         EventRepository instance = null;
-        EventDetails expResult = null;
-        EventDetails result = instance.fetchExistingMehandiEventOnDate(eventDateDate);
+        Booking expResult = null;
+        Booking result = instance.fetchExistingMehandiEventOnDate(eventDateDate);
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
 
-    private EventDetails getEventDetails() {
-        EventDetails eventDetails = new EventDetails();
+    private Booking getEventDetails() {
+        Booking eventDetails = new Booking();
         eventDetails.setEventDate(getEventDate());
         eventDetails.setFirstName(properties.getProperty("firstName"));
         eventDetails.setAddressLine1(properties.getProperty("addressLine1"));
         eventDetails.setPrimaryMobile(properties.getProperty("mobileNumber1"));
-        eventDetails.setWeddingSelected(Boolean.valueOf(properties.getProperty("weddingSelected")));
-        eventDetails.setMehandiSelected(Boolean.valueOf(properties.getProperty("mehandiSelected")));
-        eventDetails.setReceptionSelected(Boolean.valueOf(properties.getProperty("receptionSelected")));
-        eventDetails.setIshaSelected(Boolean.valueOf(properties.getProperty("ishaSelected")));
-        eventDetails.setNicaSelected(Boolean.valueOf(properties.getProperty("nicaSelected")));
-        eventDetails.setAcSelected(Boolean.valueOf(properties.getProperty("acSelected")));
-        eventDetails.setAdditionalACSelected(Boolean.valueOf(properties.getProperty("additionalACSelected")));
+        
         return eventDetails;
     }
 

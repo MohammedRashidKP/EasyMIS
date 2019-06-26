@@ -7,7 +7,8 @@ package easymis.models.entity.enumeration;
 public enum EventType {
    WEDDING("Wedding"),
    MEHANDI("Mehandi"),
-   RECEPTION("Reception"), 
+   RECEPTION_3_PM("3 PM Reception"),
+   RECEPTION_5_PM("5 PM Reception"),
    NORMAL_AC("AC"),
    ADDITIONAL_AC("Additional AC"),
    ISHA_HALL_AC("Isha Hall"),

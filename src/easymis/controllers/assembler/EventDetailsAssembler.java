@@ -1,6 +1,6 @@
 package easymis.controllers.assembler;
 
-import easymis.models.entity.EventDetails;
+import easymis.models.entity.Booking;
 import easymis.models.entity.enumeration.EventType;
 import easymis.utils.DateHelper;
 import easymis.views.viewobjects.EventDetailsViewObject;
@@ -13,7 +13,7 @@ import java.util.List;
  */
 public class EventDetailsAssembler {
 
-    public EventDetailsViewObject toEventDetailsViewObject(EventDetails eventDetails) {
+    public EventDetailsViewObject toEventDetailsViewObject(Booking eventDetails) {
         StringBuilder fullName = new StringBuilder();
         if (eventDetails.getFirstName() != null) {
             fullName.append(eventDetails.getFirstName());
@@ -27,7 +27,7 @@ public class EventDetailsAssembler {
         return eventDetailsViewObject;
     }
 
-    private String resolveEventType(EventDetails eventDetails) {
+    private String resolveEventType(Booking eventDetails) {
         String eventType = "";
         List<EventType> eventTypes = getEventTypeEnums(eventDetails);
         StringBuilder eventTypeBuilder = new StringBuilder();
@@ -44,29 +44,12 @@ public class EventDetailsAssembler {
         
     }
 
-    public List<EventType> getEventTypeEnums(EventDetails eventDetails) {
+    public List<EventType> getEventTypeEnums(Booking booking) {
         List<EventType> eventTypes = new ArrayList<>();
-        if(eventDetails.isWeddingSelected()){
-            eventTypes.add(EventType.WEDDING);
-        }
-        if(eventDetails.isMehandiSelected()){
-            eventTypes.add(EventType.MEHANDI);
-        }
-        if(eventDetails.isReceptionSelected()){
-            eventTypes.add(EventType.RECEPTION);
-        }
-        if(eventDetails.isIshaSelected()){
-            eventTypes.add(EventType.ISHA_HALL_AC);
-        }
-        if(eventDetails.isNicaSelected()){
-            eventTypes.add(EventType.NICA_LONGUE_AC);
-        }
-        if(eventDetails.isAcSelected()){
-            eventTypes.add(EventType.NORMAL_AC);
-        }
-        if(eventDetails.isAdditionalACSelected()){
-            eventTypes.add(EventType.ADDITIONAL_AC);
-        }
+        
+        booking.getEvents().stream().forEach((event) -> {
+            eventTypes.add(event.getEventType());
+        });
         return eventTypes;
     }
    

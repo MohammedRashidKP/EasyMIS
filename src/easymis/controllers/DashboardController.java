@@ -4,11 +4,10 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXTextArea;
 import easymis.controllers.assembler.EventDetailsAssembler;
-import easymis.models.entity.EventDetails;
+import easymis.models.entity.Booking;
 import easymis.models.entity.enumeration.EventCategory;
 import easymis.models.entity.enumeration.EventType;
 import easymis.models.repository.DashboardRepository;
-import easymis.models.repository.EventRepository;
 import easymis.utils.DateHelper;
 import easymis.views.viewobjects.EventAvailability;
 import java.net.URL;
@@ -68,26 +67,12 @@ public class DashboardController implements Initializable {
 
         if(eventDateField.getValue() != null){
             java.sql.Date searchDate = java.sql.Date.valueOf(eventDateField.getValue());
-            List<EventDetails> events = new ArrayList<>();
-            List<EventDetails> dayEvents = EventRepository.getUniqueInstance().fetchByEventDate(searchDate);
-            EventDetails existingMehandiEvent = EventRepository.getUniqueInstance().
-                fetchExistingMehandiEventOnDate(searchDate);
-            EventDetails existingReceptionEvent = EventRepository.getUniqueInstance().
-                fetchExistingReceptionEventOnPreviousDate(searchDate);
-            if(dayEvents != null && !dayEvents.isEmpty()){
-                events.addAll(dayEvents);
-            }
-            if(existingMehandiEvent != null){
-                existingMehandiEvent.setWeddingSelected(false);
-                events.add(existingMehandiEvent);
-            }
-            if(existingReceptionEvent != null){
-                events.add(existingReceptionEvent);
-            }
+            List<Booking> events = new ArrayList<>();
+            //TODO: Check availability
             List<EventType> allEvents = new ArrayList<>();
             if(!events.isEmpty()){
                 EventDetailsAssembler assembler = new EventDetailsAssembler();
-                for(EventDetails event: events){
+                for(Booking event: events){
                     allEvents.addAll(assembler.getEventTypeEnums(event));
                 }
             }
@@ -98,7 +83,7 @@ public class DashboardController implements Initializable {
     private void populateDashboardData() {
 
         StringBuilder notificationBuilder = new StringBuilder();
-        List<EventDetails> allEvents = DashboardRepository.getUniqueInstance().fetchAllEventOfCurrentYear();
+        List<Booking> allEvents = DashboardRepository.getUniqueInstance().fetchAllEventOfCurrentYear();
         if (allEvents != null && !allEvents.isEmpty()) {
             int totalBooking = 0;
 
@@ -108,7 +93,7 @@ public class DashboardController implements Initializable {
             
             int totalDiamonBooking = 0;
 
-            for (EventDetails event : allEvents) {
+            for (Booking event : allEvents) {
                 if (null != event.getBookingStatus()) {
                     switch (event.getBookingStatus()) {
                         case BOOKED:
@@ -162,7 +147,7 @@ public class DashboardController implements Initializable {
         }else{
             mehandiAvailability.setText(EventAvailability.AVAILABLE.toString());
         }
-        if(allEvents.contains(EventType.RECEPTION)){
+        if(allEvents.contains(EventType.RECEPTION_3_PM)){
            receptionAvailability.setText(EventAvailability.NOT_AVAILABLE.toString());
         }else{
             receptionAvailability.setText(EventAvailability.AVAILABLE.toString());

@@ -6,7 +6,8 @@
   <persistence-unit name="company-provider" transaction-type="RESOURCE_LOCAL">
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
     <!-- Entity Class -->
-    <class>easymis.models.entity.EventDetails</class>
+    <class>easymis.models.entity.Booking</class>
+    <class>easymis.models.entity.Event</class>
     <properties>
       <!-- Connection properties -->
       <property name="javax.persistence.jdbc.driver" value="org.sqlite.JDBC"/>

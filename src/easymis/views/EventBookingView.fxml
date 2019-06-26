@@ -32,7 +32,7 @@
                                  <children>
                                     <TableView fx:id="eventTable" prefHeight="563.0" prefWidth="533.0" AnchorPane.bottomAnchor="12.0" AnchorPane.leftAnchor="12.0" AnchorPane.rightAnchor="12.0" AnchorPane.topAnchor="12.0">
                                       <columns>
-                                          <TableColumn fx:id="col_bookingId" prefWidth="99.0" text="Booking ID" />
+                                          <TableColumn fx:id="col_ReceiptNumber" prefWidth="99.0" text="Receipt Number" />
                                         <TableColumn fx:id="col_EventDate" prefWidth="121.0" text="Event Date" />
                                         <TableColumn fx:id="col_fullName" prefWidth="172.0" text="Full Name" />
                                           <TableColumn fx:id="col_BookingStatus" prefWidth="123.0" text="Booking Status" />
@@ -134,7 +134,7 @@
                                           <Font name="System Bold" size="15.0" />
                                        </font>
                                     </CheckBox>
-                                    <JFXDatePicker fx:id="eventDate" defaultColor="#0868bc" layoutX="110.0" layoutY="28.0" pickOnBounds="false" promptText="Event Date" AnchorPane.leftAnchor="110.0" AnchorPane.topAnchor="30.0">
+                                    <JFXDatePicker fx:id="eventDate" defaultColor="#0868bc" layoutX="116.0" layoutY="42.0" pickOnBounds="false" promptText="Event Date" AnchorPane.leftAnchor="110.0" AnchorPane.topAnchor="42.0">
                                        <effect>
                                           <Glow />
                                        </effect>
@@ -163,12 +163,12 @@
                                        </children>
                                     </Pane>
                                     <ComboBox layoutX="653.0" layoutY="408.0" prefHeight="25.0" prefWidth="32.0" AnchorPane.leftAnchor="650.0" AnchorPane.topAnchor="450.0" />
-                                    <JFXTextField fx:id="primaryMobileNumber1" labelFloat="true" layoutX="110.0" layoutY="310.0" prefHeight="25.0" prefWidth="240.0" promptText="Reciept Number" unFocusColor="#a8a7ab" AnchorPane.leftAnchor="110.0" AnchorPane.topAnchor="340.0">
+                                    <JFXTextField fx:id="receiptNumber" labelFloat="true" layoutX="500.0" layoutY="39.0" prefHeight="25.0" prefWidth="240.0" promptText="Receipt Number" unFocusColor="#a8a7ab" AnchorPane.leftAnchor="500.0" AnchorPane.topAnchor="39.0">
                                        <font>
                                           <Font size="15.0" />
                                        </font>
                                     </JFXTextField>
-                                    <JFXTextField fx:id="primaryMobileNumber11" labelFloat="true" layoutX="484.0" layoutY="318.0" prefHeight="25.0" prefWidth="240.0" promptText="Advance Amount Paid" unFocusColor="#a8a7ab" AnchorPane.leftAnchor="500.0" AnchorPane.topAnchor="340.0">
+                                    <JFXTextField fx:id="advanceAmount" labelFloat="true" layoutX="110.0" layoutY="348.0" prefHeight="25.0" prefWidth="240.0" promptText="Advance Amount Paid" unFocusColor="#a8a7ab" AnchorPane.leftAnchor="110.0" AnchorPane.topAnchor="348.0">
                                        <font>
                                           <Font size="15.0" />
                                        </font>
@@ -182,7 +182,7 @@
                            <content>
                               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                  <children>
-                                    <JFXTextField fx:id="updBookingId" labelFloat="true" layoutX="124.0" layoutY="30.0" prefHeight="25.0" prefWidth="240.0" promptText="Booking ID" unFocusColor="#a8a7ab" AnchorPane.leftAnchor="110.0" AnchorPane.topAnchor="20.0">
+                                    <JFXTextField fx:id="updReceiptNumber" labelFloat="true" layoutX="124.0" layoutY="30.0" prefHeight="25.0" prefWidth="240.0" promptText="Receipt Number" unFocusColor="#a8a7ab" AnchorPane.leftAnchor="110.0" AnchorPane.topAnchor="20.0">
                                        <font>
                                           <Font size="15.0" />
                                        </font>
@@ -313,17 +313,7 @@
                                        </font>
                                     </JFXButton>
                                     <FontAwesomeIconView fill="WHITE" glyphName="PRINT" layoutX="953.0" layoutY="509.0" size="24" />
-                                    <JFXTextField fx:id="updPrimaryMobile1" labelFloat="true" layoutX="120.0" layoutY="304.0" prefHeight="25.0" prefWidth="240.0" promptText="Primary Mobile Number" unFocusColor="#a8a7ab" AnchorPane.leftAnchor="110.0" AnchorPane.topAnchor="270.0">
-                                       <font>
-                                          <Font size="15.0" />
-                                       </font>
-                                    </JFXTextField>
-                                    <JFXTextField fx:id="updPrimaryMobile11" labelFloat="true" layoutX="110.0" layoutY="307.0" prefHeight="25.0" prefWidth="240.0" promptText="Reciept Number" unFocusColor="#a8a7ab" AnchorPane.leftAnchor="110.0" AnchorPane.topAnchor="320.0">
-                                       <font>
-                                          <Font size="15.0" />
-                                       </font>
-                                    </JFXTextField>
-                                    <JFXTextField fx:id="updAlternateMobile1" labelFloat="true" layoutX="503.0" layoutY="321.0" prefHeight="25.0" prefWidth="240.0" promptText="Advance Amount Paid" unFocusColor="#a8a7ab" AnchorPane.leftAnchor="500.0" AnchorPane.topAnchor="320.0">
+                                    <JFXTextField fx:id="updAdvanceAmount" labelFloat="true" layoutX="110.0" layoutY="327.0" prefHeight="25.0" prefWidth="240.0" promptText="Advance Amount Paid" unFocusColor="#a8a7ab" AnchorPane.leftAnchor="110.0" AnchorPane.topAnchor="327.0">
                                        <font>
                                           <Font size="15.0" />
                                        </font>

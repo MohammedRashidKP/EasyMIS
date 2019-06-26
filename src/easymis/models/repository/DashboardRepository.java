@@ -5,7 +5,7 @@
  */
 package easymis.models.repository;
 
-import easymis.models.entity.EventDetails;
+import easymis.models.entity.Booking;
 import easymis.models.entity.utils.QueryConstants;
 import easymis.utils.DateHelper;
 import java.util.Collections;
@@ -25,11 +25,11 @@ public class DashboardRepository extends AbstractRepository{
         return uniqueInstance;
     }
     
-    public List<EventDetails> fetchAllEventOfCurrentYear(){
+    public List<Booking> fetchAllEventOfCurrentYear(){
          QueryParams param = new QueryParams();
         param.setParamName("fistDateOfYear");
         param.setParamDateValue(DateHelper.getFirstDayOfTheYear());
-        return retrieve(QueryConstants.FETCH_ALL_EVENTS_OF_CURRENT_YEAR, Collections.singletonList(param), EventDetails.class);
+        return retrieve(QueryConstants.FETCH_ALL_EVENTS_OF_CURRENT_YEAR, Collections.singletonList(param), Booking.class);
     }
     
 }

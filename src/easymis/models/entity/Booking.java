@@ -3,10 +3,14 @@ package easymis.models.entity;
 import easymis.models.entity.enumeration.BookingStatus;
 import easymis.models.entity.enumeration.EventCategory;
 import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
+import static javax.persistence.CascadeType.ALL;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.TableGenerator;
 import org.eclipse.persistence.annotations.ConversionValue;
@@ -18,16 +22,24 @@ import org.eclipse.persistence.annotations.ObjectTypeConverter;
  * @author RashidKP
  */
 @Entity
-    @Table(name = "EMIS_EVENT_MASTER_B")
-public class EventDetails extends DomainObject {
+@Table(name = "EMIS_BOOKING_DETAILS_B")
+public class Booking extends DomainObject {
 
-    
     @Id
     @GeneratedValue(generator = "sqlite")
     @TableGenerator(name = "sqlite", table = "sqlite_sequence",
             pkColumnName = "name", valueColumnName = "seq", pkColumnValue = "BOOKING_ID", initialValue = 1000, allocationSize = 1)
     @Column(name = "BOOKING_ID")
     private String bookingId;
+    
+    @Column(name = "RECEIPT_NUMBER")
+    private String receiptNumber;
+    
+    @Column(name = "ADVANCE_AMOUNT")
+    private Integer advanceAmount;
+
+    @OneToMany(cascade=ALL, mappedBy = "bookingDetails")
+    private List<Event> events;
 
     @Column(name = "EVENT_DATE")
     private Date eventDate;
@@ -56,27 +68,6 @@ public class EventDetails extends DomainObject {
     @Column(name = "PIN")
     private String pinCode;
 
-    @Column(name = "IS_WEDDING_SELECTED")
-    private boolean weddingSelected;
-
-    @Column(name = "IS_MEHANDI_SELECTED")
-    private boolean mehandiSelected;
-
-    @Column(name = "IS_RECEPTION_SELECTED")
-    private boolean receptionSelected;
-
-    @Column(name = "IS_AC_SELECTED")
-    private boolean acSelected;
-
-    @Column(name = "IS_ADDITIONAL_AC_SELECTED")
-    private boolean additionalACSelected;
-
-    @Column(name = "IS_ISHA_SELECTED")
-    private boolean ishaSelected;
-
-    @Column(name = "IS_NICA_SELECTED")
-    private boolean nicaSelected;
-
     @ObjectTypeConverter(
             name = "eventCategoryConverter", objectType = EventCategory.class, dataType = String.class, conversionValues = {
                 @ConversionValue(objectValue = "DIAMOND", dataValue = "DIAMOND"),
@@ -97,7 +88,7 @@ public class EventDetails extends DomainObject {
             name = "bookingStatusConverter", objectType = BookingStatus.class, dataType = String.class, conversionValues = {
                 @ConversionValue(objectValue = "BOOKED", dataValue = "BOOKED"),
                 @ConversionValue(objectValue = "BLOCKED", dataValue = "BLOCKED"),
-                @ConversionValue(objectValue = "BOOKING_CANCELLED", dataValue = "BOOKING_CANCELLED"),  
+                @ConversionValue(objectValue = "BOOKING_CANCELLED", dataValue = "BOOKING_CANCELLED"),
                 @ConversionValue(objectValue = "BLOCKING_CANCELLED", dataValue = "BLOCKING_CANCELLED")}
     )
     @Convert("bookingStatusConverter")
@@ -109,6 +100,11 @@ public class EventDetails extends DomainObject {
 
     @Column(name = "UPDATED_DATE")
     private Date lastUpdatedDate;
+    
+    public Booking(){
+        super();
+        this.events = new ArrayList<>();
+    }
 
     public String getBookingId() {
         return bookingId;
@@ -190,54 +186,6 @@ public class EventDetails extends DomainObject {
         this.pinCode = pinCode;
     }
 
-    public boolean isWeddingSelected() {
-        return weddingSelected;
-    }
-
-    public void setWeddingSelected(boolean weddingSelected) {
-        this.weddingSelected = weddingSelected;
-    }
-
-    public boolean isMehandiSelected() {
-        return mehandiSelected;
-    }
-
-    public void setMehandiSelected(boolean mehandiSelected) {
-        this.mehandiSelected = mehandiSelected;
-    }
-
-    public boolean isAcSelected() {
-        return acSelected;
-    }
-
-    public void setAcSelected(boolean acSelected) {
-        this.acSelected = acSelected;
-    }
-
-    public boolean isAdditionalACSelected() {
-        return additionalACSelected;
-    }
-
-    public void setAdditionalACSelected(boolean additionalACSelected) {
-        this.additionalACSelected = additionalACSelected;
-    }
-
-    public boolean isIshaSelected() {
-        return ishaSelected;
-    }
-
-    public void setIshaSelected(boolean ishaSelected) {
-        this.ishaSelected = ishaSelected;
-    }
-
-    public boolean isNicaSelected() {
-        return nicaSelected;
-    }
-
-    public void setNicaSelected(boolean nicaSelected) {
-        this.nicaSelected = nicaSelected;
-    }
-
     public EventCategory getEventCategory() {
         return eventCategory;
     }
@@ -285,31 +233,28 @@ public class EventDetails extends DomainObject {
     public void setLastUpdatedDate(Date lastUpdatedDate) {
         this.lastUpdatedDate = lastUpdatedDate;
     }
-
-    public boolean isReceptionSelected() {
-        return receptionSelected;
+    
+    public List<Event> getEvents() {
+        return events;
     }
 
-    public void setReceptionSelected(boolean receptionSelected) {
-        this.receptionSelected = receptionSelected;
+    public void setEvents(List<Event> events) {
+        this.events = events;
     }
 
-    @Override
-    public String toString() {
-        return "Event{" + "eventId=" + bookingId + ", "
-                + "eventDate=" + eventDate + ", firstName="
-                + firstName
-                + ", lastName=" + lastName + ", addressLine1="
-                + addressLine1 + ", addressLine2=" + addressLine2
-                + ", addressLine3=" + addressLine3 + ", district="
-                + district + ", state=" + state + ", pinCode=" + pinCode
-                + ", weddingSelected=" + weddingSelected + ", mehandiSelected="
-                + mehandiSelected + ", acSelectedSelected=" + acSelected
-                + ", acAddSelected=" + additionalACSelected + ", ishaSelected="
-                + ishaSelected + ", nicaSelected=" + nicaSelected
-                + ", eventCategory=" + eventCategory + ", mobileNumber1=" + primaryMobile
-                + ", mobileNumber2=" + alternateMobile + ", eventDateStatus="
-                + bookingStatus + ", createdDate="
-                + createdDate + ", lastUpdatedDate=" + lastUpdatedDate + '}';
+    public String getReceiptNumber() {
+        return receiptNumber;
+    }
+
+    public void setReceiptNumber(String receiptNumber) {
+        this.receiptNumber = receiptNumber;
+    }
+
+    public Integer getAdvanceAmount() {
+        return advanceAmount;
+    }
+
+    public void setAdvanceAmount(Integer advanceAmount) {
+        this.advanceAmount = advanceAmount;
     }
 }
