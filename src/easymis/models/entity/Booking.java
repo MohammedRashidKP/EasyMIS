@@ -38,7 +38,7 @@ public class Booking extends DomainObject {
     @Column(name = "ADVANCE_AMOUNT")
     private Integer advanceAmount;
 
-    @OneToMany(cascade=ALL, mappedBy = "bookingDetails")
+    @OneToMany(cascade=ALL, mappedBy = "bookingDetails", orphanRemoval = true)
     private List<Event> events;
 
     @Column(name = "EVENT_DATE")

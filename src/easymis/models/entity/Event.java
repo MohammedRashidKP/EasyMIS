@@ -1,5 +1,6 @@
 package easymis.models.entity;
 
+import easymis.models.entity.enumeration.BookingStatus;
 import easymis.models.entity.enumeration.EventType;
 import java.sql.Date;
 import javax.persistence.Column;
@@ -42,7 +43,8 @@ public class Event extends DomainObject {
                 @ConversionValue(objectValue = "MEHANDI", dataValue = "MEHANDI"),
                 @ConversionValue(objectValue = "RECEPTION_3_PM", dataValue = "RECEPTION_3_PM"),
                 @ConversionValue(objectValue = "RECEPTION_5_PM", dataValue = "RECEPTION_5_PM"),
-                @ConversionValue(objectValue = "ISHA_HALL_AC", dataValue = "ISHA_HALL_AC"),
+                @ConversionValue(objectValue = "ISHA_HALL_AC_DAY", dataValue = "ISHA_HALL_AC_DAY"),
+                @ConversionValue(objectValue = "ISHA_HALL_AC_EVE", dataValue = "ISHA_HALL_AC_EVE"),
                 @ConversionValue(objectValue = "NICA_LONGUE_AC", dataValue = "NICA_LONGUE_AC")}
     )
     @Convert("eventTypeConverter")
@@ -57,6 +59,17 @@ public class Event extends DomainObject {
 
     @Column(name = "EVENT_ADDONS")
     private String eventAddOns;
+    
+     @ObjectTypeConverter(
+            name = "bookingStatusConverter", objectType = BookingStatus.class, dataType = String.class, conversionValues = {
+                @ConversionValue(objectValue = "BOOKED", dataValue = "BOOKED"),
+                @ConversionValue(objectValue = "BLOCKED", dataValue = "BLOCKED"),
+                @ConversionValue(objectValue = "BOOKING_CANCELLED", dataValue = "BOOKING_CANCELLED"),
+                @ConversionValue(objectValue = "BLOCKING_CANCELLED", dataValue = "BLOCKING_CANCELLED")}
+    )
+    @Convert("bookingStatusConverter")
+    @Column(name = "BOOKING_STATUS")
+    private BookingStatus bookingStatus;
 
     public Integer getEventId() {
         return eventId;
@@ -112,5 +125,13 @@ public class Event extends DomainObject {
 
     public void setEventAddOns(String eventAddOns) {
         this.eventAddOns = eventAddOns;
+    }
+
+    public BookingStatus getBookingStatus() {
+        return bookingStatus;
+    }
+
+    public void setBookingStatus(BookingStatus bookingStatus) {
+        this.bookingStatus = bookingStatus;
     }
 }

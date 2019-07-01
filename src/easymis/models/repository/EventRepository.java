@@ -48,33 +48,30 @@ public class EventRepository extends AbstractRepository {
     }
 
     public List<Booking> fetchAllEvents() {
-        return retrieve(QueryConstants.FETCH_ALL_EVENTS, null, Booking.class);
+        return retrieve(QueryConstants.FETCH_ALL_BOOKINGS, null, Booking.class);
     }
     
     public List<Booking> fetchByEventDate(Date eventDate){
         QueryParams param = new QueryParams();
         param.setParamName("eventDate");
         param.setParamDateValue(eventDate);
-        return retrieve(QueryConstants.FETCH_EVENTS_FOR_DATE, Collections.singletonList(param), Booking.class);
+        return retrieve(QueryConstants.FETCH_BOOKING_FOR_DATE, Collections.singletonList(param), Booking.class);
     }
-
-    public Booking fetchExistingMehandiEventOnDate(Date eventDate) {
-        java.sql.Date nextDate = DateHelper.getNextDay(eventDate);
+    
+    public List<Event> fetchEventByEventDate(Date eventDate){
         QueryParams param = new QueryParams();
         param.setParamName("eventDate");
-        param.setParamDateValue(nextDate);
-        List<Booking> allBookings = retrieve(QueryConstants.FETCH_EVENTS_FOR_DATE, Collections.singletonList(param), Booking.class);
-        if(allBookings != null && !allBookings.isEmpty()){
-            for(Booking booking : allBookings){
-                for(Event event: booking.getEvents()){
-                    if(EventType.MEHANDI.equals(event.getEventType())){
-                        return booking;
-                    }
-                        
-                }
-            }
-        }
-        return null;
+        param.setParamDateValue(eventDate);
+        return retrieve(QueryConstants.FETCH_EVENT_FOR_DATE, Collections.singletonList(param), Event.class);
+    }
+
+    public boolean fetchIfMehandiExistsOnDate(Date eventDate) {
+        QueryParams param = new QueryParams();
+        param.setParamName("eventDate");
+        param.setParamDateValue(eventDate);
+        List<Event> mehandiEvents = retrieve(QueryConstants.FETCH_IS_MEHANDI_ON_DATE, Collections.singletonList(param), Event.class);
+        
+        return mehandiEvents != null ? !mehandiEvents.isEmpty(): false;
     }
     
      public Booking fetchExistingReceptionEventOnPreviousDate(Date eventDate) {
@@ -82,7 +79,7 @@ public class EventRepository extends AbstractRepository {
         QueryParams param = new QueryParams();
         param.setParamName("eventDate");
         param.setParamDateValue(nextDate);
-        List<Booking> allBookings = retrieve(QueryConstants.FETCH_EVENTS_FOR_DATE, Collections.singletonList(param), Booking.class);
+        List<Booking> allBookings = retrieve(QueryConstants.FETCH_BOOKING_FOR_DATE, Collections.singletonList(param), Booking.class);
         if(allBookings != null && !allBookings.isEmpty()){
             for(Booking booking : allBookings){
                 for(Event event: booking.getEvents()){
@@ -100,7 +97,7 @@ public class EventRepository extends AbstractRepository {
         QueryParams param = new QueryParams();
         param.setParamName("bookingId");
         param.setParamValue(bookingId);
-        List<Booking> events =retrieve(QueryConstants.FETCH_EVENT_FOR_BOOKING_ID, Collections.singletonList(param), Booking.class);
+        List<Booking> events = retrieve(QueryConstants.FETCH_BOOKING_FOR_BOOKING_ID, Collections.singletonList(param), Booking.class);
         return events != null && !events.isEmpty() ? events.get(0) : null;
     }
 
@@ -112,9 +109,6 @@ public class EventRepository extends AbstractRepository {
         List<ValidationError> validationErrors = policy.validateBooking(bookingDetail);
         if (validationErrors.isEmpty()) {
                 try {
-                    for(Event event: bookingDetail.getEvents()){
-                       remove(event, event.getEventId());
-                    }
                     return merge(bookingDetail);
                 } catch (Exception ex) {
                     status = fillTransactionStatus(ex);
@@ -127,9 +121,6 @@ public class EventRepository extends AbstractRepository {
         }
         }else{
             try {
-                for(Event event: bookingDetail.getEvents()){
-                        remove(event, event.getEventId());
-                    }
                 return merge(bookingDetail);
             } catch (Exception ex) {
                 status = fillTransactionStatus(ex);
@@ -147,5 +138,13 @@ public class EventRepository extends AbstractRepository {
             status.setSuccess(true);
         }
         return status;
+    }
+
+    public Booking fetchByReceiptNumber(String receiptNumber) {
+        QueryParams param = new QueryParams();
+        param.setParamName("receiptNumber");
+        param.setParamValue(receiptNumber);
+        List<Booking> events =retrieve(QueryConstants.FETCH_BOOKING_FOR_RECEIPT_NUMBER, Collections.singletonList(param), Booking.class);
+        return events != null && !events.isEmpty() ? events.get(0) : null;
     }
 }

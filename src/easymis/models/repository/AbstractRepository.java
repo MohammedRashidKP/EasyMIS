@@ -1,7 +1,6 @@
 package easymis.models.repository;
 
 import easymis.models.entity.DomainObject;
-import easymis.models.entity.Event;
 import easymis.models.entity.TransactionStatus;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -9,6 +8,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
 import javax.persistence.TemporalType;
+import org.eclipse.persistence.config.QueryHints;
 
 /**
  *
@@ -38,6 +38,7 @@ public class AbstractRepository {
     }
 
     public <T extends DomainObject> List<T> retrieve(String queryString, List<QueryParams> params, Class<T> responseObject) {
+        
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("company-provider");
 
         EntityManager em = emf.createEntityManager();
@@ -54,7 +55,7 @@ public class AbstractRepository {
                     }
                 });
             }
-            resultList = query.getResultList();
+            resultList = query.setHint(QueryHints.REFRESH, true).getResultList();
             if (resultList != null && !resultList.isEmpty()) {
                 return resultList;
             }
@@ -91,26 +92,6 @@ public class AbstractRepository {
             status.setMessage(exception.getLocalizedMessage());
         } else {
             status.setSuccess(true);
-        }
-        return status;
-    }
-    
-    public TransactionStatus remove(Object object, Integer id) throws Exception{
-        
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("company-provider");
-        EntityManager em = emf.createEntityManager();
-        em.getTransaction().begin();
-        TransactionStatus status = null;
-        try {
-            Event fake = em.getReference(Event.class, id);
-            em.remove(fake);
-            em.getTransaction().commit();
-            status = fillTransactionStatus(null);
-        } catch (Exception e) {
-            em.getTransaction().rollback();
-            throw e;
-        } finally {
-            em.close();
         }
         return status;
     }

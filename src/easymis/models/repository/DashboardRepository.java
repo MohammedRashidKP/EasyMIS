@@ -29,7 +29,7 @@ public class DashboardRepository extends AbstractRepository{
          QueryParams param = new QueryParams();
         param.setParamName("fistDateOfYear");
         param.setParamDateValue(DateHelper.getFirstDayOfTheYear());
-        return retrieve(QueryConstants.FETCH_ALL_EVENTS_OF_CURRENT_YEAR, Collections.singletonList(param), Booking.class);
+        return retrieve(QueryConstants.FETCH_ALL_BOOKINGS_OF_CURRENT_YEAR, Collections.singletonList(param), Booking.class);
     }
     
 }

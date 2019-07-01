@@ -16,21 +16,27 @@ public class EventDetailsViewObject {
     private BookingStatus bookingStatus;
     
     private String eventType;
-    
-    private String bookingId;
-    
+      
     private String bookingDate;
     
     private EventCategory eventCategory;
+    
+    private String receiptNumber;
 
-    public EventDetailsViewObject(String eventDate, String fullName, BookingStatus bookingStatus, String eventType, String bookingId, String bookingDate, EventCategory eventCategory) {
+    public EventDetailsViewObject(String eventDate, 
+            String fullName, 
+            BookingStatus bookingStatus, 
+            String eventType, 
+            String bookingDate, 
+            EventCategory eventCategory, 
+            String receiptNumber) {
         this.eventDate = eventDate;
         this.fullName = fullName;
         this.bookingStatus = bookingStatus;
         this.eventType = eventType;
-        this.bookingId = bookingId;
         this.bookingDate = bookingDate;
         this.eventCategory = eventCategory;
+        this.receiptNumber = receiptNumber;
     }
 
     public String getEventDate() {
@@ -49,10 +55,6 @@ public class EventDetailsViewObject {
         return eventType;
     }
 
-    public String getBookingId() {
-        return  bookingId;
-    }
-
     public String getBookingDate() {
         return bookingDate;
     }
@@ -63,6 +65,10 @@ public class EventDetailsViewObject {
 
     public void setEventCategory(EventCategory eventCategory) {
         this.eventCategory = eventCategory;
+    }
+
+    public String getReceiptNumber() {
+        return receiptNumber;
     }
     
     

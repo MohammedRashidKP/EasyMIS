@@ -22,8 +22,13 @@ public class EventDetailsAssembler {
             fullName.append(" ").append(eventDetails.getLastName());
         }
         String eventType = resolveEventType(eventDetails);
-        EventDetailsViewObject eventDetailsViewObject = new EventDetailsViewObject(DateHelper.format(eventDetails.getEventDate()) , fullName.toString(), eventDetails.getBookingStatus(), 
-                eventType, eventDetails.getBookingId(), DateHelper.format(eventDetails.getCreatedDate()), eventDetails.getEventCategory());
+        EventDetailsViewObject eventDetailsViewObject = new EventDetailsViewObject(DateHelper.format(eventDetails.getEventDate()) , 
+                fullName.toString(), 
+                eventDetails.getBookingStatus(), 
+                eventType, 
+                DateHelper.format(eventDetails.getCreatedDate()), 
+                eventDetails.getEventCategory(),
+                eventDetails.getReceiptNumber());
         return eventDetailsViewObject;
     }
 

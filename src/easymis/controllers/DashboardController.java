@@ -9,7 +9,6 @@ import easymis.models.entity.enumeration.EventCategory;
 import easymis.models.entity.enumeration.EventType;
 import easymis.models.repository.DashboardRepository;
 import easymis.utils.DateHelper;
-import easymis.views.viewobjects.EventAvailability;
 import java.net.URL;
 import java.sql.Date;
 import java.util.ArrayList;
@@ -137,30 +136,6 @@ public class DashboardController implements Initializable {
     }
 
     private void populateDateAvailabilitySearchResult(List<EventType> allEvents) {
-        if(allEvents.contains(EventType.WEDDING)){
-            weddingAvailability.setText(EventAvailability.NOT_AVAILABLE.toString());
-        }else{
-            weddingAvailability.setText(EventAvailability.AVAILABLE.toString());
-        }
-        if(allEvents.contains(EventType.MEHANDI)){
-           mehandiAvailability.setText(EventAvailability.NOT_AVAILABLE.toString());
-        }else{
-            mehandiAvailability.setText(EventAvailability.AVAILABLE.toString());
-        }
-        if(allEvents.contains(EventType.RECEPTION_3_PM)){
-           receptionAvailability.setText(EventAvailability.NOT_AVAILABLE.toString());
-        }else{
-            receptionAvailability.setText(EventAvailability.AVAILABLE.toString());
-        }
-        if(allEvents.contains(EventType.ISHA_HALL_AC)){
-           ishHallAvailable.setText(EventAvailability.NOT_AVAILABLE.toString());
-        }else{
-            ishHallAvailable.setText(EventAvailability.AVAILABLE.toString());
-        }
-        if(allEvents.contains(EventType.NICA_LONGUE_AC)){
-           nicaLoungeAvailability.setText(EventAvailability.NOT_AVAILABLE.toString());
-        }else{
-            nicaLoungeAvailability.setText(EventAvailability.AVAILABLE.toString());
-        }
+        
     }
 }
