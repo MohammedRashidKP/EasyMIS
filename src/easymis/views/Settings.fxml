@@ -1,12 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXTabPane?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
 <?import javafx.scene.control.Tab?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.text.Text?>
+<?import org.controlsfx.control.textfield.CustomPasswordField?>
 
 <StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="680.0" prefWidth="1220.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="easymis.controllers.SettingsController">
    <children>
@@ -17,26 +20,50 @@
                   <Pane prefHeight="69.0" prefWidth="1179.0" styleClass="blue-gradient" />
                   <JFXTabPane fx:id="tabPane" layoutY="32.0" prefHeight="600.0" prefWidth="1180.0">
                      <tabs>
-                        <Tab fx:id="panelTabAllEvents" onSelectionChanged="#onAllEventsTabSelection" text="Completed Events">
+                        <Tab fx:id="panelTabSettings" onSelectionChanged="#onSettingsTabSelection" text="Cost">
                           <content>
                             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="1221.0">
                                  <children>
-                                    <TableView fx:id="eventTable" prefHeight="563.0" prefWidth="533.0" AnchorPane.bottomAnchor="12.0" AnchorPane.leftAnchor="12.0" AnchorPane.rightAnchor="12.0" AnchorPane.topAnchor="12.0">
-                                      <columns>
-                                          <TableColumn fx:id="col_bookingId" prefWidth="99.0" text="Booking ID" />
-                                        <TableColumn fx:id="col_EventDate" prefWidth="121.0" text="Event Date" />
-                                        <TableColumn fx:id="col_fullName" prefWidth="172.0" text="Full Name" />
-                                          <TableColumn fx:id="col_BookingStatus" prefWidth="123.0" text="Booking Status" />
-                                          <TableColumn fx:id="col_eventType" prefWidth="412.0" text="Event Type" />
-                                          <TableColumn fx:id="col_BookingDate" prefWidth="126.0" text="Booking Date" />
-                                          <TableColumn fx:id="col_EventCategory" prefWidth="102.0" text="Event Category" />
-                                      </columns>
-                                    </TableView>
+                                    <AnchorPane layoutX="14.0" layoutY="14.0" prefHeight="532.0" prefWidth="441.0" style="-fx-background-color: #f8f8ff;">
+                                       <children>
+                                          <JFXTextField labelFloat="true" layoutX="14.0" layoutY="52.0" promptText="Wedding" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="70.0" />
+                                          <FontAwesomeIconView fill="#aeafdd" glyphName="INR" layoutX="13.0" layoutY="41.0" size="36" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="10.0" />
+                                          <JFXTextField labelFloat="true" layoutX="22.0" layoutY="93.0" promptText="Mehandi" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="120.0" />
+                                          <JFXTextField labelFloat="true" layoutX="19.0" layoutY="134.0" promptText="Reception" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="170.0" />
+                                          <JFXTextField labelFloat="true" layoutY="234.0" promptText="Reception - 3 PM" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="220.0" />
+                                          <JFXTextField labelFloat="true" layoutX="150.0" layoutY="274.0" promptText="Isha Hall" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="270.0" />
+                                          <JFXTextField labelFloat="true" layoutX="97.0" layoutY="320.0" promptText="Nica Hall" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="320.0" />
+                                          <JFXTextField labelFloat="true" layoutX="12.0" layoutY="393.0" promptText="AC" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="370.0" />
+                                          <JFXTextField labelFloat="true" layoutX="15.0" layoutY="451.0" promptText="Additional AC - Per Hr" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="420.0" />
+                                          <JFXTextField labelFloat="true" layoutX="210.0" layoutY="70.0" promptText="Daily Wages" AnchorPane.leftAnchor="210.0" AnchorPane.topAnchor="70.0" />
+                                          <JFXTextField labelFloat="true" layoutX="220.0" layoutY="125.0" promptText="Security-Day/Night" AnchorPane.leftAnchor="210.0" AnchorPane.topAnchor="120.0" />
+                                          <JFXButton buttonType="RAISED" layoutX="83.0" layoutY="13.0" prefHeight="31.0" prefWidth="55.0" style="-fx-background-color: #3a84c3;" text="Save" textFill="WHITE" AnchorPane.leftAnchor="83.0" AnchorPane.topAnchor="13.0" />
+                                          <JFXButton buttonType="RAISED" layoutX="165.0" layoutY="13.0" prefHeight="31.0" prefWidth="55.0" style="-fx-background-color: #3a84c3;" text="Edit" textFill="WHITE" AnchorPane.leftAnchor="165.0" AnchorPane.topAnchor="13.0" />
+                                       </children>
+                                    </AnchorPane>
                                  </children>
                               </AnchorPane>
                           </content>
                         </Tab>
-                        <Tab fx:id="panelTabUpdateEvent" onSelectionChanged="#onUpdateEventTabSelection" text="Expenses" />
+                        <Tab fx:id="panelTabPin" onSelectionChanged="#onPinTabSelection" text="PIN">
+                           <content>
+                              <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                                 <children>
+                                    <AnchorPane layoutX="14.0" layoutY="14.0" prefHeight="216.0" prefWidth="310.0" style="-fx-background-color: #f8f8ff;">
+                                       <children>
+                                          <CustomPasswordField layoutX="86.0" layoutY="14.0" AnchorPane.leftAnchor="130.0" AnchorPane.topAnchor="15.0" />
+                                          <Text layoutX="26.0" layoutY="31.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Old PIN:" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="20.0" />
+                                          <CustomPasswordField layoutX="130.0" layoutY="56.0" AnchorPane.leftAnchor="130.0" AnchorPane.topAnchor="55.0" />
+                                          <CustomPasswordField layoutX="130.0" layoutY="96.0" AnchorPane.leftAnchor="130.0" AnchorPane.topAnchor="95.0" />
+                                          <Text layoutX="26.0" layoutY="62.0" strokeType="OUTSIDE" strokeWidth="0.0" text="New PIN:" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="60.0" />
+                                          <Text layoutX="26.0" layoutY="107.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Confirm New PIN:" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="100.0" />
+                                          <JFXButton layoutX="130.0" layoutY="142.0" style="-fx-background-color: #3a84c3;" text="Change PIN" textFill="WHITE" />
+                                          <JFXButton layoutX="216.0" layoutY="142.0" style="-fx-background-color: #3a84c3;" text="Clear" textFill="WHITE" />
+                                       </children>
+                                    </AnchorPane>
+                                 </children>
+                              </AnchorPane>
+                           </content></Tab>
                      </tabs>
                   </JFXTabPane>
                </children>

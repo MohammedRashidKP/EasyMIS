@@ -20,7 +20,7 @@
                   <Pane prefHeight="69.0" prefWidth="1179.0" styleClass="blue-gradient" />
                   <JFXTabPane fx:id="tabPane" layoutY="32.0" prefHeight="600.0" prefWidth="1180.0">
                      <tabs>
-                        <Tab fx:id="panelTabAllEvents" onSelectionChanged="#onAllEventsTabSelection" text="Completed Events">
+                        <Tab fx:id="panelTabCompletedEvents" onSelectionChanged="#onCompletedEventsTabSelection" text="Completed Events">
                           <content>
                             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="1221.0">
                                  <children>
@@ -39,13 +39,13 @@
                               </AnchorPane>
                           </content>
                         </Tab>
-                        <Tab fx:id="panelTabUpdateEvent" onSelectionChanged="#onUpdateEventTabSelection" text="Expenses">
+                        <Tab fx:id="panelTabExpenses" onSelectionChanged="#onExpensesTabSelection" text="Expenses">
                           
                            <content>
                               <AnchorPane prefHeight="200.0" prefWidth="200.0">
                                  <children>
-                                    <JFXButton contentDisplay="BOTTOM" layoutX="634.0" layoutY="67.0" prefHeight="32.0" prefWidth="143.0" style="-fx-background-color: #3A84C3;" text="Calculate" AnchorPane.leftAnchor="635.0" AnchorPane.topAnchor="70.0" />
-                                    <JFXButton layoutX="634.0" layoutY="120.0" prefHeight="32.0" prefWidth="143.0" style="-fx-background-color: #3A84C3;" text="Edit" AnchorPane.leftAnchor="635.0" AnchorPane.topAnchor="120.0" />
+                                    <JFXButton buttonType="RAISED" contentDisplay="BOTTOM" layoutX="634.0" layoutY="67.0" prefHeight="32.0" prefWidth="143.0" style="-fx-background-color: #3A84C3;" text="Calculate" AnchorPane.leftAnchor="635.0" AnchorPane.topAnchor="70.0" />
+                                    <JFXButton buttonType="RAISED" layoutX="634.0" layoutY="120.0" prefHeight="32.0" prefWidth="143.0" style="-fx-background-color: #3A84C3;" text="Edit" AnchorPane.leftAnchor="635.0" AnchorPane.topAnchor="120.0" />
                                     <JFXTextField labelFloat="true" layoutX="40.0" layoutY="68.0" prefHeight="26.0" prefWidth="150.0" promptText="Electricity" unFocusColor="#a8a7ab" AnchorPane.leftAnchor="40.0" AnchorPane.topAnchor="70.0" />
                                     <JFXTextField labelFloat="true" layoutX="39.0" layoutY="103.0" prefHeight="26.0" prefWidth="150.0" promptText="Cleaning" unFocusColor="#a8a7ab" AnchorPane.leftAnchor="40.0" AnchorPane.topAnchor="110.0" />
                                     <JFXTextField labelFloat="true" layoutX="42.0" layoutY="136.0" prefHeight="26.0" prefWidth="150.0" promptText="Daily Wages" unFocusColor="#a8a7ab" AnchorPane.leftAnchor="40.0" AnchorPane.topAnchor="150.0" />

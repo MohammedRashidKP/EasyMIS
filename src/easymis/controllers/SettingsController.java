@@ -12,8 +12,6 @@ import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Tab;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
 
 /**
  * FXML Controller class
@@ -24,25 +22,9 @@ public class SettingsController implements Initializable {
     @FXML
     private JFXTabPane tabPane;
     @FXML
-    private Tab panelTabAllEvents;
+    private Tab panelTabSettings;
     @FXML
-    private TableView<?> eventTable;
-    @FXML
-    private TableColumn<?, ?> col_bookingId;
-    @FXML
-    private TableColumn<?, ?> col_EventDate;
-    @FXML
-    private TableColumn<?, ?> col_fullName;
-    @FXML
-    private TableColumn<?, ?> col_BookingStatus;
-    @FXML
-    private TableColumn<?, ?> col_eventType;
-    @FXML
-    private TableColumn<?, ?> col_BookingDate;
-    @FXML
-    private TableColumn<?, ?> col_EventCategory;
-    @FXML
-    private Tab panelTabUpdateEvent;
+    private Tab panelTabPin;
 
     /**
      * Initializes the controller class.
@@ -53,11 +35,11 @@ public class SettingsController implements Initializable {
     }    
 
     @FXML
-    private void onAllEventsTabSelection(Event event) {
+    private void onSettingsTabSelection(Event event) {
     }
 
     @FXML
-    private void onUpdateEventTabSelection(Event event) {
+    private void onPinTabSelection(Event event) {
     }
     
 }

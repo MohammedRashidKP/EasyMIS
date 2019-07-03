@@ -1,3 +1,8 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package easymis.controllers;
 
 import com.jfoenix.controls.JFXTabPane;
@@ -19,7 +24,7 @@ public class ExpensesController implements Initializable {
     @FXML
     private JFXTabPane tabPane;
     @FXML
-    private Tab panelTabAllEvents;
+    private Tab panelTabCompletedEvents;
     @FXML
     private TableView<?> eventTable;
     @FXML
@@ -37,7 +42,7 @@ public class ExpensesController implements Initializable {
     @FXML
     private TableColumn<?, ?> col_EventCategory;
     @FXML
-    private Tab panelTabUpdateEvent;
+    private Tab panelTabExpenses;
 
     /**
      * Initializes the controller class.
@@ -48,11 +53,11 @@ public class ExpensesController implements Initializable {
     }    
 
     @FXML
-    private void onAllEventsTabSelection(Event event) {
+    private void onCompletedEventsTabSelection(Event event) {
     }
 
     @FXML
-    private void onUpdateEventTabSelection(Event event) {
+    private void onExpensesTabSelection(Event event) {
     }
     
 }
