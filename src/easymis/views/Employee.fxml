@@ -1,12 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXTabPane?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
 <StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="680.0" prefWidth="1220.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="easymis.controllers.EmployeeController">
    <children>
@@ -17,26 +23,76 @@
                   <Pane prefHeight="69.0" prefWidth="1179.0" styleClass="blue-gradient" />
                   <JFXTabPane fx:id="tabPane" layoutY="32.0" prefHeight="600.0" prefWidth="1180.0">
                      <tabs>
-                        <Tab fx:id="panelTabAllEvents" onSelectionChanged="#onAllEventsTabSelection" text="Completed Events">
+                        <Tab fx:id="panelTabAlddInventory" onSelectionChanged="#onAllEventsTabSelection" text="Employee">
                           <content>
                             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="1221.0">
                                  <children>
-                                    <TableView fx:id="eventTable" prefHeight="563.0" prefWidth="533.0" AnchorPane.bottomAnchor="12.0" AnchorPane.leftAnchor="12.0" AnchorPane.rightAnchor="12.0" AnchorPane.topAnchor="12.0">
-                                      <columns>
-                                          <TableColumn fx:id="col_bookingId" prefWidth="99.0" text="Booking ID" />
-                                        <TableColumn fx:id="col_EventDate" prefWidth="121.0" text="Event Date" />
-                                        <TableColumn fx:id="col_fullName" prefWidth="172.0" text="Full Name" />
-                                          <TableColumn fx:id="col_BookingStatus" prefWidth="123.0" text="Booking Status" />
-                                          <TableColumn fx:id="col_eventType" prefWidth="412.0" text="Event Type" />
-                                          <TableColumn fx:id="col_BookingDate" prefWidth="126.0" text="Booking Date" />
-                                          <TableColumn fx:id="col_EventCategory" prefWidth="102.0" text="Event Category" />
-                                      </columns>
-                                    </TableView>
+                                    <AnchorPane layoutX="3.0" layoutY="14.0" prefHeight="313.0" prefWidth="1141.0" style="-fx-background-color: #f8f8ff;" AnchorPane.topAnchor="14.0">
+                                       <children>
+                                          <Text layoutX="20.0" layoutY="48.0" strokeType="OUTSIDE" strokeWidth="0.0" text="First Name" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="266.0" AnchorPane.topAnchor="35.0" />
+                                          <TextField layoutX="120.0" layoutY="30.0" prefHeight="25.0" prefWidth="228.0" AnchorPane.leftAnchor="120.0" AnchorPane.topAnchor="30.0" />
+                                          <Text layoutX="34.0" layoutY="84.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Last Name" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="266.0" AnchorPane.topAnchor="70.0" />
+                                          <TextField layoutX="96.0" layoutY="67.0" prefHeight="19.0" prefWidth="227.0" AnchorPane.leftAnchor="120.0" AnchorPane.topAnchor="65.0" />
+                                          <Button layoutX="1013.0" layoutY="183.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="109.0" style="-fx-background-color: #3a84c3;" text="Add Employee" textFill="WHITE" AnchorPane.leftAnchor="1000.0" AnchorPane.topAnchor="180.0" />
+                                          <Button layoutX="1013.0" layoutY="263.0" mnemonicParsing="false" style="-fx-background-color: #3a84c3;" text="Reset" textFill="WHITE" AnchorPane.leftAnchor="1000.0" AnchorPane.topAnchor="240.0" />
+                                          <Text layoutX="36.0" layoutY="125.0" strokeType="OUTSIDE" strokeWidth="0.0" text="DOB" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="280.98828125" AnchorPane.topAnchor="105.0" />
+                                          <DatePicker layoutX="89.0" layoutY="108.0" prefHeight="25.0" prefWidth="141.0" AnchorPane.leftAnchor="120.0" AnchorPane.topAnchor="100.0" />
+                                          <Text layoutX="274.0" layoutY="125.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Age" AnchorPane.topAnchor="105.0" />
+                                          <TextField layoutX="305.0" layoutY="108.0" prefHeight="25.0" prefWidth="41.0" AnchorPane.topAnchor="100.0" />
+                                          <Text layoutX="48.0" layoutY="162.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Address Line 1" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="140.0" />
+                                          <TextField layoutX="125.0" layoutY="145.0" prefHeight="19.0" prefWidth="227.0" AnchorPane.leftAnchor="120.0" AnchorPane.topAnchor="135.0" />
+                                          <Text layoutX="44.0" layoutY="196.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Address Line 2" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="175.0" />
+                                          <TextField layoutX="125.0" layoutY="179.0" prefHeight="19.0" prefWidth="227.0" AnchorPane.leftAnchor="120.0" AnchorPane.topAnchor="170.0" />
+                                          <Text fill="#d0cccc" layoutX="21.0" layoutY="21.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Add / Update">
+                                             <font>
+                                                <Font name="System Bold" size="20.0" />
+                                             </font>
+                                          </Text>
+                                          <Text layoutX="48.0" layoutY="244.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Address Line 3" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="210.0" />
+                                          <TextField layoutX="135.0" layoutY="227.0" prefHeight="19.0" prefWidth="227.0" AnchorPane.leftAnchor="120.0" AnchorPane.topAnchor="205.0" />
+                                          <Text layoutX="58.0" layoutY="289.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Pin Code" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="245.0" />
+                                          <TextField layoutX="145.0" layoutY="266.0" prefHeight="25.0" prefWidth="227.0" AnchorPane.leftAnchor="120.0" AnchorPane.topAnchor="240.0" />
+                                          <Text layoutX="25.0" layoutY="292.0" strokeType="OUTSIDE" strokeWidth="0.0" text="District" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="280.0" />
+                                          <TextField layoutX="120.0" layoutY="275.0" prefHeight="19.0" prefWidth="227.0" AnchorPane.leftAnchor="120.0" AnchorPane.topAnchor="275.0" />
+                                          <Text layoutX="391.0" layoutY="76.0" strokeType="OUTSIDE" strokeWidth="0.0" text="State" AnchorPane.leftAnchor="425.0" AnchorPane.topAnchor="70.0" />
+                                          <TextField layoutX="445.0" layoutY="59.0" prefHeight="19.0" prefWidth="227.0" AnchorPane.leftAnchor="535.0" AnchorPane.topAnchor="65.0" />
+                                          <TextField layoutX="457.0" layoutY="96.0" prefHeight="19.0" prefWidth="227.0" AnchorPane.leftAnchor="535.0" AnchorPane.topAnchor="100.0" />
+                                          <Text layoutX="399.0" layoutY="113.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Mobile Number" AnchorPane.leftAnchor="425.0" AnchorPane.topAnchor="105.0" />
+                                          <Text layoutX="398.0" layoutY="143.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Alternate number" AnchorPane.leftAnchor="425.0" AnchorPane.topAnchor="140.0" />
+                                          <TextField layoutX="477.0" layoutY="126.0" prefHeight="19.0" prefWidth="227.0" AnchorPane.leftAnchor="535.0" AnchorPane.topAnchor="135.0" />
+                                          <Text layoutX="424.0" layoutY="47.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Employee ID" AnchorPane.leftAnchor="425.0" AnchorPane.topAnchor="35.0" />
+                                          <TextField layoutX="537.0" layoutY="31.0" prefHeight="19.0" prefWidth="227.0" AnchorPane.leftAnchor="535.0" AnchorPane.topAnchor="30.0" />
+                                          <Text layoutX="424.0" layoutY="179.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Joining date" AnchorPane.leftAnchor="425.0" AnchorPane.topAnchor="175.0" />
+                                          <DatePicker layoutX="535.0" layoutY="171.0" prefHeight="25.0" prefWidth="141.0" AnchorPane.leftAnchor="535.0" AnchorPane.topAnchor="170.0" />
+                                          <Text layoutX="434.0" layoutY="211.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Releaving date" AnchorPane.leftAnchor="425.0" AnchorPane.topAnchor="210.0" />
+                                          <DatePicker layoutX="545.0" layoutY="211.0" prefHeight="25.0" prefWidth="141.0" AnchorPane.leftAnchor="535.0" AnchorPane.topAnchor="205.0" />
+                                          <Text layoutX="437.0" layoutY="249.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Emp Status" AnchorPane.leftAnchor="425.0" AnchorPane.topAnchor="245.0" />
+                                          <ComboBox layoutX="541.0" layoutY="241.0" prefHeight="25.0" prefWidth="143.0" AnchorPane.leftAnchor="535.0" AnchorPane.topAnchor="240.0" />
+                                          <Button layoutX="1013.0" layoutY="220.0" mnemonicParsing="false" style="-fx-background-color: #3a84c3;" text="Update Employee" textFill="WHITE" AnchorPane.leftAnchor="1000.0" AnchorPane.topAnchor="210.0" />
+                                       </children>
+                                    </AnchorPane>
+                                    <AnchorPane layoutX="4.0" layoutY="333.0" prefHeight="189.0" prefWidth="1139.0" style="-fx-background-color: #f8f8ff;">
+                                       <children>
+                                          <TableView layoutX="14.0" layoutY="14.0" prefHeight="163.0" prefWidth="1119.0">
+                                            <columns>
+                                              <TableColumn prefWidth="75.0" text="Emp Id" />
+                                              <TableColumn prefWidth="75.0" text="First Name" />
+                                                <TableColumn prefWidth="75.0" text="Last Name" />
+                                                <TableColumn prefWidth="75.0" text="Salary" />
+                                                <TableColumn prefWidth="126.0" text="DOB" />
+                                                <TableColumn prefWidth="61.0" text="Age" />
+                                                <TableColumn prefWidth="87.0" text="Previous Exp" />
+                                                <TableColumn prefWidth="87.0" text="Joining Date" />
+                                                <TableColumn prefWidth="108.0" text="Releaving Date" />
+                                                <TableColumn prefWidth="108.0" text="Emp Status" />
+                                            </columns>
+                                          </TableView>
+                                       </children>
+                                    </AnchorPane>
                                  </children>
                               </AnchorPane>
                           </content>
                         </Tab>
-                        <Tab fx:id="panelTabUpdateEvent" onSelectionChanged="#onUpdateEventTabSelection" text="Expenses" />
                      </tabs>
                   </JFXTabPane>
                </children>
