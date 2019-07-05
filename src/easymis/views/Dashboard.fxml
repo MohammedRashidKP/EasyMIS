@@ -18,36 +18,36 @@
           </stylesheets>
          <children>
             <AnchorPane layoutX="71.0" layoutY="86.0" />
-            <AnchorPane layoutX="31.0" layoutY="415.0" prefHeight="408.0" prefWidth="563.0" style="-fx-background-color: #ffffff;" styleClass="card">
+            <AnchorPane layoutX="31.0" layoutY="427.0" prefHeight="408.0" prefWidth="563.0" style="-fx-background-color: #ffffff;" styleClass="card">
                <children>
                   <JFXDatePicker fx:id="eventDateField" defaultColor="#3a84c3" layoutX="14.0" layoutY="78.0" promptText="Event Date" />
                   <JFXButton fx:id="searchButton" layoutX="199.0" layoutY="78.0" onAction="#onClickOfSearch" style="-fx-background-color: #3A84C3;" styleClass="card" text="Search Availability" textFill="WHITE" />
-                  <Text fill="#6a94e8" fontSmoothingType="LCD" layoutX="118.0" layoutY="133.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="toolbar" text="Wedding" AnchorPane.bottomAnchor="271.486328125" AnchorPane.leftAnchor="118.0" AnchorPane.rightAnchor="385.0" AnchorPane.topAnchor="117.892578125">
+                  <Text fill="#6a94e8" fontSmoothingType="LCD" layoutX="118.0" layoutY="133.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="toolbar" text="Wedding" AnchorPane.bottomAnchor="271.486328125" AnchorPane.rightAnchor="385.0" AnchorPane.topAnchor="117.0">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
                   </Text>
-                  <Text fill="#6a94e8" fontSmoothingType="LCD" layoutX="20.0" layoutY="170.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="toolbar" text="Mehandhi" AnchorPane.rightAnchor="385.0">
+                  <Text fill="#6a94e8" fontSmoothingType="LCD" layoutX="20.0" layoutY="170.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="toolbar" text="Mehandhi" AnchorPane.rightAnchor="385.0" AnchorPane.topAnchor="157.0">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
                   </Text>
-                  <Text fill="#6a94e8" fontSmoothingType="LCD" layoutX="47.0" layoutY="209.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="toolbar" text="Wedding Reception" AnchorPane.rightAnchor="385.0">
+                  <Text fill="#6a94e8" fontSmoothingType="LCD" layoutX="47.0" layoutY="209.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="toolbar" text="Reception - 3 PM" AnchorPane.rightAnchor="385.0" AnchorPane.topAnchor="197.0">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
                   </Text>
-                  <Text fill="#6a94e8" fontSmoothingType="LCD" layoutX="99.0" layoutY="243.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="toolbar" text="Isha Hall-AC" AnchorPane.rightAnchor="385.0">
+                  <Text fill="#6a94e8" fontSmoothingType="LCD" layoutX="311.0" layoutY="130.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="toolbar" text="Isha Hall_Day - AC" AnchorPane.rightAnchor="132.0" AnchorPane.topAnchor="117.0">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
                   </Text>
-                  <Text fill="#6a94e8" fontSmoothingType="LCD" layoutX="71.0" layoutY="276.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="toolbar" text="Nica Lounge-AC" AnchorPane.rightAnchor="385.0">
+                  <Text fill="#6a94e8" fontSmoothingType="LCD" layoutX="315.2919921875" layoutY="211.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="toolbar" text="Nica Lounge-AC" AnchorPane.rightAnchor="132.0" AnchorPane.topAnchor="197.0">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
                   </Text>
-                  <AnchorPane layoutX="199.0" layoutY="118.0" prefHeight="20.0" prefWidth="106.0" style="-fx-background-color: #3A84C3;" styleClass="card">
+                  <AnchorPane layoutX="199.0" layoutY="118.0" prefHeight="20.0" prefWidth="106.0" style="-fx-background-color: #3A84C3;" styleClass="card" AnchorPane.leftAnchor="200.0" AnchorPane.topAnchor="115.0">
                      <children>
                         <Text fx:id="weddingAvailability" fill="WHITE" fontSmoothingType="LCD" layoutX="5.0" layoutY="15.0" strokeType="OUTSIDE" strokeWidth="0.0">
                            <font>
@@ -56,7 +56,7 @@
                         </Text>
                      </children>
                   </AnchorPane>
-                  <AnchorPane layoutX="199.0" layoutY="155.0" prefHeight="20.0" prefWidth="106.0" style="-fx-background-color: #3A84C3;" styleClass="card">
+                  <AnchorPane layoutX="199.0" layoutY="155.0" prefHeight="20.0" prefWidth="106.0" style="-fx-background-color: #3A84C3;" styleClass="card" AnchorPane.leftAnchor="200.0" AnchorPane.topAnchor="155.0">
                      <children>
                         <Text fx:id="mehandiAvailability" fill="WHITE" fontSmoothingType="LCD" layoutX="5.0" layoutY="15.0" strokeType="OUTSIDE" strokeWidth="0.0">
                            <font>
@@ -65,7 +65,7 @@
                         </Text>
                      </children>
                   </AnchorPane>
-                  <AnchorPane layoutX="199.0" layoutY="228.0" prefHeight="20.0" prefWidth="106.0" style="-fx-background-color: #3A84C3;" styleClass="card">
+                  <AnchorPane layoutX="199.0" layoutY="228.0" prefHeight="20.0" prefWidth="106.0" style="-fx-background-color: #3A84C3;" styleClass="card" AnchorPane.leftAnchor="200.0" AnchorPane.topAnchor="235.0">
                      <children>
                         <Text fx:id="ishHallAvailable" fill="WHITE" fontSmoothingType="LCD" layoutX="5.0" layoutY="15.0" strokeType="OUTSIDE" strokeWidth="0.0">
                            <font>
@@ -74,7 +74,7 @@
                         </Text>
                      </children>
                   </AnchorPane>
-                  <AnchorPane layoutX="199.0" layoutY="261.0" prefHeight="20.0" prefWidth="106.0" style="-fx-background-color: #3A84C3;" styleClass="card">
+                  <AnchorPane layoutX="437.0" layoutY="114.0" prefHeight="20.0" prefWidth="117.0" style="-fx-background-color: #3A84C3;" styleClass="card" AnchorPane.leftAnchor="437.0" AnchorPane.topAnchor="115.0">
                      <children>
                         <Text fx:id="nicaLoungeAvailability" fill="WHITE" fontSmoothingType="LCD" layoutX="5.0" layoutY="15.0" strokeType="OUTSIDE" strokeWidth="0.0">
                            <font>
@@ -83,7 +83,7 @@
                         </Text>
                      </children>
                   </AnchorPane>
-                  <AnchorPane layoutX="199.0" layoutY="194.0" prefHeight="20.0" prefWidth="106.0" style="-fx-background-color: #3A84C3;" styleClass="card">
+                  <AnchorPane layoutX="199.0" layoutY="194.0" prefHeight="20.0" prefWidth="106.0" style="-fx-background-color: #3A84C3;" styleClass="card" AnchorPane.leftAnchor="200.0" AnchorPane.topAnchor="195.0">
                      <children>
                         <Text fx:id="receptionAvailability" fill="WHITE" fontSmoothingType="LCD" layoutX="5.0" layoutY="15.0" strokeType="OUTSIDE" strokeWidth="0.0">
                            <font>
@@ -97,18 +97,28 @@
                         <FontAwesomeIconView fill="WHITE" fontSmoothingType="LCD" glyphName="SEARCH" layoutX="50.0" layoutY="47.0" size="36" />
                      </children>
                   </AnchorPane>
-                  <AnchorPane layoutX="314.0" layoutY="194.0" prefHeight="20.0" prefWidth="106.0" style="-fx-background-color: #3A84C3;" styleClass="card">
+                  <Text fill="#6a94e8" fontSmoothingType="LCD" layoutX="74.0" layoutY="249.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="toolbar" text="Reception - 5.30 PM" AnchorPane.rightAnchor="385.0" AnchorPane.topAnchor="237.0">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Text>
+                  <Text fill="#6a94e8" fontSmoothingType="LCD" layoutX="312.0" layoutY="170.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="toolbar" text="Isha Hall_Eve - AC" AnchorPane.rightAnchor="132.0" AnchorPane.topAnchor="157.0">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Text>
+                  <AnchorPane layoutX="437.0" layoutY="154.0" prefHeight="20.0" prefWidth="117.0" style="-fx-background-color: #3A84C3;" styleClass="card" AnchorPane.leftAnchor="437.0" AnchorPane.topAnchor="155.0">
                      <children>
-                        <Text fx:id="receptionAvailability1" fill="WHITE" fontSmoothingType="LCD" layoutX="5.0" layoutY="15.0" strokeType="OUTSIDE" strokeWidth="0.0">
+                        <Text fx:id="nicaLoungeAvailability1" fill="WHITE" fontSmoothingType="LCD" layoutX="5.0" layoutY="15.0" strokeType="OUTSIDE" strokeWidth="0.0">
                            <font>
                               <Font name="System Bold" size="14.0" />
                            </font>
                         </Text>
                      </children>
                   </AnchorPane>
-                  <AnchorPane layoutX="314.0" layoutY="228.0" prefHeight="20.0" prefWidth="106.0" style="-fx-background-color: #3A84C3;" styleClass="card">
+                  <AnchorPane layoutX="437.0" layoutY="194.0" prefHeight="20.0" prefWidth="117.0" style="-fx-background-color: #3A84C3;" styleClass="card" AnchorPane.leftAnchor="437.0" AnchorPane.topAnchor="195.0">
                      <children>
-                        <Text fx:id="ishHallAvailable1" fill="WHITE" fontSmoothingType="LCD" layoutX="5.0" layoutY="15.0" strokeType="OUTSIDE" strokeWidth="0.0">
+                        <Text fx:id="nicaLoungeAvailability11" fill="WHITE" fontSmoothingType="LCD" layoutX="5.0" layoutY="15.0" strokeType="OUTSIDE" strokeWidth="0.0">
                            <font>
                               <Font name="System Bold" size="14.0" />
                            </font>

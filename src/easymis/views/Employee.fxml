@@ -69,6 +69,10 @@
                                           <Text layoutX="437.0" layoutY="249.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Emp Status" AnchorPane.leftAnchor="425.0" AnchorPane.topAnchor="245.0" />
                                           <ComboBox layoutX="541.0" layoutY="241.0" prefHeight="25.0" prefWidth="143.0" AnchorPane.leftAnchor="535.0" AnchorPane.topAnchor="240.0" />
                                           <Button layoutX="1013.0" layoutY="220.0" mnemonicParsing="false" style="-fx-background-color: #3a84c3;" text="Update Employee" textFill="WHITE" AnchorPane.leftAnchor="1000.0" AnchorPane.topAnchor="210.0" />
+                                          <Text layoutX="435.0" layoutY="286.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Salary" AnchorPane.leftAnchor="425.0" AnchorPane.topAnchor="280.0" />
+                                          <TextField layoutX="535.0" layoutY="275.0" prefHeight="19.0" prefWidth="227.0" AnchorPane.leftAnchor="535.0" AnchorPane.topAnchor="275.0" />
+                                          <Text layoutX="819.0" layoutY="48.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Previous Exp" AnchorPane.leftAnchor="820.0" AnchorPane.topAnchor="35.0" />
+                                          <TextField layoutX="909.0" layoutY="30.0" prefHeight="19.0" prefWidth="227.0" AnchorPane.topAnchor="30.0" />
                                        </children>
                                     </AnchorPane>
                                     <AnchorPane layoutX="4.0" layoutY="333.0" prefHeight="189.0" prefWidth="1139.0" style="-fx-background-color: #f8f8ff;">
@@ -92,6 +96,67 @@
                                  </children>
                               </AnchorPane>
                           </content>
+                        </Tab>
+                        <Tab fx:id="panelTabAlddInventory1" onSelectionChanged="#onAllEventsTabSelection" text="Payroll">
+                           <content>
+                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="1221.0">
+                                 <children>
+                                    <AnchorPane layoutX="3.0" layoutY="14.0" prefHeight="313.0" prefWidth="1141.0" style="-fx-background-color: #f8f8ff;" AnchorPane.topAnchor="14.0">
+                                       <children>
+                                          <Text layoutX="20.0" layoutY="48.0" strokeType="OUTSIDE" strokeWidth="0.0" text="First Name" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="266.0" AnchorPane.topAnchor="70.0" />
+                                          <TextField layoutX="120.0" layoutY="30.0" prefHeight="25.0" prefWidth="228.0" AnchorPane.leftAnchor="120.0" AnchorPane.topAnchor="65.0" />
+                                          <Text layoutX="34.0" layoutY="84.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Last Name" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="266.0" AnchorPane.topAnchor="105.0" />
+                                          <TextField layoutX="96.0" layoutY="67.0" prefHeight="19.0" prefWidth="227.0" AnchorPane.leftAnchor="120.0" AnchorPane.topAnchor="100.0" />
+                                          <Button layoutX="1000.0" layoutY="202.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="109.0" style="-fx-background-color: #3a84c3;" text="Pay" textFill="WHITE" AnchorPane.leftAnchor="1000.0" AnchorPane.topAnchor="202.0" />
+                                          <Button layoutX="1000.0" layoutY="240.0" mnemonicParsing="false" style="-fx-background-color: #3a84c3;" text="Reset" textFill="WHITE" AnchorPane.leftAnchor="1000.0" AnchorPane.topAnchor="240.0" />
+                                          <Text fill="#d0cccc" layoutX="19.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Employee Details">
+                                             <font>
+                                                <Font name="System Bold" size="18.0" />
+                                             </font>
+                                          </Text>
+                                          <Text layoutX="424.0" layoutY="47.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Employee ID" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="35.0" />
+                                          <TextField layoutX="537.0" layoutY="31.0" prefHeight="19.0" prefWidth="227.0" AnchorPane.leftAnchor="120.0" AnchorPane.topAnchor="30.0" />
+                                          <Text layoutX="21.0" layoutY="157.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Joining date" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="140.0" />
+                                          <DatePicker layoutX="120.0" layoutY="140.0" prefHeight="25.0" prefWidth="141.0" AnchorPane.leftAnchor="120.0" AnchorPane.topAnchor="135.0" />
+                                          <Text layoutX="19.0" layoutY="185.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Emp Status" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="175.0" />
+                                          <ComboBox layoutX="119.0" layoutY="180.0" prefHeight="25.0" prefWidth="143.0" AnchorPane.leftAnchor="120.0" AnchorPane.topAnchor="170.0" />
+                                          <Text layoutX="26.0" layoutY="270.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Salary" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="245.0" />
+                                          <TextField layoutX="120.0" layoutY="262.0" prefHeight="19.0" prefWidth="227.0" AnchorPane.leftAnchor="120.0" AnchorPane.topAnchor="240.0" />
+                                          <Text layoutX="395.0" layoutY="47.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Bonus" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="280.0" />
+                                          <TextField layoutX="459.0" layoutY="30.0" prefHeight="19.0" prefWidth="227.0" AnchorPane.leftAnchor="120.0" AnchorPane.topAnchor="275.0" />
+                                          <Text layoutX="19.0" layoutY="227.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Advance" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="210.0" />
+                                          <TextField layoutX="120.0" layoutY="219.0" prefHeight="19.0" prefWidth="227.0" AnchorPane.leftAnchor="120.0" AnchorPane.topAnchor="205.0" />
+                                          <Text layoutX="389.0" layoutY="48.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Salary towards the Month" AnchorPane.leftAnchor="390.0" AnchorPane.topAnchor="35.0" />
+                                          <Text fill="#d0cccc" layoutX="389.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Payroll Details">
+                                             <font>
+                                                <Font name="System Bold" size="18.0" />
+                                             </font>
+                                          </Text>
+                                          <DatePicker layoutX="538.0" layoutY="31.0" prefHeight="25.0" prefWidth="141.0" AnchorPane.topAnchor="30.0" />
+                                          <Text layoutX="389.0" layoutY="82.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Net pay (Salary-Advance)" AnchorPane.leftAnchor="390.0" AnchorPane.topAnchor="70.0" />
+                                          <TextField layoutX="538.0" layoutY="73.0" prefHeight="19.0" prefWidth="227.0" AnchorPane.topAnchor="65.0" />
+                                       </children>
+                                    </AnchorPane>
+                                    <AnchorPane layoutX="4.0" layoutY="333.0" prefHeight="189.0" prefWidth="1139.0" style="-fx-background-color: #f8f8ff;">
+                                       <children>
+                                          <TableView layoutX="14.0" layoutY="14.0" prefHeight="163.0" prefWidth="1119.0">
+                                             <columns>
+                                                <TableColumn prefWidth="75.0" text="Emp Id" />
+                                                <TableColumn prefWidth="75.0" text="First Name" />
+                                                <TableColumn prefWidth="75.0" text="Last Name" />
+                                                <TableColumn prefWidth="75.0" text="Net Pay" />
+                                                <TableColumn prefWidth="126.0" text="Month" />
+                                                <TableColumn prefWidth="61.0" text="Bonus" />
+                                                <TableColumn prefWidth="87.0" text="advance" />
+                                                <TableColumn prefWidth="87.0" text="Salary Status" />
+                                                <TableColumn prefWidth="108.0" text="Comments" />
+                                             </columns>
+                                          </TableView>
+                                       </children>
+                                    </AnchorPane>
+                                 </children>
+                              </AnchorPane>
+                           </content>
                         </Tab>
                      </tabs>
                   </JFXTabPane>

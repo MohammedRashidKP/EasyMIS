@@ -31,10 +31,11 @@
                                           <JFXTextField labelFloat="true" layoutX="22.0" layoutY="93.0" promptText="Mehandi" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="120.0" />
                                           <JFXTextField labelFloat="true" layoutX="19.0" layoutY="134.0" promptText="Reception" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="170.0" />
                                           <JFXTextField labelFloat="true" layoutY="234.0" promptText="Reception - 3 PM" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="220.0" />
-                                          <JFXTextField labelFloat="true" layoutX="150.0" layoutY="274.0" promptText="Isha Hall" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="270.0" />
-                                          <JFXTextField labelFloat="true" layoutX="97.0" layoutY="320.0" promptText="Nica Hall" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="320.0" />
+                                          <JFXTextField labelFloat="true" layoutX="150.0" layoutY="274.0" promptText="Isha Hall-Day" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="270.0" />
+                                          <JFXTextField labelFloat="true" layoutX="97.0" layoutY="320.0" promptText="Isha Hall-Eve" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="320.0" />
                                           <JFXTextField labelFloat="true" layoutX="12.0" layoutY="393.0" promptText="AC" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="370.0" />
-                                          <JFXTextField labelFloat="true" layoutX="15.0" layoutY="451.0" promptText="Additional AC - Per Hr" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="420.0" />
+                                          <JFXTextField labelFloat="true" layoutX="15.0" layoutY="451.0" promptText="Additional AC-Per Hr" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="420.0" />
+                                          <JFXTextField labelFloat="true" layoutX="17.0" layoutY="371.0" promptText="Nica Hall " AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="470.0" />
                                           <JFXTextField labelFloat="true" layoutX="210.0" layoutY="70.0" promptText="Daily Wages" AnchorPane.leftAnchor="210.0" AnchorPane.topAnchor="70.0" />
                                           <JFXTextField labelFloat="true" layoutX="220.0" layoutY="125.0" promptText="Security-Day/Night" AnchorPane.leftAnchor="210.0" AnchorPane.topAnchor="120.0" />
                                           <JFXButton buttonType="RAISED" layoutX="83.0" layoutY="13.0" prefHeight="31.0" prefWidth="55.0" style="-fx-background-color: #3a84c3;" text="Save" textFill="WHITE" AnchorPane.leftAnchor="83.0" AnchorPane.topAnchor="13.0" />
