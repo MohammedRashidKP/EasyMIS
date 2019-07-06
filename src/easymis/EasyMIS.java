@@ -20,12 +20,12 @@ public class EasyMIS extends Application {
     
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource(Constants.MAIN_VIEW));
+        Parent root = FXMLLoader.load(getClass().getResource(Constants.LOGIN_VIEW));
         
         Scene scene = new Scene(root);
         
         stage.setScene(scene);
-        stage.setFullScreen(true);
+        //stage.resizableProperty().setValue(Boolean.FALSE);
         stage.show();
     }
 

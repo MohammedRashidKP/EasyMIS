@@ -8,8 +8,10 @@
     <!-- Entity Class -->
     <class>easymis.models.entity.Booking</class>
     <class>easymis.models.entity.Event</class>
+    <class>easymis.models.entity.Settings</class>
     <properties>
       <!-- Connection properties -->
+      <property name="eclipselink.target-database" value="Database"/>
       <property name="javax.persistence.jdbc.driver" value="org.sqlite.JDBC"/>
       <property name="javax.persistence.jdbc.url" value="jdbc:sqlite:./Database.db"/>
       <!-- Fill if we need user and password -->

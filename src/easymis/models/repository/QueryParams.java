@@ -8,9 +8,9 @@ import java.sql.Date;
  */
 public class QueryParams {
     private String paramName;
-    private String paramValue;
+    private Object paramValue;
     private Date paramDateValue;
-
+    
     public String getParamName() {
         return paramName;
     }
@@ -19,11 +19,11 @@ public class QueryParams {
         this.paramName = paramName;
     }
 
-    public String getParamValue() {
+    public Object getParamValue() {
         return paramValue;
     }
 
-    public void setParamValue(String paramValue) {
+    public void setParamValue(Object paramValue) {
         this.paramValue = paramValue;
     }
 
@@ -33,8 +33,5 @@ public class QueryParams {
 
     public void setParamDateValue(Date paramDateValue) {
         this.paramDateValue = paramDateValue;
-    }
-
-    
-    
+    }    
 }

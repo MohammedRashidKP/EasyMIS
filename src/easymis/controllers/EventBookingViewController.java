@@ -889,13 +889,21 @@ public class EventBookingViewController implements Initializable {
     }
 
     private void initializeAdditionalAcComboBox() {
+        additionalAcComboBox.getItems().clear();
+        additionalAcComboBox.getSelectionModel().clearSelection();
+        updAdditionalAcComboBox.getItems().clear();
+        updAdditionalAcComboBox.getSelectionModel().clearSelection();
         ObservableList<Integer> additionalACs = FXCollections.observableArrayList();
         for (int i = 1; i < 7; i++) {
             additionalACs.add(i);
         }
+        ObservableList<Integer> updAdditionalACs = FXCollections.observableArrayList();
+        for (int i = 1; i < 7; i++) {
+            updAdditionalACs.add(i);
+        }
         additionalAcComboBox.setItems(additionalACs);
         additionalAcComboBox.getSelectionModel().selectFirst();
-        updAdditionalAcComboBox.setItems(additionalACs);
+        updAdditionalAcComboBox.setItems(updAdditionalACs);
         updAdditionalAcComboBox.getSelectionModel().selectFirst();
     }
 
@@ -921,19 +929,20 @@ public class EventBookingViewController implements Initializable {
             @Override
             public void changed(ObservableValue<? extends Tab> observable, Tab oldValue, Tab newTab) {
 
-                if (null != newTab.getId()) 
+                if (null != newTab.getId()) {
                     switch (newTab.getId()) {
-                    case "panelTabAllEvents":
-                        launchAllEventsTab();
-                        break;
-                    case "panelTabAddEvent":
-                        launchPrepareAddEventTab();
-                        break;
-                    case "panelTabUpdateEvent":
-                        launchPrepareUpdateEventTab();
-                        break;
-                    default:
-                        break;
+                        case "panelTabAllEvents":
+                            launchAllEventsTab();
+                            break;
+                        case "panelTabAddEvent":
+                            launchPrepareAddEventTab();
+                            break;
+                        case "panelTabUpdateEvent":
+                            launchPrepareUpdateEventTab();
+                            break;
+                        default:
+                            break;
+                    }
                 }
             }
         });

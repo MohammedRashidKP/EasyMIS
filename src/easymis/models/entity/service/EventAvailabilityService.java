@@ -89,7 +89,7 @@ public class EventAvailabilityService {
                             EventType.RECEPTION_5_PM.toString() + " already exists on the day");
                     availabilityDTOs.add(mehandi);
                     availabilityDTOs.add(reception3Pm);
-                    //            availabilityDTOs.add(ishaEve);
+                    availabilityDTOs.add(ishaEve);
                     availabilityDTOs.add(ishaDay);
                     break;
                 }
@@ -119,10 +119,10 @@ public class EventAvailabilityService {
                 case ISHA_HALL_AC_DAY: {
                     EventAvailabilityDTO reception3Pm = new EventAvailabilityDTO(EventType.RECEPTION_3_PM,
                             EventAvailability.NOT_AVAILABLE,
-                            EventType.RECEPTION_3_PM.toString() + " already exists on the day");
+                            EventType.ISHA_HALL_AC_DAY.toString() + " already exists on the day");
                     EventAvailabilityDTO wedding = new EventAvailabilityDTO(EventType.WEDDING,
                             EventAvailability.NOT_AVAILABLE,
-                            EventType.WEDDING.toString() + " already exists on the day");
+                            EventType.ISHA_HALL_AC_DAY.toString() + " already exists on the day");
                     availabilityDTOs.add(wedding);
                     availabilityDTOs.add(reception3Pm);
                     break;
@@ -175,11 +175,11 @@ public class EventAvailabilityService {
                     case ISHA_HALL_AC_EVE:
                         EventAvailabilityDTO mehandi = new EventAvailabilityDTO(EventType.MEHANDI,
                                 EventAvailability.NOT_AVAILABLE,
-                                EventType.MEHANDI.toString() + " already exists on the day");
+                                event.getEventType().toString() + " already exists on previous day");
                         availabilityDTOs.add(mehandi);
                          EventAvailabilityDTO mehandiAndWedding = new EventAvailabilityDTO(EventType.WEDDING_AND_MEHANDI,
                                 EventAvailability.NOT_AVAILABLE,
-                                EventType.WEDDING_AND_MEHANDI.toString() + " already exists on the day");
+                                event.getEventType().toString() + " already exists on previous day");
                         availabilityDTOs.add(mehandi);
                         availabilityDTOs.add(mehandiAndWedding);
                         break;

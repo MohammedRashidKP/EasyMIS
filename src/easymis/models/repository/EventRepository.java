@@ -128,17 +128,6 @@ public class EventRepository extends AbstractRepository {
         }
         return status;
     }
-    
-    private TransactionStatus fillTransactionStatus(Exception exception) {
-        TransactionStatus status = new TransactionStatus();
-        if (exception != null) {
-            status.setSuccess(false);
-            status.setMessage(exception.getLocalizedMessage());
-        } else {
-            status.setSuccess(true);
-        }
-        return status;
-    }
 
     public Booking fetchByReceiptNumber(String receiptNumber) {
         QueryParams param = new QueryParams();

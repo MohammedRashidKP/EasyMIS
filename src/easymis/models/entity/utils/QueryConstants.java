@@ -26,4 +26,12 @@ public class QueryConstants {
     public static final String FETCH_IS_MEHANDI_ON_DATE = "SELECT e from Event e "
             + "where e.eventDate = :eventDate and e.eventType = easymis.models.entity.enumeration.EventType.MEHANDI and e.bookingStatus = "
             + "easymis.models.entity.enumeration.BookingStatus.BOOKED";
+    
+    public static final String FETCH_SETTINGS_FOR_ATTRIBUTES = "SELECT s from Settings s "
+            + "where s.attribute = :attributes";
+    
+    public static final String FETCH_MULTIPLE_SETTINGS_FOR_ATTRIBUTES = "SELECT s from Settings s "
+            + "where s.attribute in :attributes";
+    
+    public static final String FETCH_ALL_SETTINGS = "SELECT s from Settings s";
 }

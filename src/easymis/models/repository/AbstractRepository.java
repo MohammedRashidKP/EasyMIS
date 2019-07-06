@@ -85,7 +85,7 @@ public class AbstractRepository {
         return status;
     }
 
-    private TransactionStatus fillTransactionStatus(Exception exception) {
+    public TransactionStatus fillTransactionStatus(Exception exception) {
         TransactionStatus status = new TransactionStatus();
         if (exception != null) {
             status.setSuccess(false);

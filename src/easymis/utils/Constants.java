@@ -14,5 +14,6 @@ public class Constants {
     public static final String EXPENSES_VIEW = "/easymis/views/Expenses.fxml";
     public static final String INVENTORY_VIEW = "/easymis/views/Inventory.fxml";
     public static final String REPORT_VIEW = "/easymis/views/Reports.fxml";
-    public static final String SETTINGS_VIEW = "/easymis/views/Settings.fxml"; 
+    public static final String SETTINGS_VIEW = "/easymis/views/Settings.fxml";
+    public static final String LOGIN_VIEW = "/easymis/views/Login.fxml"; 
 }
