@@ -6,7 +6,7 @@
 package easymis.models.repository;
 
 import easymis.models.entity.Booking;
-import easymis.models.entity.utils.QueryConstants;
+import easymis.models.utils.QueryConstants;
 import easymis.utils.DateHelper;
 import java.util.Collections;
 import java.util.List;

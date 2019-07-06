@@ -2,8 +2,8 @@ package easymis.models.repository;
 
 import easymis.models.entity.Settings;
 import easymis.models.entity.TransactionStatus;
-import easymis.models.entity.utils.QueryConstants;
-import easymis.models.entity.utils.SettingsConstants;
+import easymis.models.utils.QueryConstants;
+import easymis.models.utils.SettingsConstants;
 import easymis.utils.StringUtils;
 import java.util.Collections;
 import java.util.List;
@@ -46,7 +46,7 @@ public class SettingsRepository extends AbstractRepository{
         QueryParams param = new QueryParams();
         param.setParamName("attributes");
         param.setParamValue(attributes);
-        return retrieve(QueryConstants.FETCH_SETTINGS_FOR_ATTRIBUTES, Collections.singletonList(param), Settings.class);
+        return retrieve(QueryConstants.FETCH_MULTIPLE_SETTINGS_FOR_ATTRIBUTES, Collections.singletonList(param), Settings.class);
     }
     
     public String getUserPin(){

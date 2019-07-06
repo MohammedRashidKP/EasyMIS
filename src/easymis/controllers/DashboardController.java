@@ -3,17 +3,18 @@ package easymis.controllers;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXTextArea;
-import easymis.controllers.assembler.EventDetailsAssembler;
 import easymis.models.entity.Booking;
 import easymis.models.entity.enumeration.EventCategory;
-import easymis.models.entity.enumeration.EventType;
 import easymis.models.repository.DashboardRepository;
+import easymis.models.service.EventAvailabilityService;
 import easymis.utils.DateHelper;
+import easymis.views.dto.EventAvailabilityDTO;
+import easymis.views.viewobjects.EventAvailability;
 import java.net.URL;
 import java.sql.Date;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.Set;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -37,11 +38,7 @@ public class DashboardController implements Initializable {
     @FXML
     private Text mehandiAvailability;
     @FXML
-    private Text ishHallAvailable;
-    @FXML
     private Text nicaLoungeAvailability;
-    @FXML
-    private Text receptionAvailability;
     @FXML
     private Text totalDiamonBookingThisYear;
     @FXML
@@ -52,6 +49,14 @@ public class DashboardController implements Initializable {
     private Text totalBlockingThisYear;
     @FXML
     private Text averageBookingMonthly;
+    @FXML
+    private Text reception5availability;
+    @FXML
+    private Text ishaDayAvailability;
+    @FXML
+    private Text reception3Availability;
+    @FXML
+    private Text ishaEveAvailability;
 
     /**
      * Initializes the controller class.
@@ -64,19 +69,12 @@ public class DashboardController implements Initializable {
     @FXML
     private void onClickOfSearch(ActionEvent actionEvent) {
 
-        if(eventDateField.getValue() != null){
+        if (eventDateField.getValue() != null) {
             java.sql.Date searchDate = java.sql.Date.valueOf(eventDateField.getValue());
-            List<Booking> events = new ArrayList<>();
-            //TODO: Check availability
-            List<EventType> allEvents = new ArrayList<>();
-            if(!events.isEmpty()){
-                EventDetailsAssembler assembler = new EventDetailsAssembler();
-                for(Booking event: events){
-                    allEvents.addAll(assembler.getEventTypeEnums(event));
-                }
-            }
-            populateDateAvailabilitySearchResult(allEvents);
-        }        
+            enrichEventAvailability();
+            Set<EventAvailabilityDTO> events = EventAvailabilityService.checkEventAvailability(searchDate);
+            populateDateAvailabilitySearchResult(events);
+        }
     }
 
     private void populateDashboardData() {
@@ -89,7 +87,7 @@ public class DashboardController implements Initializable {
             int totalBlocking = 0;
 
             int totalCancellation = 0;
-            
+
             int totalDiamonBooking = 0;
 
             for (Booking event : allEvents) {
@@ -129,13 +127,52 @@ public class DashboardController implements Initializable {
     }
 
     private String calculateAverageMonthlyBooking(int totalBooking) {
-        int averageMonthlyBooking = totalBooking/12;
-        if(averageMonthlyBooking == 0)
+        int averageMonthlyBooking = totalBooking / 12;
+        if (averageMonthlyBooking == 0) {
             averageMonthlyBooking = 1;
+        }
         return String.valueOf(averageMonthlyBooking);
     }
 
-    private void populateDateAvailabilitySearchResult(List<EventType> allEvents) {
-        
+    private void populateDateAvailabilitySearchResult(Set<EventAvailabilityDTO> eventAvailabilityDTOs) {
+        if (eventAvailabilityDTOs != null && !eventAvailabilityDTOs.isEmpty()) {
+            for (EventAvailabilityDTO eventAvailabilityDTO : eventAvailabilityDTOs) {
+                switch (eventAvailabilityDTO.getEventType()) {
+                    case WEDDING:
+                        weddingAvailability.setText(eventAvailabilityDTO.getEventAvailability().toString());
+                        break;
+                    case MEHANDI:
+                        mehandiAvailability.setText(eventAvailabilityDTO.getEventAvailability().toString());
+                        break;
+                    case RECEPTION_3_PM:
+                        reception3Availability.setText(eventAvailabilityDTO.getEventAvailability().toString());
+                        break;
+                    case RECEPTION_5_PM:
+                        reception5availability.setText(eventAvailabilityDTO.getEventAvailability().toString());
+                        break;
+                    case ISHA_HALL_AC_DAY:
+                        ishaDayAvailability.setText(eventAvailabilityDTO.getEventAvailability().toString());
+                        break;
+                    case ISHA_HALL_AC_EVE:
+                        ishaEveAvailability.setText(eventAvailabilityDTO.getEventAvailability().toString());
+                        break;
+                    case NICA_LONGUE_AC:
+                        nicaLoungeAvailability.setText(eventAvailabilityDTO.getEventAvailability().toString());
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
+    }
+
+    private void enrichEventAvailability() {
+        weddingAvailability.setText(EventAvailability.AVAILABLE.toString());
+        mehandiAvailability.setText(EventAvailability.AVAILABLE.toString());
+        reception3Availability.setText(EventAvailability.AVAILABLE.toString());
+        reception5availability.setText(EventAvailability.AVAILABLE.toString());
+        ishaDayAvailability.setText(EventAvailability.AVAILABLE.toString());
+        ishaEveAvailability.setText(EventAvailability.AVAILABLE.toString());
+        nicaLoungeAvailability.setText(EventAvailability.AVAILABLE.toString());
     }
 }

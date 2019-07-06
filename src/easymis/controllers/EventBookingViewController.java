@@ -12,8 +12,9 @@ import easymis.models.entity.TransactionStatus;
 import easymis.models.entity.enumeration.BookingStatus;
 import easymis.models.entity.enumeration.EventCategory;
 import easymis.models.entity.enumeration.EventType;
-import easymis.models.entity.utils.EventCategoryUtils;
 import easymis.models.repository.EventRepository;
+import easymis.models.service.EventCostService;
+import easymis.models.utils.EventCategoryUtils;
 import easymis.utils.AlertHelper;
 import easymis.utils.AlertMessages;
 import easymis.utils.DateHelper;
@@ -778,7 +779,7 @@ public class EventBookingViewController implements Initializable {
         }
     }
 
-    private void getEventDetails(Booking bookingDetails) {
+    private List<Event> getEventDetails(Booking bookingDetails) {
         List<Event> eventDetails = new ArrayList<>();
         if (wedding.isSelected()) {
             Event event = new Event();
@@ -789,7 +790,8 @@ public class EventBookingViewController implements Initializable {
         if (mehandi.isSelected()) {
             Event event = new Event();
             event.setEventType(EventType.MEHANDI);
-            event.setEventDate(DateHelper.getPreviousDay(bookingDetails.getEventDate()));
+            if(bookingDetails.getEventDate() != null)
+                event.setEventDate(DateHelper.getPreviousDay(bookingDetails.getEventDate()));
             eventDetails.add(event);
         }
         if (reception.isSelected()) {
@@ -819,6 +821,7 @@ public class EventBookingViewController implements Initializable {
             event.setBookingDetails(bookingDetails);
         }
         bookingDetails.setEvents(eventDetails);
+        return eventDetails;
     }
 
     private void getEventDetailsForUpdate(Booking bookingDetails) {
@@ -965,5 +968,11 @@ public class EventBookingViewController implements Initializable {
 
     private void launchPrepareUpdateEventTab() {
         initializeAllComboBoxes();
+    }
+
+    @FXML
+    private void getCost(ActionEvent event) {
+        Double totalCost = EventCostService.getTotalEventCost(getEventDetails(new Booking()));
+        totalAmount.setText(String.valueOf(totalCost));
     }
 }

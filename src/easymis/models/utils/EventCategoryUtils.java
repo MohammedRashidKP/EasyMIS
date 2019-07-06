@@ -1,4 +1,4 @@
-package easymis.models.entity.utils;
+package easymis.models.utils;
 
 import easymis.models.entity.EventTypeDetail;
 import easymis.models.entity.enumeration.EventCategory;

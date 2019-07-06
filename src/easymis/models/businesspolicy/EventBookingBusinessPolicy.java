@@ -1,8 +1,8 @@
-package easymis.models.entity.businesspolicy;
+package easymis.models.businesspolicy;
 
 import easymis.models.entity.Booking;
 import easymis.models.entity.Event;
-import easymis.models.entity.service.EventAvailabilityService;
+import easymis.models.service.EventAvailabilityService;
 import easymis.utils.DateHelper;
 import easymis.utils.ValidationError;
 import easymis.views.dto.EventAvailabilityDTO;

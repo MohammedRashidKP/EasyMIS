@@ -49,7 +49,7 @@
                   </Text>
                   <AnchorPane layoutX="199.0" layoutY="118.0" prefHeight="20.0" prefWidth="106.0" style="-fx-background-color: #3A84C3;" styleClass="card" AnchorPane.leftAnchor="200.0" AnchorPane.topAnchor="115.0">
                      <children>
-                        <Text fx:id="weddingAvailability" fill="WHITE" fontSmoothingType="LCD" layoutX="5.0" layoutY="15.0" strokeType="OUTSIDE" strokeWidth="0.0">
+                        <Text fx:id="weddingAvailability" fill="WHITE" fontSmoothingType="LCD" layoutX="5.0" layoutY="15.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Available">
                            <font>
                               <Font name="System Bold" size="14.0" />
                            </font>
@@ -58,7 +58,7 @@
                   </AnchorPane>
                   <AnchorPane layoutX="199.0" layoutY="155.0" prefHeight="20.0" prefWidth="106.0" style="-fx-background-color: #3A84C3;" styleClass="card" AnchorPane.leftAnchor="200.0" AnchorPane.topAnchor="155.0">
                      <children>
-                        <Text fx:id="mehandiAvailability" fill="WHITE" fontSmoothingType="LCD" layoutX="5.0" layoutY="15.0" strokeType="OUTSIDE" strokeWidth="0.0">
+                        <Text fx:id="mehandiAvailability" fill="WHITE" fontSmoothingType="LCD" layoutX="5.0" layoutY="15.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Available">
                            <font>
                               <Font name="System Bold" size="14.0" />
                            </font>
@@ -67,7 +67,7 @@
                   </AnchorPane>
                   <AnchorPane layoutX="199.0" layoutY="228.0" prefHeight="20.0" prefWidth="106.0" style="-fx-background-color: #3A84C3;" styleClass="card" AnchorPane.leftAnchor="200.0" AnchorPane.topAnchor="235.0">
                      <children>
-                        <Text fx:id="ishHallAvailable" fill="WHITE" fontSmoothingType="LCD" layoutX="5.0" layoutY="15.0" strokeType="OUTSIDE" strokeWidth="0.0">
+                        <Text fx:id="reception5availability" fill="WHITE" fontSmoothingType="LCD" layoutX="5.0" layoutY="15.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Available">
                            <font>
                               <Font name="System Bold" size="14.0" />
                            </font>
@@ -76,7 +76,7 @@
                   </AnchorPane>
                   <AnchorPane layoutX="437.0" layoutY="114.0" prefHeight="20.0" prefWidth="117.0" style="-fx-background-color: #3A84C3;" styleClass="card" AnchorPane.leftAnchor="437.0" AnchorPane.topAnchor="115.0">
                      <children>
-                        <Text fx:id="nicaLoungeAvailability" fill="WHITE" fontSmoothingType="LCD" layoutX="5.0" layoutY="15.0" strokeType="OUTSIDE" strokeWidth="0.0">
+                        <Text fx:id="ishaDayAvailability" fill="WHITE" fontSmoothingType="LCD" layoutX="5.0" layoutY="15.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Available">
                            <font>
                               <Font name="System Bold" size="14.0" />
                            </font>
@@ -85,7 +85,7 @@
                   </AnchorPane>
                   <AnchorPane layoutX="199.0" layoutY="194.0" prefHeight="20.0" prefWidth="106.0" style="-fx-background-color: #3A84C3;" styleClass="card" AnchorPane.leftAnchor="200.0" AnchorPane.topAnchor="195.0">
                      <children>
-                        <Text fx:id="receptionAvailability" fill="WHITE" fontSmoothingType="LCD" layoutX="5.0" layoutY="15.0" strokeType="OUTSIDE" strokeWidth="0.0">
+                        <Text fx:id="reception3Availability" fill="WHITE" fontSmoothingType="LCD" layoutX="5.0" layoutY="15.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Available">
                            <font>
                               <Font name="System Bold" size="14.0" />
                            </font>
@@ -109,7 +109,7 @@
                   </Text>
                   <AnchorPane layoutX="437.0" layoutY="154.0" prefHeight="20.0" prefWidth="117.0" style="-fx-background-color: #3A84C3;" styleClass="card" AnchorPane.leftAnchor="437.0" AnchorPane.topAnchor="155.0">
                      <children>
-                        <Text fx:id="nicaLoungeAvailability1" fill="WHITE" fontSmoothingType="LCD" layoutX="5.0" layoutY="15.0" strokeType="OUTSIDE" strokeWidth="0.0">
+                        <Text fx:id="ishaEveAvailability" fill="WHITE" fontSmoothingType="LCD" layoutX="5.0" layoutY="15.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Available">
                            <font>
                               <Font name="System Bold" size="14.0" />
                            </font>
@@ -118,7 +118,7 @@
                   </AnchorPane>
                   <AnchorPane layoutX="437.0" layoutY="194.0" prefHeight="20.0" prefWidth="117.0" style="-fx-background-color: #3A84C3;" styleClass="card" AnchorPane.leftAnchor="437.0" AnchorPane.topAnchor="195.0">
                      <children>
-                        <Text fx:id="nicaLoungeAvailability11" fill="WHITE" fontSmoothingType="LCD" layoutX="5.0" layoutY="15.0" strokeType="OUTSIDE" strokeWidth="0.0">
+                        <Text fx:id="nicaLoungeAvailability" fill="WHITE" fontSmoothingType="LCD" layoutX="5.0" layoutY="15.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Available">
                            <font>
                               <Font name="System Bold" size="14.0" />
                            </font>

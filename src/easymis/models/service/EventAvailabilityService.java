@@ -1,4 +1,4 @@
-package easymis.models.entity.service;
+package easymis.models.service;
 
 import easymis.models.entity.Event;
 import easymis.models.entity.enumeration.EventType;

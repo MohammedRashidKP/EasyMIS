@@ -11,7 +11,7 @@ import com.jfoenix.controls.JFXTextField;
 import easymis.models.entity.Settings;
 import easymis.models.entity.TransactionStatus;
 import easymis.models.entity.enumeration.EventType;
-import easymis.models.entity.utils.SettingsConstants;
+import easymis.models.utils.SettingsConstants;
 import easymis.models.repository.SettingsRepository;
 import easymis.utils.AlertHelper;
 import easymis.utils.NumberFilter;

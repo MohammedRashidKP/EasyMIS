@@ -1,4 +1,4 @@
-package easymis.models.entity.utils;
+package easymis.models.utils;
 /**
  *
  * @author RashidKP

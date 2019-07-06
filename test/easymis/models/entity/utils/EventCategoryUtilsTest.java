@@ -1,5 +1,6 @@
 package easymis.models.entity.utils;
 
+import easymis.models.utils.EventCategoryUtils;
 import easymis.models.entity.EventTypeDetail;
 import easymis.models.entity.enumeration.EventCategory;
 import org.junit.After;
