@@ -283,7 +283,7 @@
                                     <JFXButton fx:id="updBtnReset" buttonType="RAISED" layoutX="880.0" layoutY="86.0" onAction="#resetDetailsInUpdate" prefHeight="40.0" prefWidth="70.0" style="-fx-background-color: #3a84c3;" styleClass="block-button" text="Reset" AnchorPane.leftAnchor="880.0" />
                                     <Pane layoutX="878.0" layoutY="137.0" prefHeight="212.0" prefWidth="204.0" style="-fx-border-color: GREEN; -fx-border-width: 3;" AnchorPane.leftAnchor="880.0">
                                        <children>
-                                          <Label fx:id="totalAmount1" layoutX="60.0" layoutY="99.0" text="0.00">
+                                          <Label fx:id="updTotalAmount" layoutX="60.0" layoutY="99.0" text="0.00">
                                              <font>
                                                 <Font size="48.0" />
                                              </font>

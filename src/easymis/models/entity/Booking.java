@@ -101,6 +101,9 @@ public class Booking extends DomainObject {
     @Column(name = "UPDATED_DATE")
     private Date lastUpdatedDate;
     
+    @Column(name = "BOOKING_COST")
+    private double bookingCost;
+    
     public Booking(){
         super();
         this.events = new ArrayList<>();
@@ -256,5 +259,13 @@ public class Booking extends DomainObject {
 
     public void setAdvanceAmount(Integer advanceAmount) {
         this.advanceAmount = advanceAmount;
+    }
+
+    public double getBookingCost() {
+        return bookingCost;
+    }
+
+    public void setBookingCost(double bookingCost) {
+        this.bookingCost = bookingCost;
     }
 }

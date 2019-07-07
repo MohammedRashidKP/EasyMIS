@@ -160,8 +160,6 @@ public class EventBookingViewController implements Initializable {
     @FXML
     private JFXButton updBtnReset;
     @FXML
-    private Label totalAmount1;
-    @FXML
     private Label lblEventCategory1;
     @FXML
     private JFXTextField updBookingId;
@@ -199,6 +197,8 @@ public class EventBookingViewController implements Initializable {
     private ComboBox<ComboBoxViewObject> updReceptionComboBox;
     @FXML
     private ComboBox<ComboBoxViewObject> updIshaHallComboBox;
+    @FXML
+    private Label updTotalAmount;
 
     /**
      * Initializes the controller class.
@@ -259,6 +259,7 @@ public class EventBookingViewController implements Initializable {
         booking.setAlternateMobile(alternateMobileNumber.getText());
         booking.setCreatedDate(DateHelper.getToday());
         getEventDetails(booking);
+        booking.setBookingCost(EventCostService.getTotalEventCost(booking.getEvents()));
         return booking;
     }
 
@@ -415,6 +416,7 @@ public class EventBookingViewController implements Initializable {
                 lblEventCategory1.setText(booking.getEventCategory().toString());
                 updBookingStatus.setText(booking.getBookingStatus().toString());
                 updAdvanceAmount.setText(booking.getAdvanceAmount() != null ? booking.getAdvanceAmount().toString() : "");
+                updTotalAmount.setText(String.valueOf(booking.getBookingCost()));
                 updEventDate.setDisable(true);
                 updReceiptNumber.setEditable(false);
                 updAdvanceAmount.setEditable(false);
