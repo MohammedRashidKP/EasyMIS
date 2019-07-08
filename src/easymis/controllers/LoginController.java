@@ -34,7 +34,7 @@ public class LoginController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
-        pinField.setTextFormatter(NumberFilter.pinFilter());
+        pinField.setTextFormatter(new NumberFilter().filter());
     }
 
     @FXML

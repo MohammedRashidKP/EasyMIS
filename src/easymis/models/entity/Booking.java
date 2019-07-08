@@ -36,7 +36,7 @@ public class Booking extends DomainObject {
     private String receiptNumber;
     
     @Column(name = "ADVANCE_AMOUNT")
-    private Integer advanceAmount;
+    private double advanceAmount;
 
     @OneToMany(cascade=ALL, mappedBy = "bookingDetails", orphanRemoval = true)
     private List<Event> events;
@@ -253,11 +253,11 @@ public class Booking extends DomainObject {
         this.receiptNumber = receiptNumber;
     }
 
-    public Integer getAdvanceAmount() {
+    public double getAdvanceAmount() {
         return advanceAmount;
     }
 
-    public void setAdvanceAmount(Integer advanceAmount) {
+    public void setAdvanceAmount(double advanceAmount) {
         this.advanceAmount = advanceAmount;
     }
 

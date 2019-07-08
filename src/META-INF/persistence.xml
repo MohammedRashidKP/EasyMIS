@@ -9,6 +9,7 @@
     <class>easymis.models.entity.Booking</class>
     <class>easymis.models.entity.Event</class>
     <class>easymis.models.entity.Settings</class>
+    <class>easymis.models.entity.Expenses</class>
     <properties>
       <!-- Connection properties -->
       <property name="eclipselink.target-database" value="Database"/>

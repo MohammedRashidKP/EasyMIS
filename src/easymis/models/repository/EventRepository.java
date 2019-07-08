@@ -1,9 +1,9 @@
 package easymis.models.repository;
 
+import easymis.models.businesspolicy.EventBookingBusinessPolicy;
 import easymis.models.entity.Booking;
 import easymis.models.entity.Event;
 import easymis.models.entity.TransactionStatus;
-import easymis.models.businesspolicy.EventBookingBusinessPolicy;
 import easymis.models.entity.enumeration.EventType;
 import easymis.models.utils.QueryConstants;
 import easymis.utils.DateHelper;
@@ -135,5 +135,12 @@ public class EventRepository extends AbstractRepository {
         param.setParamValue(receiptNumber);
         List<Booking> events =retrieve(QueryConstants.FETCH_BOOKING_FOR_RECEIPT_NUMBER, Collections.singletonList(param), Booking.class);
         return events != null && !events.isEmpty() ? events.get(0) : null;
+    }
+
+    public List<Booking> fetchCompletedEvents() {
+        QueryParams param = new QueryParams();
+        param.setParamName("eventDate");
+        param.setParamDateValue(DateHelper.getToday());
+        return retrieve(QueryConstants.FETCH_COMPLETED_EVENTS, Collections.singletonList(param), Booking.class);
     }
 }

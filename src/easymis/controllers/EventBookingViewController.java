@@ -243,7 +243,7 @@ public class EventBookingViewController implements Initializable {
         booking.setEventDate(eventDateValue);
         booking.setReceiptNumber(receiptNumber.getText());
         if (advanceAmount.getText() != null && !"".equals(advanceAmount.getText())) {
-            booking.setAdvanceAmount(Integer.valueOf(advanceAmount.getText()));
+            booking.setAdvanceAmount(Double.valueOf(advanceAmount.getText()));
         }
         booking.setFirstName(firstName.getText());
         booking.setLastName(lastName.getText());
@@ -415,11 +415,10 @@ public class EventBookingViewController implements Initializable {
                 updEventDate.setValue(booking.getEventDate().toLocalDate());
                 lblEventCategory1.setText(booking.getEventCategory().toString());
                 updBookingStatus.setText(booking.getBookingStatus().toString());
-                updAdvanceAmount.setText(booking.getAdvanceAmount() != null ? booking.getAdvanceAmount().toString() : "");
+                updAdvanceAmount.setText(String.valueOf(booking.getAdvanceAmount()));
                 updTotalAmount.setText(String.valueOf(booking.getBookingCost()));
                 updEventDate.setDisable(true);
                 updReceiptNumber.setEditable(false);
-                updAdvanceAmount.setEditable(false);
                 if (BookingStatus.BOOKED.equals(booking.getBookingStatus())) {
                     updBtnBook.setDisable(true);
                 } else {
@@ -661,7 +660,7 @@ public class EventBookingViewController implements Initializable {
         bookingDetails.setBookingId(updBookingId.getText());
         bookingDetails.setReceiptNumber(updReceiptNumber.getText());
         if (updAdvanceAmount.getText() != null && !"".equals(updAdvanceAmount.getText())) {
-            bookingDetails.setAdvanceAmount(Integer.valueOf(updAdvanceAmount.getText()));
+            bookingDetails.setAdvanceAmount(Double.valueOf(updAdvanceAmount.getText()));
         }
         bookingDetails.setEventDate(eventDateValue);
         bookingDetails.setFirstName(updFirstName.getText());

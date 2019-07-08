@@ -11,8 +11,8 @@ import com.jfoenix.controls.JFXTextField;
 import easymis.models.entity.Settings;
 import easymis.models.entity.TransactionStatus;
 import easymis.models.entity.enumeration.EventType;
-import easymis.models.utils.SettingsConstants;
 import easymis.models.repository.SettingsRepository;
+import easymis.models.utils.SettingsConstants;
 import easymis.utils.AlertHelper;
 import easymis.utils.NumberFilter;
 import easymis.utils.StringUtils;
@@ -234,19 +234,19 @@ public class SettingsController implements Initializable {
     }
 
     private void setNumberFormatter() {
-        wedding.setTextFormatter(NumberFilter.pinFilter());
-        mehandi.setTextFormatter(NumberFilter.pinFilter());
-        reception5pm.setTextFormatter(NumberFilter.pinFilter());
-        reception3pm.setTextFormatter(NumberFilter.pinFilter());
-        ishaHallDay.setTextFormatter(NumberFilter.pinFilter());
-        ishaHallEve.setTextFormatter(NumberFilter.pinFilter());
-        normalAC.setTextFormatter(NumberFilter.pinFilter());
-        additionalAC.setTextFormatter(NumberFilter.pinFilter());
-        nicaHall.setTextFormatter(NumberFilter.pinFilter());
-        dailyWages.setTextFormatter(NumberFilter.pinFilter());
-        security.setTextFormatter(NumberFilter.pinFilter());
-        newPin.setTextFormatter(NumberFilter.pinFilter());
-        confirmationPin.setTextFormatter(NumberFilter.pinFilter());
+        wedding.setTextFormatter(new NumberFilter().filter());
+        mehandi.setTextFormatter(new NumberFilter().filter());
+        reception5pm.setTextFormatter(new NumberFilter().filter());
+        reception3pm.setTextFormatter(new NumberFilter().filter());
+        ishaHallDay.setTextFormatter(new NumberFilter().filter());
+        ishaHallEve.setTextFormatter(new NumberFilter().filter());
+        normalAC.setTextFormatter(new NumberFilter().filter());
+        additionalAC.setTextFormatter(new NumberFilter().filter());
+        nicaHall.setTextFormatter(new NumberFilter().filter());
+        dailyWages.setTextFormatter(new NumberFilter().filter());
+        security.setTextFormatter(new NumberFilter().filter());
+        newPin.setTextFormatter(new NumberFilter().filter());
+        confirmationPin.setTextFormatter(new NumberFilter().filter());
     }
 
     private void setFieldsEditable(boolean flag) {

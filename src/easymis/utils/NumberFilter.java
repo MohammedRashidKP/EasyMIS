@@ -9,7 +9,7 @@ import javafx.scene.control.TextFormatter;
  */
 public class NumberFilter {
     
-    public static TextFormatter<String> pinFilter (){
+    public TextFormatter<String> filter (){
         UnaryOperator<TextFormatter.Change> filter = change -> {
             String text = change.getText();
             if (text.matches("[0-9]*")) {
@@ -19,4 +19,28 @@ public class NumberFilter {
         };
         return new TextFormatter<>(filter);
     }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 }

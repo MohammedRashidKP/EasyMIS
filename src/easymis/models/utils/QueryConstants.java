@@ -34,4 +34,10 @@ public class QueryConstants {
             + "where s.attribute in :attributes";
     
     public static final String FETCH_ALL_SETTINGS = "SELECT s from Settings s";
+    
+    public static final String FETCH_COMPLETED_EVENTS = "SELECT e from Booking e "
+            + "where e.eventDate <= :eventDate and e.bookingStatus = "
+            + "easymis.models.entity.enumeration.BookingStatus.BOOKED";
+    
+    public static final String FETCH_EXPENSES_FOR_RECEIPT_NUMBER = "SELECT e from Expenses e where e.receiptNumber = :receiptNumber";
 }
