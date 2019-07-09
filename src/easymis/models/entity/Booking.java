@@ -36,7 +36,7 @@ public class Booking extends DomainObject {
     private String receiptNumber;
     
     @Column(name = "ADVANCE_AMOUNT")
-    private int advanceAmount;
+    private double advanceAmount;
 
     @OneToMany(cascade=ALL, mappedBy = "bookingDetails", orphanRemoval = true)
     private List<Event> events;
@@ -102,7 +102,7 @@ public class Booking extends DomainObject {
     private Date lastUpdatedDate;
     
     @Column(name = "BOOKING_COST")
-    private int bookingCost;
+    private double bookingCost;
     
     public Booking(){
         super();
@@ -253,19 +253,19 @@ public class Booking extends DomainObject {
         this.receiptNumber = receiptNumber;
     }
 
-    public int getAdvanceAmount() {
+    public double getAdvanceAmount() {
         return advanceAmount;
     }
 
-    public void setAdvanceAmount(int advanceAmount) {
+    public void setAdvanceAmount(double advanceAmount) {
         this.advanceAmount = advanceAmount;
     }
 
-    public int getBookingCost() {
+    public double getBookingCost() {
         return bookingCost;
     }
 
-    public void setBookingCost(int bookingCost) {
+    public void setBookingCost(double bookingCost) {
         this.bookingCost = bookingCost;
     }
 }

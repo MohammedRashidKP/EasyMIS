@@ -18,52 +18,52 @@ public class Expenses extends DomainObject{
     private String receiptNumber;
     
     @Column(name = "ELECTRICITY")
-    private int electricity;
+    private double electricity;
     
     @Column(name = "CLEANING")
-    private int cleaing;
+    private double cleaing;
     
     @Column(name = "DAILY_WAGES")
-    private int dailyWages;
+    private double dailyWages;
     
     @Column(name = "SECURITY")
-    private int security;
+    private double security;
     
     @Column(name = "DIESEL")
-    private int diesel;
+    private double diesel;
     
     @Column(name = "TAX")
-    private int tax;
+    private double tax;
     
     @Column(name = "WEDDING_GIFT")
-    private int weddingGift;
+    private double weddingGift;
     
     @Column(name = "OTHER_EXPENSES")
-    private int otherExpenses;
+    private double otherExpenses;
     
     @Column(name = "BONUS_PAID")
-    private int bonusPaid;
+    private double bonusPaid;
     
     @Column(name = "PURCHASE")
-    private int purchase;
+    private double purchase;
     
     @Column(name = "MAINTENANCE")
-    private int auditoriumMaintenance;
+    private double auditoriumMaintenance;
     
     @Column(name = "DISCOUNTS")
-    private int discounts;
+    private double discounts;
     
     @Column(name = "TOTAL_REVENUE")
-    private int totalRevenue;
+    private double totalRevenue;
     
     @Column(name = "TOTAL_EXPENSE")
-    private int totalExpense;
+    private double totalExpense;
     
     @Column(name = "BALANCE")
-    private int balance;
+    private double balance;
     
     @Column(name = "OTHER_REVENUE")
-    private int otherRevenue;
+    private double otherRevenue;
 
     public String getReceiptNumber() {
         return receiptNumber;
@@ -73,131 +73,131 @@ public class Expenses extends DomainObject{
         this.receiptNumber = receiptNumber;
     }
 
-    public int getElectricity() {
+    public double getElectricity() {
         return electricity;
     }
 
-    public void setElectricity(int electricity) {
+    public void setElectricity(double electricity) {
         this.electricity = electricity;
     }
 
-    public int getCleaing() {
+    public double getCleaing() {
         return cleaing;
     }
 
-    public void setCleaing(int cleaing) {
+    public void setCleaing(double cleaing) {
         this.cleaing = cleaing;
     }
 
-    public int getDailyWages() {
+    public double getDailyWages() {
         return dailyWages;
     }
 
-    public void setDailyWages(int dailyWages) {
+    public void setDailyWages(double dailyWages) {
         this.dailyWages = dailyWages;
     }
 
-    public int getSecurity() {
+    public double getSecurity() {
         return security;
     }
 
-    public void setSecurity(int security) {
+    public void setSecurity(double security) {
         this.security = security;
     }
 
-    public int getDiesel() {
+    public double getDiesel() {
         return diesel;
     }
 
-    public void setDiesel(int diesel) {
+    public void setDiesel(double diesel) {
         this.diesel = diesel;
     }
 
-    public int getTax() {
+    public double getTax() {
         return tax;
     }
 
-    public void setTax(int tax) {
+    public void setTax(double tax) {
         this.tax = tax;
     }
 
-    public int getWeddingGift() {
+    public double getWeddingGift() {
         return weddingGift;
     }
 
-    public void setWeddingGift(int weddingGift) {
+    public void setWeddingGift(double weddingGift) {
         this.weddingGift = weddingGift;
     }
 
-    public int getOtherExpenses() {
+    public double getOtherExpenses() {
         return otherExpenses;
     }
 
-    public void setOtherExpenses(int otherExpenses) {
+    public void setOtherExpenses(double otherExpenses) {
         this.otherExpenses = otherExpenses;
     }
 
-    public int getBonusPaid() {
+    public double getBonusPaid() {
         return bonusPaid;
     }
 
-    public void setBonusPaid(int bonusPaid) {
+    public void setBonusPaid(double bonusPaid) {
         this.bonusPaid = bonusPaid;
     }
 
-    public int getPurchase() {
+    public double getPurchase() {
         return purchase;
     }
 
-    public void setPurchase(int purchase) {
+    public void setPurchase(double purchase) {
         this.purchase = purchase;
     }
 
-    public int getAuditoriumMaintenance() {
+    public double getAuditoriumMaintenance() {
         return auditoriumMaintenance;
     }
 
-    public void setAuditoriumMaintenance(int auditoriumMaintenance) {
+    public void setAuditoriumMaintenance(double auditoriumMaintenance) {
         this.auditoriumMaintenance = auditoriumMaintenance;
     }
 
-    public int getDiscounts() {
+    public double getDiscounts() {
         return discounts;
     }
 
-    public void setDiscounts(int discounts) {
+    public void setDiscounts(double discounts) {
         this.discounts = discounts;
     }
 
-    public int getTotalRevenue() {
+    public double getTotalRevenue() {
         return totalRevenue;
     }
 
-    public void setTotalRevenue(int totalRevenue) {
+    public void setTotalRevenue(double totalRevenue) {
         this.totalRevenue = totalRevenue;
     }
 
-    public int getTotalExpense() {
+    public double getTotalExpense() {
         return totalExpense;
     }
 
-    public void setTotalExpense(int totalExpense) {
+    public void setTotalExpense(double totalExpense) {
         this.totalExpense = totalExpense;
     }
 
-    public int getBalance() {
+    public double getBalance() {
         return balance;
     }
 
-    public void setBalance(int balance) {
+    public void setBalance(double balance) {
         this.balance = balance;
     }
 
-    public int getOtherRevenue() {
+    public double getOtherRevenue() {
         return otherRevenue;
     }
 
-    public void setOtherRevenue(int otherRevenue) {
+    public void setOtherRevenue(double otherRevenue) {
         this.otherRevenue = otherRevenue;
     }
     

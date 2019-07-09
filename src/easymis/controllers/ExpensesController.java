@@ -121,7 +121,7 @@ public class ExpensesController implements Initializable {
         
         Expenses expenses =  getExpenses();
         if(expenses != null && StringUtils.isNotNullCheckSpace(expenses.getReceiptNumber())){
-            int totalCalculatedExpense = expenses.getAuditoriumMaintenance()
+            double totalCalculatedExpense = expenses.getAuditoriumMaintenance()
                     +expenses.getBonusPaid()
                     +expenses.getCleaing()
                     +expenses.getDailyWages()
@@ -134,11 +134,11 @@ public class ExpensesController implements Initializable {
                     +expenses.getWeddingGift()
                     +expenses.getOtherExpenses();
             this.totalExpense.setText(String.valueOf(totalCalculatedExpense));
-            int totalCalculatedRevenue = Integer.valueOf(totalBookingRevenue.getText());
+            double totalCalculatedRevenue = Double.valueOf(totalBookingRevenue.getText());
             if(StringUtils.isNotNullCheckSpace(otherRevenue.getText()))
-                totalCalculatedRevenue = totalCalculatedRevenue + Integer.valueOf(otherRevenue.getText());
+                totalCalculatedRevenue = totalCalculatedRevenue + Double.valueOf(otherRevenue.getText());
             totalBookingRevenue.setText(String.valueOf(totalCalculatedRevenue));
-            int balanceAmount = totalCalculatedRevenue - totalCalculatedExpense;
+            double balanceAmount = totalCalculatedRevenue - totalCalculatedExpense;
             balance.setText(String.valueOf(balanceAmount));
             ExpensesRepository.getUniqueInstance().update(getExpenses());
         }
@@ -295,19 +295,19 @@ public class ExpensesController implements Initializable {
     }
 
     private void setNumberFormatter() {
-        electricity.setTextFormatter(new NumberFilter().filter());
-        cleaning.setTextFormatter(new NumberFilter().filter());
-        dailyWages.setTextFormatter(new NumberFilter().filter());
-        security.setTextFormatter(new NumberFilter().filter());
-        diesel.setTextFormatter(new NumberFilter().filter());
-        tax.setTextFormatter(new NumberFilter().filter());
-        weddingGift.setTextFormatter(new NumberFilter().filter());
-        otherExpenses.setTextFormatter(new NumberFilter().filter());
-        bonus.setTextFormatter(new NumberFilter().filter());
-        purchaseKitchenAndStationary.setTextFormatter(new NumberFilter().filter());
-        maintenance.setTextFormatter(new NumberFilter().filter());
-        discounts.setTextFormatter(new NumberFilter().filter());
-        otherRevenue.setTextFormatter(new NumberFilter().filter());
+        electricity.setTextFormatter(new NumberFilter().decimalFilter());
+        cleaning.setTextFormatter(new NumberFilter().decimalFilter());
+        dailyWages.setTextFormatter(new NumberFilter().decimalFilter());
+        security.setTextFormatter(new NumberFilter().decimalFilter());
+        diesel.setTextFormatter(new NumberFilter().decimalFilter());
+        tax.setTextFormatter(new NumberFilter().decimalFilter());
+        weddingGift.setTextFormatter(new NumberFilter().decimalFilter());
+        otherExpenses.setTextFormatter(new NumberFilter().decimalFilter());
+        bonus.setTextFormatter(new NumberFilter().decimalFilter());
+        purchaseKitchenAndStationary.setTextFormatter(new NumberFilter().decimalFilter());
+        maintenance.setTextFormatter(new NumberFilter().decimalFilter());
+        discounts.setTextFormatter(new NumberFilter().decimalFilter());
+        otherRevenue.setTextFormatter(new NumberFilter().decimalFilter());
     }
     
     private void setFieldsEditable(boolean flag){

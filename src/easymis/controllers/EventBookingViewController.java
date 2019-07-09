@@ -246,7 +246,7 @@ public class EventBookingViewController implements Initializable {
         booking.setEventDate(eventDateValue);
         booking.setReceiptNumber(receiptNumber.getText());
         if (advanceAmount.getText() != null && !"".equals(advanceAmount.getText())) {
-            booking.setAdvanceAmount(Integer.valueOf(advanceAmount.getText()));
+            booking.setAdvanceAmount(Double.valueOf(advanceAmount.getText()));
         }
         booking.setFirstName(firstName.getText());
         booking.setLastName(lastName.getText());
@@ -669,7 +669,7 @@ public class EventBookingViewController implements Initializable {
         bookingDetails.setBookingId(updBookingId.getText());
         bookingDetails.setReceiptNumber(updReceiptNumber.getText());
         if (updAdvanceAmount.getText() != null && !"".equals(updAdvanceAmount.getText())) {
-            bookingDetails.setAdvanceAmount(Integer.valueOf(updAdvanceAmount.getText()));
+            bookingDetails.setAdvanceAmount(Double.valueOf(updAdvanceAmount.getText()));
         }
         bookingDetails.setEventDate(eventDateValue);
         bookingDetails.setFirstName(updFirstName.getText());
@@ -984,13 +984,13 @@ public class EventBookingViewController implements Initializable {
 
     @FXML
     private void getCost(ActionEvent event) {
-        int totalCost = EventCostService.getTotalEventCost(getEventDetails(new Booking()));
+        double totalCost = EventCostService.getTotalEventCost(getEventDetails(new Booking()));
         totalAmount.setText(String.valueOf(totalCost));
     }
 
     @FXML
     private void getCostInUpdate(ActionEvent event) {
-        int totalCost = EventCostService.getTotalEventCost(getEventDetailsForUpdate(new Booking()));
+        double totalCost = EventCostService.getTotalEventCost(getEventDetailsForUpdate(new Booking()));
         updTotalAmount.setText(String.valueOf(totalCost));
     }
 
@@ -998,10 +998,10 @@ public class EventBookingViewController implements Initializable {
         primaryMobileNumber.setTextFormatter(new NumberFilter().filter());
         alternateMobileNumber.setTextFormatter(new NumberFilter().filter());
         pinCode.setTextFormatter(new NumberFilter().filter());
-        advanceAmount.setTextFormatter(new NumberFilter().filter());
+        advanceAmount.setTextFormatter(new NumberFilter().decimalFilter());
         updPrimaryMobile.setTextFormatter(new NumberFilter().filter());
         updAlternateMobile.setTextFormatter(new NumberFilter().filter());
         updPinCode.setTextFormatter(new NumberFilter().filter());
-        updAdvanceAmount.setTextFormatter(new NumberFilter().filter());
+        updAdvanceAmount.setTextFormatter(new NumberFilter().decimalFilter());
     }
 }

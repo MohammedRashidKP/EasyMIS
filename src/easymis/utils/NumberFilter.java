@@ -20,6 +20,17 @@ public class NumberFilter {
         return new TextFormatter<>(filter);
     }
     
+    public TextFormatter<String> decimalFilter (){
+        UnaryOperator<TextFormatter.Change> filter = change -> {
+            String text = change.getText();
+            if (text.matches("\\d{0,7}([\\.]\\d{0,4})?")) {
+                return change;
+            }
+            return null;
+        };
+        return new TextFormatter<>(filter);
+    }
+    
     
     
     

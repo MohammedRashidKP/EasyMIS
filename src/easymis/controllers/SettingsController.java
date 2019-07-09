@@ -229,19 +229,19 @@ public class SettingsController implements Initializable {
     }
 
     private void setNumberFormatter() {
-        wedding.setTextFormatter(new NumberFilter().filter());
-        mehandi.setTextFormatter(new NumberFilter().filter());
-        reception5pm.setTextFormatter(new NumberFilter().filter());
-        reception3pm.setTextFormatter(new NumberFilter().filter());
-        ishaHallDay.setTextFormatter(new NumberFilter().filter());
-        ishaHallEve.setTextFormatter(new NumberFilter().filter());
-        normalAC.setTextFormatter(new NumberFilter().filter());
-        additionalAC.setTextFormatter(new NumberFilter().filter());
-        nicaHall.setTextFormatter(new NumberFilter().filter());
-        dailyWages.setTextFormatter(new NumberFilter().filter());
-        security.setTextFormatter(new NumberFilter().filter());
-        newPin.setTextFormatter(new NumberFilter().filter());
-        confirmationPin.setTextFormatter(new NumberFilter().filter());
+        wedding.setTextFormatter(new NumberFilter().decimalFilter());
+        mehandi.setTextFormatter(new NumberFilter().decimalFilter());
+        reception5pm.setTextFormatter(new NumberFilter().decimalFilter());
+        reception3pm.setTextFormatter(new NumberFilter().decimalFilter());
+        ishaHallDay.setTextFormatter(new NumberFilter().decimalFilter());
+        ishaHallEve.setTextFormatter(new NumberFilter().decimalFilter());
+        normalAC.setTextFormatter(new NumberFilter().decimalFilter());
+        additionalAC.setTextFormatter(new NumberFilter().decimalFilter());
+        nicaHall.setTextFormatter(new NumberFilter().decimalFilter());
+        dailyWages.setTextFormatter(new NumberFilter().decimalFilter());
+        security.setTextFormatter(new NumberFilter().decimalFilter());
+        newPin.setTextFormatter(new NumberFilter().decimalFilter());
+        confirmationPin.setTextFormatter(new NumberFilter().decimalFilter());
     }
 
     private void setFieldsEditable(boolean flag) {
