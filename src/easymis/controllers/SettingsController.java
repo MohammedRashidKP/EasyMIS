@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package easymis.controllers;
 
 import com.jfoenix.controls.JFXButton;
@@ -33,7 +28,7 @@ import org.controlsfx.control.textfield.CustomPasswordField;
 /**
  * FXML Controller class
  *
- * @author faisal
+ * @author RashidKP
  */
 public class SettingsController implements Initializable {
 

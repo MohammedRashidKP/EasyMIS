@@ -186,13 +186,13 @@ public class EventBookingViewController implements Initializable {
     @FXML
     private JFXTextField updAdvanceAmount;
     @FXML
-    private ComboBox<Integer> additionalAcComboBox;
+    private ComboBox<String> additionalAcComboBox;
     @FXML
     private ComboBox<ComboBoxViewObject> receptionComboBox;
     @FXML
     private ComboBox<ComboBoxViewObject> ishaHallComboBox;
     @FXML
-    private ComboBox<Integer> updAdditionalAcComboBox;
+    private ComboBox<String> updAdditionalAcComboBox;
     @FXML
     private ComboBox<ComboBoxViewObject> updReceptionComboBox;
     @FXML
@@ -419,6 +419,7 @@ public class EventBookingViewController implements Initializable {
                 updTotalAmount.setText(String.valueOf(booking.getBookingCost()));
                 updEventDate.setDisable(true);
                 updReceiptNumber.setEditable(false);
+                updTotalAmount.setText(String.valueOf(booking.getBookingCost()));
                 if (BookingStatus.BOOKED.equals(booking.getBookingStatus())) {
                     updBtnBook.setDisable(true);
                 } else {
@@ -474,8 +475,8 @@ public class EventBookingViewController implements Initializable {
                     }
                     updAcRequired.setSelected(booking.getEvents().get(0).isNormalAcRequired());
                     if (booking.getEvents().get(0).getAdditionalAcRange() > 0) {
-                        additionalAC.setSelected(true);
-                        additionalAcComboBox.setValue(booking.getEvents().get(0).getAdditionalAcRange());
+                        updAdditionalAC.setSelected(true);
+                        updAdditionalAcComboBox.setValue(String.valueOf(booking.getEvents().get(0).getAdditionalAcRange()));
                     }
                 }
             }
@@ -537,6 +538,8 @@ public class EventBookingViewController implements Initializable {
         eventDate.setValue(null);
         primaryMobileNumber.clear();
         alternateMobileNumber.clear();
+        totalAmount.setText("");
+        lblEventCategory.setText("");
         initializeAllComboBoxes();
     }
 
@@ -593,6 +596,8 @@ public class EventBookingViewController implements Initializable {
         lblEventCategory1.setText("");
         updBookingId.clear();
         updBookingStatus.setText("");
+        updTotalAmount.setText("");
+        lblEventCategory1.setText("");
         initializeAllComboBoxes();
     }
 
@@ -676,6 +681,7 @@ public class EventBookingViewController implements Initializable {
         bookingDetails.setPrimaryMobile(updPrimaryMobile.getText());
         bookingDetails.setAlternateMobile(updAlternateMobile.getText());
         bookingDetails.setCreatedDate(DateHelper.getToday());
+        bookingDetails.setBookingCost(EventCostService.getTotalEventCost(getEventDetailsForUpdate(new Booking())));
         getEventDetailsForUpdate(bookingDetails);
         return bookingDetails;
     }
@@ -817,7 +823,7 @@ public class EventBookingViewController implements Initializable {
             event.setNormalAcRequired(acRequired.isSelected());
             event.setBookingStatus(bookingDetails.getBookingStatus());
             if (additionalAC.isSelected()) {
-                event.setAdditionalAcRange(additionalAcComboBox.getValue());
+                event.setAdditionalAcRange(Integer.valueOf(additionalAcComboBox.getValue()));
             }
             event.setBookingDetails(bookingDetails);
         }
@@ -825,7 +831,7 @@ public class EventBookingViewController implements Initializable {
         return eventDetails;
     }
 
-    private void getEventDetailsForUpdate(Booking bookingDetails) {
+    private List<Event> getEventDetailsForUpdate(Booking bookingDetails) {
         List<Event> eventDetails = new ArrayList<>();
         if (updWedding.isSelected()) {
             Event details = new Event();
@@ -862,11 +868,12 @@ public class EventBookingViewController implements Initializable {
             event.setNormalAcRequired(updAcRequired.isSelected());
             event.setBookingStatus(bookingDetails.getBookingStatus());
             if (updAdditionalAC.isSelected()) {
-                event.setAdditionalAcRange(updAdditionalAcComboBox.getValue());
+                event.setAdditionalAcRange(Integer.valueOf(updAdditionalAcComboBox.getValue()));
             }
             event.setBookingDetails(bookingDetails);
         }
         bookingDetails.setEvents(eventDetails);
+        return eventDetails;
     }
 
     private void initializeAllComboBoxes() {
@@ -897,13 +904,13 @@ public class EventBookingViewController implements Initializable {
         additionalAcComboBox.getSelectionModel().clearSelection();
         updAdditionalAcComboBox.getItems().clear();
         updAdditionalAcComboBox.getSelectionModel().clearSelection();
-        ObservableList<Integer> additionalACs = FXCollections.observableArrayList();
+        ObservableList<String> additionalACs = FXCollections.observableArrayList();
         for (int i = 1; i < 7; i++) {
-            additionalACs.add(i);
+            additionalACs.add(String.valueOf(i));
         }
-        ObservableList<Integer> updAdditionalACs = FXCollections.observableArrayList();
+        ObservableList<String> updAdditionalACs = FXCollections.observableArrayList();
         for (int i = 1; i < 7; i++) {
-            updAdditionalACs.add(i);
+            updAdditionalACs.add(String.valueOf(i));
         }
         additionalAcComboBox.setItems(additionalACs);
         additionalAcComboBox.getSelectionModel().selectFirst();
@@ -975,5 +982,11 @@ public class EventBookingViewController implements Initializable {
     private void getCost(ActionEvent event) {
         Double totalCost = EventCostService.getTotalEventCost(getEventDetails(new Booking()));
         totalAmount.setText(String.valueOf(totalCost));
+    }
+
+    @FXML
+    private void getCostInUpdate(ActionEvent event) {
+        Double totalCost = EventCostService.getTotalEventCost(getEventDetailsForUpdate(new Booking()));
+        updTotalAmount.setText(String.valueOf(totalCost));
     }
 }

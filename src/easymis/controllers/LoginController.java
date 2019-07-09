@@ -40,9 +40,7 @@ public class LoginController implements Initializable {
     @FXML
     private void onLoginClicked(ActionEvent event) {
         if (StringUtils.isNotNullCheckSpace(pinField.getText())) {
-            String pin = SettingsRepository.getUniqueInstance().getPinNmber();
-            if (StringUtils.isNotNullCheckSpace(pin)) {
-                if (pin.equals(pinField.getText())) {
+                if (validatePin(pinField.getText())) {
                     try {
                         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                         launchApplication(stage);
@@ -52,7 +50,6 @@ public class LoginController implements Initializable {
                 } else {
                     passwordIncorrectLabel.setVisible(true);
                 }
-            }
         }
     }
 
@@ -63,8 +60,21 @@ public class LoginController implements Initializable {
 
         stage.setScene(scene);
         stage.setFullScreen(true);
-        //stage.resizableProperty().setValue(Boolean.TRUE);
         stage.show();
     }
 
+ 
+    private boolean validatePin(String enteredPin) {
+        boolean isValid = false;
+        String userPin = SettingsRepository.getUniqueInstance().getUserPin();
+        if(StringUtils.isNotNullCheckSpace(userPin) && enteredPin.equals(userPin)){
+            isValid = true;
+        }else{
+            String adminPin = SettingsRepository.getUniqueInstance().getAdminPin();
+            if(enteredPin.equals(adminPin)){
+                isValid = true;
+            }
+        }
+        return isValid;
+    }
 }

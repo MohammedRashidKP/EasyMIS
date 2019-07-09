@@ -35,6 +35,9 @@ public class EventDetailsAssembler {
     private String resolveEventType(Booking eventDetails) {
         String eventType = "";
         List<EventType> eventTypes = getEventTypeEnums(eventDetails);
+        if(eventDetails.getEvents().get(0).isNormalAcRequired()){
+            eventTypes.add(EventType.NORMAL_AC);
+        }
         StringBuilder eventTypeBuilder = new StringBuilder();
         if(!eventTypes.isEmpty()){
             for(int i=0; i<eventTypes.size(); i++){

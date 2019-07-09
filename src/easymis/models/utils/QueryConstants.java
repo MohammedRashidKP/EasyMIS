@@ -40,4 +40,6 @@ public class QueryConstants {
             + "easymis.models.entity.enumeration.BookingStatus.BOOKED";
     
     public static final String FETCH_EXPENSES_FOR_RECEIPT_NUMBER = "SELECT e from Expenses e where e.receiptNumber = :receiptNumber";
+    
+    public static final String FETCH_ALL_INVENTORY = "SELECT i from Inventory i";
 }
