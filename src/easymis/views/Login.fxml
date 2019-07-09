@@ -1,10 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
-<?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
-<?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
@@ -31,12 +29,7 @@
                </font>
             </Label>
             <PasswordField fx:id="pinField" layoutX="65.0" layoutY="251.0" prefHeight="30.0" prefWidth="164.0" AnchorPane.leftAnchor="65.0" AnchorPane.rightAnchor="65.0" />
-            <Hyperlink ellipsisString="" layoutX="182.0" layoutY="292.0" text="Forgot Pin">
-               <effect>
-                  <DropShadow />
-               </effect>
-            </Hyperlink>
-            <JFXButton layoutX="1.0" layoutY="425.0" onAction="#onLoginClicked" prefHeight="58.0" style="-fx-background-color: #43bb73;" text="Login" textFill="WHITE" AnchorPane.bottomAnchor="-10.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="425.0">
+            <JFXButton layoutX="1.0" layoutY="425.0" onAction="#onLoginClicked" prefHeight="58.0" style="-fx-background-color: #3a84c3;" text="Login" textFill="WHITE" AnchorPane.bottomAnchor="-10.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="425.0">
                <font>
                   <Font size="24.0" />
                </font>
