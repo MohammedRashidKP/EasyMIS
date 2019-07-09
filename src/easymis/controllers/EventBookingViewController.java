@@ -18,6 +18,7 @@ import easymis.models.utils.EventCategoryUtils;
 import easymis.utils.AlertHelper;
 import easymis.utils.AlertMessages;
 import easymis.utils.DateHelper;
+import easymis.utils.NumberFilter;
 import easymis.views.viewobjects.ComboBoxViewObject;
 import easymis.views.viewobjects.EventDetailsViewObject;
 import java.net.URL;
@@ -210,6 +211,7 @@ public class EventBookingViewController implements Initializable {
         initializePanelTab();
         updReceiptNumber.addEventFilter(KeyEvent.KEY_PRESSED, onReceiptNumberChange());
         launchAllEventsTab();
+        setNumberFormatter();
     }
 
     @FXML
@@ -227,10 +229,11 @@ public class EventBookingViewController implements Initializable {
     }
 
     public void manageEventCreation(BookingStatus bookingStatus) {
-        Booking BookingDetail = getBookingDetails(bookingStatus);
-        TransactionStatus status = EventRepository.getUniqueInstance().create(BookingDetail);
+        Booking bookingDetail = getBookingDetails(bookingStatus);
+        TransactionStatus status = EventRepository.getUniqueInstance().create(bookingDetail);
         AlertHelper.showMessage(status);
-        lblEventCategory.setText(BookingDetail.getEventCategory().toString());
+        lblEventCategory.setText(bookingDetail.getEventCategory().toString());
+        totalAmount.setText(String.valueOf(bookingDetail.getBookingCost()));
         if (status.isSuccess()) {
             makeFieldsEditable(false);
         }
@@ -243,7 +246,7 @@ public class EventBookingViewController implements Initializable {
         booking.setEventDate(eventDateValue);
         booking.setReceiptNumber(receiptNumber.getText());
         if (advanceAmount.getText() != null && !"".equals(advanceAmount.getText())) {
-            booking.setAdvanceAmount(Double.valueOf(advanceAmount.getText()));
+            booking.setAdvanceAmount(Integer.valueOf(advanceAmount.getText()));
         }
         booking.setFirstName(firstName.getText());
         booking.setLastName(lastName.getText());
@@ -355,6 +358,7 @@ public class EventBookingViewController implements Initializable {
         TransactionStatus status = EventRepository.getUniqueInstance().update(eventDetail, isNewBooking);
         AlertHelper.showMessage(status);
         lblEventCategory1.setText(eventDetail.getEventCategory().toString());
+        updTotalAmount.setText(String.valueOf(eventDetail.getBookingCost()));
         if (status.isSuccess()) {
             makeFieldsEditableInUpdate(false);
             updBookingStatus.setText(eventDetail.getBookingStatus().toString());
@@ -665,7 +669,7 @@ public class EventBookingViewController implements Initializable {
         bookingDetails.setBookingId(updBookingId.getText());
         bookingDetails.setReceiptNumber(updReceiptNumber.getText());
         if (updAdvanceAmount.getText() != null && !"".equals(updAdvanceAmount.getText())) {
-            bookingDetails.setAdvanceAmount(Double.valueOf(updAdvanceAmount.getText()));
+            bookingDetails.setAdvanceAmount(Integer.valueOf(updAdvanceAmount.getText()));
         }
         bookingDetails.setEventDate(eventDateValue);
         bookingDetails.setFirstName(updFirstName.getText());
@@ -980,13 +984,24 @@ public class EventBookingViewController implements Initializable {
 
     @FXML
     private void getCost(ActionEvent event) {
-        Double totalCost = EventCostService.getTotalEventCost(getEventDetails(new Booking()));
+        int totalCost = EventCostService.getTotalEventCost(getEventDetails(new Booking()));
         totalAmount.setText(String.valueOf(totalCost));
     }
 
     @FXML
     private void getCostInUpdate(ActionEvent event) {
-        Double totalCost = EventCostService.getTotalEventCost(getEventDetailsForUpdate(new Booking()));
+        int totalCost = EventCostService.getTotalEventCost(getEventDetailsForUpdate(new Booking()));
         updTotalAmount.setText(String.valueOf(totalCost));
+    }
+
+    private void setNumberFormatter() {
+        primaryMobileNumber.setTextFormatter(new NumberFilter().filter());
+        alternateMobileNumber.setTextFormatter(new NumberFilter().filter());
+        pinCode.setTextFormatter(new NumberFilter().filter());
+        advanceAmount.setTextFormatter(new NumberFilter().filter());
+        updPrimaryMobile.setTextFormatter(new NumberFilter().filter());
+        updAlternateMobile.setTextFormatter(new NumberFilter().filter());
+        updPinCode.setTextFormatter(new NumberFilter().filter());
+        updAdvanceAmount.setTextFormatter(new NumberFilter().filter());
     }
 }

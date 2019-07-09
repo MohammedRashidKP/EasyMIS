@@ -14,8 +14,8 @@ import java.util.stream.Collectors;
 public class EventCostService {
     
 
-    public static Double getTotalEventCost(List<Event> eventDetails) {
-        Double totalCost = new Double("0.00");
+    public static int getTotalEventCost(List<Event> eventDetails) {
+        int totalCost = 0;
         if(eventDetails != null && !eventDetails.isEmpty()){
             
             List<String> events = eventDetails
@@ -31,11 +31,11 @@ public class EventCostService {
             }
             List<Settings> settings = SettingsRepository.getUniqueInstance().getSettingsValues(events);
             if(settings != null && !settings.isEmpty()){
-                totalCost = settings.stream().mapToDouble(e -> {
+                totalCost = settings.stream().mapToInt(e -> {
                     if(EventType.ADDITIONAL_AC.toString().equals(e.getAttribute())){
-                        return  additionalAC * new Double(e.getAttributeValue());
+                        return  additionalAC * new Integer(e.getAttributeValue());
                     } 
-                    return new Double(e.getAttributeValue());
+                    return new Integer(e.getAttributeValue());
                 }).sum();
             }
         }
