@@ -2,6 +2,7 @@ package easymis.models.businesspolicy;
 
 import easymis.models.entity.Booking;
 import easymis.models.entity.Event;
+import easymis.models.entity.enumeration.EventType;
 import easymis.models.repository.EventRepository;
 import easymis.models.service.EventAvailabilityService;
 import easymis.utils.DateHelper;
@@ -12,6 +13,7 @@ import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  *
@@ -25,6 +27,7 @@ public class EventBookingBusinessPolicy {
         
         validateIfEventDateIsInPast(eventDetails.getEventDate());
         validateDateAvailability(eventDetails);
+        validateSameBookingConstraints(eventDetails);
         if (eventDetails.getBookingId() == null) {
             validateReceiptNumber(eventDetails.getReceiptNumber());
         }
@@ -58,6 +61,17 @@ public class EventBookingBusinessPolicy {
         Booking booking = EventRepository.getUniqueInstance().fetchByReceiptNumber(receiptNumber);
         if (booking != null) {
             validationErrors.add(new ValidationError("100", "Receipt Number already exists"));
+        }
+    }
+
+    private void validateSameBookingConstraints(Booking eventDetails) {
+        
+        List<EventType> events = eventDetails.getEvents().stream().map(e -> e.getEventType()).collect(Collectors.toList());
+        if(events.contains(EventType.WEDDING) && events.contains(EventType.RECEPTION_3_PM)){
+            validationErrors.add(new ValidationError("200", "3 PM Reception cannot be be booked with Wedding"));
+        }
+        if(events.contains(EventType.ISHA_HALL_AC_DAY) && events.contains(EventType.RECEPTION_3_PM)){
+            validationErrors.add(new ValidationError("201", "3 PM Reception cannot be be booked with Isha Hall Day"));
         }
     }
 }
