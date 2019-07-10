@@ -7,7 +7,6 @@ import easymis.utils.DateHelper;
 import easymis.views.dto.EventAvailabilityDTO;
 import easymis.views.viewobjects.EventAvailability;
 import java.sql.Date;
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -23,7 +22,6 @@ public class EventAvailabilityService {
         Set<EventAvailabilityDTO> availabilityDTOs = new HashSet<>();
         checkSameDayAvailability(date, availabilityDTOs, bookingId);
         checkWeddingAndMehandiAvailability(DateHelper.getPreviousDay(date), availabilityDTOs, bookingId);
-        //(availabilityDTOs);
         return availabilityDTOs;
     }
 
@@ -31,32 +29,14 @@ public class EventAvailabilityService {
         List<Event> allEventsOnDate = EventRepository.getUniqueInstance().fetchEventByEventDate(date);
         if (allEventsOnDate != null && !allEventsOnDate.isEmpty()) {
             for (Event event : allEventsOnDate) {
-                if(bookingId != null){
-                    if(!bookingId.equals(event.getBookingDetails().getBookingId())){
+                if (bookingId != null) {
+                    if (!bookingId.equals(event.getBookingDetails().getBookingId())) {
                         checkAvailability(event, availabilityDTOs);
                     }
-                }else{
+                } else {
                     checkAvailability(event, availabilityDTOs);
                 }
-                
-            }
-        }
-    }
 
-    private static void includeAvailability(Set<EventAvailabilityDTO> events) {
-        List<EventType> availableEvents = new ArrayList<>();
-        for (EventType eventType : EventType.values()) {
-            for (EventAvailabilityDTO event : events) {
-                if (eventType != event.getEventType()) {
-                    availableEvents.add(eventType);
-                }
-            }
-        }
-        if (!availableEvents.isEmpty()) {
-            for (EventType eventType : availableEvents) {
-                events.add(new EventAvailabilityDTO(eventType,
-                        EventAvailability.AVAILABLE,
-                        null));
             }
         }
     }
@@ -65,7 +45,8 @@ public class EventAvailabilityService {
 
         EventAvailabilityDTO eventAvailabilityDTO = new EventAvailabilityDTO(event.getEventType(),
                 EventAvailability.NOT_AVAILABLE,
-                event.getEventType().toString() + " already exists on the day");
+                event.getEventType().toString() + " already exists on the day",
+                event.getEventDate());
         availabilityDTOs.add(eventAvailabilityDTO);
 
         if (null != event.getEventType()) {
@@ -73,10 +54,12 @@ public class EventAvailabilityService {
                 case WEDDING: {
                     EventAvailabilityDTO reception3Pm = new EventAvailabilityDTO(EventType.RECEPTION_3_PM,
                             EventAvailability.NOT_AVAILABLE,
-                            EventType.WEDDING.toString() + " already exists on the day");
+                            EventType.WEDDING.toString() + " already exists on the day",
+                            event.getEventDate());
                     EventAvailabilityDTO ishaDay = new EventAvailabilityDTO(EventType.ISHA_HALL_AC_DAY,
                             EventAvailability.NOT_AVAILABLE,
-                            EventType.WEDDING.toString() + " already exists on the day");
+                            EventType.WEDDING.toString() + " already exists on the day",
+                            event.getEventDate());
                     availabilityDTOs.add(reception3Pm);
                     availabilityDTOs.add(ishaDay);
                     break;
@@ -84,16 +67,20 @@ public class EventAvailabilityService {
                 case RECEPTION_5_PM: {
                     EventAvailabilityDTO mehandi = new EventAvailabilityDTO(EventType.MEHANDI,
                             EventAvailability.NOT_AVAILABLE,
-                            EventType.RECEPTION_5_PM.toString() + " already exists on the day");
+                            EventType.RECEPTION_5_PM.toString() + " already exists on the day",
+                            event.getEventDate());
                     EventAvailabilityDTO reception3Pm = new EventAvailabilityDTO(EventType.RECEPTION_3_PM,
                             EventAvailability.NOT_AVAILABLE,
-                            EventType.RECEPTION_5_PM.toString() + " already exists on the day");
+                            EventType.RECEPTION_5_PM.toString() + " already exists on the day",
+                            event.getEventDate());
                     EventAvailabilityDTO ishaEve = new EventAvailabilityDTO(EventType.ISHA_HALL_AC_EVE,
                             EventAvailability.NOT_AVAILABLE,
-                            EventType.RECEPTION_5_PM.toString() + " already exists on the day");
+                            EventType.RECEPTION_5_PM.toString() + " already exists on the day",
+                            event.getEventDate());
                     EventAvailabilityDTO ishaDay = new EventAvailabilityDTO(EventType.ISHA_HALL_AC_DAY,
                             EventAvailability.NOT_AVAILABLE,
-                            EventType.RECEPTION_5_PM.toString() + " already exists on the day");
+                            EventType.RECEPTION_5_PM.toString() + " already exists on the day",
+                            event.getEventDate());
                     availabilityDTOs.add(mehandi);
                     availabilityDTOs.add(reception3Pm);
                     availabilityDTOs.add(ishaEve);
@@ -103,19 +90,24 @@ public class EventAvailabilityService {
                 case RECEPTION_3_PM: {
                     EventAvailabilityDTO mehandi = new EventAvailabilityDTO(EventType.MEHANDI,
                             EventAvailability.NOT_AVAILABLE,
-                            EventType.MEHANDI.toString() + " already exists on the day");
+                            EventType.MEHANDI.toString() + " already exists on the day",
+                            event.getEventDate());
                     EventAvailabilityDTO reception3Pm = new EventAvailabilityDTO(EventType.RECEPTION_3_PM,
                             EventAvailability.NOT_AVAILABLE,
-                            EventType.RECEPTION_3_PM.toString() + " already exists on the day");
+                            EventType.RECEPTION_3_PM.toString() + " already exists on the day",
+                            event.getEventDate());
                     EventAvailabilityDTO ishaEve = new EventAvailabilityDTO(EventType.ISHA_HALL_AC_EVE,
                             EventAvailability.NOT_AVAILABLE,
-                            EventType.RECEPTION_3_PM.toString() + " already exists on the day");
+                            EventType.RECEPTION_3_PM.toString() + " already exists on the day",
+                            event.getEventDate());
                     EventAvailabilityDTO ishaDay = new EventAvailabilityDTO(EventType.ISHA_HALL_AC_DAY,
                             EventAvailability.NOT_AVAILABLE,
-                            EventType.RECEPTION_3_PM.toString() + " already exists on the day");
+                            EventType.RECEPTION_3_PM.toString() + " already exists on the day",
+                            event.getEventDate());
                     EventAvailabilityDTO wedding = new EventAvailabilityDTO(EventType.WEDDING,
                             EventAvailability.NOT_AVAILABLE,
-                            EventType.RECEPTION_3_PM.toString() + " already exists on the day");
+                            EventType.RECEPTION_3_PM.toString() + " already exists on the day",
+                            event.getEventDate());
                     availabilityDTOs.add(mehandi);
                     availabilityDTOs.add(reception3Pm);
                     availabilityDTOs.add(ishaEve);
@@ -126,27 +118,33 @@ public class EventAvailabilityService {
                 case ISHA_HALL_AC_DAY: {
                     EventAvailabilityDTO reception3Pm = new EventAvailabilityDTO(EventType.RECEPTION_3_PM,
                             EventAvailability.NOT_AVAILABLE,
-                            EventType.ISHA_HALL_AC_DAY.toString() + " already exists on the day");
+                            EventType.ISHA_HALL_AC_DAY.toString() + " already exists on the day",
+                            event.getEventDate());
                     EventAvailabilityDTO wedding = new EventAvailabilityDTO(EventType.WEDDING,
                             EventAvailability.NOT_AVAILABLE,
-                            EventType.ISHA_HALL_AC_DAY.toString() + " already exists on the day");
+                            EventType.ISHA_HALL_AC_DAY.toString() + " already exists on the day",
+                            event.getEventDate());
                     availabilityDTOs.add(wedding);
                     availabilityDTOs.add(reception3Pm);
                     break;
                 }
-                case ISHA_HALL_AC_EVE:{
+                case ISHA_HALL_AC_EVE: {
                     EventAvailabilityDTO reception3Pm = new EventAvailabilityDTO(EventType.RECEPTION_3_PM,
                             EventAvailability.NOT_AVAILABLE,
-                            EventType.ISHA_HALL_AC_EVE.toString() + " already exists on the day");
+                            EventType.ISHA_HALL_AC_EVE.toString() + " already exists on the day",
+                            event.getEventDate());
                     EventAvailabilityDTO reception5Pm = new EventAvailabilityDTO(EventType.RECEPTION_5_PM,
                             EventAvailability.NOT_AVAILABLE,
-                            EventType.ISHA_HALL_AC_EVE.toString() + " already exists on the day");
+                            EventType.ISHA_HALL_AC_EVE.toString() + " already exists on the day",
+                            event.getEventDate());
                     EventAvailabilityDTO mehandi = new EventAvailabilityDTO(EventType.MEHANDI,
                             EventAvailability.NOT_AVAILABLE,
-                            EventType.ISHA_HALL_AC_EVE.toString() + " already exists on the day");
+                            EventType.ISHA_HALL_AC_EVE.toString() + " already exists on the day",
+                            event.getEventDate());
                     EventAvailabilityDTO ishaEve = new EventAvailabilityDTO(EventType.ISHA_HALL_AC_EVE,
                             EventAvailability.NOT_AVAILABLE,
-                            EventType.ISHA_HALL_AC_EVE.toString() + " already exists on the day");
+                            EventType.ISHA_HALL_AC_EVE.toString() + " already exists on the day",
+                            event.getEventDate());
                     availabilityDTOs.add(reception3Pm);
                     availabilityDTOs.add(reception5Pm);
                     availabilityDTOs.add(mehandi);
@@ -156,13 +154,16 @@ public class EventAvailabilityService {
                 case MEHANDI:
                     EventAvailabilityDTO reception3Pm = new EventAvailabilityDTO(EventType.RECEPTION_3_PM,
                             EventAvailability.NOT_AVAILABLE,
-                            EventType.MEHANDI.toString() + " already exists on the day");
+                            EventType.MEHANDI.toString() + " already exists on the day",
+                            event.getEventDate());
                     EventAvailabilityDTO reception5Pm = new EventAvailabilityDTO(EventType.RECEPTION_5_PM,
                             EventAvailability.NOT_AVAILABLE,
-                            EventType.MEHANDI.toString() + " already exists on the day");
+                            EventType.MEHANDI.toString() + " already exists on the day",
+                            event.getEventDate());
                     EventAvailabilityDTO ishaEve = new EventAvailabilityDTO(EventType.ISHA_HALL_AC_EVE,
                             EventAvailability.NOT_AVAILABLE,
-                            EventType.MEHANDI.toString() + " already exists on the day");
+                            EventType.MEHANDI.toString() + " already exists on the day",
+                            event.getEventDate());
                     availabilityDTOs.add(reception3Pm);
                     availabilityDTOs.add(reception5Pm);
                     availabilityDTOs.add(ishaEve);
@@ -177,27 +178,29 @@ public class EventAvailabilityService {
         if (allEventsOnDate != null && !allEventsOnDate.isEmpty()) {
             for (Event event : allEventsOnDate) {
                 boolean goAhead = true;
-                if(bookingId != null){
-                    if(bookingId.equals(event.getBookingDetails().getBookingId())){
+                if (bookingId != null) {
+                    if (bookingId.equals(event.getBookingDetails().getBookingId())) {
                         goAhead = false;
                     }
                 }
-                if(goAhead){
-                switch (event.getEventType()) {
-                    case RECEPTION_3_PM: 
-                    case RECEPTION_5_PM:
-                    case ISHA_HALL_AC_EVE:
-                        EventAvailabilityDTO mehandi = new EventAvailabilityDTO(EventType.MEHANDI,
-                                EventAvailability.NOT_AVAILABLE,
-                                event.getEventType().toString() + " already exists on previous day");
-                        availabilityDTOs.add(mehandi);
-                         EventAvailabilityDTO mehandiAndWedding = new EventAvailabilityDTO(EventType.WEDDING_AND_MEHANDI,
-                                EventAvailability.NOT_AVAILABLE,
-                                event.getEventType().toString() + " already exists on previous day");
-                        availabilityDTOs.add(mehandi);
-                        availabilityDTOs.add(mehandiAndWedding);
-                        break;
-                }
+                if (goAhead) {
+                    switch (event.getEventType()) {
+                        case RECEPTION_3_PM:
+                        case RECEPTION_5_PM:
+                        case ISHA_HALL_AC_EVE:
+                            EventAvailabilityDTO mehandi = new EventAvailabilityDTO(EventType.MEHANDI,
+                                    EventAvailability.NOT_AVAILABLE,
+                                    event.getEventType().toString() + " already exists on previous day",
+                                    event.getEventDate());
+                            availabilityDTOs.add(mehandi);
+                            EventAvailabilityDTO mehandiAndWedding = new EventAvailabilityDTO(EventType.WEDDING_AND_MEHANDI,
+                                    EventAvailability.NOT_AVAILABLE,
+                                    event.getEventType().toString() + " already exists on previous day",
+                                    event.getEventDate());
+                            availabilityDTOs.add(mehandi);
+                            availabilityDTOs.add(mehandiAndWedding);
+                            break;
+                    }
                 }
             }
         }

@@ -48,8 +48,6 @@ public class DashboardController implements Initializable {
     @FXML
     private Text totalBlockingThisYear;
     @FXML
-    private Text averageBookingMonthly;
-    @FXML
     private Text reception5availability;
     @FXML
     private Text ishaDayAvailability;
@@ -73,7 +71,7 @@ public class DashboardController implements Initializable {
             java.sql.Date searchDate = java.sql.Date.valueOf(eventDateField.getValue());
             enrichEventAvailability();
             Set<EventAvailabilityDTO> events = EventAvailabilityService.checkEventAvailability(searchDate, null);
-            populateDateAvailabilitySearchResult(events);
+            populateDateAvailabilitySearchResult(events, searchDate);
         }
     }
 
@@ -117,7 +115,6 @@ public class DashboardController implements Initializable {
             totalBlockingThisYear.setText(String.valueOf(totalBlocking));
             totalCancellationThisYear.setText(String.valueOf(totalCancellation));
             totalDiamonBookingThisYear.setText(String.valueOf(totalDiamonBooking));
-            averageBookingMonthly.setText(calculateAverageMonthlyBooking(totalBooking));
         }
     }
 
@@ -126,41 +123,35 @@ public class DashboardController implements Initializable {
         return Math.abs(difference);
     }
 
-    private String calculateAverageMonthlyBooking(int totalBooking) {
-        int averageMonthlyBooking = totalBooking / 12;
-        if (averageMonthlyBooking == 0) {
-            averageMonthlyBooking = 1;
-        }
-        return String.valueOf(averageMonthlyBooking);
-    }
-
-    private void populateDateAvailabilitySearchResult(Set<EventAvailabilityDTO> eventAvailabilityDTOs) {
+    private void populateDateAvailabilitySearchResult(Set<EventAvailabilityDTO> eventAvailabilityDTOs, Date searchDate) {
         if (eventAvailabilityDTOs != null && !eventAvailabilityDTOs.isEmpty()) {
             for (EventAvailabilityDTO eventAvailabilityDTO : eventAvailabilityDTOs) {
-                switch (eventAvailabilityDTO.getEventType()) {
-                    case WEDDING:
-                        weddingAvailability.setText(eventAvailabilityDTO.getEventAvailability().toString());
-                        break;
-                    case MEHANDI:
-                        mehandiAvailability.setText(eventAvailabilityDTO.getEventAvailability().toString());
-                        break;
-                    case RECEPTION_3_PM:
-                        reception3Availability.setText(eventAvailabilityDTO.getEventAvailability().toString());
-                        break;
-                    case RECEPTION_5_PM:
-                        reception5availability.setText(eventAvailabilityDTO.getEventAvailability().toString());
-                        break;
-                    case ISHA_HALL_AC_DAY:
-                        ishaDayAvailability.setText(eventAvailabilityDTO.getEventAvailability().toString());
-                        break;
-                    case ISHA_HALL_AC_EVE:
-                        ishaEveAvailability.setText(eventAvailabilityDTO.getEventAvailability().toString());
-                        break;
-                    case NICA_LONGUE_AC:
-                        nicaLoungeAvailability.setText(eventAvailabilityDTO.getEventAvailability().toString());
-                        break;
-                    default:
-                        break;
+                if (searchDate.equals(eventAvailabilityDTO.getEventDate())) {
+                    switch (eventAvailabilityDTO.getEventType()) {
+                        case WEDDING:
+                            weddingAvailability.setText(eventAvailabilityDTO.getEventAvailability().toString());
+                            break;
+                        case MEHANDI:
+                            mehandiAvailability.setText(eventAvailabilityDTO.getEventAvailability().toString());
+                            break;
+                        case RECEPTION_3_PM:
+                            reception3Availability.setText(eventAvailabilityDTO.getEventAvailability().toString());
+                            break;
+                        case RECEPTION_5_PM:
+                            reception5availability.setText(eventAvailabilityDTO.getEventAvailability().toString());
+                            break;
+                        case ISHA_HALL_AC_DAY:
+                            ishaDayAvailability.setText(eventAvailabilityDTO.getEventAvailability().toString());
+                            break;
+                        case ISHA_HALL_AC_EVE:
+                            ishaEveAvailability.setText(eventAvailabilityDTO.getEventAvailability().toString());
+                            break;
+                        case NICA_LONGUE_AC:
+                            nicaLoungeAvailability.setText(eventAvailabilityDTO.getEventAvailability().toString());
+                            break;
+                        default:
+                            break;
+                    }
                 }
             }
         }

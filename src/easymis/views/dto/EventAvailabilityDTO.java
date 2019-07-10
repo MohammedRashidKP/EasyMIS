@@ -2,6 +2,7 @@ package easymis.views.dto;
 
 import easymis.models.entity.enumeration.EventType;
 import easymis.views.viewobjects.EventAvailability;
+import java.sql.Date;
 import java.util.Objects;
 
 /**
@@ -15,11 +16,20 @@ public class EventAvailabilityDTO {
     private EventAvailability eventAvailability;
     
     private String unavailabilityReason;
+    
+    private Date eventDate;
 
-    public EventAvailabilityDTO(EventType eventType, EventAvailability eventAvailability, String unavailabilityReason) {
+//    public EventAvailabilityDTO(EventType eventType, EventAvailability eventAvailability, String unavailabilityReason) {
+//        this.eventType = eventType;
+//        this.eventAvailability = eventAvailability;
+//        this.unavailabilityReason = unavailabilityReason;
+//    }
+
+    public EventAvailabilityDTO(EventType eventType, EventAvailability eventAvailability, String unavailabilityReason, Date eventDate) {
         this.eventType = eventType;
         this.eventAvailability = eventAvailability;
         this.unavailabilityReason = unavailabilityReason;
+        this.eventDate = eventDate;
     }
 
     public EventAvailability getEventAvailability() {
@@ -44,6 +54,14 @@ public class EventAvailabilityDTO {
 
     public void setUnavailabilityReason(String unavailabilityReason) {
         this.unavailabilityReason = unavailabilityReason;
+    }
+
+    public Date getEventDate() {
+        return eventDate;
+    }
+
+    public void setEventDate(Date eventDate) {
+        this.eventDate = eventDate;
     }
     
     @Override
