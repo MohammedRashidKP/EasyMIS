@@ -18,20 +18,27 @@ import java.util.Set;
  */
 public class EventAvailabilityService {
 
-    public static Set<EventAvailabilityDTO> checkEventAvailability(Date date) {
+    public static Set<EventAvailabilityDTO> checkEventAvailability(Date date, String bookingId) {
 
         Set<EventAvailabilityDTO> availabilityDTOs = new HashSet<>();
-        checkSameDayAvailability(date, availabilityDTOs);
-        checkWeddingAndMehandiAvailability(DateHelper.getPreviousDay(date), availabilityDTOs);
+        checkSameDayAvailability(date, availabilityDTOs, bookingId);
+        checkWeddingAndMehandiAvailability(DateHelper.getPreviousDay(date), availabilityDTOs, bookingId);
         //(availabilityDTOs);
         return availabilityDTOs;
     }
 
-    private static void checkSameDayAvailability(Date date, Set<EventAvailabilityDTO> availabilityDTOs) {
+    private static void checkSameDayAvailability(Date date, Set<EventAvailabilityDTO> availabilityDTOs, String bookingId) {
         List<Event> allEventsOnDate = EventRepository.getUniqueInstance().fetchEventByEventDate(date);
         if (allEventsOnDate != null && !allEventsOnDate.isEmpty()) {
             for (Event event : allEventsOnDate) {
-                checkAvailability(event, availabilityDTOs);
+                if(bookingId != null){
+                    if(!bookingId.equals(event.getBookingDetails().getBookingId())){
+                        checkAvailability(event, availabilityDTOs);
+                    }
+                }else{
+                    checkAvailability(event, availabilityDTOs);
+                }
+                
             }
         }
     }
@@ -165,10 +172,17 @@ public class EventAvailabilityService {
         }
     }
 
-    private static void checkWeddingAndMehandiAvailability(Date date, Set<EventAvailabilityDTO> availabilityDTOs) {
+    private static void checkWeddingAndMehandiAvailability(Date date, Set<EventAvailabilityDTO> availabilityDTOs, String bookingId) {
         List<Event> allEventsOnDate = EventRepository.getUniqueInstance().fetchEventByEventDate(date);
         if (allEventsOnDate != null && !allEventsOnDate.isEmpty()) {
             for (Event event : allEventsOnDate) {
+                boolean goAhead = true;
+                if(bookingId != null){
+                    if(bookingId.equals(event.getBookingDetails().getBookingId())){
+                        goAhead = false;
+                    }
+                }
+                if(goAhead){
                 switch (event.getEventType()) {
                     case RECEPTION_3_PM: 
                     case RECEPTION_5_PM:
@@ -183,6 +197,7 @@ public class EventAvailabilityService {
                         availabilityDTOs.add(mehandi);
                         availabilityDTOs.add(mehandiAndWedding);
                         break;
+                }
                 }
             }
         }

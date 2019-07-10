@@ -207,11 +207,11 @@ public class EventBookingViewController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         initializeEventTableColumnFields();
-        initializeAllComboBoxes();
         initializePanelTab();
         updReceiptNumber.addEventFilter(KeyEvent.KEY_PRESSED, onReceiptNumberChange());
         launchAllEventsTab();
         setNumberFormatter();
+        initComboBoxes();
     }
 
     @FXML
@@ -519,6 +519,22 @@ public class EventBookingViewController implements Initializable {
         alternateMobileNumber.setEditable(flag);
         receiptNumber.setEditable(flag);
         advanceAmount.setEditable(flag);
+        if(reception.isSelected()){
+            receptionComboBox.setDisable(flag);
+        }else{
+            receptionComboBox.setDisable(true);
+        }
+        if(ishaHall.isSelected()){
+            ishaHallComboBox.setDisable(flag);
+        }else{
+            ishaHallComboBox.setDisable(true);
+        }
+        if(additionalAC.isSelected()){
+            additionalAcComboBox.setDisable(flag);
+        }else{
+            additionalAcComboBox.setDisable(true);
+        }
+        
     }
 
     private void clearFields() {
@@ -544,7 +560,9 @@ public class EventBookingViewController implements Initializable {
         alternateMobileNumber.clear();
         totalAmount.setText("");
         lblEventCategory.setText("");
-        initializeAllComboBoxes();
+        receptionComboBox.setValue(null);
+        ishaHallComboBox.setValue(null);
+        additionalAcComboBox.setValue(null);
     }
 
     private void makeFieldsEditableInUpdate(boolean flag) {
@@ -571,9 +589,21 @@ public class EventBookingViewController implements Initializable {
         btnUpdate.setDisable(!flag);
         updReceiptNumber.setEditable(flag);
         updAdvanceAmount.setEditable(flag);
-        updReceptionComboBox.setEditable(flag);
-        updIshaHallComboBox.setEditable(flag);
-        updAdditionalAcComboBox.setEditable(flag);
+        if(updReception.isSelected()){
+            updReceptionComboBox.setDisable(flag);
+        }else{
+            updReceptionComboBox.setDisable(true);
+        }
+        if(updIshaHall.isSelected()){
+            updIshaHallComboBox.setDisable(flag);
+        }else{
+            updIshaHallComboBox.setDisable(true);
+        }
+        if(updAdditionalAC.isSelected()){
+            updAdditionalAcComboBox.setDisable(flag);
+        }else{
+            updAdditionalAcComboBox.setDisable(true);
+        }
     }
 
     private void clearAllFieldsInUpdate() {
@@ -602,7 +632,9 @@ public class EventBookingViewController implements Initializable {
         updBookingStatus.setText("");
         updTotalAmount.setText("");
         lblEventCategory1.setText("");
-        initializeAllComboBoxes();
+        updReceptionComboBox.setValue(null);
+        updIshaHallComboBox.setValue(null);
+        updAdditionalAcComboBox.setValue(null);
     }
 
     @FXML
@@ -838,37 +870,42 @@ public class EventBookingViewController implements Initializable {
     private List<Event> getEventDetailsForUpdate(Booking bookingDetails) {
         List<Event> eventDetails = new ArrayList<>();
         if (updWedding.isSelected()) {
-            Event details = new Event();
-            details.setEventType(EventType.WEDDING);
-            details.setEventId((Integer) updWedding.getUserData());
-            eventDetails.add(details);
+            Event event = new Event();
+            event.setEventType(EventType.WEDDING);
+            event.setEventId((Integer) updWedding.getUserData());
+            event.setEventDate(bookingDetails.getEventDate());
+            eventDetails.add(event);
         }
         if (updMehandi.isSelected()) {
-            Event details = new Event();
-            details.setEventType(EventType.MEHANDI);
-            details.setEventId((Integer) updMehandi.getUserData());
-            eventDetails.add(details);
+            Event event = new Event();
+            event.setEventType(EventType.MEHANDI);
+            event.setEventId((Integer) updMehandi.getUserData());
+            if(bookingDetails.getEventDate() != null)
+                event.setEventDate(DateHelper.getPreviousDay(bookingDetails.getEventDate()));
+            eventDetails.add(event);
         }
         if (updReception.isSelected()) {
-            Event details = new Event();
-            details.setEventType(updReceptionComboBox.getValue().getValue());
-            details.setEventId((Integer) updReception.getUserData());
-            eventDetails.add(details);
+            Event event = new Event();
+            event.setEventType(updReceptionComboBox.getValue().getValue());
+            event.setEventId((Integer) updReception.getUserData());
+            event.setEventDate(bookingDetails.getEventDate());
+            eventDetails.add(event);
         }
         if (updIshaHall.isSelected()) {
-            Event details = new Event();
-            details.setEventType(updIshaHallComboBox.getValue().getValue());
-            details.setEventId((Integer) updIshaHall.getUserData());
-            eventDetails.add(details);
+            Event event = new Event();
+            event.setEventType(updIshaHallComboBox.getValue().getValue());
+            event.setEventId((Integer) updIshaHall.getUserData());
+            event.setEventDate(bookingDetails.getEventDate());
+            eventDetails.add(event);
         }
         if (updNiceHall.isSelected()) {
-            Event details = new Event();
-            details.setEventType(EventType.NICA_LONGUE_AC);
-            details.setEventId((Integer) updNiceHall.getUserData());
-            eventDetails.add(details);
+            Event event = new Event();
+            event.setEventType(EventType.NICA_LONGUE_AC);
+            event.setEventId((Integer) updNiceHall.getUserData());
+            event.setEventDate(bookingDetails.getEventDate());
+            eventDetails.add(event);
         }
         for (Event event : eventDetails) {
-            event.setEventDate(bookingDetails.getEventDate());
             event.setNormalAcRequired(updAcRequired.isSelected());
             event.setBookingStatus(bookingDetails.getBookingStatus());
             if (updAdditionalAC.isSelected()) {
@@ -879,26 +916,24 @@ public class EventBookingViewController implements Initializable {
         bookingDetails.setEvents(eventDetails);
         return eventDetails;
     }
-
-    private void initializeAllComboBoxes() {
-        initializeReceptionComboBox();
-        initializeIshHallComboBox();
-        initializeAdditionalAcComboBox();
-    }
-
+    
     private void initializeReceptionComboBox() {
         receptionComboBox.getItems().clear();
         receptionComboBox.getSelectionModel().clearSelection();
-        updReceptionComboBox.getItems().clear();
-        updReceptionComboBox.getSelectionModel().clearSelection();
         ObservableList<ComboBoxViewObject> receptionCombo = FXCollections.observableArrayList();
         receptionCombo.addAll(new ComboBoxViewObject(EventType.RECEPTION_3_PM.toString(), EventType.RECEPTION_3_PM),
                 new ComboBoxViewObject(EventType.RECEPTION_5_PM.toString(), EventType.RECEPTION_5_PM));
+        receptionComboBox.setItems(receptionCombo);
+        receptionComboBox.getSelectionModel().selectFirst();
+        
+    }
+    
+    private void initializeUpdateReceptionComboBox(){
+        updReceptionComboBox.getItems().clear();
+        updReceptionComboBox.getSelectionModel().clearSelection();
         ObservableList<ComboBoxViewObject> updReceptionCombo = FXCollections.observableArrayList();
         updReceptionCombo.addAll(new ComboBoxViewObject(EventType.RECEPTION_3_PM.toString(), EventType.RECEPTION_3_PM),
                 new ComboBoxViewObject(EventType.RECEPTION_5_PM.toString(), EventType.RECEPTION_5_PM));
-        receptionComboBox.setItems(receptionCombo);
-        receptionComboBox.getSelectionModel().selectFirst();
         updReceptionComboBox.setItems(updReceptionCombo);
         updReceptionComboBox.getSelectionModel().selectFirst();
     }
@@ -906,18 +941,24 @@ public class EventBookingViewController implements Initializable {
     private void initializeAdditionalAcComboBox() {
         additionalAcComboBox.getItems().clear();
         additionalAcComboBox.getSelectionModel().clearSelection();
-        updAdditionalAcComboBox.getItems().clear();
-        updAdditionalAcComboBox.getSelectionModel().clearSelection();
+        
         ObservableList<String> additionalACs = FXCollections.observableArrayList();
         for (int i = 1; i < 7; i++) {
             additionalACs.add(String.valueOf(i));
         }
+        
+        additionalAcComboBox.setItems(additionalACs);
+        additionalAcComboBox.getSelectionModel().selectFirst();
+        
+    }
+    
+    private void initializeUpdateAdditionalAcComboBox() {
+        updAdditionalAcComboBox.getItems().clear();
+        updAdditionalAcComboBox.getSelectionModel().clearSelection();
         ObservableList<String> updAdditionalACs = FXCollections.observableArrayList();
         for (int i = 1; i < 7; i++) {
             updAdditionalACs.add(String.valueOf(i));
         }
-        additionalAcComboBox.setItems(additionalACs);
-        additionalAcComboBox.getSelectionModel().selectFirst();
         updAdditionalAcComboBox.setItems(updAdditionalACs);
         updAdditionalAcComboBox.getSelectionModel().selectFirst();
     }
@@ -925,16 +966,22 @@ public class EventBookingViewController implements Initializable {
     private void initializeIshHallComboBox() {
         ishaHallComboBox.getItems().clear();
         ishaHallComboBox.getSelectionModel().clearSelection();
-        updIshaHallComboBox.getItems().clear();
-        updIshaHallComboBox.getSelectionModel().clearSelection();
+        
         ObservableList<ComboBoxViewObject> ishaHallCombo = FXCollections.observableArrayList();
         ishaHallCombo.addAll(new ComboBoxViewObject(EventType.ISHA_HALL_AC_DAY.toString(), EventType.ISHA_HALL_AC_DAY),
                 new ComboBoxViewObject(EventType.ISHA_HALL_AC_EVE.toString(), EventType.ISHA_HALL_AC_EVE));
+        
+        ishaHallComboBox.setItems(ishaHallCombo);
+        ishaHallComboBox.getSelectionModel().selectFirst();
+        
+    }
+    
+    private void initializeUpdateIshHallComboBox() {
+        updIshaHallComboBox.getItems().clear();
+        updIshaHallComboBox.getSelectionModel().clearSelection();
         ObservableList<ComboBoxViewObject> updIshaHallCombo = FXCollections.observableArrayList();
         updIshaHallCombo.addAll(new ComboBoxViewObject(EventType.ISHA_HALL_AC_DAY.toString(), EventType.ISHA_HALL_AC_DAY),
                 new ComboBoxViewObject(EventType.ISHA_HALL_AC_EVE.toString(), EventType.ISHA_HALL_AC_EVE));
-        ishaHallComboBox.setItems(ishaHallCombo);
-        ishaHallComboBox.getSelectionModel().selectFirst();
         updIshaHallComboBox.setItems(updIshaHallCombo);
         updIshaHallComboBox.getSelectionModel().selectFirst();
     }
@@ -979,7 +1026,9 @@ public class EventBookingViewController implements Initializable {
     }
 
     private void launchPrepareUpdateEventTab() {
-        initializeAllComboBoxes();
+        initializeUpdateReceptionComboBox();
+        initializeUpdateIshHallComboBox();
+        initializeUpdateAdditionalAcComboBox();
     }
 
     @FXML
@@ -1003,5 +1052,97 @@ public class EventBookingViewController implements Initializable {
         updAlternateMobile.setTextFormatter(new NumberFilter().filter());
         updPinCode.setTextFormatter(new NumberFilter().filter());
         updAdvanceAmount.setTextFormatter(new NumberFilter().decimalFilter());
+    }
+
+    private void initComboBoxes() {
+        reception.selectedProperty().addListener(new ChangeListener<Boolean>() {
+    @Override
+    public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+        
+        receptionComboBox.getItems().clear();
+        receptionComboBox.getSelectionModel().clearSelection();
+        if(newValue){
+        receptionComboBox.setDisable(false);
+        initializeReceptionComboBox();
+        }else{
+            receptionComboBox.setDisable(true);
+        }
+    }
+});
+
+        updReception.selectedProperty().addListener(new ChangeListener<Boolean>() {
+    @Override
+    public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+        
+        updReceptionComboBox.getItems().clear();
+        updReceptionComboBox.getSelectionModel().clearSelection();
+        if(newValue){
+        updReceptionComboBox.setDisable(false);
+        initializeUpdateReceptionComboBox();
+        }else{
+            updReceptionComboBox.setDisable(true);
+        }
+    }
+});
+        
+        ishaHall.selectedProperty().addListener(new ChangeListener<Boolean>() {
+    @Override
+    public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+        
+        ishaHallComboBox.getItems().clear();
+        ishaHallComboBox.getSelectionModel().clearSelection();
+        if(newValue){
+        ishaHallComboBox.setDisable(false);
+        initializeIshHallComboBox();
+        }else{
+            ishaHallComboBox.setDisable(true);
+        }
+    }
+});
+        
+        updIshaHall.selectedProperty().addListener(new ChangeListener<Boolean>() {
+    @Override
+    public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+        
+        updIshaHallComboBox.getItems().clear();
+        updIshaHallComboBox.getSelectionModel().clearSelection();
+        if(newValue){
+        updIshaHallComboBox.setDisable(false);
+        initializeUpdateIshHallComboBox();
+        }else{
+            updIshaHallComboBox.setDisable(true);
+        }
+    }
+});
+        
+        additionalAC.selectedProperty().addListener(new ChangeListener<Boolean>() {
+    @Override
+    public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+        
+        additionalAcComboBox.getItems().clear();
+        additionalAcComboBox.getSelectionModel().clearSelection();
+        if(newValue){
+        additionalAcComboBox.setDisable(false);
+        initializeAdditionalAcComboBox();
+        }else{
+            additionalAcComboBox.setDisable(true);
+        }
+    }
+});
+        
+        updAdditionalAC.selectedProperty().addListener(new ChangeListener<Boolean>() {
+    @Override
+    public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+        
+       updAdditionalAcComboBox.getItems().clear();
+        updAdditionalAcComboBox.getSelectionModel().clearSelection();
+        if(newValue){
+        updAdditionalAcComboBox.setDisable(false);
+        initializeUpdateAdditionalAcComboBox();
+        }else{
+            updAdditionalAcComboBox.setDisable(true);
+        }
+    }
+});
     }
 }

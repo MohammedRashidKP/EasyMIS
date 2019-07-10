@@ -104,7 +104,6 @@ public class EventRepository extends AbstractRepository {
     public TransactionStatus update(Booking bookingDetail, boolean isNewBooking) {
         
         TransactionStatus status;
-        if(isNewBooking){
         EventBookingBusinessPolicy policy = new EventBookingBusinessPolicy();
         List<ValidationError> validationErrors = policy.validateBooking(bookingDetail);
         if (validationErrors.isEmpty()) {
@@ -119,13 +118,7 @@ public class EventRepository extends AbstractRepository {
             status.setValidationErrors(validationErrors);
             return status;
         }
-        }else{
-            try {
-                return merge(bookingDetail);
-            } catch (Exception ex) {
-                status = fillTransactionStatus(ex);
-            }
-        }
+        
         return status;
     }
 

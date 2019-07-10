@@ -23,7 +23,7 @@ public class NumberFilter {
     public TextFormatter<String> decimalFilter (){
         UnaryOperator<TextFormatter.Change> filter = change -> {
             String text = change.getText();
-            if (text.matches("\\d{0,7}([\\.]\\d{0,4})?")) {
+            if (text.matches("\\d{0,9}([\\.]\\d{0,2})?")) {
                 return change;
             }
             return null;

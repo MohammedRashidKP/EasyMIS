@@ -37,7 +37,7 @@ public class EventBookingBusinessPolicy {
 
     private void validateDateAvailability(Booking booking) {
         Set<EventAvailabilityDTO> eventAvailability = EventAvailabilityService.
-                checkEventAvailability(booking.getEventDate());
+                checkEventAvailability(booking.getEventDate(), booking.getBookingId());
         if(!eventAvailability.isEmpty()){
             for(EventAvailabilityDTO eventAvailabilityDTO: eventAvailability){
                 for(Event event: booking.getEvents()){

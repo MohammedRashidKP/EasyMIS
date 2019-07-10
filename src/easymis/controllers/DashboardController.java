@@ -72,7 +72,7 @@ public class DashboardController implements Initializable {
         if (eventDateField.getValue() != null) {
             java.sql.Date searchDate = java.sql.Date.valueOf(eventDateField.getValue());
             enrichEventAvailability();
-            Set<EventAvailabilityDTO> events = EventAvailabilityService.checkEventAvailability(searchDate);
+            Set<EventAvailabilityDTO> events = EventAvailabilityService.checkEventAvailability(searchDate, null);
             populateDateAvailabilitySearchResult(events);
         }
     }

@@ -162,7 +162,7 @@
                                           <FontAwesomeIconView fill="WHITE" glyphName="INR" layoutX="132.0" layoutY="197.0" size="20" />
                                        </children>
                                     </Pane>
-                                    <ComboBox fx:id="additionalAcComboBox" layoutX="653.0" layoutY="408.0" prefHeight="25.0" prefWidth="32.0" AnchorPane.leftAnchor="650.0" AnchorPane.topAnchor="450.0" />
+                                    <ComboBox fx:id="additionalAcComboBox" disable="true" layoutX="653.0" layoutY="408.0" prefHeight="25.0" prefWidth="32.0" AnchorPane.leftAnchor="650.0" AnchorPane.topAnchor="450.0" />
                                     <JFXTextField fx:id="receiptNumber" labelFloat="true" layoutX="500.0" layoutY="39.0" prefHeight="25.0" prefWidth="240.0" promptText="Receipt Number" unFocusColor="#a8a7ab" AnchorPane.leftAnchor="500.0" AnchorPane.topAnchor="39.0">
                                        <font>
                                           <Font size="15.0" />
@@ -173,8 +173,8 @@
                                           <Font size="15.0" />
                                        </font>
                                     </JFXTextField>
-                                    <ComboBox fx:id="receptionComboBox" layoutX="230.0" layoutY="454.0" prefHeight="25.0" prefWidth="130.0" AnchorPane.leftAnchor="230.0" AnchorPane.topAnchor="490.0" />
-                                    <ComboBox fx:id="ishaHallComboBox" layoutX="650.0" layoutY="488.0" prefHeight="25.0" prefWidth="130.0" />
+                                    <ComboBox fx:id="receptionComboBox" disable="true" layoutX="230.0" layoutY="454.0" prefHeight="25.0" prefWidth="130.0" AnchorPane.leftAnchor="230.0" AnchorPane.topAnchor="490.0" />
+                                    <ComboBox fx:id="ishaHallComboBox" disable="true" layoutX="650.0" layoutY="488.0" prefHeight="25.0" prefWidth="130.0" />
                                  </children>
                               </AnchorPane>
                           </content>
@@ -312,8 +312,8 @@
                                        </font>
                                     </Label>
                                     <JFXButton fx:id="updCancelButton" buttonType="RAISED" disable="true" layoutX="878.0" layoutY="432.0" onAction="#cancelEvent" prefHeight="41.0" prefWidth="112.0" style="-fx-background-color: red;" styleClass="book-button" text="Cancel Event" AnchorPane.leftAnchor="880.0" AnchorPane.topAnchor="430.0" />
-                                    <ComboBox fx:id="updAdditionalAcComboBox" layoutX="660.0" layoutY="418.0" prefHeight="25.0" prefWidth="32.0" AnchorPane.leftAnchor="650.0" AnchorPane.topAnchor="420.0" />
-                                    <ComboBox fx:id="updReceptionComboBox" layoutX="320.0" layoutY="458.0" prefHeight="25.0" prefWidth="130.0" AnchorPane.leftAnchor="230.0" AnchorPane.topAnchor="460.0" />
+                                    <ComboBox fx:id="updAdditionalAcComboBox" disable="true" layoutX="660.0" layoutY="418.0" prefHeight="25.0" prefWidth="32.0" AnchorPane.leftAnchor="650.0" AnchorPane.topAnchor="420.0" />
+                                    <ComboBox fx:id="updReceptionComboBox" disable="true" layoutX="320.0" layoutY="458.0" prefHeight="25.0" prefWidth="130.0" AnchorPane.leftAnchor="230.0" AnchorPane.topAnchor="460.0" />
                                     <JFXButton buttonType="RAISED" layoutX="878.0" layoutY="489.0" prefHeight="41.0" prefWidth="101.0" style="-fx-background-color: #3a84c3;" text="Print" textFill="WHITE" AnchorPane.leftAnchor="880.0" AnchorPane.topAnchor="480.0">
                                        <font>
                                           <Font name="System Bold" size="16.0" />
@@ -330,7 +330,7 @@
                                           <Font size="15.0" />
                                        </font>
                                     </JFXTextField>
-                                    <ComboBox fx:id="updIshaHallComboBox" layoutX="650.0" layoutY="458.0" prefHeight="25.0" prefWidth="130.0" />
+                                    <ComboBox fx:id="updIshaHallComboBox" disable="true" layoutX="650.0" layoutY="458.0" prefHeight="25.0" prefWidth="130.0" />
                                  </children>
                               </AnchorPane>
                            </content>
