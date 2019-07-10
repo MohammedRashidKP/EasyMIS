@@ -18,7 +18,7 @@
           </stylesheets>
          <children>
             <AnchorPane layoutX="71.0" layoutY="86.0" />
-            <AnchorPane layoutX="31.0" layoutY="427.0" prefHeight="408.0" prefWidth="563.0" style="-fx-background-color: #ffffff;" styleClass="card">
+            <AnchorPane layoutX="31.0" layoutY="362.0" prefHeight="408.0" prefWidth="563.0" style="-fx-background-color: #ffffff;" styleClass="card">
                <children>
                   <JFXDatePicker fx:id="eventDateField" defaultColor="#3a84c3" layoutX="14.0" layoutY="78.0" promptText="Event Date" />
                   <JFXButton fx:id="searchButton" layoutX="199.0" layoutY="78.0" onAction="#onClickOfSearch" style="-fx-background-color: #3A84C3;" styleClass="card" text="Search Availability" textFill="WHITE" />
@@ -125,13 +125,18 @@
                         </Text>
                      </children>
                   </AnchorPane>
+                  <JFXButton buttonType="RAISED" layoutX="448.0" layoutY="6.0" prefHeight="37.0" prefWidth="106.0" style="-fx-background-color: #3A84C3;" text="Sync" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="16.0" />
+                     </font>
+                  </JFXButton>
                </children>
             </AnchorPane>
-            <AnchorPane layoutX="643.0" layoutY="415.0" prefHeight="408.0" prefWidth="563.0" style="-fx-background-color: #ffffff;" styleClass="card">
+            <AnchorPane layoutX="643.0" layoutY="223.0" prefHeight="550.0" prefWidth="553.0" style="-fx-background-color: #ffffff;" styleClass="card">
                <children>
-                  <AnchorPane layoutX="14.0" layoutY="-21.0" prefHeight="70.0" prefWidth="266.0" style="-fx-background-color: #9400d3;" styleClass="card">
+                  <AnchorPane layoutX="14.0" layoutY="-21.0" prefHeight="70.0" prefWidth="184.0" style="-fx-background-color: #9400d3;" styleClass="card">
                      <children>
-                        <Text fill="WHITE" fontSmoothingType="LCD" layoutX="64.0" layoutY="41.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Diamond Notification">
+                        <Text fill="WHITE" fontSmoothingType="LCD" layoutX="64.0" layoutY="41.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Notification">
                            <font>
                               <Font name="System Bold" size="18.0" />
                            </font>
@@ -169,100 +174,76 @@
                         <Font name="System Bold" size="14.0" />
                      </font>
                   </Text>
-                  <JFXTextArea fx:id="diamondNotifications" disable="true" editable="false" layoutX="15.0" layoutY="87.0" prefHeight="214.0" prefWidth="532.0" />
-                  <JFXButton buttonType="RAISED" layoutX="437.0" layoutY="306.0" prefHeight="37.0" prefWidth="106.0" style="-fx-background-color: #3A84C3;" text="Sync" textFill="WHITE">
-                     <font>
-                        <Font name="System Bold" size="16.0" />
-                     </font>
-                  </JFXButton>
+                  <JFXTextArea fx:id="diamondNotifications" disable="true" editable="false" layoutX="15.0" layoutY="87.0" prefHeight="457.0" prefWidth="516.0" />
                   <FontAwesomeIconView fill="WHITE" glyphName="REFRESH" layoutX="515.0" layoutY="335.0" size="24" />
                   <FontAwesomeIconView fill="WHITE" glyphName="DIAMOND" layoutX="220.0" layoutY="99.0" size="24" />
                </children></AnchorPane>
-            <AnchorPane layoutX="31.0" layoutY="213.0" prefHeight="159.0" prefWidth="266.0" style="-fx-background-color: #ffffff;" styleClass="card">
+            <AnchorPane layoutX="31.0" layoutY="213.0" prefHeight="96.0" prefWidth="171.0" style="-fx-background-color: #ffffff;" styleClass="card">
                <children>
-                  <AnchorPane layoutX="14.0" layoutY="-19.0" prefHeight="70.0" prefWidth="99.0" style="-fx-background-color: #008000;" styleClass="card">
+                  <AnchorPane layoutX="14.0" layoutY="-19.0" prefHeight="48.0" prefWidth="44.0" style="-fx-background-color: #008000;" styleClass="card">
                      <children>
-                        <FontAwesomeIconView fill="WHITE" glyphName="CALENDAR" layoutX="35.0" layoutY="47.0" size="36" wrappingWidth="30.0" />
+                        <FontAwesomeIconView fill="WHITE" glyphName="CALENDAR" layoutX="10.0" layoutY="29.0" size="24" wrappingWidth="30.0" />
                      </children>
                   </AnchorPane>
-                  <Text fx:id="totalBookingThisYear" fill="DARKSLATEGRAY" fontSmoothingType="LCD" layoutX="151.0" layoutY="102.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0">
+                  <Text fx:id="totalBookingThisYear" fill="DARKSLATEGRAY" fontSmoothingType="LCD" layoutX="31.0" layoutY="67.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0">
                      <font>
                         <Font name="System Bold" size="18.0" />
                      </font>
                   </Text>
-                  <Text fill="DARKSLATEGRAY" fontSmoothingType="LCD" layoutX="128.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Total Booking">
+                  <Text fill="DARKSLATEGRAY" fontSmoothingType="LCD" layoutX="64.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Total Booking">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
                   </Text>
-                  <Text fill="DARKSLATEGRAY" fontSmoothingType="LCD" layoutX="128.0" layoutY="35.0" strokeType="OUTSIDE" strokeWidth="0.0" text="This Year">
+                  <Text fill="DARKSLATEGRAY" fontSmoothingType="LCD" layoutX="64.0" layoutY="35.0" strokeType="OUTSIDE" strokeWidth="0.0" text="This Year">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
                   </Text>
                </children>
             </AnchorPane>
-            <AnchorPane layoutX="328.0" layoutY="213.0" prefHeight="159.0" prefWidth="266.0" style="-fx-background-color: #ffffff;" styleClass="card">
+            <AnchorPane layoutX="217.0" layoutY="213.0" prefHeight="96.0" prefWidth="171.0" style="-fx-background-color: #ffffff;" styleClass="card">
                <children>
-                  <AnchorPane layoutX="14.0" layoutY="-19.0" prefHeight="70.0" prefWidth="99.0" style="-fx-background-color: #ffd700;" styleClass="card">
+                  <AnchorPane layoutX="14.0" layoutY="-19.0" prefHeight="48.0" prefWidth="44.0" style="-fx-background-color: #ffd700;" styleClass="card">
                      <children>
-                        <FontAwesomeIconView fill="WHITE" fontSmoothingType="LCD" glyphName="LOCK" layoutX="38.0" layoutY="47.0" size="36" />
+                        <FontAwesomeIconView fill="WHITE" fontSmoothingType="LCD" glyphName="LOCK" layoutX="14.0" layoutY="32.0" size="24" />
                      </children>
                   </AnchorPane>
-                  <Text fx:id="totalBlockingThisYear" fill="DARKSLATEGRAY" fontSmoothingType="LCD" layoutX="151.0" layoutY="102.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0">
+                  <Text fx:id="totalBlockingThisYear" fill="DARKSLATEGRAY" fontSmoothingType="LCD" layoutX="31.0" layoutY="67.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0">
                      <font>
                         <Font name="System Bold" size="18.0" />
                      </font>
                   </Text>
-                  <Text fill="DARKSLATEGRAY" fontSmoothingType="LCD" layoutX="128.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Total Blocking">
+                  <Text fill="DARKSLATEGRAY" fontSmoothingType="LCD" layoutX="65.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Total Blocking">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
                   </Text>
-                  <Text fill="DARKSLATEGRAY" fontSmoothingType="LCD" layoutX="128.0" layoutY="35.0" strokeType="OUTSIDE" strokeWidth="0.0" text="This Year">
+                  <Text fill="DARKSLATEGRAY" fontSmoothingType="LCD" layoutX="64.0" layoutY="35.0" strokeType="OUTSIDE" strokeWidth="0.0" text="This Year">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
                   </Text>
                </children>
             </AnchorPane>
-            <AnchorPane layoutX="643.0" layoutY="213.0" prefHeight="159.0" prefWidth="266.0" style="-fx-background-color: #ffffff;" styleClass="card">
+            <AnchorPane layoutX="410.0" layoutY="213.0" prefHeight="96.0" prefWidth="184.0" style="-fx-background-color: #ffffff;" styleClass="card">
                <children>
-                  <AnchorPane layoutX="14.0" layoutY="-19.0" prefHeight="70.0" prefWidth="99.0" style="-fx-background-color: #ff0000;" styleClass="card">
+                  <AnchorPane layoutX="14.0" layoutY="-19.0" prefHeight="48.0" prefWidth="44.0" style="-fx-background-color: #ff0000;" styleClass="card">
                      <children>
-                        <FontAwesomeIconView fill="WHITE" glyphName="BAN" layoutX="35.0" layoutY="47.0" size="36" wrappingWidth="30.0" />
+                        <FontAwesomeIconView fill="WHITE" glyphName="BAN" layoutX="9.0" layoutY="32.0" size="24" wrappingWidth="30.0" />
                      </children>
                   </AnchorPane>
-                  <Text fx:id="totalCancellationThisYear" fill="DARKSLATEGRAY" fontSmoothingType="LCD" layoutX="151.0" layoutY="102.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0">
+                  <Text fx:id="totalCancellationThisYear" fill="DARKSLATEGRAY" fontSmoothingType="LCD" layoutX="31.0" layoutY="67.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0">
                      <font>
                         <Font name="System Bold" size="18.0" />
                      </font>
                   </Text>
-                  <Text fill="DARKSLATEGRAY" fontSmoothingType="LCD" layoutX="128.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Total Cancellation">
+                  <Text fill="DARKSLATEGRAY" fontSmoothingType="LCD" layoutX="62.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Total Cancellation">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
                   </Text>
-                  <Text fill="DARKSLATEGRAY" fontSmoothingType="LCD" layoutX="128.0" layoutY="35.0" strokeType="OUTSIDE" strokeWidth="0.0" text="This Year">
-                     <font>
-                        <Font name="System Bold" size="14.0" />
-                     </font>
-                  </Text>
-               </children>
-            </AnchorPane>
-            <AnchorPane layoutX="940.0" layoutY="213.0" prefHeight="159.0" prefWidth="266.0" style="-fx-background-color: #ffffff;" styleClass="card">
-               <children>
-                  <AnchorPane layoutX="14.0" layoutY="-19.0" prefHeight="70.0" prefWidth="99.0" style="-fx-background-color: #adff2f;" styleClass="card">
-                     <children>
-                        <FontAwesomeIconView fill="WHITE" glyphName="LIST" layoutX="35.0" layoutY="47.0" size="36" wrappingWidth="30.0" />
-                     </children>
-                  </AnchorPane>
-                  <Text fx:id="averageBookingMonthly" fill="DARKSLATEGRAY" fontSmoothingType="LCD" layoutX="151.0" layoutY="102.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0">
-                     <font>
-                        <Font name="System Bold" size="18.0" />
-                     </font>
-                  </Text>
-                  <Text fill="DARKSLATEGRAY" fontSmoothingType="LCD" layoutX="128.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Monthly Booking">
+                  <Text fill="DARKSLATEGRAY" fontSmoothingType="LCD" layoutX="63.0" layoutY="35.0" strokeType="OUTSIDE" strokeWidth="0.0" text="This Year">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
