@@ -104,6 +104,8 @@ public class ExpensesController implements Initializable {
     private JFXTextField receiptNumber;
     @FXML
     private JFXTextField totalBookingRevenue;
+    @FXML
+    private TableColumn<?, ?> col_EventCategory1;
 
     /**
      * Initializes the controller class.
@@ -325,5 +327,9 @@ public class ExpensesController implements Initializable {
         discounts.setEditable(flag);
         otherRevenue.setEditable(flag);
         calculateButton.setDisable(!flag);
+    }
+
+    @FXML
+    private void onSubmitButtonClick(ActionEvent event) {
     }
 }
