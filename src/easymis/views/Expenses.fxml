@@ -3,7 +3,6 @@
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXTabPane?>
 <?import com.jfoenix.controls.JFXTextField?>
-<?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
@@ -29,13 +28,12 @@
                                     <TableView fx:id="eventTable" layoutX="12.0" layoutY="10.0" prefHeight="563.0" prefWidth="533.0" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="12.0" AnchorPane.rightAnchor="12.0" AnchorPane.topAnchor="10.0">
                                       <columns>
                                           <TableColumn fx:id="col_ReceiptNumber" prefWidth="112.0" text="Receipt Number" />
-                                        <TableColumn fx:id="col_EventDate" prefWidth="108.0" text="Event Date" />
-                                        <TableColumn fx:id="col_fullName" prefWidth="172.0" text="Full Name" />
-                                          <TableColumn fx:id="col_BookingStatus" prefWidth="123.0" text="Booking Status" />
-                                          <TableColumn fx:id="col_eventType" prefWidth="146.0" text="Event Type" />
-                                          <TableColumn fx:id="col_BookingDate" prefWidth="152.0" text="Booking Date" />
-                                          <TableColumn fx:id="col_EventCategory" prefWidth="115.0" text="Event Category" />
-                                          <TableColumn fx:id="col_EventCategory1" prefWidth="329.0" text="Event settlement Status" />
+                                        <TableColumn fx:id="col_EventDate" prefWidth="156.0" text="Event Date" />
+                                        <TableColumn fx:id="col_fullName" prefWidth="146.0" text="Full Name" />
+                                          <TableColumn fx:id="col_eventType" prefWidth="293.0" text="Event Type" />
+                                          <TableColumn fx:id="col_BookingDate" prefWidth="146.0" text="Booking Date" />
+                                          <TableColumn fx:id="col_EventCategory" prefWidth="129.0" text="Event Category" />
+                                          <TableColumn fx:id="col_SettlementStatus" prefWidth="173.0" text="Event settlement Status" />
                                       </columns>
                                     </TableView>
                                  </children>
@@ -48,7 +46,7 @@
                               <AnchorPane prefHeight="200.0" prefWidth="200.0">
                                  <children>
                                     <JFXButton fx:id="calculateButton" buttonType="RAISED" contentDisplay="BOTTOM" disable="true" layoutX="634.0" layoutY="67.0" onAction="#onCalculateButtonClick" prefHeight="32.0" prefWidth="143.0" style="-fx-background-color: #3A84C3;" text="Calculate" AnchorPane.leftAnchor="635.0" AnchorPane.topAnchor="70.0" />
-                                    <JFXButton buttonType="RAISED" layoutX="634.0" layoutY="120.0" onAction="#onEditButtonClick" prefHeight="32.0" prefWidth="143.0" style="-fx-background-color: #3A84C3;" text="Edit" AnchorPane.leftAnchor="635.0" AnchorPane.topAnchor="120.0" />
+                                    <JFXButton fx:id="editButton" buttonType="RAISED" layoutX="634.0" layoutY="120.0" onAction="#onEditButtonClick" prefHeight="32.0" prefWidth="143.0" style="-fx-background-color: #3A84C3;" text="Edit" AnchorPane.leftAnchor="635.0" AnchorPane.topAnchor="120.0" />
                                     <JFXTextField fx:id="electricity" labelFloat="true" layoutX="40.0" layoutY="68.0" prefHeight="26.0" prefWidth="150.0" promptText="Electricity" unFocusColor="#a8a7ab" AnchorPane.leftAnchor="40.0" AnchorPane.topAnchor="70.0" />
                                     <JFXTextField fx:id="cleaning" labelFloat="true" layoutX="39.0" layoutY="103.0" prefHeight="26.0" prefWidth="150.0" promptText="Cleaning" unFocusColor="#a8a7ab" AnchorPane.leftAnchor="40.0" AnchorPane.topAnchor="110.0" />
                                     <JFXTextField fx:id="dailyWages" labelFloat="true" layoutX="42.0" layoutY="136.0" prefHeight="26.0" prefWidth="150.0" promptText="Daily Wages" unFocusColor="#a8a7ab" AnchorPane.leftAnchor="40.0" AnchorPane.topAnchor="150.0" />
@@ -63,7 +61,7 @@
                                     <JFXTextField fx:id="discounts" labelFloat="true" layoutX="50.0" layoutY="515.0" prefHeight="26.0" prefWidth="150.0" promptText="Discounts If Any" unFocusColor="#a8a7ab" AnchorPane.leftAnchor="40.0" AnchorPane.topAnchor="510.0" />
                                     <JFXTextField fx:id="eventDate" editable="false" labelFloat="true" layoutX="262.0" layoutY="66.0" prefHeight="26.0" prefWidth="145.0" promptText="Event Date" unFocusColor="#a8a7ab" AnchorPane.leftAnchor="250.0" AnchorPane.topAnchor="70.0" />
                                     <JFXTextField fx:id="advancePaid" editable="false" labelFloat="true" layoutX="252.0" layoutY="96.0" prefHeight="26.0" prefWidth="145.0" promptText="Advance Paid" unFocusColor="#a8a7ab" AnchorPane.leftAnchor="250.0" AnchorPane.topAnchor="110.0" />
-                                    <JFXTextField fx:id="eventType" editable="false" labelFloat="true" layoutX="262.0" layoutY="120.0" prefHeight="26.0" prefWidth="145.0" promptText="Event Type" unFocusColor="#a8a7ab" AnchorPane.leftAnchor="250.0" AnchorPane.topAnchor="150.0" />
+                                    <JFXTextField fx:id="eventType" editable="false" labelFloat="true" layoutX="262.0" layoutY="120.0" prefHeight="26.0" prefWidth="145.0" promptText="Event Category" unFocusColor="#a8a7ab" AnchorPane.leftAnchor="250.0" AnchorPane.topAnchor="150.0" />
                                     <JFXTextField fx:id="totalExpense" editable="false" labelFloat="true" layoutX="425.0" layoutY="149.0" prefHeight="26.0" prefWidth="150.0" promptText="Total Expense" unFocusColor="#a8a7ab" AnchorPane.leftAnchor="425.0" AnchorPane.topAnchor="149.0" />
                                     <JFXTextField fx:id="balance" editable="false" labelFloat="true" layoutX="425.0" layoutY="189.0" prefHeight="26.0" prefWidth="150.0" promptText="Balance" unFocusColor="#a8a7ab" AnchorPane.leftAnchor="425.0" AnchorPane.topAnchor="189.0" />
                                     <JFXTextField fx:id="otherRevenue" labelFloat="true" layoutX="425.0" layoutY="73.0" prefHeight="26.0" prefWidth="150.0" promptText="Other Revenue" unFocusColor="#a8a7ab" AnchorPane.topAnchor="70.0" />
@@ -79,8 +77,7 @@
                                           <Font name="System Bold" size="20.0" />
                                        </font>
                                     </Text>
-                                    <JFXButton buttonType="RAISED" layoutX="635.0" layoutY="173.0" onAction="#onSubmitButtonClick" prefHeight="32.0" prefWidth="143.0" style="-fx-background-color: #3A84C3;" text="Submit" />
-                                    <CheckBox layoutX="250.0" layoutY="243.0" mnemonicParsing="false" text="Event Closed" />
+                                    <JFXButton fx:id="submitButton" buttonType="RAISED" layoutX="635.0" layoutY="173.0" onAction="#onSubmitButtonClick" prefHeight="32.0" prefWidth="143.0" style="-fx-background-color: #3A84C3;" text="Submit" />
                                  </children></AnchorPane>
                            </content></Tab>
                      </tabs>

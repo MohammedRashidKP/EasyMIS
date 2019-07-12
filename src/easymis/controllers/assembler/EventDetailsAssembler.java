@@ -1,7 +1,9 @@
 package easymis.controllers.assembler;
 
 import easymis.models.entity.Booking;
+import easymis.models.entity.Expenses;
 import easymis.models.entity.enumeration.EventType;
+import easymis.models.repository.ExpensesRepository;
 import easymis.utils.DateHelper;
 import easymis.views.viewobjects.EventDetailsViewObject;
 import java.util.ArrayList;
@@ -29,6 +31,26 @@ public class EventDetailsAssembler {
                 DateHelper.format(eventDetails.getCreatedDate()), 
                 eventDetails.getEventCategory(),
                 eventDetails.getReceiptNumber());
+        return eventDetailsViewObject;
+    }
+    
+    public EventDetailsViewObject toEventExpenseDetailsViewObject(Booking booking){
+        StringBuilder fullName = new StringBuilder();
+        if (booking.getFirstName() != null) {
+            fullName.append(booking.getFirstName());
+        }
+        if (booking.getLastName() != null) {
+            fullName.append(" ").append(booking.getLastName());
+        }
+        String eventType = resolveEventType(booking);
+        EventDetailsViewObject eventDetailsViewObject = new EventDetailsViewObject(DateHelper.format(booking.getEventDate()) , 
+                fullName.toString(), 
+                booking.getBookingStatus(), 
+                eventType, 
+                DateHelper.format(booking.getCreatedDate()), 
+                booking.getEventCategory(),
+                booking.getReceiptNumber(),
+                getSettlementStatus(booking.getReceiptNumber()));
         return eventDetailsViewObject;
     }
 
@@ -59,6 +81,12 @@ public class EventDetailsAssembler {
             eventTypes.add(event.getEventType());
         });
         return eventTypes;
+    }
+
+    private String getSettlementStatus(String receiptNumber) {
+        Expenses expenses = ExpensesRepository.getUniqueInstance().
+                fetchExpensesForReceiptNumber(receiptNumber);
+        return expenses != null ? "CLOSED": "OPEN";
     }
    
 }

@@ -11,6 +11,7 @@
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.effect.Glow?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
@@ -30,7 +31,7 @@
                           <content>
                             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="1221.0">
                                  <children>
-                                    <TableView fx:id="eventTable" prefHeight="563.0" prefWidth="533.0" AnchorPane.bottomAnchor="12.0" AnchorPane.leftAnchor="12.0" AnchorPane.rightAnchor="12.0" AnchorPane.topAnchor="12.0">
+                                    <TableView fx:id="eventTable" layoutY="37.0" prefHeight="514.0" prefWidth="1156.0" AnchorPane.bottomAnchor="12.0" AnchorPane.leftAnchor="12.0" AnchorPane.rightAnchor="12.0" AnchorPane.topAnchor="37.0">
                                       <columns>
                                           <TableColumn fx:id="col_ReceiptNumber" prefWidth="99.0" text="Receipt Number" />
                                         <TableColumn fx:id="col_EventDate" prefWidth="121.0" text="Event Date" />
@@ -41,6 +42,7 @@
                                           <TableColumn fx:id="col_EventCategory" prefWidth="102.0" text="Event Category" />
                                       </columns>
                                     </TableView>
+                                    <TextField fx:id="searchText" layoutX="14.0" layoutY="8.0" promptText="Search Text" />
                                  </children>
                               </AnchorPane>
                           </content>
@@ -139,27 +141,27 @@
                                           <Glow />
                                        </effect>
                                     </JFXDatePicker>
-                                    <JFXButton fx:id="btnBlock" buttonType="RAISED" layoutX="900.0" layoutY="489.0" onAction="#blockEvent" prefHeight="40.0" prefWidth="70.0" style="-fx-background-color: #ffd700;" styleClass="block-button" text="Block" AnchorPane.leftAnchor="900.0" AnchorPane.topAnchor="490.0" />
-                                    <JFXButton fx:id="btnBook" buttonType="RAISED" layoutX="900.0" layoutY="440.0" onAction="#bookEvent" prefHeight="40.0" prefWidth="70.0" style="-fx-background-color: #008000;" styleClass="book-button" text="Book" AnchorPane.leftAnchor="900.0" AnchorPane.topAnchor="440.0" />
-                                    <JFXButton fx:id="btnReset" buttonType="RAISED" layoutX="900.0" layoutY="390.0" onAction="#resetEventDetails" prefHeight="40.0" prefWidth="70.0" style="-fx-background-color: #3a84c3;" styleClass="block-button" text="Reset" AnchorPane.leftAnchor="900.0" AnchorPane.topAnchor="390.0" />
-                                    <Pane layoutX="878.0" layoutY="173.0" prefHeight="212.0" prefWidth="204.0" style="-fx-border-color: WHITE; -fx-border-width: 3;">
+                                    <JFXButton fx:id="btnBlock" buttonType="RAISED" layoutX="1068.0" layoutY="481.0" onAction="#blockEvent" prefHeight="40.0" prefWidth="70.0" style="-fx-background-color: #ffd700;" styleClass="block-button" text="Block" AnchorPane.leftAnchor="1068.0" AnchorPane.topAnchor="480.0" />
+                                    <JFXButton fx:id="btnBook" buttonType="RAISED" layoutX="987.0" layoutY="483.0" onAction="#bookEvent" prefHeight="40.0" prefWidth="70.0" style="-fx-background-color: #008000;" styleClass="book-button" text="Book" AnchorPane.leftAnchor="987.0" AnchorPane.topAnchor="480.0" />
+                                    <JFXButton fx:id="btnReset" buttonType="RAISED" layoutX="1068.0" layoutY="47.0" onAction="#resetEventDetails" prefHeight="40.0" prefWidth="70.0" style="-fx-background-color: #3a84c3;" styleClass="block-button" text="Reset" AnchorPane.leftAnchor="1068.0" AnchorPane.topAnchor="47.0" />
+                                    <Pane layoutX="981.0" layoutY="115.0" prefHeight="212.0" prefWidth="174.0" style="-fx-border-color: WHITE; -fx-border-width: 3;">
                                        <children>
-                                          <Label fx:id="totalAmount" layoutX="23.0" layoutY="132.0" text="0.00" textFill="#7a787c">
+                                          <Label fx:id="totalAmount" alignment="CENTER" layoutX="5.0" layoutY="127.0" prefHeight="27.0" prefWidth="164.0" text="0.00" textFill="#7a787c">
                                              <font>
-                                                <Font size="18.0" />
+                                                <Font name="System Bold" size="18.0" />
                                              </font>
                                           </Label>
-                                          <Label fx:id="lblEventCategory" layoutX="22.0" layoutY="82.0" prefHeight="45.0" prefWidth="244.0" textFill="#7a787c">
+                                          <Label fx:id="lblEventCategory" alignment="CENTER" layoutX="10.0" layoutY="64.0" prefHeight="45.0" prefWidth="153.0" textFill="#7a787c">
                                              <font>
                                                 <Font size="30.0" />
                                              </font>
                                           </Label>
-                                          <JFXButton buttonType="RAISED" layoutX="21.0" layoutY="169.0" onAction="#getCost" prefHeight="38.0" prefWidth="136.0" style="-fx-background-color: #3a84c3;" text="Get Cost" textFill="WHITE">
+                                          <JFXButton buttonType="RAISED" layoutX="20.0" layoutY="169.0" onAction="#getCost" prefHeight="38.0" prefWidth="136.0" style="-fx-background-color: #3a84c3; -fx-border-width: 2;" text="Get Cost" textFill="WHITE">
                                              <font>
                                                 <Font name="System Bold" size="17.0" />
                                              </font>
                                           </JFXButton>
-                                          <FontAwesomeIconView fill="WHITE" glyphName="INR" layoutX="132.0" layoutY="197.0" size="20" />
+                                          <FontAwesomeIconView fill="WHITE" glyphName="INR" layoutX="131.0" layoutY="197.0" size="20" />
                                        </children>
                                     </Pane>
                                     <ComboBox fx:id="additionalAcComboBox" disable="true" layoutX="653.0" layoutY="408.0" prefHeight="25.0" prefWidth="32.0" AnchorPane.leftAnchor="650.0" AnchorPane.topAnchor="450.0" />
@@ -175,6 +177,11 @@
                                     </JFXTextField>
                                     <ComboBox fx:id="receptionComboBox" disable="true" layoutX="230.0" layoutY="454.0" prefHeight="25.0" prefWidth="130.0" AnchorPane.leftAnchor="230.0" AnchorPane.topAnchor="490.0" />
                                     <ComboBox fx:id="ishaHallComboBox" disable="true" layoutX="650.0" layoutY="488.0" prefHeight="25.0" prefWidth="130.0" />
+                                    <JFXTextField fx:id="blockedBy" editable="false" labelFloat="true" layoutX="485.0" layoutY="354.0" prefHeight="25.0" prefWidth="242.0" promptText="Blocked by" AnchorPane.leftAnchor="500.0" AnchorPane.topAnchor="348.0">
+                                       <font>
+                                          <Font size="15.0" />
+                                       </font>
+                                    </JFXTextField>
                                  </children>
                               </AnchorPane>
                           </content>
@@ -278,27 +285,27 @@
                                           <Font name="System Bold" size="15.0" />
                                        </font>
                                     </CheckBox>
-                                    <JFXButton fx:id="updBtnBook" buttonType="RAISED" disable="true" layoutX="878.0" layoutY="381.0" onAction="#bookEventInUpdate" prefHeight="40.0" prefWidth="70.0" style="-fx-background-color: #ffd700;" styleClass="block-button" text="Book" AnchorPane.leftAnchor="880.0" AnchorPane.topAnchor="380.0" />
-                                    <JFXButton fx:id="btnUpdate" buttonType="RAISED" disable="true" layoutX="896.0" layoutY="37.0" onAction="#updateEvent" prefHeight="40.0" prefWidth="100.0" style="-fx-background-color: #008000;" styleClass="book-button" text="Update" AnchorPane.leftAnchor="880.0" AnchorPane.topAnchor="40.0" />
-                                    <JFXButton fx:id="updBtnReset" buttonType="RAISED" layoutX="880.0" layoutY="86.0" onAction="#resetDetailsInUpdate" prefHeight="40.0" prefWidth="70.0" style="-fx-background-color: #3a84c3;" styleClass="block-button" text="Reset" AnchorPane.leftAnchor="880.0" />
-                                    <Pane layoutX="876.0" layoutY="158.0" prefHeight="212.0" prefWidth="204.0" style="-fx-border-color: WHITE; -fx-border-width: 3;" AnchorPane.leftAnchor="876.0">
+                                    <JFXButton fx:id="updBtnBook" buttonType="RAISED" disable="true" layoutX="918.0" layoutY="432.0" onAction="#bookEventInUpdate" prefHeight="40.0" prefWidth="70.0" style="-fx-background-color: #ffd700;" styleClass="block-button" text="Book" AnchorPane.leftAnchor="918.0" AnchorPane.topAnchor="435.0" />
+                                    <JFXButton fx:id="btnUpdate" buttonType="RAISED" disable="true" layoutX="938.0" layoutY="50.0" onAction="#updateEvent" prefHeight="40.0" prefWidth="100.0" style="-fx-background-color: #008000;" styleClass="book-button" text="Update" AnchorPane.leftAnchor="938.0" AnchorPane.topAnchor="50.0" />
+                                    <JFXButton fx:id="updBtnReset" buttonType="RAISED" layoutX="1052.0" layoutY="50.0" onAction="#resetDetailsInUpdate" prefHeight="40.0" prefWidth="70.0" style="-fx-background-color: #3a84c3;" styleClass="block-button" text="Reset" AnchorPane.leftAnchor="1052.0" />
+                                    <Pane layoutX="950.0" layoutY="128.0" prefHeight="216.0" prefWidth="204.0" style="-fx-border-color: WHITE; -fx-border-width: 3;" AnchorPane.leftAnchor="950.0">
                                        <children>
-                                          <Label fx:id="updTotalAmount" layoutX="7.0" layoutY="132.0" text="0.00" textFill="#7a787c">
+                                          <Label fx:id="updTotalAmount" alignment="CENTER" contentDisplay="CENTER" layoutX="7.0" layoutY="132.0" prefHeight="27.0" prefWidth="191.0" text="0.00" textFill="#7a787c">
                                              <font>
-                                                <Font size="18.0" />
+                                                <Font name="System Bold" size="18.0" />
                                              </font>
                                           </Label>
-                                          <Label fx:id="lblEventCategory1" layoutX="8.0" layoutY="84.0" prefHeight="45.0" prefWidth="263.0" textFill="#7a787c">
+                                          <Label fx:id="lblEventCategory1" layoutX="8.0" layoutY="68.0" prefHeight="45.0" prefWidth="185.0" textFill="#7a787c">
                                              <font>
                                                 <Font size="30.0" />
                                              </font>
                                           </Label>
-                                          <JFXButton layoutX="5.0" layoutY="171.0" onAction="#getCostInUpdate" prefHeight="38.0" prefWidth="132.0" style="-fx-background-color: #3a84c3;" text="Get Cost" textFill="WHITE">
+                                          <JFXButton layoutX="37.0" layoutY="171.0" onAction="#getCostInUpdate" prefHeight="38.0" prefWidth="132.0" style="-fx-background-color: #3a84c3;" text="Get Cost" textFill="WHITE">
                                              <font>
                                                 <Font name="System Bold" size="17.0" />
                                              </font>
                                           </JFXButton>
-                                          <FontAwesomeIconView fill="WHITE" glyphName="INR" layoutX="120.0" layoutY="206.0" size="20" />
+                                          <FontAwesomeIconView fill="WHITE" glyphName="INR" layoutX="148.0" layoutY="199.0" size="20" />
                                        </children>
                                     </Pane>
                                     <Label layoutX="110.0" layoutY="507.0" prefHeight="29.0" prefWidth="72.0" text="Status: " AnchorPane.leftAnchor="110.0">
@@ -311,14 +318,9 @@
                                           <Font name="System Italic" size="15.0" />
                                        </font>
                                     </Label>
-                                    <JFXButton fx:id="updCancelButton" buttonType="RAISED" disable="true" layoutX="878.0" layoutY="432.0" onAction="#cancelEvent" prefHeight="41.0" prefWidth="112.0" style="-fx-background-color: red;" styleClass="book-button" text="Cancel Event" AnchorPane.leftAnchor="880.0" AnchorPane.topAnchor="430.0" />
+                                    <JFXButton fx:id="updCancelButton" buttonType="RAISED" disable="true" layoutX="1010.0" layoutY="431.0" onAction="#cancelEvent" prefHeight="40.0" prefWidth="112.0" style="-fx-background-color: red;" styleClass="book-button" text="Cancel Event" AnchorPane.leftAnchor="1010.0" AnchorPane.topAnchor="435.0" />
                                     <ComboBox fx:id="updAdditionalAcComboBox" disable="true" layoutX="660.0" layoutY="418.0" prefHeight="25.0" prefWidth="32.0" AnchorPane.leftAnchor="650.0" AnchorPane.topAnchor="420.0" />
                                     <ComboBox fx:id="updReceptionComboBox" disable="true" layoutX="320.0" layoutY="458.0" prefHeight="25.0" prefWidth="130.0" AnchorPane.leftAnchor="230.0" AnchorPane.topAnchor="460.0" />
-                                    <JFXButton buttonType="RAISED" layoutX="878.0" layoutY="489.0" prefHeight="41.0" prefWidth="101.0" style="-fx-background-color: #3a84c3;" text="Print" textFill="WHITE" AnchorPane.leftAnchor="880.0" AnchorPane.topAnchor="480.0">
-                                       <font>
-                                          <Font name="System Bold" size="16.0" />
-                                       </font>
-                                    </JFXButton>
                                     <FontAwesomeIconView fill="WHITE" glyphName="PRINT" layoutX="953.0" layoutY="509.0" size="24" />
                                     <JFXTextField fx:id="updAdvanceAmount" labelFloat="true" layoutX="110.0" layoutY="327.0" prefHeight="25.0" prefWidth="240.0" promptText="Advance Amount Paid" unFocusColor="#a8a7ab" AnchorPane.leftAnchor="110.0" AnchorPane.topAnchor="327.0">
                                        <font>
@@ -331,6 +333,11 @@
                                        </font>
                                     </JFXTextField>
                                     <ComboBox fx:id="updIshaHallComboBox" disable="true" layoutX="650.0" layoutY="458.0" prefHeight="25.0" prefWidth="130.0" />
+                                    <JFXTextField fx:id="updBlockedBy" editable="false" labelFloat="true" layoutX="492.0" layoutY="327.0" prefHeight="25.0" prefWidth="242.0" promptText="Blocked by" AnchorPane.leftAnchor="500.0" AnchorPane.topAnchor="327.0">
+                                       <font>
+                                          <Font size="15.0" />
+                                       </font>
+                                    </JFXTextField>
                                  </children>
                               </AnchorPane>
                            </content>

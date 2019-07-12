@@ -64,6 +64,13 @@ public class EventRepository extends AbstractRepository {
         param.setParamDateValue(eventDate);
         return retrieve(QueryConstants.FETCH_EVENT_FOR_DATE, Collections.singletonList(param), Event.class);
     }
+    
+    public List<Event> fetchBlockedEventsBytDate(Date eventDate){
+        QueryParams param = new QueryParams();
+        param.setParamName("eventDate");
+        param.setParamDateValue(eventDate);
+        return retrieve(QueryConstants.FETCH_BLOCKED_EVENT_FOR_DATE, Collections.singletonList(param), Event.class);
+    }
 
     public boolean fetchIfMehandiExistsOnDate(Date eventDate) {
         QueryParams param = new QueryParams();
@@ -135,5 +142,12 @@ public class EventRepository extends AbstractRepository {
         param.setParamName("eventDate");
         param.setParamDateValue(DateHelper.getToday());
         return retrieve(QueryConstants.FETCH_COMPLETED_EVENTS, Collections.singletonList(param), Booking.class);
+    }
+    
+    public List<Booking> fetchUpcomingEvents() {
+        QueryParams param = new QueryParams();
+        param.setParamName("eventDate");
+        param.setParamDateValue(DateHelper.getToday());
+        return retrieve(QueryConstants.FETCH_UPCOMING_EVENTS, Collections.singletonList(param), Booking.class);
     }
 }

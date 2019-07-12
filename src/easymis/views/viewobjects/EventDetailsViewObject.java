@@ -22,6 +22,8 @@ public class EventDetailsViewObject {
     private EventCategory eventCategory;
     
     private String receiptNumber;
+    
+    private String settlementStatus;
 
     public EventDetailsViewObject(String eventDate, 
             String fullName, 
@@ -37,6 +39,17 @@ public class EventDetailsViewObject {
         this.bookingDate = bookingDate;
         this.eventCategory = eventCategory;
         this.receiptNumber = receiptNumber;
+    }
+
+    public EventDetailsViewObject(String eventDate, String fullName, BookingStatus bookingStatus, String eventType, String bookingDate, EventCategory eventCategory, String receiptNumber, String settlementStatus) {
+        this.eventDate = eventDate;
+        this.fullName = fullName;
+        this.bookingStatus = bookingStatus;
+        this.eventType = eventType;
+        this.bookingDate = bookingDate;
+        this.eventCategory = eventCategory;
+        this.receiptNumber = receiptNumber;
+        this.settlementStatus = settlementStatus;
     }
 
     public String getEventDate() {
@@ -70,6 +83,12 @@ public class EventDetailsViewObject {
     public String getReceiptNumber() {
         return receiptNumber;
     }
-    
-    
+
+    public String getSettlementStatus() {
+        return settlementStatus;
+    }
+
+    public void setSettlementStatus(String settlementStatus) {
+        this.settlementStatus = settlementStatus;
+    }
 }

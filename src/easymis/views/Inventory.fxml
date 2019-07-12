@@ -30,12 +30,13 @@
                                        <children>
                                           <TableView fx:id="table" layoutX="14.0" layoutY="38.0" prefHeight="299.0" prefWidth="1131.0">
                                             <columns>
-                                              <TableColumn fx:id="col_ItemId" prefWidth="75.0" text="Item Id" />
-                                              <TableColumn fx:id="col_ItemName" prefWidth="75.0" text="Item Name" />
-                                                <TableColumn fx:id="col_Quantity" prefWidth="75.0" text="Quantity" />
-                                                <TableColumn fx:id="col_AddedDate" prefWidth="75.0" text="Added Date" />
-                                                <TableColumn fx:id="col_LastUpdatedDate" prefWidth="126.0" text="Last Updated date" />
-                                                <TableColumn fx:id="col_Remarks" prefWidth="669.0" text="Remarks" />
+                                              <TableColumn fx:id="col_ItemId" prefWidth="109.0" text="Item Id" />
+                                              <TableColumn fx:id="col_ItemName" prefWidth="178.0" text="Item Name" />
+                                                <TableColumn fx:id="col_Quantity" prefWidth="79.0" text="Quantity" />
+                                                <TableColumn fx:id="col_AddedDateString" prefWidth="162.0" text="Added Date" />
+                                                <TableColumn fx:id="col_LastUpdatedDate" prefWidth="176.0" text="Last Updated date" />
+                                                <TableColumn fx:id="col_Remarks" prefWidth="391.0" text="Remarks" />
+                                                <TableColumn fx:id="col_AddedDateValue" editable="false" prefWidth="75.0" text="Added Date" visible="false" />
                                             </columns>
                                           </TableView>
                                        </children>

@@ -23,6 +23,10 @@ public class QueryConstants {
             + "where e.eventDate = :eventDate and e.bookingStatus = "
             + "easymis.models.entity.enumeration.BookingStatus.BOOKED";
     
+    public static final String FETCH_BLOCKED_EVENT_FOR_DATE = "SELECT e from Event e "
+            + "where e.eventDate = :eventDate and e.bookingStatus = "
+            + "easymis.models.entity.enumeration.BookingStatus.BLOCKED";
+    
     public static final String FETCH_IS_MEHANDI_ON_DATE = "SELECT e from Event e "
             + "where e.eventDate = :eventDate and e.eventType = easymis.models.entity.enumeration.EventType.MEHANDI and e.bookingStatus = "
             + "easymis.models.entity.enumeration.BookingStatus.BOOKED";
@@ -37,6 +41,10 @@ public class QueryConstants {
     
     public static final String FETCH_COMPLETED_EVENTS = "SELECT e from Booking e "
             + "where e.eventDate <= :eventDate and e.bookingStatus = "
+            + "easymis.models.entity.enumeration.BookingStatus.BOOKED";
+    
+    public static final String FETCH_UPCOMING_EVENTS = "SELECT e from Booking e "
+            + "where e.eventDate >= :eventDate and e.bookingStatus = "
             + "easymis.models.entity.enumeration.BookingStatus.BOOKED";
     
     public static final String FETCH_EXPENSES_FOR_RECEIPT_NUMBER = "SELECT e from Expenses e where e.receiptNumber = :receiptNumber";

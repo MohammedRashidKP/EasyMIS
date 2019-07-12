@@ -2,22 +2,29 @@ package easymis.controllers;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDatePicker;
-import com.jfoenix.controls.JFXTextArea;
 import easymis.models.entity.Booking;
+import easymis.models.entity.Event;
 import easymis.models.entity.enumeration.EventCategory;
+import easymis.models.entity.enumeration.EventType;
 import easymis.models.repository.DashboardRepository;
+import easymis.models.repository.EventRepository;
 import easymis.models.service.EventAvailabilityService;
 import easymis.utils.DateHelper;
 import easymis.views.dto.EventAvailabilityDTO;
 import easymis.views.viewobjects.EventAvailability;
+import easymis.views.viewobjects.UpcomingEventNotifier;
 import java.net.URL;
 import java.sql.Date;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.Set;
+import java.util.stream.Collectors;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Label;
 import javafx.scene.text.Text;
 
 /**
@@ -42,8 +49,6 @@ public class DashboardController implements Initializable {
     @FXML
     private Text totalDiamonBookingThisYear;
     @FXML
-    private JFXTextArea diamondNotifications;
-    @FXML
     private Text totalBookingThisYear;
     @FXML
     private Text totalBlockingThisYear;
@@ -56,12 +61,35 @@ public class DashboardController implements Initializable {
     @FXML
     private Text ishaEveAvailability;
 
+    private final int MAX_COUNT = 10;
+    @FXML
+    private Label row1;
+    @FXML
+    private Label row2;
+    @FXML
+    private Label row3;
+    @FXML
+    private Label row4;
+    @FXML
+    private Label row5;
+    @FXML
+    private Label row6;
+    @FXML
+    private Label row7;
+    @FXML
+    private Label row8;
+    @FXML
+    private Label row9;
+    @FXML
+    private Label row10;
+
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         populateDashboardData();
+        populateUpcomingBookings();
     }
 
     @FXML
@@ -165,5 +193,69 @@ public class DashboardController implements Initializable {
         ishaDayAvailability.setText(EventAvailability.AVAILABLE.toString());
         ishaEveAvailability.setText(EventAvailability.AVAILABLE.toString());
         nicaLoungeAvailability.setText(EventAvailability.AVAILABLE.toString());
+    }
+
+    private void populateUpcomingBookings() {
+
+        List<Booking> bookings = EventRepository.getUniqueInstance().fetchUpcomingEvents();
+        if (bookings != null && !bookings.isEmpty()) {
+            Collections.sort(bookings, new Comparator<Booking>() {
+                @Override
+                public int compare(Booking o1, Booking o2) {
+                    return o1.getEventDate().compareTo(o2.getEventDate());
+                }
+            });
+            int i = 1;
+            for (Booking booking : bookings) {
+                String notification = new UpcomingEventNotifier(booking.getReceiptNumber(),
+                        booking.getPrimaryMobile(),
+                        booking.getEventCategory().toString(),
+                        booking.getEventDate(),
+                        getEvents(booking.getEvents())).prettify();
+                setNotification(notification, i);
+                i++;
+            }
+        }
+    }
+
+    private List<EventType> getEvents(List<Event> events) {
+        return events.stream().map(e -> e.getEventType()).collect(Collectors.toList());
+    }
+
+    private void setNotification(String notification, int i) {
+        switch (i) {
+            case 1:
+                row1.setText(notification);
+                break;
+            case 2:
+                row2.setText(notification);
+                break;
+            case 3:
+                row3.setText(notification);
+                break;
+            case 4:
+                row4.setText(notification);
+                break;
+            case 5:
+                row5.setText(notification);
+                break;
+            case 6:
+                row6.setText(notification);
+                break;
+            case 7:
+                row7.setText(notification);
+                break;
+            case 8:
+                row8.setText(notification);
+                break;
+            case 9:
+                row9.setText(notification);
+                break;
+            case 10:
+                row10.setText(notification);
+                break;
+            default:
+                break;
+        }
     }
 }

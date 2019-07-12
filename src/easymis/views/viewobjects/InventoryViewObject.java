@@ -14,9 +14,11 @@ public class InventoryViewObject {
     
     private int quantity;
     
-    private Date addedDate;
+    private String addedDateString;
     
-    private Date updatedDate;
+    private Date addedDateValue;
+    
+    private String updatedDate;
     
     private String remarks;
 
@@ -44,19 +46,19 @@ public class InventoryViewObject {
         this.quantity = quantity;
     }
 
-    public Date getAddedDate() {
-        return addedDate;
+    public String getAddedDateString() {
+        return addedDateString;
     }
 
-    public void setAddedDate(Date addedDate) {
-        this.addedDate = addedDate;
+    public void setAddedDateString(String addedDateString) {
+        this.addedDateString = addedDateString;
     }
 
-    public Date getUpdatedDate() {
+    public String getUpdatedDate() {
         return updatedDate;
     }
 
-    public void setUpdatedDate(Date updatedDate) {
+    public void setUpdatedDate(String updatedDate) {
         this.updatedDate = updatedDate;
     }
 
@@ -67,7 +69,13 @@ public class InventoryViewObject {
     public void setRemarks(String remarks) {
         this.remarks = remarks;
     }
-    
-    
+
+    public Date getAddedDateValue() {
+        return addedDateValue;
+    }
+
+    public void setAddedDateValue(Date addedDateValue) {
+        this.addedDateValue = addedDateValue;
+    }
     
 }

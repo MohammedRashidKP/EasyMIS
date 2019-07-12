@@ -48,9 +48,7 @@ public class InventoryController implements Initializable {
     @FXML
     private TableColumn<InventoryViewObject, Integer> col_Quantity;
     @FXML
-    private TableColumn<InventoryViewObject, Date> col_AddedDate;
-    @FXML
-    private TableColumn<InventoryViewObject, Date> col_LastUpdatedDate;
+    private TableColumn<InventoryViewObject, String> col_LastUpdatedDate;
     @FXML
     private TableColumn<InventoryViewObject, String> col_Remarks;
     
@@ -70,6 +68,10 @@ public class InventoryController implements Initializable {
     private TextField remarks;
     @FXML
     private DatePicker createdDateField;
+    @FXML
+    private TableColumn<InventoryViewObject, String> col_AddedDateString;
+    @FXML
+        private TableColumn<InventoryViewObject, Date> col_AddedDateValue;
 
     /**
      * Initializes the controller class.
@@ -148,7 +150,8 @@ public class InventoryController implements Initializable {
         col_ItemId.setCellValueFactory(new PropertyValueFactory<>("itemId"));
         col_ItemName.setCellValueFactory(new PropertyValueFactory<>("itemName"));
         col_Quantity.setCellValueFactory(new PropertyValueFactory<>("quantity"));
-        col_AddedDate.setCellValueFactory(new PropertyValueFactory<>("addedDate"));
+        col_AddedDateString.setCellValueFactory(new PropertyValueFactory<>("addedDateString"));
+        col_AddedDateValue.setCellValueFactory(new PropertyValueFactory<>("addedDateValue"));
         col_LastUpdatedDate.setCellValueFactory(new PropertyValueFactory<>("updatedDate"));
         col_Remarks.setCellValueFactory(new PropertyValueFactory<>("remarks"));
         table.setRowFactory(tv -> {
@@ -170,7 +173,7 @@ public class InventoryController implements Initializable {
         itemId.setText(String.valueOf(rowData.getItemId()));
         itemName.setText(rowData.getItemName());
         quantity.setText(String.valueOf(rowData.getQuantity()));
-        createdDateField.setValue(rowData.getAddedDate().toLocalDate());
+        createdDateField.setValue(rowData.getAddedDateValue().toLocalDate());
         remarks.setText(rowData.getRemarks());
     }
     
@@ -191,8 +194,9 @@ public class InventoryController implements Initializable {
         inventoryViewObject.setItemName(inventory.getItemName());
         inventoryViewObject.setQuantity(inventory.getQuantity());
         inventoryViewObject.setRemarks(inventory.getRemarks());
-        inventoryViewObject.setAddedDate(inventory.getAddedDate());
-        inventoryViewObject.setUpdatedDate(inventory.getUpdatedDate());
+        inventoryViewObject.setAddedDateValue(inventory.getAddedDate());
+        inventoryViewObject.setAddedDateString(DateHelper.format(inventory.getAddedDate()));
+        inventoryViewObject.setUpdatedDate(DateHelper.format(inventory.getUpdatedDate()));
         return inventoryViewObject;
     }
 }

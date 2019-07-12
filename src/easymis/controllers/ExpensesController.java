@@ -6,10 +6,11 @@ import com.jfoenix.controls.JFXTextField;
 import easymis.controllers.assembler.EventDetailsAssembler;
 import easymis.models.entity.Booking;
 import easymis.models.entity.Expenses;
-import easymis.models.entity.enumeration.BookingStatus;
+import easymis.models.entity.TransactionStatus;
 import easymis.models.entity.enumeration.EventCategory;
 import easymis.models.repository.EventRepository;
 import easymis.models.repository.ExpensesRepository;
+import easymis.utils.AlertHelper;
 import easymis.utils.DateHelper;
 import easymis.utils.NumberFilter;
 import easymis.utils.StringUtils;
@@ -46,9 +47,7 @@ public class ExpensesController implements Initializable {
     private TableColumn<EventDetailsViewObject, String> col_EventDate;
     @FXML
     private TableColumn<EventDetailsViewObject, String> col_fullName;
-    @FXML
-    private TableColumn<EventDetailsViewObject, BookingStatus> col_BookingStatus;
-    @FXML
+   @FXML
     private TableColumn<EventDetailsViewObject, String> col_eventType;
     @FXML
     private TableColumn<EventDetailsViewObject, Date> col_BookingDate;
@@ -105,7 +104,11 @@ public class ExpensesController implements Initializable {
     @FXML
     private JFXTextField totalBookingRevenue;
     @FXML
-    private TableColumn<?, ?> col_EventCategory1;
+    private JFXButton editButton;
+    @FXML
+    private JFXButton submitButton;
+    @FXML
+    private TableColumn<EventDetailsViewObject, String> col_SettlementStatus;
 
     /**
      * Initializes the controller class.
@@ -122,6 +125,17 @@ public class ExpensesController implements Initializable {
     private void onCalculateButtonClick(ActionEvent event) {
         
         Expenses expenses =  getExpenses();
+        Double totalRevenue = Double.valueOf("0.0");
+        Double otherRevenue1 = Double.valueOf("0.0");
+        if(totalBookingRevenue.getUserData() != null){
+            totalRevenue = Double.valueOf(totalBookingRevenue.getText());
+        }
+        if(StringUtils.isNotNullCheckSpace(otherRevenue.getText())){
+            otherRevenue1 = Double.valueOf(otherRevenue.getText());
+        }
+        
+        Double totalCalculatedRevenue = totalRevenue + otherRevenue1;
+        totalBookingRevenue.setText(String.valueOf(totalCalculatedRevenue));
         if(expenses != null && StringUtils.isNotNullCheckSpace(expenses.getReceiptNumber())){
             double totalCalculatedExpense = expenses.getAuditoriumMaintenance()
                     +expenses.getBonusPaid()
@@ -135,30 +149,29 @@ public class ExpensesController implements Initializable {
                     +expenses.getTax()
                     +expenses.getWeddingGift()
                     +expenses.getOtherExpenses();
-            this.totalExpense.setText(String.valueOf(totalCalculatedExpense));
-            double totalCalculatedRevenue = Double.valueOf(totalBookingRevenue.getText());
-            if(StringUtils.isNotNullCheckSpace(otherRevenue.getText()))
-                totalCalculatedRevenue = totalCalculatedRevenue + Double.valueOf(otherRevenue.getText());
-            totalBookingRevenue.setText(String.valueOf(totalCalculatedRevenue));
-            double balanceAmount = totalCalculatedRevenue - totalCalculatedExpense;
+            totalExpense.setText(String.valueOf(totalCalculatedExpense));
+            Double balanceAmount =  totalCalculatedRevenue - totalCalculatedExpense;
             balance.setText(String.valueOf(balanceAmount));
-            ExpensesRepository.getUniqueInstance().update(getExpenses());
+            otherRevenue.setText("");
+            setFieldsEditable(false);
+            submitButton.setDisable(false);
         }
     }
 
     @FXML
     private void onEditButtonClick(ActionEvent event) {
         setFieldsEditable(true);
+        submitButton.setDisable(true);
     }
 
     private void initializeEventTableColumnFields() {
         col_EventDate.setCellValueFactory(new PropertyValueFactory<>("eventDate"));
         col_fullName.setCellValueFactory(new PropertyValueFactory<>("fullName"));
-        col_BookingStatus.setCellValueFactory(new PropertyValueFactory<>("bookingStatus"));
         col_eventType.setCellValueFactory(new PropertyValueFactory<>("eventType"));
         col_BookingDate.setCellValueFactory(new PropertyValueFactory<>("bookingDate"));
         col_EventCategory.setCellValueFactory(new PropertyValueFactory<>("eventCategory"));
         col_ReceiptNumber.setCellValueFactory(new PropertyValueFactory<>("receiptNumber"));
+        col_SettlementStatus.setCellValueFactory(new PropertyValueFactory<>("settlementStatus"));
         eventTable.setRowFactory(tv -> {
             TableRow<EventDetailsViewObject> row = new TableRow<>();
             row.setOnMouseClicked(event -> {
@@ -201,7 +214,7 @@ public class ExpensesController implements Initializable {
         EventDetailsAssembler assembler = new EventDetailsAssembler();
         observableList.clear();
         eventDetails.stream().forEach((eventDetail) -> {
-            observableList.add(assembler.toEventDetailsViewObject(eventDetail));
+            observableList.add(assembler.toEventExpenseDetailsViewObject(eventDetail));
         });
         eventTable.setItems(observableList);
     }
@@ -218,6 +231,7 @@ public class ExpensesController implements Initializable {
                 eventDate.setText(DateHelper.format(booking.getEventDate()));
                 advancePaid.setText(String.valueOf(booking.getAdvanceAmount()));
                 totalBookingRevenue.setText(String.valueOf(booking.getBookingCost()));
+                eventType.setText(booking.getEventCategory().toString());
             }
             Expenses expenses = ExpensesRepository.getUniqueInstance().fetchExpensesForReceiptNumber(receiptNumber);
             if (expenses != null) {
@@ -234,6 +248,7 @@ public class ExpensesController implements Initializable {
                 maintenance.setText(String.valueOf(expenses.getAuditoriumMaintenance()));
                 discounts.setText(String.valueOf(expenses.getDiscounts()));
                 totalBookingRevenue.setText(String.valueOf(expenses.getTotalRevenue()));
+                totalBookingRevenue.setUserData(expenses.getTotalRevenue());
                 totalExpense.setText(String.valueOf(expenses.getTotalExpense()));
                 otherRevenue.setText(String.valueOf(expenses.getOtherRevenue()));
                 balance.setText(String.valueOf(expenses.getBalance()));
@@ -245,52 +260,52 @@ public class ExpensesController implements Initializable {
         Expenses expenses = new Expenses();
         expenses.setReceiptNumber(receiptNumber.getText());
         if (StringUtils.isNotNullCheckSpace(electricity.getText())) {
-            expenses.setElectricity(Integer.valueOf(electricity.getText()));
+            expenses.setElectricity(Double.valueOf(electricity.getText()));
         }
         if (StringUtils.isNotNullCheckSpace(cleaning.getText())) {
-            expenses.setCleaing(Integer.valueOf(cleaning.getText()));
+            expenses.setCleaing(Double.valueOf(cleaning.getText()));
         }
         if (StringUtils.isNotNullCheckSpace(dailyWages.getText())) {
-            expenses.setDailyWages(Integer.valueOf(dailyWages.getText()));
+            expenses.setDailyWages(Double.valueOf(dailyWages.getText()));
         }
         if (StringUtils.isNotNullCheckSpace(security.getText())) {
-            expenses.setSecurity(Integer.valueOf(security.getText()));
+            expenses.setSecurity(Double.valueOf(security.getText()));
         }
         if (StringUtils.isNotNullCheckSpace(diesel.getText())) {
-            expenses.setDiesel(Integer.valueOf(diesel.getText()));
+            expenses.setDiesel(Double.valueOf(diesel.getText()));
         }
         if (StringUtils.isNotNullCheckSpace(tax.getText())) {
-            expenses.setTax(Integer.valueOf(tax.getText()));
+            expenses.setTax(Double.valueOf(tax.getText()));
         }
         if (StringUtils.isNotNullCheckSpace(weddingGift.getText())) {
-            expenses.setWeddingGift(Integer.valueOf(weddingGift.getText()));
+            expenses.setWeddingGift(Double.valueOf(weddingGift.getText()));
         }
         if (StringUtils.isNotNullCheckSpace(otherExpenses.getText())) {
-            expenses.setOtherExpenses(Integer.valueOf(otherExpenses.getText()));
+            expenses.setOtherExpenses(Double.valueOf(otherExpenses.getText()));
         }
         if (StringUtils.isNotNullCheckSpace(bonus.getText())) {
-            expenses.setBonusPaid(Integer.valueOf(bonus.getText()));
+            expenses.setBonusPaid(Double.valueOf(bonus.getText()));
         }
         if (StringUtils.isNotNullCheckSpace(purchaseKitchenAndStationary.getText())) {
-            expenses.setPurchase(Integer.valueOf(purchaseKitchenAndStationary.getText()));
+            expenses.setPurchase(Double.valueOf(purchaseKitchenAndStationary.getText()));
         }
         if (StringUtils.isNotNullCheckSpace(maintenance.getText())) {
-            expenses.setAuditoriumMaintenance(Integer.valueOf(maintenance.getText()));
+            expenses.setAuditoriumMaintenance(Double.valueOf(maintenance.getText()));
         }
         if (StringUtils.isNotNullCheckSpace(discounts.getText())) {
-            expenses.setDiscounts(Integer.valueOf(discounts.getText()));
+            expenses.setDiscounts(Double.valueOf(discounts.getText()));
         }
         if (StringUtils.isNotNullCheckSpace(totalBookingRevenue.getText())) {
-            expenses.setTotalRevenue(Integer.valueOf(totalBookingRevenue.getText()));
+            expenses.setTotalRevenue(Double.valueOf(totalBookingRevenue.getText()));
         }
         if (StringUtils.isNotNullCheckSpace(totalExpense.getText())) {
-            expenses.setTotalExpense(Integer.valueOf(totalExpense.getText()));
+            expenses.setTotalExpense(Double.valueOf(totalExpense.getText()));
         }
         if (StringUtils.isNotNullCheckSpace(balance.getText())) {
-            expenses.setBalance(Integer.valueOf(balance.getText()));
+            expenses.setBalance(Double.valueOf(balance.getText()));
         }
         if (StringUtils.isNotNullCheckSpace(otherRevenue.getText())) {
-            expenses.setOtherRevenue(Integer.valueOf(otherRevenue.getText()));
+            expenses.setOtherRevenue(Double.valueOf(otherRevenue.getText()));
         }
 
         return expenses;
@@ -310,6 +325,9 @@ public class ExpensesController implements Initializable {
         maintenance.setTextFormatter(new NumberFilter().decimalFilter());
         discounts.setTextFormatter(new NumberFilter().decimalFilter());
         otherRevenue.setTextFormatter(new NumberFilter().decimalFilter());
+        totalBookingRevenue.setTextFormatter(new NumberFilter().decimalFilter());
+        totalExpense.setTextFormatter(new NumberFilter().decimalFilter());
+        balance.setTextFormatter(new NumberFilter().decimalFilter());
     }
     
     private void setFieldsEditable(boolean flag){
@@ -327,9 +345,19 @@ public class ExpensesController implements Initializable {
         discounts.setEditable(flag);
         otherRevenue.setEditable(flag);
         calculateButton.setDisable(!flag);
+        submitButton.setDisable(!flag);
     }
 
     @FXML
     private void onSubmitButtonClick(ActionEvent event) {
+        
+        TransactionStatus status = ExpensesRepository.getUniqueInstance().update(getExpenses());
+        if(status.isSuccess()){
+            calculateButton.setDisable(true);
+            editButton.setDisable(true);
+            submitButton.setDisable(true);
+        }
+        AlertHelper.showMessage(status);
+        
     }
 }
