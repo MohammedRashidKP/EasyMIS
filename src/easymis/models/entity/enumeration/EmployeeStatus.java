@@ -4,7 +4,7 @@ package easymis.models.entity.enumeration;
  *
  * @author RashidKP
  */
-public enum BookingType {
+public enum EmployeeStatus {
     
-    BOOKED, BLOCKED, CANCELLED;
+    ACTIVE,RESIGNED;
 }

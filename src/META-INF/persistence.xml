@@ -11,6 +11,8 @@
     <class>easymis.models.entity.Settings</class>
     <class>easymis.models.entity.Expenses</class>
     <class>easymis.models.entity.Inventory</class>
+    <class>easymis.models.entity.Employee</class>
+    <class>easymis.models.entity.Payroll</class>
     <properties>
       <!-- Connection properties -->
       <property name="eclipselink.target-database" value="Database"/>

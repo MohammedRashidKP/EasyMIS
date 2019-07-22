@@ -1,39 +1,493 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package easymis.controllers;
 
 import com.jfoenix.controls.JFXTabPane;
+import easymis.models.entity.Employee;
+import easymis.models.entity.TransactionStatus;
+import easymis.models.entity.enumeration.EmployeeStatus;
+import easymis.models.repository.EmployeeRepository;
+import easymis.utils.AlertHelper;
+import easymis.utils.DateHelper;
+import easymis.utils.NumberFilter;
+import easymis.utils.StringUtils;
+import easymis.views.viewobjects.EmployeeViewObject;
+import easymis.views.viewobjects.PayrollViewObject;
 import java.net.URL;
+import java.sql.Date;
+import java.time.Month;
+import java.util.Arrays;
+import java.util.List;
 import java.util.ResourceBundle;
-import javafx.event.Event;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.DatePicker;
+import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableRow;
+import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 
 /**
  * FXML Controller class
  *
- * @author faisal
+ * @author RashidKP
  */
 public class EmployeeController implements Initializable {
+
     @FXML
     private JFXTabPane tabPane;
     @FXML
-    private Tab panelTabAlddInventory;
+    private TextField firstName;
+    @FXML
+    private TextField lastName;
+    @FXML
+    private Button reset;
+    @FXML
+    private DatePicker dateOfBirth;
+    @FXML
+    private TextField addressLine1;
+    @FXML
+    private TextField addressLine2;
+    @FXML
+    private TextField addressLine3;
+    @FXML
+    private TextField pinCode;
+    @FXML
+    private TextField district;
+    @FXML
+    private TextField state;
+    @FXML
+    private TextField mobileNumber;
+    @FXML
+    private TextField alternateNumber;
+    @FXML
+    private TextField employeeId;
+    @FXML
+    private DatePicker joininDate;
+    @FXML
+    private DatePicker releavingDate;
+    @FXML
+    private ComboBox<String> employeeStatus;
+    @FXML
+    private TextField salary;
+    @FXML
+    private TextField previousExperience;
+    @FXML
+    private TableView<EmployeeViewObject> employeeTable;
+    @FXML
+    private TableColumn<EmployeeViewObject, String> col_EmpId;
+    @FXML
+    private TableColumn<EmployeeViewObject, String> col_FirstName;
+    @FXML
+    private TableColumn<EmployeeViewObject, String> col_LastName;
+    @FXML
+    private TableColumn<EmployeeViewObject, String> col_Salary;
+    @FXML
+    private TableColumn<EmployeeViewObject, String> col_DOB;
+    @FXML
+    private TableColumn<EmployeeViewObject, String> col_PrevExp;
+    @FXML
+    private TableColumn<EmployeeViewObject, String> col_JoiningDate;
+    @FXML
+    private TableColumn<EmployeeViewObject, String> col_ReleavingDate;
+    @FXML
+    private TableColumn<EmployeeViewObject, String> col_EmpStatus;
+    @FXML
+    private TextField payrollFirstName;
+    @FXML
+    private TextField payrollLastName;
+    @FXML
+    private TextField payrollEmployeeId;
+    @FXML
+    private DatePicker payrollJoiningDate;
+    @FXML
+    private TextField payrollSalary;
+    @FXML
+    private TextField payrollBonus;
+    @FXML
+    private TextField payrollAdvance;
+    @FXML
+    private TextField payrollNetPay;
+    @FXML
+    private ComboBox<String> payrollMonth;
+    @FXML
+    private ComboBox<String> payrollYear;
+    @FXML
+    private TableColumn<PayrollViewObject, String> col_PayrollEmployeeId;
+    @FXML
+    private TableColumn<PayrollViewObject, String> col_payroll_firstName;
+    @FXML
+    private TableColumn<PayrollViewObject, String> col_payrollLastName;
+    @FXML
+    private TableColumn<PayrollViewObject, String> col_payrollNetPay;
+    @FXML
+    private TableColumn<PayrollViewObject, String> col_PayrollMonth;
+    @FXML
+    private TableColumn<PayrollViewObject, String> col_payrollYear;
+    @FXML
+    private TableColumn<PayrollViewObject, String> col_payrollBonus;
+    @FXML
+    private TableColumn<PayrollViewObject, String> col_payrollAdvance;
+    @FXML
+    private TableColumn<PayrollViewObject, String> col_payrollId;
+    @FXML
+    private TableView<PayrollViewObject> payrollTable;
+    @FXML
+    private Button editButton;
+    @FXML
+    private Button btnEmployeeSubmit;
+    ObservableList<EmployeeViewObject> employeeObservableList = FXCollections.observableArrayList();
+    @FXML
+    private Tab panelTabEmployee;
+    @FXML
+    private Tab panelTabPayroll;
+    @FXML
+    private Label payrollEmployeeStatus;
+    @FXML
+    private Label payrollId;
+    @FXML
+    private Button btnPayrollReset;
+    @FXML
+    private Button btnPayrollEdit;
+    @FXML
+    private Button btnSalaryPay;
+    @FXML
+    private Button btnAdvancePay;
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
-    }    
+        initializeEmployeeStatusComboBox();
+        initializePanelTab();
+        initializeNumberFormatter();
+        initializeEmployeeTable();
+        loadEmployeeTableDetails();
+    }
 
     @FXML
-    private void onAllEventsTabSelection(Event event) {
+    private void onEmployeeResetClick(ActionEvent event) {
+        resetEmployeeDetails();
+    }
+
+    private void initializeEmployeeStatusComboBox() {
+        ObservableList<String> employeeCombo = FXCollections.observableArrayList();
+        employeeCombo.addAll(Arrays.asList(EmployeeStatus.ACTIVE.toString(), EmployeeStatus.RESIGNED.toString()));
+        employeeStatus.setItems(employeeCombo);
+        employeeStatus.getSelectionModel().selectFirst();
+    }
+
+    private boolean validateMandatory() {
+        return StringUtils.isNotNullCheckSpace(firstName.getText());
+    }
+
+    private Employee getEmployeeDetails() {
+        Employee employee = new Employee();
+
+        if (StringUtils.isNotNullCheckSpace(employeeId.getText())) {
+            employee.setEmployeeId(Integer.valueOf(employeeId.getText()));
+        }
+
+        employee.setFirstName(firstName.getText());
+        employee.setLastName(lastName.getText());
+
+        if (dateOfBirth.getValue() != null) {
+            employee.setDateOfBirth(Date.valueOf(dateOfBirth.getValue()));
+        }
+
+        employee.setAddressLine1(addressLine1.getText());
+        employee.setAddressLine2(addressLine2.getText());
+        employee.setAddressLine3(addressLine3.getText());
+
+        if (StringUtils.isNotNullCheckSpace(pinCode.getText())) {
+            employee.setPinCode(Integer.valueOf(pinCode.getText()));
+        }
+
+        employee.setDistrict(district.getText());
+        employee.setStates(state.getText());
+
+        if (StringUtils.isNotNullCheckSpace(mobileNumber.getText())) {
+            employee.setMobileNumber(Integer.valueOf(mobileNumber.getText()));
+        }
+
+        if (StringUtils.isNotNullCheckSpace(alternateNumber.getText())) {
+            employee.setAlternateNumber(Integer.valueOf(alternateNumber.getText()));
+        }
+
+        if (joininDate.getValue() != null) {
+            employee.setJoiningDate(Date.valueOf(joininDate.getValue()));
+        }
+
+        if (releavingDate.getValue() != null) {
+            employee.setRelievingDate(Date.valueOf(releavingDate.getValue()));
+        }
+
+        employee.setEmployeeStatus(EmployeeStatus.valueOf(employeeStatus.getValue()));
+
+        if (StringUtils.isNotNullCheckSpace(salary.getText())) {
+            employee.setSalary(Double.valueOf(salary.getText()));
+        }
+        employee.setPreviousExperience(previousExperience.getText());
+
+        return employee;
+    }
+
+    private void initializeNumberFormatter() {
+        pinCode.setTextFormatter(new NumberFilter().filter());
+        mobileNumber.setTextFormatter(new NumberFilter().filter());
+        alternateNumber.setTextFormatter(new NumberFilter().filter());
+        previousExperience.setTextFormatter(new NumberFilter().filter());
+        salary.setTextFormatter(new NumberFilter().decimalFilter());
+
+    }
+
+    @FXML
+    private void onEmployeeEditClick(ActionEvent event) {
+        makeEmployeeFieldsEditable(true);
+    }
+
+    private void makeEmployeeFieldsEditable(boolean flag) {
+        firstName.setEditable(flag);
+        lastName.setEditable(flag);
+        addressLine1.setEditable(flag);
+        addressLine2.setEditable(flag);
+        addressLine3.setEditable(flag);
+        pinCode.setEditable(flag);
+        district.setEditable(flag);
+        state.setEditable(flag);
+        mobileNumber.setEditable(flag);
+        alternateNumber.setEditable(flag);
+        salary.setEditable(flag);
+        previousExperience.setEditable(flag);
+        employeeStatus.setDisable(!flag);
+        joininDate.setDisable(!flag);
+        releavingDate.setDisable(!flag);
+        dateOfBirth.setDisable(!flag);
+        btnEmployeeSubmit.setDisable(!flag);
+        editButton.setDisable(!flag);
+
+    }
+
+    @FXML
+    private void onEmployeeSubmitClick(ActionEvent event) {
+        if (validateMandatory()) {
+            TransactionStatus status;
+            if (StringUtils.isNotNullCheckSpace(employeeId.getText())) {
+                status = EmployeeRepository.getUniqueInstance().update(getEmployeeDetails());
+            } else {
+                status = EmployeeRepository.getUniqueInstance().create(getEmployeeDetails());
+            }
+            if (status.isSuccess()) {
+                makeEmployeeFieldsEditable(false);
+                loadEmployeeTableDetails();
+            }
+            AlertHelper.showMessage(status);
+        }
+    }
+
+    private void loadEmployeeTableDetails() {
+        List<Employee> employees = EmployeeRepository.getUniqueInstance().fetchAllEmployees();
+        if (employees != null && !employees.isEmpty()) {
+            employeeObservableList.clear();
+            employees.stream().forEach((employee) -> {
+                employeeObservableList.add(buildEmployeeViewObject(employee));
+            });
+            employeeTable.setItems(employeeObservableList);
+        }
+    }
+
+    private EmployeeViewObject buildEmployeeViewObject(Employee employee) {
+
+        EmployeeViewObject employeeViewObject = new EmployeeViewObject(
+                String.valueOf(employee.getEmployeeId()),
+                employee.getFirstName(),
+                employee.getLastName(),
+                String.valueOf(employee.getSalary()),
+                employee.getDateOfBirth() != null ? DateHelper.format(employee.getDateOfBirth()) : null,
+                employee.getPreviousExperience(),
+                employee.getJoiningDate() != null ? DateHelper.format(employee.getJoiningDate()) : null,
+                employee.getRelievingDate() != null ? DateHelper.format(employee.getRelievingDate()) : null,
+                employee.getEmployeeStatus() != null ? employee.getEmployeeStatus().toString() : null);
+        return employeeViewObject;
+    }
+
+    private void initializeEmployeeTable() {
+        col_EmpId.setCellValueFactory(new PropertyValueFactory<>("employeeId"));
+        col_FirstName.setCellValueFactory(new PropertyValueFactory<>("firstName"));
+        col_LastName.setCellValueFactory(new PropertyValueFactory<>("lastName"));
+        col_Salary.setCellValueFactory(new PropertyValueFactory<>("salary"));
+        col_DOB.setCellValueFactory(new PropertyValueFactory<>("dateOfBirth"));
+        col_PrevExp.setCellValueFactory(new PropertyValueFactory<>("previousExperience"));
+        col_JoiningDate.setCellValueFactory(new PropertyValueFactory<>("joiningDate"));
+        col_ReleavingDate.setCellValueFactory(new PropertyValueFactory<>("releavingDate"));
+        col_EmpStatus.setCellValueFactory(new PropertyValueFactory<>("employeeStatus"));
+        employeeTable.setRowFactory(tv -> {
+            TableRow<EmployeeViewObject> row = new TableRow<>();
+            row.setOnMouseClicked(event -> {
+                if (event.getClickCount() == 2 && (!row.isEmpty())) {
+                    EmployeeViewObject rowData = row.getItem();
+                    if (rowData != null) {
+                        populateDetailsForUpdate(rowData);
+                    }
+                }
+            });
+            return row;
+        });
+    }
+
+    private void populateDetailsForUpdate(EmployeeViewObject rowData) {
+        if (rowData != null) {
+            Employee employee = EmployeeRepository.getUniqueInstance().fetchEmployeeById(Integer.valueOf(rowData.getEmployeeId()));
+            if (employee != null) {
+                resetEmployeeDetails();
+                employeeId.setText(String.valueOf(employee.getEmployeeId()));
+                firstName.setText(employee.getFirstName());
+                lastName.setText(employee.getLastName());
+                addressLine1.setText(employee.getAddressLine1());
+                addressLine2.setText(employee.getAddressLine2());
+                addressLine3.setText(employee.getAddressLine3());
+                pinCode.setText(employee.getPinCode() > 0 ? String.valueOf(employee.getPinCode()) : "");
+                district.setText(employee.getDistrict());
+                state.setText(employee.getStates());
+                mobileNumber.setText(employee.getMobileNumber() > 0 ? String.valueOf(employee.getMobileNumber()) : "");
+                alternateNumber.setText(employee.getAlternateNumber() > 0 ? String.valueOf(employee.getAlternateNumber()) : "");
+                salary.setText(employee.getSalary() > 0 ? String.valueOf(employee.getSalary()) : "");
+                previousExperience.setText(employee.getPreviousExperience());
+                employeeStatus.setValue(employee.getEmployeeStatus() != null ? employee.getEmployeeStatus().toString() : "");
+                joininDate.setValue(employee.getJoiningDate() != null ? employee.getJoiningDate().toLocalDate() : null);
+                releavingDate.setValue(employee.getRelievingDate() != null ? employee.getRelievingDate().toLocalDate() : null);
+                dateOfBirth.setValue(employee.getDateOfBirth() != null ? employee.getDateOfBirth().toLocalDate() : null);
+                makeEmployeeFieldsEditable(false);
+                btnEmployeeSubmit.setDisable(true);
+                editButton.setDisable(false);
+            }
+        }
+    }
+
+    private void resetEmployeeDetails() {
+        employeeId.clear();
+        firstName.clear();
+        lastName.clear();
+        addressLine1.clear();
+        addressLine2.clear();
+        addressLine3.clear();
+        pinCode.clear();
+        district.clear();
+        state.clear();
+        mobileNumber.clear();
+        alternateNumber.clear();
+        salary.clear();
+        previousExperience.clear();
+        employeeStatus.setValue(null);
+        joininDate.setValue(null);
+        releavingDate.setValue(null);
+        dateOfBirth.setValue(null);
+        btnEmployeeSubmit.setDisable(false);
+        editButton.setDisable(false);
+    }
+
+    private void initializePanelTab() {
+        tabPane.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Tab>() {
+            @Override
+            public void changed(ObservableValue<? extends Tab> observable, Tab oldValue, Tab newTab) {
+
+                if (null != newTab.getId()) {
+                    switch (newTab.getId()) {
+                        case "panelTabEmployee":
+                            loadEmployeeTableDetails();
+                            resetEmployeeDetails();
+                            makeEmployeeFieldsEditable(true);
+                            break;
+                        case "panelTabPayroll":
+                            initializePayrollTab();
+                            break;
+                        default:
+                            break;
+                    }
+                }
+            }
+        });
+    }
+
+    private void initializePayrollTab() {
+        
+        initializePayrollTable();
+        initializeMonthYearComboBoxes();
+        payrollEmployeeId.setTextFormatter(new NumberFilter().filter());
+        payrollEmployeeId.addEventFilter(KeyEvent.KEY_PRESSED, onPayrollEmployeeIdChangeChange());
+        payrollAdvance.setTextFormatter(new NumberFilter().decimalFilter());
+        payrollBonus.setTextFormatter(new NumberFilter().decimalFilter());
+        payrollSalary.setTextFormatter(new NumberFilter().decimalFilter());
+        payrollNetPay.setTextFormatter(new NumberFilter().decimalFilter());
     }
     
+    public EventHandler<KeyEvent> onPayrollEmployeeIdChangeChange() {
+        return (KeyEvent e) -> {
+            if (e.getCode() == KeyCode.TAB || e.getCode() == KeyCode.ENTER) {
+                String employeeIdValue = payrollEmployeeId.getText();
+                populateEmployeeDetailsForPayroll(Integer.valueOf(employeeIdValue));
+            }
+        };
+    }
+
+    private void initializePayrollTable() {
+    }
+    
+    private void initializeMonthYearComboBoxes() {
+        ObservableList<String> monthCombo = FXCollections.observableArrayList();
+        String currentMonth = DateHelper.getToday().toLocalDate().getMonth().name();
+        monthCombo.addAll(Stream.of(Month.values()).map(e -> e.name()).collect(Collectors.toList()));
+        payrollMonth.setItems(monthCombo);
+        payrollMonth.getSelectionModel().select(currentMonth);
+        
+        ObservableList<String> yearCombo = FXCollections.observableArrayList();
+        int currentYear = DateHelper.getToday().toLocalDate().getYear();
+        for(int i = 2019; i < (currentYear+50); i++){
+            yearCombo.add(String.valueOf(i));
+        }
+        payrollYear.setItems(yearCombo);
+        payrollYear.getSelectionModel().select(String.valueOf(currentYear));
+    }
+
+    private void populateEmployeeDetailsForPayroll(int employeeId) {
+        Employee employee = EmployeeRepository.getUniqueInstance().fetchEmployeeById(employeeId);
+        if(employee != null){
+            payrollFirstName.setText(employee.getFirstName());
+            payrollLastName.setText(employee.getLastName());
+            payrollJoiningDate.setValue(employee.getJoiningDate() != null ? employee.getJoiningDate().toLocalDate() : null);
+            payrollEmployeeStatus.setText(employee.getEmployeeStatus().toString());
+            payrollSalary.setText(String.valueOf(employee.getSalary()));
+        }
+    }
+
+
+    @FXML
+    private void onPayrollResetClick(ActionEvent event) {
+    }
+
+    @FXML
+    private void onPayrollEditClick(ActionEvent event) {
+    }
+
+    @FXML
+    private void onPaySalaryButtonClick(ActionEvent event) {
+    }
+
+    @FXML
+    private void onPayAdvanceButtonClick(ActionEvent event) {
+    }
 }

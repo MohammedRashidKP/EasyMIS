@@ -50,4 +50,14 @@ public class QueryConstants {
     public static final String FETCH_EXPENSES_FOR_RECEIPT_NUMBER = "SELECT e from Expenses e where e.receiptNumber = :receiptNumber";
     
     public static final String FETCH_ALL_INVENTORY = "SELECT i from Inventory i";
+    
+    public static final String FETCH_ALL_EMPLOYEE = "SELECT e from Employee e";
+    
+    public static final String FETCH_EMPLOYEE_FOR_ID = "SELECT e from Employee e where e.employeeId = :employeeId";
+    
+    public static final String FETCH_ALL_PAYROLL = "SELECT p from Payroll p";
+    
+    public static final String FETCH_PAYROLL_FOR_ID = "SELECT p from Payroll p where p.id = :id";
+    
+    public static final String FETCH_BOOKINGS_BETWEEN_DATES = "SELECT b from Booking b where b.eventDate BETWEEN :startDate AND :endDate";
 }

@@ -10,9 +10,10 @@ import easymis.models.repository.DashboardRepository;
 import easymis.models.repository.EventRepository;
 import easymis.models.service.EventAvailabilityService;
 import easymis.utils.DateHelper;
+import easymis.utils.TooltippedTableCell;
 import easymis.views.dto.EventAvailabilityDTO;
 import easymis.views.viewobjects.EventAvailability;
-import easymis.views.viewobjects.UpcomingEventNotifier;
+import easymis.views.viewobjects.UpcomingEventsViewObject;
 import java.net.URL;
 import java.sql.Date;
 import java.util.Collections;
@@ -21,10 +22,14 @@ import java.util.List;
 import java.util.ResourceBundle;
 import java.util.Set;
 import java.util.stream.Collectors;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.text.Text;
 
 /**
@@ -61,35 +66,32 @@ public class DashboardController implements Initializable {
     @FXML
     private Text ishaEveAvailability;
 
-    private final int MAX_COUNT = 10;
+    private final int MAX_COUNT = 7;
+    
+    ObservableList<UpcomingEventsViewObject> eventsObservableList = FXCollections.observableArrayList();
+
     @FXML
-    private Label row1;
+    private TableView<UpcomingEventsViewObject> upcomingEventsTable;
     @FXML
-    private Label row2;
+    private TableColumn<UpcomingEventsViewObject, String> col_eventDate;
     @FXML
-    private Label row3;
+    private TableColumn<UpcomingEventsViewObject, String> col_category;
     @FXML
-    private Label row4;
+    private TableColumn<UpcomingEventsViewObject, String> col_events;
     @FXML
-    private Label row5;
+    private TableColumn<UpcomingEventsViewObject, String> col_receiptNumber;
     @FXML
-    private Label row6;
-    @FXML
-    private Label row7;
-    @FXML
-    private Label row8;
-    @FXML
-    private Label row9;
-    @FXML
-    private Label row10;
+    private TableColumn<UpcomingEventsViewObject, String> col_mobileNumber;
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        initializeUpcomingBookingsTable();
         populateDashboardData();
         populateUpcomingBookings();
+        
     }
 
     @FXML
@@ -205,57 +207,52 @@ public class DashboardController implements Initializable {
                     return o1.getEventDate().compareTo(o2.getEventDate());
                 }
             });
-            int i = 1;
-            for (Booking booking : bookings) {
-                String notification = new UpcomingEventNotifier(booking.getReceiptNumber(),
-                        booking.getPrimaryMobile(),
-                        booking.getEventCategory().toString(),
-                        booking.getEventDate(),
-                        getEvents(booking.getEvents())).prettify();
-                setNotification(notification, i);
-                i++;
-            }
+            eventsObservableList.clear();
+            bookings.stream().limit(MAX_COUNT).forEach((booking) -> {
+                eventsObservableList.add(buildBookingViewObject(booking));
+            });
+            upcomingEventsTable.setItems(eventsObservableList);
         }
     }
-
-    private List<EventType> getEvents(List<Event> events) {
-        return events.stream().map(e -> e.getEventType()).collect(Collectors.toList());
+    
+    private UpcomingEventsViewObject buildBookingViewObject(Booking booking){
+        UpcomingEventsViewObject upcomingEventsViewObject = new UpcomingEventsViewObject(
+                getEventDateString(booking.getEventDate()), 
+                booking.getEventCategory().toString(), 
+                getEvents(booking.getEvents()), 
+                booking.getReceiptNumber(), 
+                booking.getPrimaryMobile());
+        return upcomingEventsViewObject;
+    }
+    
+     private String getEventDateString(Date eventDate) {
+        if(eventDate.equals(DateHelper.getToday())){
+            return "Today";
+        }else if(eventDate.equals(DateHelper.getNextDay(DateHelper.getToday()))){
+            return "Tomorrow";
+        }else{
+            return DateHelper.format(eventDate);
+        }
+    }
+    
+    private String getEvents(List<Event> events){
+        
+        List<EventType> eventTypes = events.stream().map(e -> e.getEventType()).collect(Collectors.toList());
+        if(!eventTypes.isEmpty()){
+            StringBuilder builder = new StringBuilder();
+            eventTypes.stream().forEach(e -> builder.append(e.toString()).append(", "));
+            String eventString = builder.toString();
+            return eventString.substring(0, eventString.length()-2);
+        }
+        return "";
     }
 
-    private void setNotification(String notification, int i) {
-        switch (i) {
-            case 1:
-                row1.setText(notification);
-                break;
-            case 2:
-                row2.setText(notification);
-                break;
-            case 3:
-                row3.setText(notification);
-                break;
-            case 4:
-                row4.setText(notification);
-                break;
-            case 5:
-                row5.setText(notification);
-                break;
-            case 6:
-                row6.setText(notification);
-                break;
-            case 7:
-                row7.setText(notification);
-                break;
-            case 8:
-                row8.setText(notification);
-                break;
-            case 9:
-                row9.setText(notification);
-                break;
-            case 10:
-                row10.setText(notification);
-                break;
-            default:
-                break;
-        }
+    private void initializeUpcomingBookingsTable() {
+        col_eventDate.setCellValueFactory(new PropertyValueFactory<>("eventDate"));
+        col_category.setCellValueFactory(new PropertyValueFactory<>("category"));
+        col_events.setCellValueFactory(new PropertyValueFactory<>("events"));
+        col_events.setCellFactory(TooltippedTableCell.forTableColumn());
+        col_mobileNumber.setCellValueFactory(new PropertyValueFactory<>("mobileNumber"));
+        col_receiptNumber.setCellValueFactory(new PropertyValueFactory<>("receiptNumber"));
     }
 }

@@ -22,27 +22,27 @@
                   <Pane prefHeight="69.0" prefWidth="1179.0" styleClass="blue-gradient" />
                   <JFXTabPane fx:id="tabPane" layoutY="32.0" prefHeight="600.0" prefWidth="1180.0">
                      <tabs>
-                        <Tab fx:id="panelTabAllEvents" onSelectionChanged="#onAllEventsTabSelection" text="Revenue Report">
+                        <Tab fx:id="revenueReportTab" text="Revenue Report">
                           <content>
                             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="1221.0">
                                  <children>
                                     <AnchorPane layoutX="9.0" layoutY="8.0" prefHeight="220.0" prefWidth="1156.0" style="-fx-background-color: #eaeaea;" />
-                                    <TableView fx:id="eventTable" layoutX="6.0" layoutY="237.0" prefHeight="314.0" prefWidth="1162.0" AnchorPane.bottomAnchor="12.0" AnchorPane.leftAnchor="6.0" AnchorPane.rightAnchor="12.0" AnchorPane.topAnchor="237.0">
+                                    <TableView fx:id="revenueTable" layoutX="6.0" layoutY="237.0" prefHeight="314.0" prefWidth="1162.0" AnchorPane.bottomAnchor="12.0" AnchorPane.leftAnchor="6.0" AnchorPane.rightAnchor="12.0" AnchorPane.topAnchor="237.0">
                                       <columns>
-                                          <TableColumn fx:id="col_bookingId" prefWidth="99.0" text="Receipt Number" />
-                                        <TableColumn fx:id="col_EventDate" prefWidth="121.0" text="Event Date" />
-                                        <TableColumn fx:id="col_fullName" prefWidth="172.0" text="Event Settlement status" />
-                                          <TableColumn fx:id="col_eventType" prefWidth="73.0" text="Event Type" />
-                                          <TableColumn fx:id="col_BookingDate" prefWidth="149.0" text="Total Revenue" />
-                                          <TableColumn fx:id="col_EventCategory" prefWidth="180.0" text="Total Expense" />
-                                          <TableColumn fx:id="col_EventCategory1" prefWidth="180.0" text="Profit" />
+                                          <TableColumn fx:id="revenue_receiptNumber" prefWidth="134.99996948242188" style="-fx-alignment: CENTER;" text="Receipt Number" />
+                                        <TableColumn fx:id="revenue_eventDate" prefWidth="115.0" style="-fx-alignment: CENTER;" text="Event Date" />
+                                        <TableColumn fx:id="revenue_settlementStatus" prefWidth="168.0" style="-fx-alignment: CENTER;" text="Event Settlement status" />
+                                          <TableColumn fx:id="revenue_eventType" prefWidth="190.0" style="-fx-alignment: CENTER;" text="Event Type" />
+                                          <TableColumn fx:id="revenue_totalRevenue" prefWidth="158.0" style="-fx-alignment: CENTER;" text="Total Revenue" />
+                                          <TableColumn fx:id="revenue_totalExpense" prefWidth="229.0" style="-fx-alignment: CENTER;" text="Total Expense" />
+                                          <TableColumn fx:id="revenue_profit" prefWidth="166.0" style="-fx-alignment: CENTER;" text="Profit" />
                                       </columns>
                                     </TableView>
-                                    <DatePicker layoutX="91.0" layoutY="44.0" prefHeight="25.0" prefWidth="128.0" promptText="Select start date" />
+                                    <DatePicker fx:id="revenueFromDate" layoutX="91.0" layoutY="44.0" prefHeight="25.0" prefWidth="128.0" promptText="Select start date" />
                                     <Text layoutX="41.0" layoutY="61.0" strokeType="OUTSIDE" strokeWidth="0.0" text="From" />
                                     <Text layoutX="55.0" layoutY="103.0" strokeType="OUTSIDE" strokeWidth="0.0" text="To" />
-                                    <DatePicker layoutX="91.0" layoutY="86.0" prefHeight="25.0" prefWidth="127.0" promptText="Select end date" />
-                                    <JFXButton layoutX="109.0" layoutY="134.0" style="-fx-background-color: #3a84c3;" text="Generate Report" textFill="WHITE">
+                                    <DatePicker fx:id="revenueToDate" layoutX="91.0" layoutY="86.0" prefHeight="25.0" prefWidth="127.0" promptText="Select end date" />
+                                    <JFXButton layoutX="109.0" layoutY="134.0" onAction="#generateRevenueReport" style="-fx-background-color: #3a84c3;" text="Generate Report" textFill="WHITE">
                                        <font>
                                           <Font name="System Bold" size="12.0" />
                                        </font>
@@ -53,36 +53,36 @@
                                           <Font name="System Bold" size="20.0" />
                                        </font>
                                     </Text>
-                                    <TextField layoutX="513.0" layoutY="44.0" />
+                                    <TextField fx:id="totalRevenue" editable="false" layoutX="513.0" layoutY="44.0" />
                                     <Text layoutX="290.0" layoutY="103.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Total Expense for the given period" />
-                                    <TextField layoutX="513.0" layoutY="86.0" />
+                                    <TextField fx:id="totalExpense" editable="false" layoutX="513.0" layoutY="86.0" />
                                     <Text layoutX="442.0" layoutY="144.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Profit" />
-                                    <TextField layoutX="513.0" layoutY="125.0" />
+                                    <TextField fx:id="profit" editable="false" layoutX="513.0" layoutY="125.0" />
                                  </children>
                               </AnchorPane>
                           </content>
                         </Tab>
-                        <Tab fx:id="panelTabAllEvents1" onSelectionChanged="#onAllEventsTabSelection" text="Event Report">
+                        <Tab fx:id="eventReportTab" text="Event Report">
                            <content>
                               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="1221.0">
                                  <children>
                                     <AnchorPane layoutX="7.0" layoutY="4.0" prefHeight="225.0" prefWidth="1158.0" style="-fx-background-color: #eaeaea;" />
-                                    <TableView fx:id="eventTable1" layoutX="6.0" layoutY="237.0" prefHeight="314.0" prefWidth="1162.0" AnchorPane.bottomAnchor="12.0" AnchorPane.leftAnchor="6.0" AnchorPane.rightAnchor="12.0" AnchorPane.topAnchor="237.0">
+                                    <TableView fx:id="eventTable" layoutX="6.0" layoutY="237.0" prefHeight="314.0" prefWidth="1162.0" AnchorPane.bottomAnchor="12.0" AnchorPane.leftAnchor="6.0" AnchorPane.rightAnchor="12.0" AnchorPane.topAnchor="237.0">
                                        <columns>
-                                          <TableColumn fx:id="col_bookingId1" prefWidth="99.0" text="Receipt Number" />
-                                          <TableColumn fx:id="col_EventDate1" prefWidth="121.0" text="Event Date" />
-                                          <TableColumn fx:id="col_fullName1" prefWidth="172.0" text="Full Name" />
-                                          <TableColumn fx:id="col_eventType1" prefWidth="106.0" text="Booking Status" />
-                                          <TableColumn fx:id="col_BookingDate1" prefWidth="116.0" text="Event Type" />
-                                          <TableColumn fx:id="col_EventCategory12" prefWidth="180.0" text="Booking Date " />
-                                          <TableColumn fx:id="col_EventCategory11" prefWidth="180.0" text="Event Category" />
+                                          <TableColumn fx:id="event_receiptNumber" prefWidth="99.0" style="-fx-alignment: CENTER;" text="Receipt Number" />
+                                          <TableColumn fx:id="event_eventDate" prefWidth="121.0" style="-fx-alignment: CENTER;" text="Event Date" />
+                                          <TableColumn fx:id="event_fullName" prefWidth="195.0" style="-fx-alignment: CENTER;" text="Full Name" />
+                                          <TableColumn fx:id="event_bookingStatus" prefWidth="131.0" style="-fx-alignment: CENTER;" text="Booking Status" />
+                                          <TableColumn fx:id="event_eventType" prefWidth="332.0" style="-fx-alignment: CENTER;" text="Events" />
+                                          <TableColumn fx:id="event_bookingDate" prefWidth="127.0" style="-fx-alignment: CENTER;" text="Booking Date " />
+                                          <TableColumn fx:id="event_eventCategory" prefWidth="156.0" style="-fx-alignment: CENTER;" text="Event Category" />
                                        </columns>
                                     </TableView>
-                                    <DatePicker layoutX="91.0" layoutY="44.0" prefHeight="25.0" prefWidth="128.0" promptText="Select start date" />
+                                    <DatePicker fx:id="eventFromDate" layoutX="91.0" layoutY="44.0" prefHeight="25.0" prefWidth="128.0" promptText="Select start date" />
                                     <Text layoutX="41.0" layoutY="61.0" strokeType="OUTSIDE" strokeWidth="0.0" text="From" />
                                     <Text layoutX="55.0" layoutY="103.0" strokeType="OUTSIDE" strokeWidth="0.0" text="To" />
-                                    <DatePicker layoutX="91.0" layoutY="86.0" prefHeight="25.0" prefWidth="127.0" promptText="Select end date" />
-                                    <JFXButton layoutX="109.0" layoutY="134.0" style="-fx-background-color: #3a84c3;" text="Generate Report" textFill="WHITE">
+                                    <DatePicker fx:id="eventToDate" layoutX="91.0" layoutY="86.0" prefHeight="25.0" prefWidth="127.0" promptText="Select end date" />
+                                    <JFXButton layoutX="109.0" layoutY="134.0" onAction="#generateEventReport" style="-fx-background-color: #3a84c3;" text="Generate Report" textFill="WHITE">
                                        <font>
                                           <Font name="System Bold" size="12.0" />
                                        </font>
@@ -93,38 +93,38 @@
                                           <Font name="System Bold" size="20.0" />
                                        </font>
                                     </Text>
-                                    <TextField layoutX="543.0" layoutY="44.0" />
+                                    <TextField fx:id="totalEvents" editable="false" layoutX="543.0" layoutY="44.0" />
                                     <Text layoutX="450.0" layoutY="105.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Total Booked" />
-                                    <TextField layoutX="543.0" layoutY="88.0" />
+                                    <TextField fx:id="totalBooked" editable="false" layoutX="543.0" layoutY="88.0" />
                                     <Text layoutX="449.0" layoutY="149.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Total Blocked" />
                                     <Text layoutX="444.0" layoutY="189.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Total Cancelled" />
-                                    <TextField layoutX="543.0" layoutY="131.0" />
-                                    <TextField layoutX="543.0" layoutY="171.0" />
+                                    <TextField fx:id="totalBlocked" editable="false" layoutX="543.0" layoutY="131.0" />
+                                    <TextField fx:id="totalCancelled" editable="false" layoutX="543.0" layoutY="171.0" />
                                  </children>
                               </AnchorPane>
                            </content>
                         </Tab>
-                        <Tab fx:id="panelTabAllEvents11" onSelectionChanged="#onAllEventsTabSelection" text="Salary Report">
+                        <Tab fx:id="salaryReportTab" text="Salary Report">
                            <content>
                               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="1221.0">
                                  <children>
                                     <AnchorPane layoutX="7.0" layoutY="3.0" prefHeight="230.0" prefWidth="1159.0" style="-fx-background-color: #eaeaea;" />
-                                    <TableView fx:id="eventTable11" layoutX="6.0" layoutY="237.0" prefHeight="314.0" prefWidth="1162.0" AnchorPane.bottomAnchor="12.0" AnchorPane.leftAnchor="6.0" AnchorPane.rightAnchor="12.0" AnchorPane.topAnchor="237.0">
+                                    <TableView fx:id="salaryTable" layoutX="6.0" layoutY="237.0" prefHeight="314.0" prefWidth="1162.0" AnchorPane.bottomAnchor="12.0" AnchorPane.leftAnchor="6.0" AnchorPane.rightAnchor="12.0" AnchorPane.topAnchor="237.0">
                                        <columns>
-                                          <TableColumn fx:id="col_bookingId11" prefWidth="99.0" text="Emp Id" />
-                                          <TableColumn fx:id="col_EventDate11" prefWidth="121.0" text="First Name" />
-                                          <TableColumn fx:id="col_fullName11" prefWidth="172.0" text="Last Name" />
-                                          <TableColumn fx:id="col_eventType11" prefWidth="73.0" text=" Emp Status" />
-                                          <TableColumn fx:id="col_BookingDate11" prefWidth="149.0" text="Salary" />
-                                          <TableColumn fx:id="col_EventCategory2" prefWidth="180.0" text="Salary towards month" />
-                                          <TableColumn fx:id="col_EventCategory111" prefWidth="180.0" text="Bonus" />
+                                          <TableColumn fx:id="salary_employeeId" prefWidth="125.0" style="-fx-alignment: CENTER;" text="Emp Id" />
+                                          <TableColumn fx:id="salary_firstName" prefWidth="184.0" style="-fx-alignment: CENTER;" text="First Name" />
+                                          <TableColumn fx:id="salary_lastName" prefWidth="198.0" style="-fx-alignment: CENTER;" text="Last Name" />
+                                          <TableColumn fx:id="salary_employeeStatus" prefWidth="173.0" style="-fx-alignment: CENTER;" text=" Emp Status" />
+                                          <TableColumn fx:id="salary_salary" prefWidth="162.0" style="-fx-alignment: CENTER;" text="Salary" />
+                                          <TableColumn fx:id="salary_salaryDate" prefWidth="188.0" style="-fx-alignment: CENTER;" text="Salary towards month" />
+                                          <TableColumn fx:id="salary_bonus" prefWidth="131.0" style="-fx-alignment: CENTER;" text="Bonus" />
                                        </columns>
                                     </TableView>
-                                    <DatePicker layoutX="91.0" layoutY="44.0" prefHeight="25.0" prefWidth="128.0" promptText="Select start date" />
+                                    <DatePicker fx:id="salaryFromDate" layoutX="91.0" layoutY="44.0" prefHeight="25.0" prefWidth="128.0" promptText="Select start date" />
                                     <Text layoutX="41.0" layoutY="61.0" strokeType="OUTSIDE" strokeWidth="0.0" text="From" />
                                     <Text layoutX="55.0" layoutY="103.0" strokeType="OUTSIDE" strokeWidth="0.0" text="To" />
-                                    <DatePicker layoutX="91.0" layoutY="86.0" prefHeight="25.0" prefWidth="127.0" promptText="Select end date" />
-                                    <JFXButton layoutX="109.0" layoutY="134.0" style="-fx-background-color: #3a84c3;" text="Generate Report" textFill="WHITE">
+                                    <DatePicker fx:id="salaryToDate" layoutX="91.0" layoutY="86.0" prefHeight="25.0" prefWidth="127.0" promptText="Select end date" />
+                                    <JFXButton layoutX="109.0" layoutY="134.0" onAction="#generateSalaryReport" style="-fx-background-color: #3a84c3;" text="Generate Report" textFill="WHITE">
                                        <font>
                                           <Font name="System Bold" size="12.0" />
                                        </font>
@@ -135,9 +135,9 @@
                                           <Font name="System Bold" size="20.0" />
                                        </font>
                                     </Text>
-                                    <TextField layoutX="516.0" layoutY="44.0" />
+                                    <TextField fx:id="totalSalary" editable="false" layoutX="516.0" layoutY="44.0" />
                                     <Text layoutX="393.0" layoutY="105.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Total Bonus paid" />
-                                    <TextField layoutX="516.0" layoutY="88.0" />
+                                    <TextField fx:id="totalBonus" editable="false" layoutX="516.0" layoutY="88.0" />
                                  </children>
                               </AnchorPane>
                            </content>

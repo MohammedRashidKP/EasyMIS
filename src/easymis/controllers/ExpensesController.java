@@ -109,6 +109,8 @@ public class ExpensesController implements Initializable {
     private JFXButton submitButton;
     @FXML
     private TableColumn<EventDetailsViewObject, String> col_SettlementStatus;
+    @FXML
+    private JFXTextField additionalRevenue;
 
     /**
      * Initializes the controller class.
@@ -126,15 +128,20 @@ public class ExpensesController implements Initializable {
         
         Expenses expenses =  getExpenses();
         Double totalRevenue = Double.valueOf("0.0");
-        Double otherRevenue1 = Double.valueOf("0.0");
-        if(totalBookingRevenue.getUserData() != null){
+        Double additionalRevenueValue = Double.valueOf("0.0");
+        Double currentOtherRevenue = Double.valueOf("0.0");
+        if(totalBookingRevenue.getText() != null){
             totalRevenue = Double.valueOf(totalBookingRevenue.getText());
         }
-        if(StringUtils.isNotNullCheckSpace(otherRevenue.getText())){
-            otherRevenue1 = Double.valueOf(otherRevenue.getText());
+        if(StringUtils.isNotNullCheckSpace(additionalRevenue.getText())){
+            additionalRevenueValue = Double.valueOf(additionalRevenue.getText());
         }
-        
-        Double totalCalculatedRevenue = totalRevenue + otherRevenue1;
+        if(StringUtils.isNotNullCheckSpace(otherRevenue.getText())){
+            currentOtherRevenue = Double.valueOf(otherRevenue.getText());
+            
+        }
+        otherRevenue.setText(String.valueOf(currentOtherRevenue + additionalRevenueValue));
+        Double totalCalculatedRevenue = totalRevenue + additionalRevenueValue;
         totalBookingRevenue.setText(String.valueOf(totalCalculatedRevenue));
         if(expenses != null && StringUtils.isNotNullCheckSpace(expenses.getReceiptNumber())){
             double totalCalculatedExpense = expenses.getAuditoriumMaintenance()
@@ -152,7 +159,7 @@ public class ExpensesController implements Initializable {
             totalExpense.setText(String.valueOf(totalCalculatedExpense));
             Double balanceAmount =  totalCalculatedRevenue - totalCalculatedExpense;
             balance.setText(String.valueOf(balanceAmount));
-            otherRevenue.setText("");
+            additionalRevenue.setText("");
             setFieldsEditable(false);
             submitButton.setDisable(false);
         }
@@ -253,6 +260,7 @@ public class ExpensesController implements Initializable {
                 otherRevenue.setText(String.valueOf(expenses.getOtherRevenue()));
                 balance.setText(String.valueOf(expenses.getBalance()));
             }
+            editButton.setDisable(false);
         }
     }
 
@@ -328,6 +336,7 @@ public class ExpensesController implements Initializable {
         totalBookingRevenue.setTextFormatter(new NumberFilter().decimalFilter());
         totalExpense.setTextFormatter(new NumberFilter().decimalFilter());
         balance.setTextFormatter(new NumberFilter().decimalFilter());
+        additionalRevenue.setTextFormatter(new NumberFilter().decimalFilter());
     }
     
     private void setFieldsEditable(boolean flag){
@@ -343,9 +352,9 @@ public class ExpensesController implements Initializable {
         purchaseKitchenAndStationary.setEditable(flag);
         maintenance.setEditable(flag);
         discounts.setEditable(flag);
-        otherRevenue.setEditable(flag);
         calculateButton.setDisable(!flag);
         submitButton.setDisable(!flag);
+        additionalRevenue.setEditable(flag);
     }
 
     @FXML

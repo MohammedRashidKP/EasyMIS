@@ -1,14 +1,13 @@
 package easymis.controllers;
 
 import com.jfoenix.controls.JFXButton;
-import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXTabPane;
-import com.jfoenix.controls.JFXTextField;
 import easymis.controllers.assembler.EventDetailsAssembler;
 import easymis.models.entity.Booking;
 import easymis.models.entity.Event;
 import easymis.models.entity.EventTypeDetail;
 import easymis.models.entity.TransactionStatus;
+import easymis.models.entity.enumeration.ActionType;
 import easymis.models.entity.enumeration.BookingStatus;
 import easymis.models.entity.enumeration.EventCategory;
 import easymis.models.entity.enumeration.EventType;
@@ -20,6 +19,7 @@ import easymis.utils.AlertHelper;
 import easymis.utils.AlertMessages;
 import easymis.utils.DateHelper;
 import easymis.utils.NumberFilter;
+import easymis.utils.StringUtils;
 import easymis.views.viewobjects.ComboBoxViewObject;
 import easymis.views.viewobjects.EventDetailsViewObject;
 import java.net.URL;
@@ -44,7 +44,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableRow;
@@ -53,6 +53,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.text.Text;
 
 /**
  * FXML Controller class
@@ -62,21 +64,21 @@ import javafx.scene.input.KeyEvent;
 public class EventBookingViewController implements Initializable {
 
     @FXML
-    private JFXTextField firstName;
+    private TextField firstName;
     @FXML
-    private JFXTextField lastName;
+    private TextField lastName;
     @FXML
-    private JFXTextField addressLine1;
+    private TextField addressLine1;
     @FXML
-    private JFXTextField addressLine2;
+    private TextField addressLine2;
     @FXML
-    private JFXTextField addressLine3;
+    private TextField addressLine3;
     @FXML
-    private JFXTextField district;
+    private TextField district;
     @FXML
-    private JFXTextField state;
+    private TextField state;
     @FXML
-    private JFXTextField pinCode;
+    private TextField pinCode;
     @FXML
     private CheckBox wedding;
     @FXML
@@ -92,9 +94,9 @@ public class EventBookingViewController implements Initializable {
     @FXML
     private CheckBox additionalAC;
     @FXML
-    private JFXDatePicker eventDate;
+    private DatePicker eventDate;
     @FXML
-    private Label totalAmount;
+    private TextField totalAmount;
     @FXML
     private TableColumn<EventDetailsViewObject, String> col_EventDate;
     @FXML
@@ -112,85 +114,27 @@ public class EventBookingViewController implements Initializable {
     @FXML
     private TableColumn<EventDetailsViewObject, EventCategory> col_EventCategory;
     @FXML
-    private Label lblEventCategory;
+    private TextField lblEventCategory;
     @FXML
-    private JFXTextField primaryMobileNumber;
+    private TextField primaryMobileNumber;
     @FXML
-    private JFXTextField alternateMobileNumber;
-    @FXML
-    private JFXButton btnBlock;
-    @FXML
-    private JFXButton btnBook;
+    private TextField alternateMobileNumber;
+
     @FXML
     private JFXButton btnReset;
-    @FXML
-    private JFXTextField updFirstName;
-    @FXML
-    private JFXTextField updLastName;
-    @FXML
-    private JFXTextField updAddressLine1;
-    @FXML
-    private JFXTextField updAddressLine2;
-    @FXML
-    private JFXTextField updAddressLine3;
-    @FXML
-    private JFXTextField updDistrict;
-    @FXML
-    private JFXTextField updState;
-    @FXML
-    private JFXTextField updPinCode;
-    @FXML
-    private JFXTextField updPrimaryMobile;
-    @FXML
-    private JFXTextField updAlternateMobile;
-    @FXML
-    private CheckBox updWedding;
-    @FXML
-    private CheckBox updMehandi;
-    @FXML
-    private CheckBox updReception;
-    @FXML
-    private CheckBox updAcRequired;
-    @FXML
-    private CheckBox updIshaHall;
-    @FXML
-    private CheckBox updNiceHall;
-    @FXML
-    private CheckBox updAdditionalAC;
-    @FXML
-    private JFXDatePicker updEventDate;
-    @FXML
-    private JFXButton updBtnBook;
-    @FXML
-    private JFXButton btnUpdate;
-    @FXML
-    private JFXButton updBtnReset;
-    @FXML
-    private Label lblEventCategory1;
-    @FXML
-    private JFXTextField updBookingId;
-    @FXML
-    private Label updBookingStatus;
-    @FXML
-    private JFXButton updCancelButton;
+
     @FXML
     private Tab panelTabAllEvents;
     @FXML
     private Tab panelTabAddEvent;
     @FXML
-    private Tab panelTabUpdateEvent;
-    @FXML
     private JFXTabPane tabPane;
     @FXML
     private TableColumn<EventDetailsViewObject, String> col_ReceiptNumber;
     @FXML
-    private JFXTextField receiptNumber;
+    private TextField receiptNumber;
     @FXML
-    private JFXTextField advanceAmount;
-    @FXML
-    private JFXTextField updReceiptNumber;
-    @FXML
-    private JFXTextField updAdvanceAmount;
+    private TextField advanceAmount;
     @FXML
     private ComboBox<String> additionalAcComboBox;
     @FXML
@@ -198,21 +142,17 @@ public class EventBookingViewController implements Initializable {
     @FXML
     private ComboBox<ComboBoxViewObject> ishaHallComboBox;
     @FXML
-    private ComboBox<String> updAdditionalAcComboBox;
-    @FXML
-    private ComboBox<ComboBoxViewObject> updReceptionComboBox;
-    @FXML
-    private ComboBox<ComboBoxViewObject> updIshaHallComboBox;
-    @FXML
-    private Label updTotalAmount;
-    @FXML
-    private JFXTextField blockedBy;
-    @FXML
-    private JFXTextField updBlockedBy;
+    private TextField blockedBy;
     @FXML
     private TextField searchText;
     @FXML
-    private Button onSearch;
+    private ComboBox<String> actionComboBOx;
+    @FXML
+    private Button submitButton;
+    @FXML
+    private Text bookingStatus;
+    @FXML
+    private Text bookingId;
 
     /**
      * Initializes the controller class.
@@ -221,20 +161,18 @@ public class EventBookingViewController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         initializeEventTableColumnFields();
         initializePanelTab();
-        updReceiptNumber.addEventFilter(KeyEvent.KEY_PRESSED, onReceiptNumberChange());
+        this.receiptNumber.addEventFilter(KeyEvent.KEY_PRESSED, onReceiptNumberChange());
         launchAllEventsTab();
         setNumberFormatter();
         initComboBoxes();
     }
 
-    @FXML
     private void blockEvent(ActionEvent event) {
         if (event != null && validateMandatory()) {
             showBookingConfirmation(BookingStatus.BLOCKED);
         }
     }
 
-    @FXML
     private void bookEvent(ActionEvent event) {
         if (event != null && validateMandatory()) {
             showBookingConfirmation(BookingStatus.BOOKED);
@@ -257,6 +195,9 @@ public class EventBookingViewController implements Initializable {
     private Booking getBookingDetails(BookingStatus bookingStatus) {
         Booking booking = new Booking();
         java.sql.Date eventDateValue = java.sql.Date.valueOf(eventDate.getValue());
+        if (StringUtils.isNotNullCheckSpace(bookingId.getText())) {
+            booking.setBookingId(bookingId.getText());
+        }
         booking.setEventDate(eventDateValue);
         booking.setReceiptNumber(receiptNumber.getText());
         if (advanceAmount.getText() != null && !"".equals(advanceAmount.getText())) {
@@ -332,9 +273,8 @@ public class EventBookingViewController implements Initializable {
         clearFields();
     }
 
-    @FXML
-    private void bookEventInUpdate(ActionEvent event) {
-        if (validateMandatoryFieldsInUpdate()) {
+    private void bookEventInUpdate() {
+        if (validateMandatory()) {
             Alert alert = new Alert(AlertType.CONFIRMATION);
             alert.setHeaderText("");
             alert.setTitle(getConfirmationDialogTitle(BookingStatus.BOOKED));
@@ -343,16 +283,15 @@ public class EventBookingViewController implements Initializable {
             Optional<ButtonType> option = alert.showAndWait();
             if (option.get() == null) {
             } else if (option.get() == ButtonType.OK) {
-                Booking eventDetail = getBookingDetailsForUpdate(BookingStatus.BOOKED);
+                Booking eventDetail = getBookingDetails(BookingStatus.BOOKED);
                 manageEventUpdate(eventDetail, true);
             }
         }
     }
 
-    @FXML
-    private void updateEvent(ActionEvent event) {
-        if (validateMandatoryFieldsInUpdate()) {
-            BookingStatus currentBookingStatus = BookingStatus.fromValue(updBookingStatus.getText());
+    private void updateEvent() {
+        if (validateMandatory()) {
+            BookingStatus currentBookingStatus = BookingStatus.fromValue(bookingStatus.getText());
             Alert alert = new Alert(AlertType.CONFIRMATION);
             alert.setHeaderText("");
             alert.setTitle(getConfirmationDialogTitle(currentBookingStatus));
@@ -361,21 +300,21 @@ public class EventBookingViewController implements Initializable {
             Optional<ButtonType> option = alert.showAndWait();
             if (option.get() == null) {
             } else if (option.get() == ButtonType.OK) {
-                Booking eventDetail = getBookingDetailsForUpdate(currentBookingStatus);
-                manageEventUpdate(eventDetail, false);
+                Booking eventDetail = getBookingDetails(currentBookingStatus);
+                manageEventUpdate(eventDetail, true);
             }
         }
     }
 
-    private void manageEventUpdate(Booking eventDetail, boolean isNewBooking) {
+    private void manageEventUpdate(Booking eventDetail, boolean isValidationRequired) {
 
-        TransactionStatus status = EventRepository.getUniqueInstance().update(eventDetail, isNewBooking);
+        TransactionStatus status = EventRepository.getUniqueInstance().update(eventDetail, isValidationRequired);
         AlertHelper.showMessage(status);
-        lblEventCategory1.setText(eventDetail.getEventCategory().toString());
-        updTotalAmount.setText(String.valueOf(eventDetail.getBookingCost()));
+        lblEventCategory.setText(eventDetail.getEventCategory().toString());
+        totalAmount.setText(String.valueOf(eventDetail.getBookingCost()));
         if (status.isSuccess()) {
-            makeFieldsEditableInUpdate(false);
-            updBookingStatus.setText(eventDetail.getBookingStatus().toString());
+            makeFieldsEditable(false);
+            bookingStatus.setText(eventDetail.getBookingStatus().toString());
         }
 
     }
@@ -394,7 +333,7 @@ public class EventBookingViewController implements Initializable {
                 if (event.getClickCount() == 2 && (!row.isEmpty())) {
                     EventDetailsViewObject rowData = row.getItem();
                     if (rowData != null) {
-                        tabPane.getSelectionModel().select(panelTabUpdateEvent);
+                        tabPane.getSelectionModel().select(panelTabAddEvent);
                         populateDetailsForUpdate(rowData.getReceiptNumber());
                     }
                 }
@@ -406,8 +345,8 @@ public class EventBookingViewController implements Initializable {
     public EventHandler<KeyEvent> onReceiptNumberChange() {
         return (KeyEvent e) -> {
             if (e.getCode() == KeyCode.TAB || e.getCode() == KeyCode.ENTER) {
-                String bookingId = updReceiptNumber.getText();
-                populateDetailsForUpdate(bookingId);
+                String bookingIdValue = this.receiptNumber.getText();
+                populateDetailsForUpdate(bookingIdValue);
             }
         };
     }
@@ -416,95 +355,87 @@ public class EventBookingViewController implements Initializable {
         if (receiptNumber != null && !"".equals(receiptNumber)) {
             Booking booking = EventRepository.getUniqueInstance().fetchByReceiptNumber(receiptNumber);
             if (booking != null) {
-                clearAllFieldsInUpdate();
-                makeFieldsEditableInUpdate(true);
-                updReceiptNumber.setText(receiptNumber);
-                updBookingId.setText(booking.getBookingId());
-                updFirstName.setText(booking.getFirstName());
-                updLastName.setText(booking.getLastName());
-                updAddressLine1.setText(booking.getAddressLine1());
-                updAddressLine2.setText(booking.getAddressLine2());
-                updAddressLine3.setText(booking.getAddressLine3());
-                updDistrict.setText(booking.getDistrict());
-                updState.setText(booking.getState());
-                updPinCode.setText(booking.getPinCode());
-                updPrimaryMobile.setText(booking.getPrimaryMobile());
-                updAlternateMobile.setText(booking.getAlternateMobile());
-                updEventDate.setValue(booking.getEventDate().toLocalDate());
-                lblEventCategory1.setText(booking.getEventCategory().toString());
-                updBookingStatus.setText(booking.getBookingStatus().toString());
-                updAdvanceAmount.setText(String.valueOf(booking.getAdvanceAmount()));
-                updTotalAmount.setText(String.valueOf(booking.getBookingCost()));
-                updEventDate.setDisable(true);
-                updReceiptNumber.setEditable(false);
-                updTotalAmount.setText(String.valueOf(booking.getBookingCost()));
+                clearFields();
+                makeFieldsEditable(true);
+                initializeActionComboBoxForUpdate(booking.getBookingStatus());
+                this.receiptNumber.setText(receiptNumber);
+                bookingId.setText(booking.getBookingId());
+                firstName.setText(booking.getFirstName());
+                lastName.setText(booking.getLastName());
+                addressLine1.setText(booking.getAddressLine1());
+                addressLine2.setText(booking.getAddressLine2());
+                addressLine3.setText(booking.getAddressLine3());
+                district.setText(booking.getDistrict());
+                state.setText(booking.getState());
+                pinCode.setText(booking.getPinCode());
+                primaryMobileNumber.setText(booking.getPrimaryMobile());
+                alternateMobileNumber.setText(booking.getAlternateMobile());
+                eventDate.setValue(booking.getEventDate().toLocalDate());
+                lblEventCategory.setText(booking.getEventCategory().toString());
+                bookingStatus.setText(booking.getBookingStatus().toString());
+                advanceAmount.setText(String.valueOf(booking.getAdvanceAmount()));
+                totalAmount.setText(String.valueOf(booking.getBookingCost()));
+                eventDate.setDisable(true);
+                eventDate.setStyle("-fx-opacity: 1");
+                eventDate.getEditor().setStyle("-fx-opacity: 1");
+                this.receiptNumber.setEditable(false);
+                totalAmount.setText(String.valueOf(booking.getBookingCost()));
                 if (BookingStatus.BOOKED.equals(booking.getBookingStatus())) {
-                    updBtnBook.setDisable(true);
                 } else {
-                    updBtnBook.setDisable(false);
                 }
                 if (BookingStatus.BLOCKING_CANCELLED.equals(booking.getBookingStatus()) || BookingStatus.BOOKING_CANCELLED.equals(booking.getBookingStatus())) {
-                    updCancelButton.setDisable(true);
                 } else {
-                    updCancelButton.setDisable(false);
                 }
-                btnUpdate.setDisable(false);
-                updBlockedBy.setText(new EventBlockingService().getEventBlockedBy(booking.getEvents()));
+                blockedBy.setText(new EventBlockingService().getEventBlockedBy(booking.getEvents()));
                 if (booking.getEvents() != null && !booking.getEvents().isEmpty()) {
                     for (Event event : booking.getEvents()) {
                         if (null != event.getEventType()) {
                             switch (event.getEventType()) {
                                 case WEDDING:
-                                    updWedding.setSelected(true);
-                                    updWedding.setUserData(event.getEventId());
+                                    wedding.setSelected(true);
+                                    wedding.setUserData(event.getEventId());
                                     break;
                                 case MEHANDI:
-                                    updMehandi.setSelected(true);
-                                    updMehandi.setUserData(event.getEventId());
+                                    mehandi.setSelected(true);
+                                    mehandi.setUserData(event.getEventId());
                                     break;
                                 case RECEPTION_3_PM:
-                                    updReception.setSelected(true);
-                                    updReceptionComboBox.setValue(new ComboBoxViewObject(EventType.RECEPTION_3_PM.toString(), EventType.RECEPTION_3_PM));
-                                    updReception.setUserData(event.getEventId());
+                                    reception.setSelected(true);
+                                    receptionComboBox.setValue(new ComboBoxViewObject(EventType.RECEPTION_3_PM.toString(), EventType.RECEPTION_3_PM));
+                                    reception.setUserData(event.getEventId());
                                     break;
                                 case RECEPTION_5_PM:
-                                    updReception.setSelected(true);
-                                    updReceptionComboBox.setValue(new ComboBoxViewObject(EventType.RECEPTION_5_PM.toString(), EventType.RECEPTION_5_PM));
-                                    updReception.setUserData(event.getEventId());
+                                    reception.setSelected(true);
+                                    receptionComboBox.setValue(new ComboBoxViewObject(EventType.RECEPTION_5_PM.toString(), EventType.RECEPTION_5_PM));
+                                    reception.setUserData(event.getEventId());
                                     break;
                                 case ISHA_HALL_AC_DAY:
-                                    updIshaHall.setSelected(true);
-                                    updIshaHallComboBox.setValue(new ComboBoxViewObject(EventType.ISHA_HALL_AC_DAY.toString(), EventType.ISHA_HALL_AC_DAY));
-                                    updIshaHall.setUserData(event.getEventId());
+                                    ishaHall.setSelected(true);
+                                    ishaHallComboBox.setValue(new ComboBoxViewObject(EventType.ISHA_HALL_AC_DAY.toString(), EventType.ISHA_HALL_AC_DAY));
+                                    ishaHall.setUserData(event.getEventId());
                                     break;
                                 case ISHA_HALL_AC_EVE:
-                                    updIshaHall.setSelected(true);
-                                    updIshaHallComboBox.setValue(new ComboBoxViewObject(EventType.ISHA_HALL_AC_EVE.toString(), EventType.ISHA_HALL_AC_EVE));
-                                    updIshaHall.setUserData(event.getEventId());
+                                    ishaHall.setSelected(true);
+                                    ishaHallComboBox.setValue(new ComboBoxViewObject(EventType.ISHA_HALL_AC_EVE.toString(), EventType.ISHA_HALL_AC_EVE));
+                                    ishaHall.setUserData(event.getEventId());
                                     break;
                                 case NICA_LONGUE_AC:
-                                    updNiceHall.setSelected(true);
-                                    updNiceHall.setUserData(event.getEventId());
+                                    niceHall.setSelected(true);
+                                    niceHall.setUserData(event.getEventId());
                                     break;
                                 default:
                                     break;
                             }
                         }
                     }
-                    updAcRequired.setSelected(booking.getEvents().get(0).isNormalAcRequired());
+                    acRequired.setSelected(booking.getEvents().get(0).isNormalAcRequired());
                     if (booking.getEvents().get(0).getAdditionalAcRange() > 0) {
-                        updAdditionalAC.setSelected(true);
-                        updAdditionalAcComboBox.setValue(String.valueOf(booking.getEvents().get(0).getAdditionalAcRange()));
+                        additionalAC.setSelected(true);
+                        additionalAcComboBox.setValue(String.valueOf(booking.getEvents().get(0).getAdditionalAcRange()));
                     }
                 }
             }
         }
-    }
-
-    @FXML
-    private void resetDetailsInUpdate(ActionEvent event) {
-        makeFieldsEditableInUpdate(true);
-        clearAllFieldsInUpdate();
     }
 
     private void makeFieldsEditable(boolean flag) {
@@ -524,8 +455,8 @@ public class EventBookingViewController implements Initializable {
         niceHall.setDisable(!flag);
         additionalAC.setDisable(!flag);
         eventDate.setDisable(!flag);
-        btnBlock.setDisable(!flag);
-        btnBook.setDisable(!flag);
+        eventDate.setStyle("-fx-opacity: 1");
+        eventDate.getEditor().setStyle("-fx-opacity: 1");
         receptionComboBox.setDisable(!flag);
         ishaHallComboBox.setDisable(!flag);
         additionalAcComboBox.setDisable(!flag);
@@ -578,184 +509,15 @@ public class EventBookingViewController implements Initializable {
         ishaHallComboBox.setValue(null);
         additionalAcComboBox.setValue(null);
         blockedBy.setText("");
+        bookingId.setText("");
+        bookingStatus.setText("");
     }
 
-    private void makeFieldsEditableInUpdate(boolean flag) {
-        updFirstName.setEditable(flag);
-        updLastName.setEditable(flag);
-        updAddressLine1.setEditable(flag);
-        updAddressLine2.setEditable(flag);
-        updAddressLine3.setEditable(flag);
-        updDistrict.setEditable(flag);
-        updState.setEditable(flag);
-        updPinCode.setEditable(flag);
-        updPrimaryMobile.setEditable(flag);
-        updAlternateMobile.setEditable(flag);
-        updWedding.setDisable(!flag);
-        updMehandi.setDisable(!flag);
-        updReception.setDisable(!flag);
-        updAcRequired.setDisable(!flag);
-        updIshaHall.setDisable(!flag);
-        updNiceHall.setDisable(!flag);
-        updAdditionalAC.setDisable(!flag);
-        updEventDate.setEditable(flag);
-        updBtnBook.setDisable(!flag);
-        updCancelButton.setDisable(!flag);
-        btnUpdate.setDisable(!flag);
-        updReceiptNumber.setEditable(flag);
-        updAdvanceAmount.setEditable(flag);
-        if (updReception.isSelected()) {
-            updReceptionComboBox.setDisable(flag);
-        } else {
-            updReceptionComboBox.setDisable(true);
-        }
-        if (updIshaHall.isSelected()) {
-            updIshaHallComboBox.setDisable(flag);
-        } else {
-            updIshaHallComboBox.setDisable(true);
-        }
-        if (updAdditionalAC.isSelected()) {
-            updAdditionalAcComboBox.setDisable(flag);
-        } else {
-            updAdditionalAcComboBox.setDisable(true);
-        }
-    }
+    private void cancelEvent() {
 
-    private void clearAllFieldsInUpdate() {
-        receiptNumber.clear();
-        advanceAmount.clear();
-        updFirstName.clear();
-        updLastName.clear();
-        updAddressLine1.clear();
-        updAddressLine2.clear();
-        updAddressLine3.clear();
-        updDistrict.clear();
-        updState.clear();
-        updPinCode.clear();
-        updPrimaryMobile.clear();
-        updAlternateMobile.clear();
-        updWedding.setSelected(false);
-        updMehandi.setSelected(false);
-        updReception.setSelected(false);
-        updAcRequired.setSelected(false);
-        updIshaHall.setSelected(false);
-        updNiceHall.setSelected(false);
-        updAdditionalAC.setSelected(false);
-        updEventDate.setValue(null);
-        lblEventCategory1.setText("");
-        updBookingId.clear();
-        updBookingStatus.setText("");
-        updTotalAmount.setText("");
-        lblEventCategory1.setText("");
-        updReceptionComboBox.setValue(null);
-        updIshaHallComboBox.setValue(null);
-        updAdditionalAcComboBox.setValue(null);
-        updBlockedBy.setText("");
-    }
-
-    @FXML
-    private void onWeddingSelection(ActionEvent event) {
-    }
-
-    @FXML
-    private void onMehandiSelection(ActionEvent event) {
-    }
-
-    @FXML
-    private void onReceptionSelection(ActionEvent event) {
-    }
-
-    @FXML
-    private void onAcRequiredSelection(ActionEvent event) {
-    }
-
-    @FXML
-    private void onIshaHallSelection(ActionEvent event) {
-    }
-
-    @FXML
-    private void onNicaHallSelection(ActionEvent event) {
-    }
-
-    @FXML
-    private void onAdditionalAcSelection(ActionEvent event) {
-    }
-
-    private boolean validateMandatoryFieldsInUpdate() {
-        boolean isValid = true;
-        StringBuilder errorMessage = new StringBuilder("Following fileds missing: ");
-        if (updEventDate.getValue() == null) {
-            errorMessage.append(" Event Date,");
-            isValid = false;
-        }
-        if (updFirstName.getText() == null || "".equals(updFirstName.getText())) {
-            errorMessage.append(" First Name,");
-            isValid = false;
-        }
-        if (updAddressLine1.getText() == null || "".equals(updAddressLine1.getText())) {
-            errorMessage.append(" Address Line 1,");
-            isValid = false;
-        }
-        if (updPrimaryMobile.getText() == null || "".equals(updPrimaryMobile.getText())) {
-            errorMessage.append(" Mobile Number,");
-            isValid = false;
-        }
-        if (!updWedding.isSelected() && !updReception.isSelected() && !updNiceHall.isSelected() && !updIshaHall.isSelected()) {
-            errorMessage.append(" Any Event");
-            isValid = false;
-        }
-        if (!isValid) {
-            String stringMessage = errorMessage.toString();
-            AlertHelper.showErrorMessage(stringMessage);
-        }
-        return isValid;
-    }
-
-    private Booking getBookingDetailsForUpdate(BookingStatus bookingStatus) {
-        Booking bookingDetails = new Booking();
-        java.sql.Date eventDateValue = java.sql.Date.valueOf(updEventDate.getValue());
-        bookingDetails.setBookingId(updBookingId.getText());
-        bookingDetails.setReceiptNumber(updReceiptNumber.getText());
-        if (updAdvanceAmount.getText() != null && !"".equals(updAdvanceAmount.getText())) {
-            bookingDetails.setAdvanceAmount(Double.valueOf(updAdvanceAmount.getText()));
-        }
-        bookingDetails.setEventDate(eventDateValue);
-        bookingDetails.setFirstName(updFirstName.getText());
-        bookingDetails.setLastName(updLastName.getText());
-        bookingDetails.setAddressLine1(updAddressLine1.getText());
-        bookingDetails.setAddressLine2(updAddressLine2.getText());
-        bookingDetails.setAddressLine3(updAddressLine3.getText());
-        bookingDetails.setDistrict(updDistrict.getText());
-        bookingDetails.setState(updState.getText());
-        bookingDetails.setPinCode(updPinCode.getText());
-        bookingDetails.setBookingStatus(bookingStatus);
-        bookingDetails.setEventCategory(EventCategoryUtils.getEventCategory(buildEventCategoryDetailForUpdate()));
-        bookingDetails.setPrimaryMobile(updPrimaryMobile.getText());
-        bookingDetails.setAlternateMobile(updAlternateMobile.getText());
-        bookingDetails.setCreatedDate(DateHelper.getToday());
-        bookingDetails.setBookingCost(EventCostService.getTotalEventCost(getEventDetailsForUpdate(new Booking())));
-        getEventDetailsForUpdate(bookingDetails);
-        return bookingDetails;
-    }
-
-    private EventTypeDetail buildEventCategoryDetailForUpdate() {
-        EventTypeDetail eventCategoryDetail = new EventTypeDetail();
-        eventCategoryDetail.setAcSelected(updAcRequired.isSelected());
-        eventCategoryDetail.setAdditionalACSelected(updAdditionalAC.isSelected());
-        eventCategoryDetail.setIshaSelected(updIshaHall.isSelected());
-        eventCategoryDetail.setMehandiSelected(updMehandi.isSelected());
-        eventCategoryDetail.setNicaSelected(updNiceHall.isSelected());
-        eventCategoryDetail.setReceptionSelected(updReception.isSelected());
-        eventCategoryDetail.setWeddingSelected(updWedding.isSelected());
-        return eventCategoryDetail;
-    }
-
-    @FXML
-    private void cancelEvent(ActionEvent event) {
-
-        if (validateMandatoryFieldsInUpdate()) {
+        if (validateMandatory()) {
             BookingStatus newBookngStatus = null;
-            BookingStatus currentBookingStatus = BookingStatus.fromValue(updBookingStatus.getText());
+            BookingStatus currentBookingStatus = BookingStatus.fromValue(bookingStatus.getText());
             if (BookingStatus.BOOKED.equals(currentBookingStatus)) {
                 newBookngStatus = BookingStatus.BOOKING_CANCELLED;
             } else if (BookingStatus.BLOCKED.equals(currentBookingStatus)) {
@@ -769,7 +531,7 @@ public class EventBookingViewController implements Initializable {
             Optional<ButtonType> option = alert.showAndWait();
             if (option.get() == null) {
             } else if (option.get() == ButtonType.OK) {
-                Booking eventDetail = getBookingDetailsForUpdate(newBookngStatus);
+                Booking eventDetail = getBookingDetails(newBookngStatus);
                 manageEventUpdate(eventDetail, false);
             }
         }
@@ -844,6 +606,9 @@ public class EventBookingViewController implements Initializable {
             Event event = new Event();
             event.setEventType(EventType.WEDDING);
             event.setEventDate(bookingDetails.getEventDate());
+            if (wedding.getUserData() != null) {
+                event.setEventId((Integer) wedding.getUserData());
+            }
             eventDetails.add(event);
         }
         if (mehandi.isSelected()) {
@@ -852,24 +617,36 @@ public class EventBookingViewController implements Initializable {
             if (bookingDetails.getEventDate() != null) {
                 event.setEventDate(DateHelper.getPreviousDay(bookingDetails.getEventDate()));
             }
+            if (mehandi.getUserData() != null) {
+                event.setEventId((Integer) mehandi.getUserData());
+            }
             eventDetails.add(event);
         }
         if (reception.isSelected()) {
             Event event = new Event();
             event.setEventType(receptionComboBox.getValue().getValue());
             event.setEventDate(bookingDetails.getEventDate());
+            if (reception.getUserData() != null) {
+                event.setEventId((Integer) reception.getUserData());
+            }
             eventDetails.add(event);
         }
         if (ishaHall.isSelected()) {
             Event event = new Event();
             event.setEventType(ishaHallComboBox.getValue().getValue());
             event.setEventDate(bookingDetails.getEventDate());
+            if (ishaHall.getUserData() != null) {
+                event.setEventId((Integer) ishaHall.getUserData());
+            }
             eventDetails.add(event);
         }
         if (niceHall.isSelected()) {
             Event event = new Event();
             event.setEventType(EventType.NICA_LONGUE_AC);
             event.setEventDate(bookingDetails.getEventDate());
+            if (niceHall.getUserData() != null) {
+                event.setEventId((Integer) niceHall.getUserData());
+            }
             eventDetails.add(event);
         }
         for (Event event : eventDetails) {
@@ -877,57 +654,6 @@ public class EventBookingViewController implements Initializable {
             event.setBookingStatus(bookingDetails.getBookingStatus());
             if (additionalAC.isSelected()) {
                 event.setAdditionalAcRange(Integer.valueOf(additionalAcComboBox.getValue()));
-            }
-            event.setBookingDetails(bookingDetails);
-        }
-        bookingDetails.setEvents(eventDetails);
-        return eventDetails;
-    }
-
-    private List<Event> getEventDetailsForUpdate(Booking bookingDetails) {
-        List<Event> eventDetails = new ArrayList<>();
-        if (updWedding.isSelected()) {
-            Event event = new Event();
-            event.setEventType(EventType.WEDDING);
-            event.setEventId((Integer) updWedding.getUserData());
-            event.setEventDate(bookingDetails.getEventDate());
-            eventDetails.add(event);
-        }
-        if (updMehandi.isSelected()) {
-            Event event = new Event();
-            event.setEventType(EventType.MEHANDI);
-            event.setEventId((Integer) updMehandi.getUserData());
-            if (bookingDetails.getEventDate() != null) {
-                event.setEventDate(DateHelper.getPreviousDay(bookingDetails.getEventDate()));
-            }
-            eventDetails.add(event);
-        }
-        if (updReception.isSelected()) {
-            Event event = new Event();
-            event.setEventType(updReceptionComboBox.getValue().getValue());
-            event.setEventId((Integer) updReception.getUserData());
-            event.setEventDate(bookingDetails.getEventDate());
-            eventDetails.add(event);
-        }
-        if (updIshaHall.isSelected()) {
-            Event event = new Event();
-            event.setEventType(updIshaHallComboBox.getValue().getValue());
-            event.setEventId((Integer) updIshaHall.getUserData());
-            event.setEventDate(bookingDetails.getEventDate());
-            eventDetails.add(event);
-        }
-        if (updNiceHall.isSelected()) {
-            Event event = new Event();
-            event.setEventType(EventType.NICA_LONGUE_AC);
-            event.setEventId((Integer) updNiceHall.getUserData());
-            event.setEventDate(bookingDetails.getEventDate());
-            eventDetails.add(event);
-        }
-        for (Event event : eventDetails) {
-            event.setNormalAcRequired(updAcRequired.isSelected());
-            event.setBookingStatus(bookingDetails.getBookingStatus());
-            if (updAdditionalAC.isSelected()) {
-                event.setAdditionalAcRange(Integer.valueOf(updAdditionalAcComboBox.getValue()));
             }
             event.setBookingDetails(bookingDetails);
         }
@@ -946,16 +672,6 @@ public class EventBookingViewController implements Initializable {
 
     }
 
-    private void initializeUpdateReceptionComboBox() {
-        updReceptionComboBox.getItems().clear();
-        updReceptionComboBox.getSelectionModel().clearSelection();
-        ObservableList<ComboBoxViewObject> updReceptionCombo = FXCollections.observableArrayList();
-        updReceptionCombo.addAll(new ComboBoxViewObject(EventType.RECEPTION_3_PM.toString(), EventType.RECEPTION_3_PM),
-                new ComboBoxViewObject(EventType.RECEPTION_5_PM.toString(), EventType.RECEPTION_5_PM));
-        updReceptionComboBox.setItems(updReceptionCombo);
-        updReceptionComboBox.getSelectionModel().selectFirst();
-    }
-
     private void initializeAdditionalAcComboBox() {
         additionalAcComboBox.getItems().clear();
         additionalAcComboBox.getSelectionModel().clearSelection();
@@ -968,17 +684,6 @@ public class EventBookingViewController implements Initializable {
         additionalAcComboBox.setItems(additionalACs);
         additionalAcComboBox.getSelectionModel().selectFirst();
 
-    }
-
-    private void initializeUpdateAdditionalAcComboBox() {
-        updAdditionalAcComboBox.getItems().clear();
-        updAdditionalAcComboBox.getSelectionModel().clearSelection();
-        ObservableList<String> updAdditionalACs = FXCollections.observableArrayList();
-        for (int i = 1; i < 7; i++) {
-            updAdditionalACs.add(String.valueOf(i));
-        }
-        updAdditionalAcComboBox.setItems(updAdditionalACs);
-        updAdditionalAcComboBox.getSelectionModel().selectFirst();
     }
 
     private void initializeIshHallComboBox() {
@@ -994,16 +699,6 @@ public class EventBookingViewController implements Initializable {
 
     }
 
-    private void initializeUpdateIshHallComboBox() {
-        updIshaHallComboBox.getItems().clear();
-        updIshaHallComboBox.getSelectionModel().clearSelection();
-        ObservableList<ComboBoxViewObject> updIshaHallCombo = FXCollections.observableArrayList();
-        updIshaHallCombo.addAll(new ComboBoxViewObject(EventType.ISHA_HALL_AC_DAY.toString(), EventType.ISHA_HALL_AC_DAY),
-                new ComboBoxViewObject(EventType.ISHA_HALL_AC_EVE.toString(), EventType.ISHA_HALL_AC_EVE));
-        updIshaHallComboBox.setItems(updIshaHallCombo);
-        updIshaHallComboBox.getSelectionModel().selectFirst();
-    }
-
     private void initializePanelTab() {
         tabPane.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Tab>() {
             @Override
@@ -1016,9 +711,6 @@ public class EventBookingViewController implements Initializable {
                             break;
                         case "panelTabAddEvent":
                             launchPrepareAddEventTab();
-                            break;
-                        case "panelTabUpdateEvent":
-                            launchPrepareUpdateEventTab();
                             break;
                         default:
                             break;
@@ -1045,51 +737,34 @@ public class EventBookingViewController implements Initializable {
                 String lowerCaseFilter = newValue.toLowerCase();
 
                 if (booking.getReceiptNumber().toLowerCase().contains(lowerCaseFilter)) {
-                    return true; 
+                    return true;
                 } else if (booking.getEventDate().toLowerCase().contains(lowerCaseFilter)) {
-                    return true; 
-                }else if (booking.getFullName().toLowerCase().contains(lowerCaseFilter)) {
-                    return true; 
-                }else if (booking.getBookingStatus().toString().toLowerCase().contains(lowerCaseFilter)) {
-                    return true; 
-                }else if (booking.getEventType().toLowerCase().contains(lowerCaseFilter)) {
-                    return true; 
-                }else if (booking.getBookingDate().toLowerCase().contains(lowerCaseFilter)) {
-                    return true; 
-                }else if (booking.getEventCategory().toString().toLowerCase().contains(lowerCaseFilter)) {
-                    return true; 
+                    return true;
+                } else if (booking.getFullName().toLowerCase().contains(lowerCaseFilter)) {
+                    return true;
+                } else if (booking.getBookingStatus().toString().toLowerCase().contains(lowerCaseFilter)) {
+                    return true;
+                } else if (booking.getEventType().toLowerCase().contains(lowerCaseFilter)) {
+                    return true;
+                } else if (booking.getBookingDate().toLowerCase().contains(lowerCaseFilter)) {
+                    return true;
+                } else if (booking.getEventCategory().toString().toLowerCase().contains(lowerCaseFilter)) {
+                    return true;
                 }
-                return false; 
+                return false;
             });
         });
         SortedList<EventDetailsViewObject> sortedData = new SortedList<>(filteredData);
-        
+
         sortedData.comparatorProperty().bind(eventTable.comparatorProperty());
-        
+
         eventTable.setItems(sortedData);
     }
 
     private void launchPrepareAddEventTab() {
         makeFieldsEditable(true);
         clearFields();
-    }
-
-    private void launchPrepareUpdateEventTab() {
-        initializeUpdateReceptionComboBox();
-        initializeUpdateIshHallComboBox();
-        initializeUpdateAdditionalAcComboBox();
-    }
-
-    @FXML
-    private void getCost(ActionEvent event) {
-        double totalCost = EventCostService.getTotalEventCost(getEventDetails(new Booking()));
-        totalAmount.setText(String.valueOf(totalCost));
-    }
-
-    @FXML
-    private void getCostInUpdate(ActionEvent event) {
-        double totalCost = EventCostService.getTotalEventCost(getEventDetailsForUpdate(new Booking()));
-        updTotalAmount.setText(String.valueOf(totalCost));
+        initActionComboBox();
     }
 
     private void setNumberFormatter() {
@@ -1097,10 +772,6 @@ public class EventBookingViewController implements Initializable {
         alternateMobileNumber.setTextFormatter(new NumberFilter().filter());
         pinCode.setTextFormatter(new NumberFilter().filter());
         advanceAmount.setTextFormatter(new NumberFilter().decimalFilter());
-        updPrimaryMobile.setTextFormatter(new NumberFilter().filter());
-        updAlternateMobile.setTextFormatter(new NumberFilter().filter());
-        updPinCode.setTextFormatter(new NumberFilter().filter());
-        updAdvanceAmount.setTextFormatter(new NumberFilter().decimalFilter());
     }
 
     private void initComboBoxes() {
@@ -1115,21 +786,6 @@ public class EventBookingViewController implements Initializable {
                     initializeReceptionComboBox();
                 } else {
                     receptionComboBox.setDisable(true);
-                }
-            }
-        });
-
-        updReception.selectedProperty().addListener(new ChangeListener<Boolean>() {
-            @Override
-            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
-
-                updReceptionComboBox.getItems().clear();
-                updReceptionComboBox.getSelectionModel().clearSelection();
-                if (newValue) {
-                    updReceptionComboBox.setDisable(false);
-                    initializeUpdateReceptionComboBox();
-                } else {
-                    updReceptionComboBox.setDisable(true);
                 }
             }
         });
@@ -1149,21 +805,6 @@ public class EventBookingViewController implements Initializable {
             }
         });
 
-        updIshaHall.selectedProperty().addListener(new ChangeListener<Boolean>() {
-            @Override
-            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
-
-                updIshaHallComboBox.getItems().clear();
-                updIshaHallComboBox.getSelectionModel().clearSelection();
-                if (newValue) {
-                    updIshaHallComboBox.setDisable(false);
-                    initializeUpdateIshHallComboBox();
-                } else {
-                    updIshaHallComboBox.setDisable(true);
-                }
-            }
-        });
-
         additionalAC.selectedProperty().addListener(new ChangeListener<Boolean>() {
             @Override
             public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
@@ -1178,20 +819,56 @@ public class EventBookingViewController implements Initializable {
                 }
             }
         });
+    }
 
-        updAdditionalAC.selectedProperty().addListener(new ChangeListener<Boolean>() {
-            @Override
-            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+    @FXML
+    private void getCostIconClick(MouseEvent event) {
+        double totalCost = EventCostService.getTotalEventCost(getEventDetails(new Booking()));
+        totalAmount.setText(String.valueOf(totalCost));
+        lblEventCategory.setText(EventCategoryUtils.getEventCategory(buildEventCategoryDetail()).toString());
+    }
 
-                updAdditionalAcComboBox.getItems().clear();
-                updAdditionalAcComboBox.getSelectionModel().clearSelection();
-                if (newValue) {
-                    updAdditionalAcComboBox.setDisable(false);
-                    initializeUpdateAdditionalAcComboBox();
+    @FXML
+    private void onSubmitButtonClick(ActionEvent event) {
+        if (event != null && validateMandatory()) {
+            if (ActionType.BOOK.toString().equals(actionComboBOx.getValue())) {
+                if (StringUtils.isNotNullCheckSpace(bookingId.getText())) {
+                    bookEventInUpdate();
                 } else {
-                    updAdditionalAcComboBox.setDisable(true);
+                    showBookingConfirmation(BookingStatus.BOOKED);
                 }
+            } else if (ActionType.BLOCK.toString().equals(actionComboBOx.getValue())) {
+                showBookingConfirmation(BookingStatus.BLOCKED);
+            } else if (ActionType.UPDATE.toString().equals(actionComboBOx.getValue())) {
+                updateEvent();
+            } else if (ActionType.CANCEL_BOOKING.toString().equals(actionComboBOx.getValue())) {
+                cancelEvent();
+            } else if (ActionType.CANCEL_BLOCKING.toString().equals(actionComboBOx.getValue())) {
+                cancelEvent();
             }
-        });
+        }
+    }
+
+    private void initActionComboBox() {
+        actionComboBOx.getItems().clear();
+        actionComboBOx.getSelectionModel().clearSelection();
+        ObservableList<String> actionCombo = FXCollections.observableArrayList();
+        actionCombo.addAll(ActionType.BOOK.toString(), ActionType.BLOCK.toString());
+        actionComboBOx.setItems(actionCombo);
+        actionComboBOx.getSelectionModel().selectFirst();
+    }
+
+    private void initializeActionComboBoxForUpdate(BookingStatus bookingStatus) {
+        actionComboBOx.getItems().clear();
+        actionComboBOx.getSelectionModel().clearSelection();
+        ObservableList<String> actionCombo = FXCollections.observableArrayList();
+        actionCombo.add(ActionType.UPDATE.toString());
+        if (BookingStatus.BOOKED == bookingStatus) {
+            actionCombo.add(ActionType.CANCEL_BOOKING.toString());
+        } else if (BookingStatus.BLOCKED == bookingStatus) {
+            actionCombo.addAll(ActionType.BOOK.toString(), ActionType.CANCEL_BLOCKING.toString());
+        }
+        actionComboBOx.setItems(actionCombo);
+        actionComboBOx.getSelectionModel().selectFirst();
     }
 }

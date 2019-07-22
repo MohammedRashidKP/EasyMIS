@@ -27,13 +27,13 @@
                                  <children>
                                     <TableView fx:id="eventTable" layoutX="12.0" layoutY="10.0" prefHeight="563.0" prefWidth="533.0" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="12.0" AnchorPane.rightAnchor="12.0" AnchorPane.topAnchor="10.0">
                                       <columns>
-                                          <TableColumn fx:id="col_ReceiptNumber" prefWidth="112.0" text="Receipt Number" />
-                                        <TableColumn fx:id="col_EventDate" prefWidth="156.0" text="Event Date" />
-                                        <TableColumn fx:id="col_fullName" prefWidth="146.0" text="Full Name" />
-                                          <TableColumn fx:id="col_eventType" prefWidth="293.0" text="Event Type" />
-                                          <TableColumn fx:id="col_BookingDate" prefWidth="146.0" text="Booking Date" />
-                                          <TableColumn fx:id="col_EventCategory" prefWidth="129.0" text="Event Category" />
-                                          <TableColumn fx:id="col_SettlementStatus" prefWidth="173.0" text="Event settlement Status" />
+                                          <TableColumn fx:id="col_ReceiptNumber" prefWidth="112.0" style="-fx-alignment: CENTER;" text="Receipt Number" />
+                                        <TableColumn fx:id="col_EventDate" prefWidth="156.0" style="-fx-alignment: CENTER;" text="Event Date" />
+                                        <TableColumn fx:id="col_fullName" prefWidth="146.0" style="-fx-alignment: CENTER;" text="Full Name" />
+                                          <TableColumn fx:id="col_eventType" prefWidth="293.0" style="-fx-alignment: CENTER;" text="Event Type" />
+                                          <TableColumn fx:id="col_BookingDate" prefWidth="146.0" style="-fx-alignment: CENTER;" text="Booking Date" />
+                                          <TableColumn fx:id="col_EventCategory" prefWidth="129.0" style="-fx-alignment: CENTER;" text="Event Category" />
+                                          <TableColumn fx:id="col_SettlementStatus" prefWidth="173.0" style="-fx-alignment: CENTER;" text="Event settlement Status" />
                                       </columns>
                                     </TableView>
                                  </children>
@@ -64,9 +64,9 @@
                                     <JFXTextField fx:id="eventType" editable="false" labelFloat="true" layoutX="262.0" layoutY="120.0" prefHeight="26.0" prefWidth="145.0" promptText="Event Category" unFocusColor="#a8a7ab" AnchorPane.leftAnchor="250.0" AnchorPane.topAnchor="150.0" />
                                     <JFXTextField fx:id="totalExpense" editable="false" labelFloat="true" layoutX="425.0" layoutY="149.0" prefHeight="26.0" prefWidth="150.0" promptText="Total Expense" unFocusColor="#a8a7ab" AnchorPane.leftAnchor="425.0" AnchorPane.topAnchor="149.0" />
                                     <JFXTextField fx:id="balance" editable="false" labelFloat="true" layoutX="425.0" layoutY="189.0" prefHeight="26.0" prefWidth="150.0" promptText="Balance" unFocusColor="#a8a7ab" AnchorPane.leftAnchor="425.0" AnchorPane.topAnchor="189.0" />
-                                    <JFXTextField fx:id="otherRevenue" labelFloat="true" layoutX="425.0" layoutY="73.0" prefHeight="26.0" prefWidth="150.0" promptText="Other Revenue" unFocusColor="#a8a7ab" AnchorPane.topAnchor="70.0" />
+                                    <JFXTextField fx:id="otherRevenue" editable="false" labelFloat="true" layoutX="425.0" layoutY="73.0" prefHeight="26.0" prefWidth="150.0" promptText="Other Revenue" unFocusColor="#a8a7ab" AnchorPane.topAnchor="70.0" />
                                     <JFXTextField fx:id="receiptNumber" editable="false" labelFloat="true" layoutX="250.0" layoutY="202.0" prefHeight="26.0" prefWidth="145.0" promptText="ReceiptNumber" unFocusColor="#a8a7ab" AnchorPane.topAnchor="189.0" />
-                                    <JFXTextField fx:id="totalBookingRevenue" editable="false" labelFloat="true" layoutX="425.0" layoutY="111.0" prefHeight="25.0" prefWidth="151.0" promptText="Total Revenue" unFocusColor="#b2a6a6" />
+                                    <JFXTextField fx:id="totalBookingRevenue" editable="false" labelFloat="true" layoutX="425.0" layoutY="111.0" prefHeight="25.0" prefWidth="151.0" promptText="Total Revenue" unFocusColor="#b2a6a6" AnchorPane.leftAnchor="425.0" AnchorPane.topAnchor="111.0" />
                                     <Text fill="#d0cccc" layoutX="40.0" layoutY="39.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Expenditure">
                                        <font>
                                           <Font name="System Bold" size="20.0" />
@@ -78,6 +78,7 @@
                                        </font>
                                     </Text>
                                     <JFXButton fx:id="submitButton" buttonType="RAISED" layoutX="635.0" layoutY="173.0" onAction="#onSubmitButtonClick" prefHeight="32.0" prefWidth="143.0" style="-fx-background-color: #3A84C3;" text="Submit" />
+                                    <JFXTextField fx:id="additionalRevenue" editable="false" labelFloat="true" layoutX="426.0" layoutY="230.0" prefHeight="26.0" prefWidth="150.0" promptText="Add Revenue" unFocusColor="#a8a7ab" />
                                  </children></AnchorPane>
                            </content></Tab>
                      </tabs>

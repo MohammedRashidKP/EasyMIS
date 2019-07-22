@@ -9,6 +9,7 @@ import easymis.models.utils.QueryConstants;
 import easymis.utils.DateHelper;
 import easymis.utils.ValidationError;
 import java.sql.Date;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -108,12 +109,12 @@ public class EventRepository extends AbstractRepository {
         return events != null && !events.isEmpty() ? events.get(0) : null;
     }
 
-    public TransactionStatus update(Booking bookingDetail, boolean isNewBooking) {
+    public TransactionStatus update(Booking bookingDetail, boolean isValidationRequired) {
         
         TransactionStatus status;
         EventBookingBusinessPolicy policy = new EventBookingBusinessPolicy();
         List<ValidationError> validationErrors = policy.validateBooking(bookingDetail);
-        if (validationErrors.isEmpty()) {
+        if (validationErrors.isEmpty() || !isValidationRequired) {
                 try {
                     return merge(bookingDetail);
                 } catch (Exception ex) {
@@ -149,5 +150,15 @@ public class EventRepository extends AbstractRepository {
         param.setParamName("eventDate");
         param.setParamDateValue(DateHelper.getToday());
         return retrieve(QueryConstants.FETCH_UPCOMING_EVENTS, Collections.singletonList(param), Booking.class);
+    }
+
+    public List<Booking> getBookingsBetweenDays(Date startDate, Date endDate) {
+        QueryParams param1 = new QueryParams();
+        param1.setParamName("startDate");
+        param1.setParamDateValue(startDate);
+        QueryParams param2 = new QueryParams();
+        param2.setParamName("endDate");
+        param2.setParamDateValue(endDate);
+        return retrieve(QueryConstants.FETCH_BOOKINGS_BETWEEN_DATES, Arrays.asList(param1, param2), Booking.class);
     }
 }
