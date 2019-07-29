@@ -2,6 +2,7 @@
 
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXTabPane?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TableColumn?>
@@ -108,7 +109,18 @@
                            <content>
                               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="1221.0">
                                  <children>
-                                    <AnchorPane layoutX="7.0" layoutY="3.0" prefHeight="230.0" prefWidth="1159.0" style="-fx-background-color: #eaeaea;" />
+                                    <AnchorPane layoutX="7.0" layoutY="3.0" prefHeight="230.0" prefWidth="1159.0" style="-fx-background-color: #eaeaea;">
+                                       <children>
+                                          <ComboBox fx:id="fromMonth" layoutX="81.0" layoutY="43.0" prefWidth="150.0" />
+                                          <ComboBox fx:id="fromYear" layoutX="242.0" layoutY="43.0" prefHeight="25.0" prefWidth="80.0" />
+                                          <ComboBox fx:id="toMonth" layoutX="81.0" layoutY="84.0" prefWidth="150.0" />
+                                          <ComboBox fx:id="toYear" layoutX="242.0" layoutY="84.0" prefHeight="25.0" prefWidth="79.0" />
+                                          <JFXButton layoutX="212.0" layoutY="133.0" onAction="#generateSalaryReport" style="-fx-background-color: #3a84c3;" text="Generate Report" textFill="WHITE">
+                                             <font>
+                                                <Font name="System Bold" size="12.0" />
+                                             </font>
+                                          </JFXButton>
+                                       </children></AnchorPane>
                                     <TableView fx:id="salaryTable" layoutX="6.0" layoutY="237.0" prefHeight="314.0" prefWidth="1162.0" AnchorPane.bottomAnchor="12.0" AnchorPane.leftAnchor="6.0" AnchorPane.rightAnchor="12.0" AnchorPane.topAnchor="237.0">
                                        <columns>
                                           <TableColumn fx:id="salary_employeeId" prefWidth="125.0" style="-fx-alignment: CENTER;" text="Emp Id" />
@@ -120,24 +132,17 @@
                                           <TableColumn fx:id="salary_bonus" prefWidth="131.0" style="-fx-alignment: CENTER;" text="Bonus" />
                                        </columns>
                                     </TableView>
-                                    <DatePicker fx:id="salaryFromDate" layoutX="91.0" layoutY="44.0" prefHeight="25.0" prefWidth="128.0" promptText="Select start date" />
                                     <Text layoutX="41.0" layoutY="61.0" strokeType="OUTSIDE" strokeWidth="0.0" text="From" />
                                     <Text layoutX="55.0" layoutY="103.0" strokeType="OUTSIDE" strokeWidth="0.0" text="To" />
-                                    <DatePicker fx:id="salaryToDate" layoutX="91.0" layoutY="86.0" prefHeight="25.0" prefWidth="127.0" promptText="Select end date" />
-                                    <JFXButton layoutX="109.0" layoutY="134.0" onAction="#generateSalaryReport" style="-fx-background-color: #3a84c3;" text="Generate Report" textFill="WHITE">
-                                       <font>
-                                          <Font name="System Bold" size="12.0" />
-                                       </font>
-                                    </JFXButton>
-                                    <Text layoutX="292.0" layoutY="61.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Total salary paid in the given period" />
-                                    <Text fill="#a19d9d" layoutX="292.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Summary">
+                                    <Text layoutX="517.0" layoutY="61.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Total salary paid in the given period" />
+                                    <Text fill="#a19d9d" layoutX="517.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Summary">
                                        <font>
                                           <Font name="System Bold" size="20.0" />
                                        </font>
                                     </Text>
-                                    <TextField fx:id="totalSalary" editable="false" layoutX="516.0" layoutY="44.0" />
-                                    <Text layoutX="393.0" layoutY="105.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Total Bonus paid" />
-                                    <TextField fx:id="totalBonus" editable="false" layoutX="516.0" layoutY="88.0" />
+                                    <TextField fx:id="totalSalary" editable="false" layoutX="741.0" layoutY="44.0" />
+                                    <Text layoutX="618.0" layoutY="105.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Total Bonus paid" />
+                                    <TextField fx:id="totalBonus" editable="false" layoutX="741.0" layoutY="88.0" />
                                  </children>
                               </AnchorPane>
                            </content>

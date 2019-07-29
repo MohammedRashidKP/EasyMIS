@@ -227,11 +227,11 @@ public class EmployeeController implements Initializable {
         employee.setStates(state.getText());
 
         if (StringUtils.isNotNullCheckSpace(mobileNumber.getText())) {
-            employee.setMobileNumber(Integer.valueOf(mobileNumber.getText()));
+            employee.setMobileNumber(mobileNumber.getText());
         }
 
         if (StringUtils.isNotNullCheckSpace(alternateNumber.getText())) {
-            employee.setAlternateNumber(Integer.valueOf(alternateNumber.getText()));
+            employee.setAlternateNumber(alternateNumber.getText());
         }
 
         if (joininDate.getValue() != null) {
@@ -370,8 +370,8 @@ public class EmployeeController implements Initializable {
                 pinCode.setText(employee.getPinCode() > 0 ? String.valueOf(employee.getPinCode()) : "");
                 district.setText(employee.getDistrict());
                 state.setText(employee.getStates());
-                mobileNumber.setText(employee.getMobileNumber() > 0 ? String.valueOf(employee.getMobileNumber()) : "");
-                alternateNumber.setText(employee.getAlternateNumber() > 0 ? String.valueOf(employee.getAlternateNumber()) : "");
+                mobileNumber.setText(employee.getMobileNumber());
+                alternateNumber.setText(employee.getAlternateNumber());
                 salary.setText(employee.getSalary() > 0 ? String.valueOf(employee.getSalary()) : "");
                 previousExperience.setText(employee.getPreviousExperience());
                 employeeStatus.setValue(employee.getEmployeeStatus() != null ? employee.getEmployeeStatus().toString() : "");
@@ -575,10 +575,14 @@ public class EmployeeController implements Initializable {
             payroll.setLastName(payrollLastName.getText());
             payroll.setMonth(payrollMonth.getValue());
             payroll.setYear(Integer.valueOf(payrollYear.getValue()));
-            payroll.setSalary(Double.valueOf(payrollSalary.getText()));
-            payroll.setNetPay(Double.valueOf(payrollNetPay.getText()));
-            payroll.setAdvance(Double.valueOf(payrollAdvance.getText()));
-            payroll.setBonus(Double.valueOf(payrollBonus.getText()));
+            if(StringUtils.isNotNullCheckSpace(payrollSalary.getText()))
+                payroll.setSalary(Double.valueOf(payrollSalary.getText()));
+            if(StringUtils.isNotNullCheckSpace(payrollNetPay.getText()))
+                payroll.setNetPay(Double.valueOf(payrollNetPay.getText()));
+            if(StringUtils.isNotNullCheckSpace(payrollAdvance.getText()))
+                payroll.setAdvance(Double.valueOf(payrollAdvance.getText()));
+            if(StringUtils.isNotNullCheckSpace(payrollBonus.getText()))
+                payroll.setBonus(Double.valueOf(payrollBonus.getText()));
             TransactionStatus status;
             if (StringUtils.isNotNullCheckSpace(payrollId.getText())) {
                 payroll.setId(Integer.valueOf(payrollId.getText()));

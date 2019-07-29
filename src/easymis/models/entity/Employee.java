@@ -54,10 +54,10 @@ public class Employee extends DomainObject{
     private String states;
     
     @Column(name = "MOBILE_NUMBER")
-    private int mobileNumber;
+    private String mobileNumber;
     
     @Column(name = "ALTERNATE_NUMBER")
-    private int alternateNumber;
+    private String alternateNumber;
     
     @Column(name = "JOINING_DATE")
     private Date joiningDate;
@@ -160,19 +160,19 @@ public class Employee extends DomainObject{
         this.states = states;
     }
 
-    public int getMobileNumber() {
+    public String getMobileNumber() {
         return mobileNumber;
     }
 
-    public void setMobileNumber(int mobileNumber) {
+    public void setMobileNumber(String mobileNumber) {
         this.mobileNumber = mobileNumber;
     }
 
-    public int getAlternateNumber() {
+    public String getAlternateNumber() {
         return alternateNumber;
     }
 
-    public void setAlternateNumber(int alternateNumber) {
+    public void setAlternateNumber(String alternateNumber) {
         this.alternateNumber = alternateNumber;
     }
 

@@ -1,30 +1,33 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package easymis.controllers;
 
 import com.jfoenix.controls.JFXTabPane;
 import easymis.models.entity.Booking;
+import easymis.models.entity.Employee;
 import easymis.models.entity.Expenses;
+import easymis.models.entity.Payroll;
 import easymis.models.entity.enumeration.EventType;
+import easymis.models.repository.EmployeeRepository;
 import easymis.models.repository.EventRepository;
 import easymis.models.repository.ExpensesRepository;
+import easymis.models.repository.PayrollRepository;
 import easymis.utils.DateHelper;
 import easymis.views.viewobjects.EventReportTableViewObject;
 import easymis.views.viewobjects.RevenueReportTableViewObject;
 import easymis.views.viewobjects.SalaryReportTableViewObject;
 import java.net.URL;
 import java.sql.Date;
+import java.time.Month;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TableColumn;
@@ -118,10 +121,6 @@ public class ReportsController implements Initializable {
     @FXML
     private TableColumn<SalaryReportTableViewObject, String> salary_bonus;
     @FXML
-    private DatePicker salaryFromDate;
-    @FXML
-    private DatePicker salaryToDate;
-    @FXML
     private TextField totalSalary;
     @FXML
     private TextField totalBonus;
@@ -129,6 +128,14 @@ public class ReportsController implements Initializable {
     ObservableList<SalaryReportTableViewObject> salaryObservableList = FXCollections.observableArrayList();
     ObservableList<EventReportTableViewObject> eventsObservableList = FXCollections.observableArrayList();
     ObservableList<RevenueReportTableViewObject> revenueObservableList = FXCollections.observableArrayList();
+    @FXML
+    private ComboBox<String> fromMonth;
+    @FXML
+    private ComboBox<String> fromYear;
+    @FXML
+    private ComboBox<String> toMonth;
+    @FXML
+    private ComboBox<String> toYear;
 
     /**
      * Initializes the controller class.
@@ -138,10 +145,12 @@ public class ReportsController implements Initializable {
         initializeRevenueTable();
         initializeEventTable();
         initializeSalaryTable();
+        initializeMonthYearComboBoxes();
     }
 
     @FXML
     private void generateRevenueReport(ActionEvent event) {
+        
         revenueObservableList.clear();
         double totalRevenueValue = new Double("0.00");
         double totalExpenseValue = new Double("0.00");
@@ -222,10 +231,56 @@ public class ReportsController implements Initializable {
 
     @FXML
     private void generateSalaryReport(ActionEvent event) {
+        
+        salaryObservableList.clear();
+        Double totalSalaryPaid = new Double("0.0");
+        Double bonusPaid = new Double("0.0");
+        Month fromMonthValue = Month.valueOf(fromMonth.getValue());
+        int fromYearValue = Integer.valueOf(fromYear.getValue());
+        Month toMonthValue = Month.valueOf(toMonth.getValue());
+        int toYearValue = Integer.valueOf(toYear.getValue());
+        List<Payroll> payrolls = PayrollRepository.getUniqueInstance().fetchPayrollByInterval(fromMonthValue, fromYearValue, toMonthValue, toYearValue);
+        if (payrolls != null && !payrolls.isEmpty()) {
+            for (Payroll payroll : payrolls) {
 
-        if (salaryFromDate.getValue() != null && salaryToDate != null) {
+                Employee employee = EmployeeRepository.getUniqueInstance().fetchEmployeeById(payroll.getEmployeeId());
 
+                String salaryDate = payroll.getMonth() + "/" + payroll.getYear();
+                SalaryReportTableViewObject viewObj = new SalaryReportTableViewObject(
+                        String.valueOf(payroll.getEmployeeId()),
+                        payroll.getFirstName(),
+                        payroll.getLastName(),
+                        employee.getEmployeeStatus() != null ? employee.getEmployeeStatus().name() : null,
+                        String.valueOf(payroll.getSalary()),
+                        salaryDate,
+                        String.valueOf(payroll.getBonus()));
+                salaryObservableList.add(viewObj);
+                totalSalaryPaid += payroll.getSalary();
+                bonusPaid += payroll.getBonus();
+                totalSalary.setText(String.valueOf(totalSalaryPaid));
+                totalBonus.setText(String.valueOf(bonusPaid));
+            }
+            salaryTable.setItems(salaryObservableList);
         }
+    }
+
+    private void initializeMonthYearComboBoxes() {
+        ObservableList<String> monthCombo = FXCollections.observableArrayList();
+        String currentMonth = DateHelper.getToday().toLocalDate().getMonth().name();
+        monthCombo.addAll(Stream.of(Month.values()).map(e -> e.name()).collect(Collectors.toList()));
+        fromMonth.setItems(monthCombo);
+        fromMonth.getSelectionModel().select(currentMonth);
+        toMonth.setItems(monthCombo);
+        toMonth.getSelectionModel().select(currentMonth);
+        ObservableList<String> yearCombo = FXCollections.observableArrayList();
+        int currentYear = DateHelper.getToday().toLocalDate().getYear();
+        for (int i = 2019; i < (currentYear + 50); i++) {
+            yearCombo.add(String.valueOf(i));
+        }
+        fromYear.setItems(yearCombo);
+        fromYear.getSelectionModel().select(String.valueOf(currentYear));
+        toYear.setItems(yearCombo);
+        toYear.getSelectionModel().select(String.valueOf(currentYear));
     }
 
     private RevenueReportTableViewObject buildRevenueTableViewObject(Booking booking) {

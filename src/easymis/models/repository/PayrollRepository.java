@@ -3,9 +3,14 @@ package easymis.models.repository;
 import easymis.models.entity.Payroll;
 import easymis.models.entity.TransactionStatus;
 import easymis.models.utils.QueryConstants;
+import java.time.Month;
+import java.time.YearMonth;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.Locale;
 
 /**
  *
@@ -62,7 +67,7 @@ public class PayrollRepository extends AbstractRepository {
         List<Payroll> payrolls = retrieve(QueryConstants.FETCH_PAYROLL_FOR_ID, Collections.singletonList(param), Payroll.class);
         return payrolls != null && !payrolls.isEmpty() ? payrolls.get(0) : null;
     }
-    
+
     public Payroll fetchPayrollByMonthYear(String month, int year) {
         QueryParams param1 = new QueryParams();
         param1.setParamName("month");
@@ -75,7 +80,7 @@ public class PayrollRepository extends AbstractRepository {
     }
 
     private boolean validateSameMonthPayroll(String month, int year) {
-        
+
         Payroll payroll = fetchPayrollByMonthYear(month, year);
         return payroll == null;
     }
@@ -83,8 +88,33 @@ public class PayrollRepository extends AbstractRepository {
     public List<Payroll> fetchAllPayrollRecords() {
 
         return retrieve(QueryConstants.FETCH_ALL_PAYROLL, null, Payroll.class);
-    } 
-    
+    }
 
-   
+    public List<Payroll> fetchPayrollByInterval(Month fromMonth, int fromYear, Month toMonth, int toYear) {
+        List<Payroll> filteredPayrolls = new ArrayList<>();
+        List<Payroll> allPayrolls = retrieve(QueryConstants.FETCH_ALL_PAYROLL, null, Payroll.class);
+        if (allPayrolls != null && !allPayrolls.isEmpty()) {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM-yyyy", Locale.ENGLISH);
+            YearMonth fromYearMonth = YearMonth.parse(getYearMonthString(fromMonth, fromYear), formatter);
+            YearMonth toYearMonth = YearMonth.parse(getYearMonthString(toMonth, toYear), formatter);
+            
+            for(Payroll payroll: allPayrolls){
+                YearMonth payrollYearMonth = YearMonth.parse(getYearMonthString(Month.valueOf(payroll.getMonth()), payroll.getYear()), formatter);
+                
+                if((payrollYearMonth.equals(fromYearMonth) || payrollYearMonth.isAfter(fromYearMonth)) && (payrollYearMonth.equals(toYearMonth) || payrollYearMonth.isBefore(toYearMonth))){
+                    filteredPayrolls.add(payroll);
+                }
+            }
+        }
+        return filteredPayrolls;
+    }
+
+    private String getYearMonthString(Month fromMonth, int fromYear) {
+        return new StringBuilder()
+                .append(fromMonth.name().substring(0,1))
+                .append(fromMonth.name().substring(1,3).toLowerCase())
+                .append("-")
+                .append(fromYear).toString();
+    }
+
 }
