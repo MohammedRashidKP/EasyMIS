@@ -78,15 +78,15 @@
                                        <children>
                                           <TableView fx:id="employeeTable" layoutX="14.0" layoutY="14.0" prefHeight="163.0" prefWidth="1119.0">
                                             <columns>
-                                              <TableColumn fx:id="col_EmpId" prefWidth="75.0" text="Emp Id" />
-                                              <TableColumn fx:id="col_FirstName" prefWidth="156.0" text="First Name" />
-                                                <TableColumn fx:id="col_LastName" prefWidth="151.0" text="Last Name" />
-                                                <TableColumn fx:id="col_Salary" prefWidth="137.0" text="Salary" />
-                                                <TableColumn fx:id="col_DOB" prefWidth="116.0" text="DOB" />
-                                                <TableColumn fx:id="col_PrevExp" prefWidth="89.0" text="Previous Exp" />
-                                                <TableColumn fx:id="col_JoiningDate" prefWidth="133.0" text="Joining Date" />
-                                                <TableColumn fx:id="col_ReleavingDate" prefWidth="139.0" text="Releaving Date" />
-                                                <TableColumn fx:id="col_EmpStatus" prefWidth="122.0" text="Emp Status" />
+                                              <TableColumn fx:id="col_EmpId" prefWidth="75.0" style="-fx-alignment: CENTER;" text="Emp Id" />
+                                              <TableColumn fx:id="col_FirstName" prefWidth="156.0" style="-fx-alignment: CENTER;" text="First Name" />
+                                                <TableColumn fx:id="col_LastName" prefWidth="151.0" style="-fx-alignment: CENTER;" text="Last Name" />
+                                                <TableColumn fx:id="col_Salary" prefWidth="137.0" style="-fx-alignment: CENTER;" text="Salary" />
+                                                <TableColumn fx:id="col_DOB" prefWidth="116.0" style="-fx-alignment: CENTER;" text="DOB" />
+                                                <TableColumn fx:id="col_PrevExp" prefWidth="89.0" style="-fx-alignment: CENTER;" text="Previous Exp" />
+                                                <TableColumn fx:id="col_JoiningDate" prefWidth="133.0" style="-fx-alignment: CENTER;" text="Joining Date" />
+                                                <TableColumn fx:id="col_ReleavingDate" prefWidth="139.0" style="-fx-alignment: CENTER;" text="Releaving Date" />
+                                                <TableColumn fx:id="col_EmpStatus" prefWidth="122.0" style="-fx-alignment: CENTER;" text="Emp Status" />
                                             </columns>
                                           </TableView>
                                        </children>
@@ -130,7 +130,7 @@
                                              </font>
                                           </Text>
                                           <Text layoutX="389.0" layoutY="82.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Net pay (Salary-Advance)" AnchorPane.leftAnchor="390.0" AnchorPane.topAnchor="70.0" />
-                                          <TextField fx:id="payrollNetPay" layoutX="538.0" layoutY="73.0" prefHeight="25.0" prefWidth="239.0" AnchorPane.topAnchor="65.0" />
+                                          <TextField fx:id="payrollNetPay" editable="false" layoutX="538.0" layoutY="73.0" prefHeight="25.0" prefWidth="239.0" AnchorPane.topAnchor="65.0" />
                                           <ComboBox fx:id="payrollMonth" layoutX="538.0" layoutY="31.0" prefHeight="25.0" prefWidth="122.0" />
                                           <ComboBox fx:id="payrollYear" layoutX="701.0" layoutY="31.0" prefHeight="25.0" prefWidth="74.0" />
                                           <Label layoutX="670.0" layoutY="35.0" text="Year:" />
@@ -144,14 +144,14 @@
                                        <children>
                                           <TableView fx:id="payrollTable" layoutX="14.0" layoutY="14.0" prefHeight="163.0" prefWidth="1119.0">
                                              <columns>
-                                                <TableColumn fx:id="col_PayrollEmployeeId" prefWidth="87.0" text="Emp Id" />
-                                                <TableColumn fx:id="col_payroll_firstName" prefWidth="165.0" text="First Name" />
-                                                <TableColumn fx:id="col_payrollLastName" prefWidth="169.0" text="Last Name" />
-                                                <TableColumn fx:id="col_PayrollMonth" prefWidth="148.0" text="Month" />
-                                                <TableColumn fx:id="col_payrollYear" prefWidth="117.0" text="Year" />
-                                                <TableColumn fx:id="col_payrollNetPay" prefWidth="128.0" text="Net Pay" />
-                                                <TableColumn fx:id="col_payrollBonus" prefWidth="135.0" text="Bonus" />
-                                                <TableColumn fx:id="col_payrollAdvance" prefWidth="169.0" text="Adavance" />
+                                                <TableColumn fx:id="col_PayrollEmployeeId" prefWidth="87.0" style="-fx-alignment: CENTER;" text="Emp Id" />
+                                                <TableColumn fx:id="col_payroll_firstName" prefWidth="165.0" style="-fx-alignment: CENTER;" text="First Name" />
+                                                <TableColumn fx:id="col_payrollLastName" prefWidth="169.0" style="-fx-alignment: CENTER;" text="Last Name" />
+                                                <TableColumn fx:id="col_PayrollMonth" prefWidth="148.0" style="-fx-alignment: CENTER;" text="Month" />
+                                                <TableColumn fx:id="col_payrollYear" prefWidth="117.0" style="-fx-alignment: CENTER;" text="Year" />
+                                                <TableColumn fx:id="col_payrollNetPay" prefWidth="128.0" style="-fx-alignment: CENTER;" text="Net Pay" />
+                                                <TableColumn fx:id="col_payrollBonus" prefWidth="135.0" style="-fx-alignment: CENTER;" text="Bonus" />
+                                                <TableColumn fx:id="col_payrollAdvance" prefWidth="169.0" style="-fx-alignment: CENTER;" text="Advance" />
                                                 <TableColumn fx:id="col_payrollId" editable="false" prefWidth="169.0" text="Adavance" visible="false" />
                                              </columns>
                                           </TableView>

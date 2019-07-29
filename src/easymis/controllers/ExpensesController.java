@@ -130,7 +130,7 @@ public class ExpensesController implements Initializable {
         Double totalRevenue = Double.valueOf("0.0");
         Double additionalRevenueValue = Double.valueOf("0.0");
         Double currentOtherRevenue = Double.valueOf("0.0");
-        if(totalBookingRevenue.getText() != null){
+        if(StringUtils.isNotNullCheckSpace(totalBookingRevenue.getText())){
             totalRevenue = Double.valueOf(totalBookingRevenue.getText());
         }
         if(StringUtils.isNotNullCheckSpace(additionalRevenue.getText())){
@@ -231,6 +231,7 @@ public class ExpensesController implements Initializable {
     }
 
     private void populateDetailsForExpense(String receiptNumber) {
+        clearAllFields();
         if (receiptNumber != null && !"".equals(receiptNumber)) {
             this.receiptNumber.setText(receiptNumber);
             Booking booking = EventRepository.getUniqueInstance().fetchByReceiptNumber(receiptNumber);
@@ -336,7 +337,7 @@ public class ExpensesController implements Initializable {
         totalBookingRevenue.setTextFormatter(new NumberFilter().decimalFilter());
         totalExpense.setTextFormatter(new NumberFilter().decimalFilter());
         balance.setTextFormatter(new NumberFilter().decimalFilter());
-        additionalRevenue.setTextFormatter(new NumberFilter().decimalFilter());
+        additionalRevenue.setTextFormatter(new NumberFilter().negativeDecimalFilter());
     }
     
     private void setFieldsEditable(boolean flag){
@@ -368,5 +369,25 @@ public class ExpensesController implements Initializable {
         }
         AlertHelper.showMessage(status);
         
+    }
+
+    private void clearAllFields() {
+        electricity.clear();
+        cleaning.clear();
+        dailyWages.clear();
+        security.clear();
+        diesel.clear();
+        tax.clear();
+        weddingGift.clear();
+        otherExpenses.clear();
+        bonus.clear();
+        purchaseKitchenAndStationary.clear();
+        maintenance.clear();
+        discounts.clear();
+        additionalRevenue.clear();
+        otherRevenue.clear();
+        totalBookingRevenue.clear();
+        totalExpense.clear();
+        balance.clear();
     }
 }

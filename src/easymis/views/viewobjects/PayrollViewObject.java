@@ -6,7 +6,7 @@ package easymis.views.viewobjects;
  */
 public class PayrollViewObject {
     
-    private String payrollId;
+    private String employeeId;
     
     private String firstName;
     
@@ -23,7 +23,7 @@ public class PayrollViewObject {
     private String advance;
 
     public PayrollViewObject(String payrollId, String firstName, String lastName, String month, String year, String netPay, String bonus, String advance) {
-        this.payrollId = payrollId;
+        this.employeeId = payrollId;
         this.firstName = firstName;
         this.lastName = lastName;
         this.month = month;
@@ -33,12 +33,12 @@ public class PayrollViewObject {
         this.advance = advance;
     }
 
-    public String getPayrollId() {
-        return payrollId;
+    public String getEmployeeId() {
+        return employeeId;
     }
 
-    public void setPayrollId(String payrollId) {
-        this.payrollId = payrollId;
+    public void setEmployeeId(String employeeId) {
+        this.employeeId = employeeId;
     }
 
     public String getFirstName() {

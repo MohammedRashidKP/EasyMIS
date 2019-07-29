@@ -24,8 +24,14 @@ public class Payroll extends DomainObject{
     @Column(name = "EMPLOYEE_ID")
     private int employeeId;
     
+    @Column(name = "FIRST_NAME")
+    private String firstName;
+    
+    @Column(name = "LAST_NAME")
+    private String lastName;
+    
     @Column(name = "SALARY_MONTH")
-    private int month;
+    private String month;
     
     @Column(name = "SALARY_YEAR")
     private int year;
@@ -58,11 +64,11 @@ public class Payroll extends DomainObject{
         this.employeeId = employeeId;
     }
 
-    public int getMonth() {
+    public String getMonth() {
         return month;
     }
 
-    public void setMonth(int month) {
+    public void setMonth(String month) {
         this.month = month;
     }
 
@@ -105,6 +111,20 @@ public class Payroll extends DomainObject{
     public void setNetPay(double netPay) {
         this.netPay = netPay;
     }
-    
-    
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
 }

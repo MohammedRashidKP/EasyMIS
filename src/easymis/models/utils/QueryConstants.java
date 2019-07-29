@@ -58,6 +58,8 @@ public class QueryConstants {
     public static final String FETCH_ALL_PAYROLL = "SELECT p from Payroll p";
     
     public static final String FETCH_PAYROLL_FOR_ID = "SELECT p from Payroll p where p.id = :id";
+        
+    public static final String FETCH_PAYROLL_FOR_MONTH_YEAR = "SELECT p from Payroll p where p.month = :month and p.year = :year";
     
     public static final String FETCH_BOOKINGS_BETWEEN_DATES = "SELECT b from Booking b where b.eventDate BETWEEN :startDate AND :endDate";
 }

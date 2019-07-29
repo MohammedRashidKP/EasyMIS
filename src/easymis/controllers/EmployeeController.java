@@ -2,9 +2,11 @@ package easymis.controllers;
 
 import com.jfoenix.controls.JFXTabPane;
 import easymis.models.entity.Employee;
+import easymis.models.entity.Payroll;
 import easymis.models.entity.TransactionStatus;
 import easymis.models.entity.enumeration.EmployeeStatus;
 import easymis.models.repository.EmployeeRepository;
+import easymis.models.repository.PayrollRepository;
 import easymis.utils.AlertHelper;
 import easymis.utils.DateHelper;
 import easymis.utils.NumberFilter;
@@ -149,7 +151,11 @@ public class EmployeeController implements Initializable {
     private Button editButton;
     @FXML
     private Button btnEmployeeSubmit;
+    
     ObservableList<EmployeeViewObject> employeeObservableList = FXCollections.observableArrayList();
+    
+    ObservableList<PayrollViewObject> payrollObservableList = FXCollections.observableArrayList();
+    
     @FXML
     private Tab panelTabEmployee;
     @FXML
@@ -251,6 +257,7 @@ public class EmployeeController implements Initializable {
         mobileNumber.setTextFormatter(new NumberFilter().filter());
         alternateNumber.setTextFormatter(new NumberFilter().filter());
         previousExperience.setTextFormatter(new NumberFilter().filter());
+        payrollEmployeeId.setTextFormatter(new NumberFilter().filter());
         salary.setTextFormatter(new NumberFilter().decimalFilter());
 
     }
@@ -392,7 +399,7 @@ public class EmployeeController implements Initializable {
         alternateNumber.clear();
         salary.clear();
         previousExperience.clear();
-        employeeStatus.setValue(null);
+        initializeEmployeeStatusComboBox();
         joininDate.setValue(null);
         releavingDate.setValue(null);
         dateOfBirth.setValue(null);
@@ -425,38 +432,86 @@ public class EmployeeController implements Initializable {
 
     private void initializePayrollTab() {
         
+        clearAllPayrollFields();
         initializePayrollTable();
         initializeMonthYearComboBoxes();
         payrollEmployeeId.setTextFormatter(new NumberFilter().filter());
         payrollEmployeeId.addEventFilter(KeyEvent.KEY_PRESSED, onPayrollEmployeeIdChangeChange());
+        payrollBonus.addEventFilter(KeyEvent.KEY_PRESSED, onPayrollBonusChange());
+        payrollAdvance.addEventFilter(KeyEvent.KEY_PRESSED, onPayrollAdvanceChange());
         payrollAdvance.setTextFormatter(new NumberFilter().decimalFilter());
         payrollBonus.setTextFormatter(new NumberFilter().decimalFilter());
         payrollSalary.setTextFormatter(new NumberFilter().decimalFilter());
         payrollNetPay.setTextFormatter(new NumberFilter().decimalFilter());
     }
-    
+
     public EventHandler<KeyEvent> onPayrollEmployeeIdChangeChange() {
         return (KeyEvent e) -> {
             if (e.getCode() == KeyCode.TAB || e.getCode() == KeyCode.ENTER) {
                 String employeeIdValue = payrollEmployeeId.getText();
-                populateEmployeeDetailsForPayroll(Integer.valueOf(employeeIdValue));
+                if(StringUtils.isNotNullCheckSpace(employeeIdValue))
+                    populateEmployeeDetailsForPayroll(Integer.valueOf(employeeIdValue));
+            }
+        };
+    }
+    
+    public EventHandler<KeyEvent> onPayrollAdvanceChange() {
+        return (KeyEvent e) -> {
+            if (e.getCode() == KeyCode.TAB || e.getCode() == KeyCode.ENTER) {
+                if(StringUtils.isNotNullCheckSpace(payrollAdvance.getText())){
+                    refreshNetPayAmount();
+                }
+            }
+        };
+    }
+    
+    public EventHandler<KeyEvent> onPayrollBonusChange() {
+        return (KeyEvent e) -> {
+            if (e.getCode() == KeyCode.TAB || e.getCode() == KeyCode.ENTER) {
+                if(StringUtils.isNotNullCheckSpace(payrollBonus.getText())){
+                    refreshNetPayAmount();
+                }
+                
             }
         };
     }
 
-    private void initializePayrollTable() {
+    private void refreshNetPayAmount() throws NumberFormatException {
+        double bonus = Double.valueOf("00.0");
+        if(StringUtils.isNotNullCheckSpace(payrollBonus.getText()))
+            bonus = Double.valueOf(payrollBonus.getText());
+        double advance = Double.valueOf("00.0");
+        if(StringUtils.isNotNullCheckSpace(payrollAdvance.getText()))
+            advance = Double.valueOf(payrollAdvance.getText());
+        double salaryValue = Double.valueOf("00.0");
+        if(StringUtils.isNotNullCheckSpace(payrollSalary.getText()))
+            salaryValue = Double.valueOf(payrollSalary.getText());
+        payrollNetPay.setText(String.valueOf((salaryValue+bonus) - advance));
     }
-    
+
+    private void initializePayrollTable() {
+        col_PayrollEmployeeId.setCellValueFactory(new PropertyValueFactory<>("employeeId"));
+        col_PayrollMonth.setCellValueFactory(new PropertyValueFactory<>("month"));
+        col_payrollYear.setCellValueFactory(new PropertyValueFactory<>("year"));
+        col_payroll_firstName.setCellValueFactory(new PropertyValueFactory<>("firstName"));
+        col_payrollLastName.setCellValueFactory(new PropertyValueFactory<>("lastName"));
+        col_payrollAdvance.setCellValueFactory(new PropertyValueFactory<>("advance"));
+        col_payrollBonus.setCellValueFactory(new PropertyValueFactory<>("bonus"));
+        col_payrollNetPay.setCellValueFactory(new PropertyValueFactory<>("netPay"));
+        
+        populatePayrollTable();
+    }
+
     private void initializeMonthYearComboBoxes() {
         ObservableList<String> monthCombo = FXCollections.observableArrayList();
         String currentMonth = DateHelper.getToday().toLocalDate().getMonth().name();
         monthCombo.addAll(Stream.of(Month.values()).map(e -> e.name()).collect(Collectors.toList()));
         payrollMonth.setItems(monthCombo);
         payrollMonth.getSelectionModel().select(currentMonth);
-        
+
         ObservableList<String> yearCombo = FXCollections.observableArrayList();
         int currentYear = DateHelper.getToday().toLocalDate().getYear();
-        for(int i = 2019; i < (currentYear+50); i++){
+        for (int i = 2019; i < (currentYear + 50); i++) {
             yearCombo.add(String.valueOf(i));
         }
         payrollYear.setItems(yearCombo);
@@ -465,29 +520,163 @@ public class EmployeeController implements Initializable {
 
     private void populateEmployeeDetailsForPayroll(int employeeId) {
         Employee employee = EmployeeRepository.getUniqueInstance().fetchEmployeeById(employeeId);
-        if(employee != null){
+        if (employee != null) {
             payrollFirstName.setText(employee.getFirstName());
             payrollLastName.setText(employee.getLastName());
             payrollJoiningDate.setValue(employee.getJoiningDate() != null ? employee.getJoiningDate().toLocalDate() : null);
             payrollEmployeeStatus.setText(employee.getEmployeeStatus().toString());
             payrollSalary.setText(String.valueOf(employee.getSalary()));
+            payrollBonus.setText("00.0");
+            payrollAdvance.setText("00.0");
+            Payroll payroll = PayrollRepository.getUniqueInstance().fetchPayrollByMonthYear(
+                    payrollMonth.getValue(), 
+                    Integer.valueOf(payrollYear.getValue()));
+            if(payroll != null){
+                payrollAdvance.setText(String.valueOf(payroll.getAdvance()));
+                payrollBonus.setText(String.valueOf(payroll.getBonus()));
+                payrollId.setText(String.valueOf(payroll.getId()));
+                double salaryValue = payroll.getSalary();
+                if(payroll.getSalary() ==0){
+                    salaryValue = employee.getSalary();
+                }else if(payroll.getSalary() > 0){
+                    makePayrollFieldsEditable(false);
+                } 
+                double netPay = (salaryValue + payroll.getBonus()) - payroll.getAdvance();
+                payrollNetPay.setText(String.valueOf(netPay));                    
+            }else{
+                payrollNetPay.setText(String.valueOf(employee.getSalary()));
+            }
+            payrollEmployeeId.setEditable(false);
+            payrollMonth.setDisable(true);
+            payrollYear.setDisable(true);
+        }else{
+            payrollEmployeeId.clear();
         }
     }
 
-
     @FXML
     private void onPayrollResetClick(ActionEvent event) {
+        
+       clearAllPayrollFields();
     }
 
     @FXML
     private void onPayrollEditClick(ActionEvent event) {
+        makePayrollFieldsEditable(true);
     }
 
     @FXML
     private void onPaySalaryButtonClick(ActionEvent event) {
+        if (StringUtils.isNotNullCheckSpace(payrollNetPay.getText())
+                && StringUtils.isNotNullCheckSpace(payrollEmployeeId.getText())) {
+            Payroll payroll = new Payroll();
+            payroll.setEmployeeId(Integer.valueOf(payrollEmployeeId.getText()));
+            payroll.setFirstName(payrollFirstName.getText());
+            payroll.setLastName(payrollLastName.getText());
+            payroll.setMonth(payrollMonth.getValue());
+            payroll.setYear(Integer.valueOf(payrollYear.getValue()));
+            payroll.setSalary(Double.valueOf(payrollSalary.getText()));
+            payroll.setNetPay(Double.valueOf(payrollNetPay.getText()));
+            payroll.setAdvance(Double.valueOf(payrollAdvance.getText()));
+            payroll.setBonus(Double.valueOf(payrollBonus.getText()));
+            TransactionStatus status;
+            if (StringUtils.isNotNullCheckSpace(payrollId.getText())) {
+                payroll.setId(Integer.valueOf(payrollId.getText()));
+                status = PayrollRepository.getUniqueInstance().update(payroll);
+            }else{
+                status = PayrollRepository.getUniqueInstance().create(payroll);
+            }
+            AlertHelper.showMessage(status);
+            if (status.isSuccess()) {
+                makePayrollFieldsEditable(false);
+                populatePayrollTable();
+                        
+            }
+        }
     }
 
     @FXML
     private void onPayAdvanceButtonClick(ActionEvent event) {
+
+        if (StringUtils.isNotNullCheckSpace(payrollAdvance.getText())
+                && StringUtils.isNotNullCheckSpace(payrollEmployeeId.getText()) 
+                && Double.valueOf(payrollAdvance.getText()) > 0) {
+            Payroll payroll = new Payroll();
+            payroll.setEmployeeId(Integer.valueOf(payrollEmployeeId.getText()));
+            payroll.setFirstName(payrollFirstName.getText());
+            payroll.setLastName(payrollLastName.getText());
+            payroll.setMonth(payrollMonth.getValue());
+            payroll.setYear(Integer.valueOf(payrollYear.getValue()));
+            payroll.setAdvance(Double.valueOf(payrollAdvance.getText()));
+            TransactionStatus status;
+            if (StringUtils.isNotNullCheckSpace(payrollId.getText())) {
+                payroll.setId(Integer.valueOf(payrollId.getText()));
+                status = PayrollRepository.getUniqueInstance().update(payroll);
+            }else{
+                status = PayrollRepository.getUniqueInstance().create(payroll);
+            }
+            AlertHelper.showMessage(status);
+            if (status.isSuccess()) {
+                makePayrollFieldsEditable(false);
+                populatePayrollTable();
+            }
+        }
+    }
+
+    private void makePayrollFieldsEditable(boolean flag) {
+        
+        payrollAdvance.setEditable(flag);
+        payrollBonus.setEditable(flag);
+        payrollMonth.setDisable(!flag);
+        payrollYear.setDisable(!flag);
+        btnAdvancePay.setDisable(!flag);
+        btnSalaryPay.setDisable(!flag);
+        btnPayrollEdit.setDisable(!flag);
+    }
+
+    private void clearAllPayrollFields() {
+         payrollEmployeeId.clear();
+        payrollAdvance.clear();
+        payrollBonus.clear();
+        payrollNetPay.clear();
+        payrollSalary.clear();
+        initializeMonthYearComboBoxes();
+        btnAdvancePay.setDisable(false);
+        btnSalaryPay.setDisable(false);
+        btnPayrollEdit.setDisable(false);
+        payrollId.setText("");
+        payrollFirstName.clear();
+        payrollLastName.clear();
+        payrollJoiningDate.setValue(null);
+        payrollEmployeeStatus.setText("");
+        makePayrollFieldsEditable(true);
+        payrollEmployeeId.setEditable(true);
+    }
+
+    private void populatePayrollTable() {
+        payrollObservableList.clear();
+        List<Payroll> payrolls = PayrollRepository.getUniqueInstance().fetchAllPayrollRecords();
+        if(payrolls != null && !payrolls.isEmpty()){
+            
+            payrolls.stream().forEach((payroll) -> {
+                payrollObservableList.add(buildPayrollViewObject(payroll));
+            });
+            payrollTable.setItems(payrollObservableList);
+        
+        }
+    }
+    
+    private PayrollViewObject buildPayrollViewObject(Payroll payroll){
+        
+        PayrollViewObject payrollViewObject = new PayrollViewObject(
+                String.valueOf(payroll.getEmployeeId()), 
+                payroll.getFirstName(), 
+                payroll.getLastName(), 
+                payroll.getMonth(), 
+                String.valueOf(payroll.getYear()), 
+                String.valueOf(payroll.getNetPay()), 
+                String.valueOf(payroll.getBonus()),
+                String.valueOf(payroll.getAdvance()));
+        return payrollViewObject;
     }
 }
