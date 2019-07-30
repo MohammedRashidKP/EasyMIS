@@ -54,6 +54,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 
 /**
@@ -153,6 +154,8 @@ public class EventBookingViewController implements Initializable {
     private Text bookingStatus;
     @FXML
     private Text bookingId;
+    @FXML
+    private Pane diamondNote;
 
     /**
      * Initializes the controller class.
@@ -188,6 +191,8 @@ public class EventBookingViewController implements Initializable {
         if (status.isSuccess()) {
             makeFieldsEditable(false);
             blockedBy.setText(new EventBlockingService().getEventBlockedBy(bookingDetail.getEvents()));
+            if(EventCategory.DIAMOND == bookingDetail.getEventCategory())
+                diamondNote.setVisible(true);
         }
 
     }
@@ -315,6 +320,8 @@ public class EventBookingViewController implements Initializable {
         if (status.isSuccess()) {
             makeFieldsEditable(false);
             bookingStatus.setText(eventDetail.getBookingStatus().toString());
+            if(EventCategory.DIAMOND == eventDetail.getEventCategory())
+                diamondNote.setVisible(true);
         }
 
     }
@@ -380,12 +387,8 @@ public class EventBookingViewController implements Initializable {
                 eventDate.getEditor().setStyle("-fx-opacity: 1");
                 this.receiptNumber.setEditable(false);
                 totalAmount.setText(String.valueOf(booking.getBookingCost()));
-                if (BookingStatus.BOOKED.equals(booking.getBookingStatus())) {
-                } else {
-                }
-                if (BookingStatus.BLOCKING_CANCELLED.equals(booking.getBookingStatus()) || BookingStatus.BOOKING_CANCELLED.equals(booking.getBookingStatus())) {
-                } else {
-                }
+                if(EventCategory.DIAMOND == booking.getEventCategory())
+                    diamondNote.setVisible(true);
                 blockedBy.setText(new EventBlockingService().getEventBlockedBy(booking.getEvents()));
                 if (booking.getEvents() != null && !booking.getEvents().isEmpty()) {
                     for (Event event : booking.getEvents()) {
@@ -494,11 +497,16 @@ public class EventBookingViewController implements Initializable {
         state.clear();
         pinCode.clear();
         wedding.setSelected(false);
+        wedding.setUserData(null);
         mehandi.setSelected(false);
+        mehandi.setUserData(null);
         reception.setSelected(false);
+        reception.setUserData(null);
         acRequired.setSelected(false);
         ishaHall.setSelected(false);
+        ishaHall.setUserData(null);
         niceHall.setSelected(false);
+        niceHall.setUserData(null);
         additionalAC.setSelected(false);
         eventDate.setValue(null);
         primaryMobileNumber.clear();
@@ -511,6 +519,7 @@ public class EventBookingViewController implements Initializable {
         blockedBy.setText("");
         bookingId.setText("");
         bookingStatus.setText("");
+        diamondNote.setVisible(false);
     }
 
     private void cancelEvent() {

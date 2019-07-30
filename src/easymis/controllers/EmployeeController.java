@@ -529,6 +529,7 @@ public class EmployeeController implements Initializable {
             payrollBonus.setText("00.0");
             payrollAdvance.setText("00.0");
             Payroll payroll = PayrollRepository.getUniqueInstance().fetchPayrollByMonthYear(
+                    employee.getEmployeeId(),
                     payrollMonth.getValue(), 
                     Integer.valueOf(payrollYear.getValue()));
             if(payroll != null){

@@ -29,7 +29,7 @@ public class PayrollRepository extends AbstractRepository {
 
     public TransactionStatus create(Payroll payroll) {
         TransactionStatus status;
-        if (validateSameMonthPayroll(payroll.getMonth(), payroll.getYear())) {
+        if (validateSameMonthPayroll(payroll.getEmployeeId(), payroll.getMonth(), payroll.getYear())) {
             try {
                 return persist(payroll);
             } catch (Exception ex) {
@@ -68,20 +68,23 @@ public class PayrollRepository extends AbstractRepository {
         return payrolls != null && !payrolls.isEmpty() ? payrolls.get(0) : null;
     }
 
-    public Payroll fetchPayrollByMonthYear(String month, int year) {
+    public Payroll fetchPayrollByMonthYear(int employeeId, String month, int year) {
         QueryParams param1 = new QueryParams();
         param1.setParamName("month");
         param1.setParamValue(month);
         QueryParams param2 = new QueryParams();
         param2.setParamName("year");
         param2.setParamValue(year);
-        List<Payroll> payrolls = retrieve(QueryConstants.FETCH_PAYROLL_FOR_MONTH_YEAR, Arrays.asList(param1, param2), Payroll.class);
+        QueryParams param3 = new QueryParams();
+        param3.setParamName("employeeId");
+        param3.setParamValue(employeeId);
+        List<Payroll> payrolls = retrieve(QueryConstants.FETCH_PAYROLL_FOR_MONTH_YEAR, Arrays.asList(param1, param2, param3), Payroll.class);
         return payrolls != null && !payrolls.isEmpty() ? payrolls.get(0) : null;
     }
 
-    private boolean validateSameMonthPayroll(String month, int year) {
+    private boolean validateSameMonthPayroll(int employeeId, String month, int year) {
 
-        Payroll payroll = fetchPayrollByMonthYear(month, year);
+        Payroll payroll = fetchPayrollByMonthYear(employeeId, month, year);
         return payroll == null;
     }
 

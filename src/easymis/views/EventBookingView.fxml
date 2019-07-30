@@ -10,7 +10,6 @@
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.effect.Glow?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -50,7 +49,7 @@
                         </Tab>
                         <Tab fx:id="panelTabAddEvent" text="Add/Update Event">
                           <content>
-                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: #f8f8ff;">
+                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: #ffffff;">
                                  <children>
                                     <Text layoutX="477.0" layoutY="62.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Receipt Number" AnchorPane.leftAnchor="20.0" />
                                     <TextField fx:id="receiptNumber" layoutX="500.0" layoutY="39.0" minHeight="25.0" prefHeight="25.0" prefWidth="240.0" AnchorPane.leftAnchor="120.0" AnchorPane.topAnchor="45.0">
@@ -193,19 +192,22 @@
                                     <Text fx:id="bookingId" layoutX="1020.0" layoutY="434.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="96.0" AnchorPane.leftAnchor="1020.0" AnchorPane.topAnchor="420.0" />
                                     <Text layoutX="927.0" layoutY="463.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Current Status: " AnchorPane.topAnchor="450.0" />
                                     <Text layoutX="927.0" layoutY="435.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Booking Id: " AnchorPane.topAnchor="420.0" />
-                                    <TextArea layoutX="901.0" layoutY="119.0" prefHeight="179.0" prefWidth="243.0" style="-fx-background-color: #ffffff;" />
-                                    <Text layoutX="902.0" layoutY="137.0" strokeType="OUTSIDE" strokeWidth="0.0" text="NOTE:" AnchorPane.leftAnchor="910.0">
-                                       <font>
-                                          <Font name="System Bold" size="12.0" />
-                                       </font>
-                                    </Text>
-                                    <Text layoutX="904.0" layoutY="155.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Please collect the below charges if any:" underline="true" AnchorPane.leftAnchor="910.0" />
-                                    <Text layoutX="906.0" layoutY="185.0" strokeType="OUTSIDE" strokeWidth="0.0" text="1- Additional power for Photograhy " AnchorPane.leftAnchor="910.0" />
-                                    <Text layoutX="908.0" layoutY="206.0" strokeType="OUTSIDE" strokeWidth="0.0" text="2- Additional power for Musical evening" AnchorPane.leftAnchor="910.0" />
-                                    <Text layoutX="909.0" layoutY="227.0" strokeType="OUTSIDE" strokeWidth="0.0" text="3- Power for Sugar candy / Popcorn" AnchorPane.leftAnchor="910.0" />
-                                    <Text layoutX="909.0" layoutY="248.0" strokeType="OUTSIDE" strokeWidth="0.0" text="4-Catering service charge" AnchorPane.leftAnchor="910.0" />
-                                    <Text layoutX="910.0" layoutY="269.0" strokeType="OUTSIDE" strokeWidth="0.0" text="5- Stage Service charge" AnchorPane.leftAnchor="910.0" />
-                                    <Text layoutX="910.0" layoutY="289.0" strokeType="OUTSIDE" strokeWidth="0.0" text="6- Any other charges" AnchorPane.leftAnchor="910.0" />
+                                    <Pane fx:id="diamondNote" layoutX="901.0" layoutY="129.0" prefHeight="200.0" prefWidth="239.0" visible="false">
+                                       <children>
+                                          <Text layoutX="17.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" text="NOTE:">
+                                             <font>
+                                                <Font name="System Bold" size="12.0" />
+                                             </font>
+                                          </Text>
+                                          <Text layoutX="18.0" layoutY="45.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Please collect the below charges if any:" underline="true" />
+                                          <Text layoutX="17.0" layoutY="72.0" strokeType="OUTSIDE" strokeWidth="0.0" text="1- Additional power for Photography " />
+                                          <Text layoutX="18.0" layoutY="95.0" strokeType="OUTSIDE" strokeWidth="0.0" text="2- Additional power for Musical evening" />
+                                          <Text layoutX="19.0" layoutY="117.0" strokeType="OUTSIDE" strokeWidth="0.0" text="3- Power for Sugar candy / Popcorn" />
+                                          <Text layoutX="19.0" layoutY="138.0" strokeType="OUTSIDE" strokeWidth="0.0" text="4- Catering service charge" />
+                                          <Text layoutX="19.0" layoutY="159.0" strokeType="OUTSIDE" strokeWidth="0.0" text="5- Stage Service charge" />
+                                          <Text layoutX="19.0" layoutY="179.0" strokeType="OUTSIDE" strokeWidth="0.0" text="6- Any other charges" />
+                                       </children>
+                                    </Pane>
                                  </children>
                               </AnchorPane>
                           </content>
