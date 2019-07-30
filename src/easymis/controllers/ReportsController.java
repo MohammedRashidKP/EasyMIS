@@ -150,7 +150,7 @@ public class ReportsController implements Initializable {
 
     @FXML
     private void generateRevenueReport(ActionEvent event) {
-        
+
         revenueObservableList.clear();
         double totalRevenueValue = new Double("0.00");
         double totalExpenseValue = new Double("0.00");
@@ -161,14 +161,16 @@ public class ReportsController implements Initializable {
                     Date.valueOf(revenueToDate.getValue()));
 
             if (bookings != null && !bookings.isEmpty()) {
-
                 revenueObservableList.clear();
                 for (Booking booking : bookings) {
                     RevenueReportTableViewObject viewObj = buildRevenueTableViewObject(booking);
-                    revenueObservableList.add(viewObj);
-                    totalRevenueValue += Double.valueOf(viewObj.getTotalRevenue());
-                    totalExpenseValue += Double.valueOf(viewObj.getTotalExpense());
-                    totalProfit += Double.valueOf(viewObj.getProfit());
+                    if (viewObj != null) {
+                        revenueObservableList.add(viewObj);
+                        totalRevenueValue += Double.valueOf(viewObj.getTotalRevenue());
+                        totalExpenseValue += Double.valueOf(viewObj.getTotalExpense());
+                        totalProfit += Double.valueOf(viewObj.getProfit());
+                    }
+
                 }
                 revenueTable.setItems(revenueObservableList);
             }
@@ -231,7 +233,7 @@ public class ReportsController implements Initializable {
 
     @FXML
     private void generateSalaryReport(ActionEvent event) {
-        
+
         salaryObservableList.clear();
         Double totalSalaryPaid = new Double("0.0");
         Double bonusPaid = new Double("0.0");
@@ -285,26 +287,22 @@ public class ReportsController implements Initializable {
 
     private RevenueReportTableViewObject buildRevenueTableViewObject(Booking booking) {
 
+        RevenueReportTableViewObject revenueReportTableViewObject = null;
         Expenses expense = ExpensesRepository.getUniqueInstance().fetchExpensesForReceiptNumber(booking.getReceiptNumber());
-        String settlementStatus = "OPEN";
-        double totalRevenueValue = booking.getBookingCost();
-        double totalExpenseValue = new Double("0.00");
-        double profitValue;
         if (expense != null) {
-            settlementStatus = "CLOSED";
-            totalRevenueValue = expense.getTotalRevenue();
-            totalExpenseValue = expense.getTotalExpense();
-        }
-        profitValue = totalRevenueValue - totalExpenseValue;
-        RevenueReportTableViewObject revenueReportTableViewObject = new RevenueReportTableViewObject(
-                String.valueOf(booking.getReceiptNumber()),
-                DateHelper.format(booking.getEventDate()),
-                settlementStatus,
-                booking.getEventCategory().toString(),
-                String.valueOf(totalRevenueValue),
-                String.valueOf(totalExpenseValue),
-                String.valueOf(profitValue));
+            double totalRevenueValue = booking.getBookingCost();
+            double totalExpenseValue = expense.getTotalExpense();
 
+            double profitValue = totalRevenueValue - totalExpenseValue;
+            revenueReportTableViewObject = new RevenueReportTableViewObject(
+                    String.valueOf(booking.getReceiptNumber()),
+                    DateHelper.format(booking.getEventDate()),
+                    "CLOSED",
+                    booking.getEventCategory().toString(),
+                    String.valueOf(totalRevenueValue),
+                    String.valueOf(totalExpenseValue),
+                    String.valueOf(profitValue));
+        }
         return revenueReportTableViewObject;
     }
 
