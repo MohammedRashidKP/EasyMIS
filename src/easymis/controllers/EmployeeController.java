@@ -550,6 +550,9 @@ public class EmployeeController implements Initializable {
             payrollEmployeeId.setEditable(false);
             payrollMonth.setDisable(true);
             payrollYear.setDisable(true);
+            if(EmployeeStatus.RESIGNED == employee.getEmployeeStatus()){
+                makePayrollFieldsEditable(false);
+            }
         }else{
             payrollEmployeeId.clear();
         }

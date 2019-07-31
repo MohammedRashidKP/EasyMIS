@@ -56,8 +56,6 @@ public class SettingsController implements Initializable {
     private JFXTextField additionalAC;
     @FXML
     private JFXTextField nicaHall;
-    private JFXTextField dailyWages;
-    private JFXTextField security;
     @FXML
     private JFXButton saveButton;
     @FXML
@@ -211,18 +209,6 @@ public class SettingsController implements Initializable {
             setting.setAttributeValue(nicaHall.getText());
             settingsList.add(setting);
         }
-        if (StringUtils.isNotNullCheckSpace(dailyWages.getText())) {
-            Settings setting = new Settings();
-            setting.setAttribute(SettingsConstants.DAILY_WAGES);
-            setting.setAttributeValue(dailyWages.getText());
-            settingsList.add(setting);
-        }
-        if (StringUtils.isNotNullCheckSpace(security.getText())) {
-            Settings setting = new Settings();
-            setting.setAttribute(SettingsConstants.SECURITY);
-            setting.setAttributeValue(security.getText());
-            settingsList.add(setting);
-        }
         return settingsList;
     }
 
@@ -236,8 +222,6 @@ public class SettingsController implements Initializable {
         normalAC.setTextFormatter(new NumberFilter().decimalFilter());
         additionalAC.setTextFormatter(new NumberFilter().decimalFilter());
         nicaHall.setTextFormatter(new NumberFilter().decimalFilter());
-        dailyWages.setTextFormatter(new NumberFilter().decimalFilter());
-        security.setTextFormatter(new NumberFilter().decimalFilter());
         newPin.setTextFormatter(new NumberFilter().decimalFilter());
         confirmationPin.setTextFormatter(new NumberFilter().decimalFilter());
     }
@@ -252,8 +236,6 @@ public class SettingsController implements Initializable {
         normalAC.setEditable(flag);
         additionalAC.setEditable(flag);
         nicaHall.setEditable(flag);
-        dailyWages.setEditable(flag);
-        security.setEditable(flag);
     }
 
     private void populateSettings(List<Settings> settings) {
@@ -276,11 +258,7 @@ public class SettingsController implements Initializable {
                 normalAC.setText(setting.getAttributeValue());
             } else if(setting.getAttribute().equals(EventType.ADDITIONAL_AC.toString())){
                 additionalAC.setText(setting.getAttributeValue());
-            } else if(setting.getAttribute().equals(SettingsConstants.DAILY_WAGES)){
-                dailyWages.setText(setting.getAttributeValue());
-            } else if(setting.getAttribute().equals(SettingsConstants.SECURITY)){
-                security.setText(setting.getAttributeValue());
-            } 
+            }
         }
     }
 }

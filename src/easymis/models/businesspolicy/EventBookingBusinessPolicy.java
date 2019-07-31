@@ -25,7 +25,7 @@ public class EventBookingBusinessPolicy {
     
     public List<ValidationError> validateBooking(Booking eventDetails) {
         
-       // validateIfEventDateIsInPast(eventDetails.getEventDate());
+        validateIfEventDateIsInPast(eventDetails.getEventDate());
         validateDateAvailability(eventDetails);
         validateSameBookingConstraints(eventDetails);
         if (eventDetails.getBookingId() == null) {
