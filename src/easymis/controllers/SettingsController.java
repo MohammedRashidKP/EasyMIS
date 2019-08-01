@@ -56,9 +56,7 @@ public class SettingsController implements Initializable {
     private JFXTextField additionalAC;
     @FXML
     private JFXTextField nicaHall;
-    @FXML
     private JFXTextField dailyWages;
-    @FXML
     private JFXTextField security;
     @FXML
     private JFXButton saveButton;
