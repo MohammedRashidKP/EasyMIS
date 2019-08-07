@@ -87,8 +87,6 @@ public class EventBookingViewController implements Initializable {
     @FXML
     private CheckBox reception;
     @FXML
-    private CheckBox acRequired;
-    @FXML
     private CheckBox ishaHall;
     @FXML
     private CheckBox niceHall;
@@ -156,6 +154,8 @@ public class EventBookingViewController implements Initializable {
     private Text bookingId;
     @FXML
     private Pane diamondNote;
+    @FXML
+    private TextField remarks;
 
     /**
      * Initializes the controller class.
@@ -223,6 +223,7 @@ public class EventBookingViewController implements Initializable {
         booking.setCreatedDate(DateHelper.getToday());
         getEventDetails(booking);
         booking.setBookingCost(EventCostService.getTotalEventCost(booking.getEvents()));
+        booking.setRemarks(remarks.getText());
         return booking;
     }
 
@@ -262,7 +263,6 @@ public class EventBookingViewController implements Initializable {
 
     private EventTypeDetail buildEventCategoryDetail() {
         EventTypeDetail eventCategoryDetail = new EventTypeDetail();
-        eventCategoryDetail.setAcSelected(acRequired.isSelected());
         eventCategoryDetail.setAdditionalACSelected(additionalAC.isSelected());
         eventCategoryDetail.setIshaSelected(ishaHall.isSelected());
         eventCategoryDetail.setMehandiSelected(mehandi.isSelected());
@@ -390,6 +390,7 @@ public class EventBookingViewController implements Initializable {
                 if(EventCategory.DIAMOND == booking.getEventCategory())
                     diamondNote.setVisible(true);
                 blockedBy.setText(new EventBlockingService().getEventBlockedBy(booking.getEvents()));
+                remarks.setText(booking.getRemarks());
                 if (booking.getEvents() != null && !booking.getEvents().isEmpty()) {
                     for (Event event : booking.getEvents()) {
                         if (null != event.getEventType()) {
@@ -431,7 +432,6 @@ public class EventBookingViewController implements Initializable {
                             }
                         }
                     }
-                    acRequired.setSelected(booking.getEvents().get(0).isNormalAcRequired());
                     if (booking.getEvents().get(0).getAdditionalAcRange() > 0) {
                         additionalAC.setSelected(true);
                         additionalAcComboBox.setValue(String.valueOf(booking.getEvents().get(0).getAdditionalAcRange()));
@@ -453,7 +453,6 @@ public class EventBookingViewController implements Initializable {
         wedding.setDisable(!flag);
         mehandi.setDisable(!flag);
         reception.setDisable(!flag);
-        acRequired.setDisable(!flag);
         ishaHall.setDisable(!flag);
         niceHall.setDisable(!flag);
         additionalAC.setDisable(!flag);
@@ -467,6 +466,7 @@ public class EventBookingViewController implements Initializable {
         alternateMobileNumber.setEditable(flag);
         receiptNumber.setEditable(flag);
         advanceAmount.setEditable(flag);
+        remarks.setEditable(flag);
         if (reception.isSelected()) {
             receptionComboBox.setDisable(flag);
         } else {
@@ -502,7 +502,6 @@ public class EventBookingViewController implements Initializable {
         mehandi.setUserData(null);
         reception.setSelected(false);
         reception.setUserData(null);
-        acRequired.setSelected(false);
         ishaHall.setSelected(false);
         ishaHall.setUserData(null);
         niceHall.setSelected(false);
@@ -520,6 +519,7 @@ public class EventBookingViewController implements Initializable {
         bookingId.setText("");
         bookingStatus.setText("");
         diamondNote.setVisible(false);
+        remarks.clear();
     }
 
     private void cancelEvent() {
@@ -659,7 +659,6 @@ public class EventBookingViewController implements Initializable {
             eventDetails.add(event);
         }
         for (Event event : eventDetails) {
-            event.setNormalAcRequired(acRequired.isSelected());
             event.setBookingStatus(bookingDetails.getBookingStatus());
             if (additionalAC.isSelected()) {
                 event.setAdditionalAcRange(Integer.valueOf(additionalAcComboBox.getValue()));

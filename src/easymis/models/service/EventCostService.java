@@ -22,9 +22,6 @@ public class EventCostService {
                     .stream()
                     .map(e -> e.getEventType().toString())
                     .collect(Collectors.toList());
-            if(eventDetails.get(0).isNormalAcRequired()){
-                events.add(EventType.NORMAL_AC.toString());
-            }
             int additionalAC = eventDetails.get(0).getAdditionalAcRange();
             if(additionalAC > 0){
                 events.add(EventType.ADDITIONAL_AC.toString());

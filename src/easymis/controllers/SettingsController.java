@@ -125,6 +125,7 @@ public class SettingsController implements Initializable {
         newPin.setText(null);
         confirmationPin.setText(null);
     }
+    
 
     private void loadSettingsData() {
         List<Settings> settings = SettingsRepository.getUniqueInstance().getAllSettings();

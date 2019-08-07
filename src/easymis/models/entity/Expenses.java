@@ -41,14 +41,14 @@ public class Expenses extends DomainObject{
     @Column(name = "OTHER_EXPENSES")
     private double otherExpenses;
     
-    @Column(name = "BONUS_PAID")
-    private double bonusPaid;
+    @Column(name = "STAGE_SERVICE_CHARGE")
+    private double stageServiceCharge;
     
-    @Column(name = "PURCHASE")
-    private double purchase;
+    @Column(name = "VIDEOGRAPHY_CHARGE")
+    private double videographyCharge;
     
-    @Column(name = "MAINTENANCE")
-    private double auditoriumMaintenance;
+    @Column(name = "CATERING_SERVICE_CHARGE")
+    private double cateringServiceCharge;
     
     @Column(name = "DISCOUNTS")
     private double discounts;
@@ -64,6 +64,9 @@ public class Expenses extends DomainObject{
     
     @Column(name = "OTHER_REVENUE")
     private double otherRevenue;
+    
+    @Column(name = "CATERING_SERVICE_PROVIDER")
+    private String cateringServiceProvider;
 
     public String getReceiptNumber() {
         return receiptNumber;
@@ -137,28 +140,28 @@ public class Expenses extends DomainObject{
         this.otherExpenses = otherExpenses;
     }
 
-    public double getBonusPaid() {
-        return bonusPaid;
+    public double getStageServiceCharge() {
+        return stageServiceCharge;
     }
 
-    public void setBonusPaid(double bonusPaid) {
-        this.bonusPaid = bonusPaid;
+    public void setStageServiceCharge(double stageServiceCharge) {
+        this.stageServiceCharge = stageServiceCharge;
     }
 
-    public double getPurchase() {
-        return purchase;
+    public double getVideographyCharge() {
+        return videographyCharge;
     }
 
-    public void setPurchase(double purchase) {
-        this.purchase = purchase;
+    public void setVideographyCharge(double videographyCharge) {
+        this.videographyCharge = videographyCharge;
     }
 
-    public double getAuditoriumMaintenance() {
-        return auditoriumMaintenance;
+    public double getCateringServiceCharge() {
+        return cateringServiceCharge;
     }
 
-    public void setAuditoriumMaintenance(double auditoriumMaintenance) {
-        this.auditoriumMaintenance = auditoriumMaintenance;
+    public void setCateringServiceCharge(double cateringServiceCharge) {
+        this.cateringServiceCharge = cateringServiceCharge;
     }
 
     public double getDiscounts() {
@@ -199,6 +202,14 @@ public class Expenses extends DomainObject{
 
     public void setOtherRevenue(double otherRevenue) {
         this.otherRevenue = otherRevenue;
+    }
+
+    public String getCateringServiceProvider() {
+        return cateringServiceProvider;
+    }
+
+    public void setCateringServiceProvider(String cateringServiceProvider) {
+        this.cateringServiceProvider = cateringServiceProvider;
     }
     
 }

@@ -51,9 +51,6 @@ public class Event extends DomainObject {
     @Column(name = "EVENT_TYPE")
     private EventType eventType;
 
-    @Column(name = "NORMAL_AC")
-    private boolean normalAcRequired;
-
     @Column(name = "ADDITIONAL_AC")
     private int additionalAcRange;
 
@@ -101,14 +98,6 @@ public class Event extends DomainObject {
 
     public void setEventType(EventType eventType) {
         this.eventType = eventType;
-    }
-
-    public boolean isNormalAcRequired() {
-        return normalAcRequired;
-    }
-
-    public void setNormalAcRequired(boolean normalAcRequired) {
-        this.normalAcRequired = normalAcRequired;
     }
 
     public int getAdditionalAcRange() {

@@ -67,7 +67,7 @@ public class DashboardController implements Initializable {
     private Text ishaEveAvailability;
 
     private final int MAX_COUNT = 7;
-    
+
     ObservableList<UpcomingEventsViewObject> eventsObservableList = FXCollections.observableArrayList();
 
     @FXML
@@ -91,7 +91,7 @@ public class DashboardController implements Initializable {
         initializeUpcomingBookingsTable();
         populateDashboardData();
         populateUpcomingBookings();
-        
+
     }
 
     @FXML
@@ -107,7 +107,6 @@ public class DashboardController implements Initializable {
 
     private void populateDashboardData() {
 
-        StringBuilder notificationBuilder = new StringBuilder();
         List<Booking> allEvents = DashboardRepository.getUniqueInstance().fetchAllEventOfCurrentYear();
         if (allEvents != null && !allEvents.isEmpty()) {
             int totalBooking = 0;
@@ -214,35 +213,40 @@ public class DashboardController implements Initializable {
             upcomingEventsTable.setItems(eventsObservableList);
         }
     }
-    
-    private UpcomingEventsViewObject buildBookingViewObject(Booking booking){
+
+    private UpcomingEventsViewObject buildBookingViewObject(Booking booking) {
         UpcomingEventsViewObject upcomingEventsViewObject = new UpcomingEventsViewObject(
-                getEventDateString(booking.getEventDate()), 
-                booking.getEventCategory().toString(), 
-                getEvents(booking.getEvents()), 
-                booking.getReceiptNumber(), 
+                getEventDateString(booking.getEventDate()),
+                booking.getEventCategory().toString(),
+                getEvents(booking.getEvents()),
+                booking.getReceiptNumber(),
                 booking.getPrimaryMobile());
         return upcomingEventsViewObject;
     }
-    
-     private String getEventDateString(Date eventDate) {
-        if(eventDate.equals(DateHelper.getToday())){
+
+    private String getEventDateString(Date eventDate) {
+        if (eventDate.equals(DateHelper.getToday())) {
             return "Today";
-        }else if(eventDate.equals(DateHelper.getNextDay(DateHelper.getToday()))){
+        } else if (eventDate.equals(DateHelper.getNextDay(DateHelper.getToday()))) {
             return "Tomorrow";
-        }else{
+        } else {
             return DateHelper.format(eventDate);
         }
     }
-    
-    private String getEvents(List<Event> events){
-        
+
+    private String getEvents(List<Event> events) {
+
         List<EventType> eventTypes = events.stream().map(e -> e.getEventType()).collect(Collectors.toList());
-        if(!eventTypes.isEmpty()){
+        if (!eventTypes.isEmpty()) {
             StringBuilder builder = new StringBuilder();
             eventTypes.stream().forEach(e -> builder.append(e.toString()).append(", "));
+            if (events.get(0).getAdditionalAcRange() > 0) {
+                builder.append("A/C - ")
+                        .append(events.get(0).getAdditionalAcRange())
+                        .append(" Hrs");
+            }
             String eventString = builder.toString();
-            return eventString.substring(0, eventString.length()-2);
+            return eventString.substring(0, eventString.length());
         }
         return "";
     }

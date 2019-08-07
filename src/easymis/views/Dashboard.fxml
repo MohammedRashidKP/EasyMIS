@@ -43,7 +43,7 @@
                         <Font name="System Bold" size="14.0" />
                      </font>
                   </Text>
-                  <Text fill="#6a94e8" fontSmoothingType="LCD" layoutX="315.2919921875" layoutY="211.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="toolbar" text="Nica Lounge-AC" AnchorPane.rightAnchor="132.0" AnchorPane.topAnchor="197.0">
+                  <Text fill="#6a94e8" fontSmoothingType="LCD" layoutX="315.2919921875" layoutY="211.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="toolbar" text="Naiza Lounge-AC" AnchorPane.rightAnchor="132.0" AnchorPane.topAnchor="197.0">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>

@@ -78,11 +78,11 @@ public class ExpensesController implements Initializable {
     @FXML
     private JFXTextField otherExpenses;
     @FXML
-    private JFXTextField bonus;
+    private JFXTextField stageServiceCharge;
     @FXML
-    private JFXTextField purchaseKitchenAndStationary;
+    private JFXTextField videographyCharge;
     @FXML
-    private JFXTextField maintenance;
+    private JFXTextField cateringServiceCharge;
     @FXML
     private JFXTextField discounts;
     @FXML
@@ -111,6 +111,8 @@ public class ExpensesController implements Initializable {
     private TableColumn<EventDetailsViewObject, String> col_SettlementStatus;
     @FXML
     private JFXTextField additionalRevenue;
+    @FXML
+    private JFXTextField cateringServiceProvider;
 
     /**
      * Initializes the controller class.
@@ -144,14 +146,14 @@ public class ExpensesController implements Initializable {
         Double totalCalculatedRevenue = totalRevenue + additionalRevenueValue;
         totalBookingRevenue.setText(String.valueOf(totalCalculatedRevenue));
         if(expenses != null && StringUtils.isNotNullCheckSpace(expenses.getReceiptNumber())){
-            double totalCalculatedExpense = expenses.getAuditoriumMaintenance()
-                    +expenses.getBonusPaid()
+            double totalCalculatedExpense = expenses.getCateringServiceCharge()
+                    +expenses.getStageServiceCharge()
                     +expenses.getCleaing()
                     +expenses.getDailyWages()
                     +expenses.getDiesel()
                     +expenses.getDiscounts()
                     +expenses.getElectricity()
-                    +expenses.getPurchase()
+                    +expenses.getVideographyCharge()
                     +expenses.getSecurity()
                     +expenses.getTax()
                     +expenses.getWeddingGift()
@@ -227,6 +229,7 @@ public class ExpensesController implements Initializable {
     }
 
     private void launchExpenseTab() {
+        clearAllFields();
         setFieldsEditable(false);
     }
 
@@ -251,15 +254,16 @@ public class ExpensesController implements Initializable {
                 tax.setText(String.valueOf(expenses.getTax()));
                 weddingGift.setText(String.valueOf(expenses.getWeddingGift()));
                 otherExpenses.setText(String.valueOf(expenses.getOtherExpenses()));
-                bonus.setText(String.valueOf(expenses.getBonusPaid()));
-                purchaseKitchenAndStationary.setText(String.valueOf(expenses.getPurchase()));
-                maintenance.setText(String.valueOf(expenses.getAuditoriumMaintenance()));
+                stageServiceCharge.setText(String.valueOf(expenses.getStageServiceCharge()));
+                videographyCharge.setText(String.valueOf(expenses.getVideographyCharge()));
+                cateringServiceCharge.setText(String.valueOf(expenses.getCateringServiceCharge()));
                 discounts.setText(String.valueOf(expenses.getDiscounts()));
                 totalBookingRevenue.setText(String.valueOf(expenses.getTotalRevenue()));
                 totalBookingRevenue.setUserData(expenses.getTotalRevenue());
                 totalExpense.setText(String.valueOf(expenses.getTotalExpense()));
                 otherRevenue.setText(String.valueOf(expenses.getOtherRevenue()));
                 balance.setText(String.valueOf(expenses.getBalance()));
+                cateringServiceProvider.setText(expenses.getCateringServiceProvider());
             }
             editButton.setDisable(false);
         }
@@ -292,14 +296,14 @@ public class ExpensesController implements Initializable {
         if (StringUtils.isNotNullCheckSpace(otherExpenses.getText())) {
             expenses.setOtherExpenses(Double.valueOf(otherExpenses.getText()));
         }
-        if (StringUtils.isNotNullCheckSpace(bonus.getText())) {
-            expenses.setBonusPaid(Double.valueOf(bonus.getText()));
+        if (StringUtils.isNotNullCheckSpace(stageServiceCharge.getText())) {
+            expenses.setStageServiceCharge(Double.valueOf(stageServiceCharge.getText()));
         }
-        if (StringUtils.isNotNullCheckSpace(purchaseKitchenAndStationary.getText())) {
-            expenses.setPurchase(Double.valueOf(purchaseKitchenAndStationary.getText()));
+        if (StringUtils.isNotNullCheckSpace(videographyCharge.getText())) {
+            expenses.setVideographyCharge(Double.valueOf(videographyCharge.getText()));
         }
-        if (StringUtils.isNotNullCheckSpace(maintenance.getText())) {
-            expenses.setAuditoriumMaintenance(Double.valueOf(maintenance.getText()));
+        if (StringUtils.isNotNullCheckSpace(cateringServiceCharge.getText())) {
+            expenses.setCateringServiceCharge(Double.valueOf(cateringServiceCharge.getText()));
         }
         if (StringUtils.isNotNullCheckSpace(discounts.getText())) {
             expenses.setDiscounts(Double.valueOf(discounts.getText()));
@@ -316,6 +320,7 @@ public class ExpensesController implements Initializable {
         if (StringUtils.isNotNullCheckSpace(otherRevenue.getText())) {
             expenses.setOtherRevenue(Double.valueOf(otherRevenue.getText()));
         }
+        expenses.setCateringServiceProvider(cateringServiceProvider.getText());
 
         return expenses;
     }
@@ -329,9 +334,9 @@ public class ExpensesController implements Initializable {
         tax.setTextFormatter(new NumberFilter().decimalFilter());
         weddingGift.setTextFormatter(new NumberFilter().decimalFilter());
         otherExpenses.setTextFormatter(new NumberFilter().decimalFilter());
-        bonus.setTextFormatter(new NumberFilter().decimalFilter());
-        purchaseKitchenAndStationary.setTextFormatter(new NumberFilter().decimalFilter());
-        maintenance.setTextFormatter(new NumberFilter().decimalFilter());
+        stageServiceCharge.setTextFormatter(new NumberFilter().decimalFilter());
+        videographyCharge.setTextFormatter(new NumberFilter().decimalFilter());
+        cateringServiceCharge.setTextFormatter(new NumberFilter().decimalFilter());
         discounts.setTextFormatter(new NumberFilter().decimalFilter());
         otherRevenue.setTextFormatter(new NumberFilter().decimalFilter());
         totalBookingRevenue.setTextFormatter(new NumberFilter().decimalFilter());
@@ -349,10 +354,11 @@ public class ExpensesController implements Initializable {
         tax.setEditable(flag);
         weddingGift.setEditable(flag);
         otherExpenses.setEditable(flag);
-        bonus.setEditable(flag);
-        purchaseKitchenAndStationary.setEditable(flag);
-        maintenance.setEditable(flag);
+        stageServiceCharge.setEditable(flag);
+        videographyCharge.setEditable(flag);
+        cateringServiceCharge.setEditable(flag);
         discounts.setEditable(flag);
+        cateringServiceProvider.setEditable(flag);
         calculateButton.setDisable(!flag);
         submitButton.setDisable(!flag);
         additionalRevenue.setEditable(flag);
@@ -380,14 +386,15 @@ public class ExpensesController implements Initializable {
         tax.clear();
         weddingGift.clear();
         otherExpenses.clear();
-        bonus.clear();
-        purchaseKitchenAndStationary.clear();
-        maintenance.clear();
+        stageServiceCharge.clear();
+        videographyCharge.clear();
+        cateringServiceCharge.clear();
         discounts.clear();
         additionalRevenue.clear();
         otherRevenue.clear();
         totalBookingRevenue.clear();
         totalExpense.clear();
         balance.clear();
+        cateringServiceProvider.clear();
     }
 }

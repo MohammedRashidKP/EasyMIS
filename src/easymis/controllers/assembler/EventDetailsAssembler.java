@@ -57,16 +57,20 @@ public class EventDetailsAssembler {
     private String resolveEventType(Booking eventDetails) {
         String eventType = "";
         List<EventType> eventTypes = getEventTypeEnums(eventDetails);
-        if(eventDetails.getEvents().get(0).isNormalAcRequired()){
-            eventTypes.add(EventType.NORMAL_AC);
-        }
         StringBuilder eventTypeBuilder = new StringBuilder();
         if(!eventTypes.isEmpty()){
-            for(int i=0; i<eventTypes.size(); i++){
+            for(int i=0; i<eventTypes.size(); i++){                    
                 eventTypeBuilder.append(eventTypes.get(i));
                 if(i != eventTypes.size()-1){
                     eventTypeBuilder.append(", ");
                 }
+            }
+            if(eventDetails.getEvents().get(0).getAdditionalAcRange() > 0){
+                eventTypeBuilder
+                        .append(", ")
+                        .append("A/C - ")
+                        .append(eventDetails.getEvents().get(0).getAdditionalAcRange())
+                        .append(" Hrs");
             }
             eventType = eventTypeBuilder.toString();
         }

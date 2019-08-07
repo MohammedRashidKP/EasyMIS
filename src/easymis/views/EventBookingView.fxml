@@ -140,12 +140,7 @@
                                        </font>
                                     </CheckBox>
                                     <ComboBox fx:id="receptionComboBox" disable="true" layoutX="230.0" layoutY="454.0" prefHeight="25.0" prefWidth="130.0" AnchorPane.leftAnchor="240.0" AnchorPane.topAnchor="495.0" />
-                                    <CheckBox fx:id="acRequired" contentDisplay="CENTER" graphicTextGap="20.0" layoutX="505.0" layoutY="410.0" lineSpacing="10.0" mnemonicParsing="false" text="A/C Required" AnchorPane.leftAnchor="550.0" AnchorPane.topAnchor="360.0">
-                                       <font>
-                                          <Font name="System Bold" size="15.0" />
-                                       </font>
-                                    </CheckBox>
-                                    <CheckBox fx:id="additionalAC" contentDisplay="CENTER" graphicTextGap="20.0" layoutX="500.0" layoutY="440.0" lineSpacing="10.0" mnemonicParsing="false" text="Additional A/C" AnchorPane.leftAnchor="550.0" AnchorPane.topAnchor="405.0">
+                                    <CheckBox fx:id="additionalAC" contentDisplay="CENTER" graphicTextGap="20.0" layoutX="500.0" layoutY="440.0" lineSpacing="10.0" mnemonicParsing="false" text="A/C" AnchorPane.leftAnchor="550.0" AnchorPane.topAnchor="405.0">
                                        <font>
                                           <Font name="System Bold" size="15.0" />
                                        </font>
@@ -157,7 +152,7 @@
                                        </font>
                                     </CheckBox>
                                     <ComboBox fx:id="ishaHallComboBox" disable="true" layoutX="650.0" layoutY="488.0" prefHeight="25.0" prefWidth="130.0" AnchorPane.leftAnchor="700.0" AnchorPane.topAnchor="450.0" />
-                                    <CheckBox fx:id="niceHall" contentDisplay="CENTER" graphicTextGap="20.0" layoutX="500.0" layoutY="519.0" lineSpacing="10.0" mnemonicParsing="false" text="Nica Hall - A/C" AnchorPane.leftAnchor="550.0" AnchorPane.topAnchor="495.0">
+                                    <CheckBox fx:id="niceHall" contentDisplay="CENTER" graphicTextGap="20.0" layoutX="500.0" layoutY="519.0" lineSpacing="10.0" mnemonicParsing="false" text="Naiza Hall - A/C" AnchorPane.leftAnchor="550.0" AnchorPane.topAnchor="495.0">
                                        <font>
                                           <Font name="System Bold" size="15.0" />
                                        </font>
@@ -171,12 +166,12 @@
                                           <Font size="15.0" />
                                        </font>
                                     </TextField>
-                                    <TextField fx:id="blockedBy" editable="false" layoutX="485.0" layoutY="354.0" minHeight="25.0" prefHeight="25.0" prefWidth="242.0" AnchorPane.leftAnchor="550.0" AnchorPane.topAnchor="315.0">
+                                    <TextField fx:id="blockedBy" editable="false" layoutX="549.0" layoutY="360.0" minHeight="25.0" prefHeight="25.0" prefWidth="242.0" AnchorPane.leftAnchor="549.0" AnchorPane.topAnchor="360.0">
                                        <font>
                                           <Font size="15.0" />
                                        </font>
                                     </TextField>
-                                    <Text layoutX="477.0" layoutY="332.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Blocked By" AnchorPane.leftAnchor="440.0" />
+                                    <Text layoutX="439.0" layoutY="377.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Blocked By" AnchorPane.leftAnchor="439.0" />
                                     <Text layoutX="17.0" layoutY="365.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Total Cost  " AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="360.0" />
                                     <TextField fx:id="totalAmount" editable="false" layoutX="120.0" layoutY="348.0" minHeight="25.0" prefHeight="25.0" prefWidth="121.0" AnchorPane.topAnchor="360.0">
                                        <font>
@@ -208,6 +203,12 @@
                                           <Text layoutX="19.0" layoutY="179.0" strokeType="OUTSIDE" strokeWidth="0.0" text="6- Any other charges" />
                                        </children>
                                     </Pane>
+                                    <TextField fx:id="remarks" layoutX="551.0" layoutY="317.0" minHeight="25.0" prefHeight="25.0" prefWidth="242.0">
+                                       <font>
+                                          <Font size="15.0" />
+                                       </font>
+                                    </TextField>
+                                    <Text layoutX="441.0" layoutY="334.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Remarks" />
                                  </children>
                               </AnchorPane>
                           </content>

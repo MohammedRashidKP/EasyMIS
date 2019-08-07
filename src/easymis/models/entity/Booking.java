@@ -67,6 +67,9 @@ public class Booking extends DomainObject {
 
     @Column(name = "PIN")
     private String pinCode;
+    
+    @Column(name = "REMARKS")
+    private String remarks;
 
     @ObjectTypeConverter(
             name = "eventCategoryConverter", objectType = EventCategory.class, dataType = String.class, conversionValues = {
@@ -267,5 +270,13 @@ public class Booking extends DomainObject {
 
     public void setBookingCost(double bookingCost) {
         this.bookingCost = bookingCost;
+    }
+
+    public String getRemarks() {
+        return remarks;
+    }
+
+    public void setRemarks(String remarks) {
+        this.remarks = remarks;
     }
 }
