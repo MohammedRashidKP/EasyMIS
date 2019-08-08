@@ -34,12 +34,13 @@
                                     <TableView fx:id="eventTable" layoutY="52.0" prefHeight="499.0" prefWidth="1156.0" AnchorPane.bottomAnchor="12.0" AnchorPane.leftAnchor="12.0" AnchorPane.rightAnchor="12.0" AnchorPane.topAnchor="52.0">
                                       <columns>
                                           <TableColumn fx:id="col_ReceiptNumber" prefWidth="99.0" style="-fx-alignment: CENTER;" text="Receipt Number" />
-                                        <TableColumn fx:id="col_EventDate" prefWidth="121.0" style="-fx-alignment: CENTER;" text="Event Date" />
-                                        <TableColumn fx:id="col_fullName" prefWidth="172.0" style="-fx-alignment: CENTER;" text="Full Name" />
-                                          <TableColumn fx:id="col_BookingStatus" prefWidth="123.0" style="-fx-alignment: CENTER;" text="Booking Status" />
-                                          <TableColumn fx:id="col_eventType" prefWidth="412.0" style="-fx-alignment: CENTER;" text="Event Type" />
-                                          <TableColumn fx:id="col_BookingDate" prefWidth="126.0" style="-fx-alignment: CENTER;" text="Booking Date" />
-                                          <TableColumn fx:id="col_EventCategory" prefWidth="102.0" style="-fx-alignment: CENTER;" text="Event Category" />
+                                        <TableColumn fx:id="col_EventDate" prefWidth="86.0" style="-fx-alignment: CENTER;" text="Event Date" />
+                                        <TableColumn fx:id="col_fullName" prefWidth="119.0" style="-fx-alignment: CENTER;" text="Full Name" />
+                                          <TableColumn fx:id="col_BookingStatus" prefWidth="94.0" style="-fx-alignment: CENTER;" text="Booking Status" />
+                                          <TableColumn fx:id="col_eventType" prefWidth="104.0" style="-fx-alignment: CENTER;" text="Event Type" />
+                                          <TableColumn fx:id="col_BookingDate" prefWidth="116.0" style="-fx-alignment: CENTER;" text="Booking Date" />
+                                          <TableColumn fx:id="col_EventCategory" prefWidth="346.0" style="-fx-alignment: CENTER;" text="Event Category" />
+                                          <TableColumn fx:id="col_EventCategory1" prefWidth="293.0" style="-fx-alignment: CENTER;" text="Remarks" />
                                       </columns>
                                     </TableView>
                                     <TextField fx:id="searchText" layoutX="14.0" layoutY="13.0" promptText="Search Text" />
@@ -124,6 +125,17 @@
                                        </font>
                                     </TextField>
                                     <Text layoutX="37.0" layoutY="332.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Advance Amount" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="315.0" />
+                                    <TextField fx:id="advanceAmount" layoutX="110.0" layoutY="348.0" minHeight="25.0" prefHeight="25.0" prefWidth="240.0" AnchorPane.leftAnchor="120.0" AnchorPane.topAnchor="315.0">
+                                       <font>
+                                          <Font size="15.0" />
+                                       </font>
+                                    </TextField>
+                                    <Text layoutX="441.0" layoutY="334.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Remarks" />
+                                    <TextField fx:id="remarks" layoutX="551.0" layoutY="317.0" minHeight="25.0" prefHeight="25.0" prefWidth="242.0">
+                                       <font>
+                                          <Font size="15.0" />
+                                       </font>
+                                    </TextField>
                                     <CheckBox fx:id="wedding" contentDisplay="CENTER" graphicTextGap="20.0" layoutX="110.0" layoutY="410.0" lineSpacing="10.0" mnemonicParsing="false" text="Wedding" AnchorPane.leftAnchor="120.0" AnchorPane.topAnchor="405.0">
                                        <font>
                                           <Font name="System Bold" size="15.0" />
@@ -161,11 +173,6 @@
                                     <ComboBox fx:id="actionComboBOx" layoutX="927.0" layoutY="492.0" prefHeight="28.0" prefWidth="150.0" />
                                     <Button fx:id="submitButton" layoutX="1084.0" layoutY="492.0" mnemonicParsing="false" onAction="#onSubmitButtonClick" prefHeight="28.0" prefWidth="54.0" text="Submit" />
                                     <JFXButton fx:id="btnReset" buttonType="RAISED" layoutX="1090.0" layoutY="14.0" onAction="#resetEventDetails" prefHeight="40.0" prefWidth="70.0" style="-fx-background-color: #3a84c3;" styleClass="block-button" text="Reset" AnchorPane.leftAnchor="1090.0" AnchorPane.topAnchor="14.0" />
-                                    <TextField fx:id="advanceAmount" layoutX="110.0" layoutY="348.0" minHeight="25.0" prefHeight="25.0" prefWidth="240.0" AnchorPane.leftAnchor="120.0" AnchorPane.topAnchor="315.0">
-                                       <font>
-                                          <Font size="15.0" />
-                                       </font>
-                                    </TextField>
                                     <TextField fx:id="blockedBy" editable="false" layoutX="549.0" layoutY="360.0" minHeight="25.0" prefHeight="25.0" prefWidth="242.0" AnchorPane.leftAnchor="549.0" AnchorPane.topAnchor="360.0">
                                        <font>
                                           <Font size="15.0" />
@@ -203,12 +210,6 @@
                                           <Text layoutX="19.0" layoutY="179.0" strokeType="OUTSIDE" strokeWidth="0.0" text="6- Any other charges" />
                                        </children>
                                     </Pane>
-                                    <TextField fx:id="remarks" layoutX="551.0" layoutY="317.0" minHeight="25.0" prefHeight="25.0" prefWidth="242.0">
-                                       <font>
-                                          <Font size="15.0" />
-                                       </font>
-                                    </TextField>
-                                    <Text layoutX="441.0" layoutY="334.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Remarks" />
                                  </children>
                               </AnchorPane>
                           </content>
