@@ -21,8 +21,18 @@ public class PayrollViewObject {
     private String bonus;
     
     private String advance;
+    
+    private String advanceHistory;
 
-    public PayrollViewObject(String payrollId, String firstName, String lastName, String month, String year, String netPay, String bonus, String advance) {
+    public PayrollViewObject(String payrollId, 
+            String firstName, 
+            String lastName, 
+            String month, 
+            String year, 
+            String netPay, 
+            String bonus, 
+            String advance,
+            String advanceHistory) {
         this.employeeId = payrollId;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -31,6 +41,7 @@ public class PayrollViewObject {
         this.netPay = netPay;
         this.bonus = bonus;
         this.advance = advance;
+        this.advanceHistory = advanceHistory;
     }
 
     public String getEmployeeId() {
@@ -95,6 +106,14 @@ public class PayrollViewObject {
 
     public void setAdvance(String advance) {
         this.advance = advance;
+    }
+
+    public String getAdvanceHistory() {
+        return advanceHistory;
+    }
+
+    public void setAdvanceHistory(String advanceHistory) {
+        this.advanceHistory = advanceHistory;
     }
     
     

@@ -47,6 +47,9 @@ public class Payroll extends DomainObject{
     
     @Column(name = "NET_PAY")
     private double netPay;
+    
+    @Column(name = "ADVANCE_HISTORY")
+    private String advanceHistory;
 
     public int getId() {
         return id;
@@ -126,5 +129,13 @@ public class Payroll extends DomainObject{
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+
+    public String getAdvanceHistory() {
+        return advanceHistory;
+    }
+
+    public void setAdvanceHistory(String advanceHistory) {
+        this.advanceHistory = advanceHistory;
     }
 }

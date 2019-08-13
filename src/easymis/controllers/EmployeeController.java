@@ -11,6 +11,7 @@ import easymis.utils.AlertHelper;
 import easymis.utils.DateHelper;
 import easymis.utils.NumberFilter;
 import easymis.utils.StringUtils;
+import easymis.utils.TooltippedTableCell;
 import easymis.views.viewobjects.EmployeeViewObject;
 import easymis.views.viewobjects.PayrollViewObject;
 import java.net.URL;
@@ -38,9 +39,12 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Tooltip;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.util.converter.DefaultStringConverter;
 
 /**
  * FXML Controller class
@@ -498,6 +502,28 @@ public class EmployeeController implements Initializable {
         col_payrollAdvance.setCellValueFactory(new PropertyValueFactory<>("advance"));
         col_payrollBonus.setCellValueFactory(new PropertyValueFactory<>("bonus"));
         col_payrollNetPay.setCellValueFactory(new PropertyValueFactory<>("netPay"));
+        col_payrollAdvance.setCellFactory(TooltippedTableCell.forTableColumn());
+        col_payrollAdvance.setCellFactory((TableColumn<PayrollViewObject, String> param) -> {
+        TextFieldTableCell<PayrollViewObject, String> myCell = new TextFieldTableCell<PayrollViewObject, String>(new DefaultStringConverter()) {
+        @Override
+        public void updateItem(final String value, final boolean empty) {
+            super.updateItem(value, empty);
+            TableRow row = this.getTableRow();
+            PayrollViewObject item = (PayrollViewObject) row.getItem();
+            if(item != null){
+                String history = item.getAdvanceHistory();
+                this.setText(item.getAdvance());
+
+            //Add text as tooltip so that user can read text without editing it.
+            Tooltip tooltip = new Tooltip(history);
+            tooltip.setWrapText(true);
+            tooltip.prefWidthProperty().bind(this.widthProperty());
+            this.setTooltip(tooltip);
+            }
+        }
+        };
+        return myCell;
+    });
         
         populatePayrollTable();
     }
@@ -533,7 +559,6 @@ public class EmployeeController implements Initializable {
                     payrollMonth.getValue(), 
                     Integer.valueOf(payrollYear.getValue()));
             if(payroll != null){
-                payrollAdvance.setText(String.valueOf(payroll.getAdvance()));
                 payrollBonus.setText(String.valueOf(payroll.getBonus()));
                 payrollId.setText(String.valueOf(payroll.getId()));
                 double salaryValue = payroll.getSalary();
@@ -543,7 +568,8 @@ public class EmployeeController implements Initializable {
                     makePayrollFieldsEditable(false);
                 } 
                 double netPay = (salaryValue + payroll.getBonus()) - payroll.getAdvance();
-                payrollNetPay.setText(String.valueOf(netPay));                    
+                payrollNetPay.setText(String.valueOf(netPay));
+                payrollAdvance.setUserData(payroll.getAdvanceHistory());
             }else{
                 payrollNetPay.setText(String.valueOf(employee.getSalary()));
             }
@@ -616,9 +642,11 @@ public class EmployeeController implements Initializable {
             payroll.setMonth(payrollMonth.getValue());
             payroll.setYear(Integer.valueOf(payrollYear.getValue()));
             payroll.setAdvance(Double.valueOf(payrollAdvance.getText()));
+            payroll.setAdvanceHistory(updateAdvanceHistory());
             TransactionStatus status;
             if (StringUtils.isNotNullCheckSpace(payrollId.getText())) {
                 payroll.setId(Integer.valueOf(payrollId.getText()));
+                updateTotalAdvance(payroll);
                 status = PayrollRepository.getUniqueInstance().update(payroll);
             }else{
                 status = PayrollRepository.getUniqueInstance().create(payroll);
@@ -684,7 +712,48 @@ public class EmployeeController implements Initializable {
                 String.valueOf(payroll.getYear()), 
                 String.valueOf(payroll.getNetPay()), 
                 String.valueOf(payroll.getBonus()),
-                String.valueOf(payroll.getAdvance()));
+                String.valueOf(payroll.getAdvance()),
+                prettifyAdvanceHistory(payroll.getAdvanceHistory()));
         return payrollViewObject;
+    }
+
+    private String updateAdvanceHistory() {
+        
+        StringBuilder advanceHistory = new StringBuilder();
+        String newEntry = payrollAdvance.getText() + " : " + DateHelper.format(DateHelper.getToday());
+        if(payrollAdvance.getUserData() != null){
+            String currentHistory = (String) payrollAdvance.getUserData();
+            advanceHistory.append(currentHistory).append(",");
+        }
+        advanceHistory.append(newEntry);
+        return advanceHistory.toString();
+    }
+
+    private void updateTotalAdvance(Payroll payroll) {
+        
+        double existingAdvance = new Double("0.0");
+        if(payrollAdvance.getUserData() != null){
+            String[] payrollHistory = payrollAdvance.getUserData().toString().split(",");
+            if(payrollHistory != null && payrollHistory.length >0){
+                for(String current: payrollHistory){
+                    String[] advance = current.split(":");
+                    if(advance != null && advance.length > 0 ){
+                        
+                    double eachAdvance = new Double(advance[0]);
+                    if(!Double.isNaN(eachAdvance)){
+                        existingAdvance += eachAdvance;
+                    }
+                }
+                }
+                
+            }
+        }
+        payroll.setAdvance(payroll.getAdvance()+existingAdvance);
+    }
+
+
+    private String prettifyAdvanceHistory(String advanceHistory) {
+        
+        return StringUtils.isNotNullCheckSpace(advanceHistory) ? advanceHistory.replaceAll(",", "\n") : "";
     }
 }
