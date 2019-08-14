@@ -35,12 +35,12 @@
                                       <columns>
                                           <TableColumn fx:id="col_ReceiptNumber" prefWidth="99.0" style="-fx-alignment: CENTER;" text="Receipt Number" />
                                         <TableColumn fx:id="col_EventDate" prefWidth="86.0" style="-fx-alignment: CENTER;" text="Event Date" />
-                                        <TableColumn fx:id="col_fullName" prefWidth="119.0" style="-fx-alignment: CENTER;" text="Full Name" />
-                                          <TableColumn fx:id="col_BookingStatus" prefWidth="94.0" style="-fx-alignment: CENTER;" text="Booking Status" />
-                                          <TableColumn fx:id="col_eventType" prefWidth="104.0" style="-fx-alignment: CENTER;" text="Event Type" />
-                                          <TableColumn fx:id="col_BookingDate" prefWidth="116.0" style="-fx-alignment: CENTER;" text="Booking Date" />
-                                          <TableColumn fx:id="col_EventCategory" prefWidth="346.0" style="-fx-alignment: CENTER;" text="Event Category" />
-                                          <TableColumn fx:id="col_EventCategory1" prefWidth="293.0" style="-fx-alignment: CENTER;" text="Remarks" />
+                                        <TableColumn fx:id="col_fullName" prefWidth="138.0" style="-fx-alignment: CENTER;" text="Full Name" />
+                                          <TableColumn fx:id="col_BookingStatus" prefWidth="136.0" style="-fx-alignment: CENTER;" text="Booking Status" />
+                                          <TableColumn fx:id="col_eventType" prefWidth="285.0" style="-fx-alignment: CENTER;" text="Event Type" />
+                                          <TableColumn fx:id="col_BookingDate" prefWidth="95.0" style="-fx-alignment: CENTER;" text="Booking Date" />
+                                          <TableColumn fx:id="col_EventCategory" prefWidth="101.0" style="-fx-alignment: CENTER;" text="Event Category" />
+                                          <TableColumn fx:id="col_remarks" prefWidth="215.0" style="-fx-alignment: CENTER;" text="Remarks" />
                                       </columns>
                                     </TableView>
                                     <TextField fx:id="searchText" layoutX="14.0" layoutY="13.0" promptText="Search Text" />

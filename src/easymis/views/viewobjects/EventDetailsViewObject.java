@@ -24,6 +24,8 @@ public class EventDetailsViewObject {
     private String receiptNumber;
     
     private String settlementStatus;
+    
+    private String remarks;
 
     public EventDetailsViewObject(String eventDate, 
             String fullName, 
@@ -31,7 +33,9 @@ public class EventDetailsViewObject {
             String eventType, 
             String bookingDate, 
             EventCategory eventCategory, 
-            String receiptNumber) {
+            String receiptNumber,
+            String remarks,
+            String additional) {
         this.eventDate = eventDate;
         this.fullName = fullName;
         this.bookingStatus = bookingStatus;
@@ -39,6 +43,7 @@ public class EventDetailsViewObject {
         this.bookingDate = bookingDate;
         this.eventCategory = eventCategory;
         this.receiptNumber = receiptNumber;
+        this.remarks = remarks;
     }
 
     public EventDetailsViewObject(String eventDate, String fullName, BookingStatus bookingStatus, String eventType, String bookingDate, EventCategory eventCategory, String receiptNumber, String settlementStatus) {
@@ -90,5 +95,13 @@ public class EventDetailsViewObject {
 
     public void setSettlementStatus(String settlementStatus) {
         this.settlementStatus = settlementStatus;
+    }
+
+    public String getRemarks() {
+        return remarks;
+    }
+
+    public void setRemarks(String remarks) {
+        this.remarks = remarks;
     }
 }

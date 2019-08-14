@@ -181,9 +181,9 @@
                       <TableColumn fx:id="col_eventDate" editable="false" prefWidth="75.0" sortable="false" style="-fx-alignment: CENTER;" text="Event Date" />
                       <TableColumn fx:id="col_category" editable="false" prefWidth="75.0" sortable="false" style="-fx-alignment: CENTER;" text="Category" />
                         <TableColumn fx:id="col_events" editable="false" prefWidth="101.0" sortable="false" style="-fx-alignment: CENTER;" text="Events" />
-                        <TableColumn fx:id="col_receiptNumber" editable="false" prefWidth="72.0" sortable="false" style="-fx-alignment: CENTER;" text="Receipt Number" />
-                        <TableColumn fx:id="col_mobileNumber" editable="false" prefWidth="125.0" sortable="false" style="-fx-alignment: CENTER;" text="Mobile Number" />
-                        <TableColumn fx:id="col_mobileNumber1" editable="false" prefWidth="201.0" sortable="false" style="-fx-alignment: CENTER;" text="Remarks" />
+                        <TableColumn fx:id="col_receiptNumber" editable="false" prefWidth="101.0" sortable="false" style="-fx-alignment: CENTER;" text="Receipt Number" />
+                        <TableColumn fx:id="col_mobileNumber" editable="false" prefWidth="105.0" sortable="false" style="-fx-alignment: CENTER;" text="Mobile Number" />
+                        <TableColumn fx:id="col_remarks" editable="false" prefWidth="123.0" sortable="false" style="-fx-alignment: CENTER;" text="Remarks" />
                     </columns>
                   </TableView>
                </children></AnchorPane>

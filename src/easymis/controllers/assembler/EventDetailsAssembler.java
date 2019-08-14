@@ -30,7 +30,9 @@ public class EventDetailsAssembler {
                 eventType, 
                 DateHelper.format(eventDetails.getCreatedDate()), 
                 eventDetails.getEventCategory(),
-                eventDetails.getReceiptNumber());
+                eventDetails.getReceiptNumber(),
+                eventDetails.getRemarks(),
+                null);
         return eventDetailsViewObject;
     }
     

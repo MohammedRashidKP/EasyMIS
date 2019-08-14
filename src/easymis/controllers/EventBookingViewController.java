@@ -156,6 +156,8 @@ public class EventBookingViewController implements Initializable {
     private Pane diamondNote;
     @FXML
     private TextField remarks;
+    @FXML
+    private TableColumn<EventDetailsViewObject, String> col_remarks;
 
     /**
      * Initializes the controller class.
@@ -334,6 +336,7 @@ public class EventBookingViewController implements Initializable {
         col_BookingDate.setCellValueFactory(new PropertyValueFactory<>("bookingDate"));
         col_EventCategory.setCellValueFactory(new PropertyValueFactory<>("eventCategory"));
         col_ReceiptNumber.setCellValueFactory(new PropertyValueFactory<>("receiptNumber"));
+        col_remarks.setCellValueFactory(new PropertyValueFactory<>("remarks"));
         eventTable.setRowFactory(tv -> {
             TableRow<EventDetailsViewObject> row = new TableRow<>();
             row.setOnMouseClicked(event -> {

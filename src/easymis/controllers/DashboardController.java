@@ -82,6 +82,8 @@ public class DashboardController implements Initializable {
     private TableColumn<UpcomingEventsViewObject, String> col_receiptNumber;
     @FXML
     private TableColumn<UpcomingEventsViewObject, String> col_mobileNumber;
+    @FXML
+    private TableColumn<UpcomingEventsViewObject, String> col_remarks;
 
     /**
      * Initializes the controller class.
@@ -220,7 +222,8 @@ public class DashboardController implements Initializable {
                 booking.getEventCategory().toString(),
                 getEvents(booking.getEvents()),
                 booking.getReceiptNumber(),
-                booking.getPrimaryMobile());
+                booking.getPrimaryMobile(), 
+                booking.getRemarks());
         return upcomingEventsViewObject;
     }
 
@@ -254,9 +257,17 @@ public class DashboardController implements Initializable {
     private void initializeUpcomingBookingsTable() {
         col_eventDate.setCellValueFactory(new PropertyValueFactory<>("eventDate"));
         col_category.setCellValueFactory(new PropertyValueFactory<>("category"));
-        col_events.setCellValueFactory(new PropertyValueFactory<>("events"));
-        col_events.setCellFactory(TooltippedTableCell.forTableColumn());
+        col_events.setCellValueFactory(new PropertyValueFactory<>("events"));   
         col_mobileNumber.setCellValueFactory(new PropertyValueFactory<>("mobileNumber"));
         col_receiptNumber.setCellValueFactory(new PropertyValueFactory<>("receiptNumber"));
+        col_remarks.setCellValueFactory(new PropertyValueFactory<>("remarks"));
+        
+        col_events.setCellFactory(TooltippedTableCell.forTableColumn());
+        col_eventDate.setCellFactory(TooltippedTableCell.forTableColumn());
+        col_category.setCellFactory(TooltippedTableCell.forTableColumn());
+        col_events.setCellFactory(TooltippedTableCell.forTableColumn());
+        col_mobileNumber.setCellFactory(TooltippedTableCell.forTableColumn());
+        col_receiptNumber.setCellFactory(TooltippedTableCell.forTableColumn());
+        col_remarks.setCellFactory(TooltippedTableCell.forTableColumn());
     }
 }

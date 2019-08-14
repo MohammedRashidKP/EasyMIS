@@ -155,11 +155,11 @@ public class EmployeeController implements Initializable {
     private Button editButton;
     @FXML
     private Button btnEmployeeSubmit;
-    
+
     ObservableList<EmployeeViewObject> employeeObservableList = FXCollections.observableArrayList();
-    
+
     ObservableList<PayrollViewObject> payrollObservableList = FXCollections.observableArrayList();
-    
+
     @FXML
     private Tab panelTabEmployee;
     @FXML
@@ -435,7 +435,7 @@ public class EmployeeController implements Initializable {
     }
 
     private void initializePayrollTab() {
-        
+
         clearAllPayrollFields();
         initializePayrollTable();
         initializeMonthYearComboBoxes();
@@ -453,44 +453,48 @@ public class EmployeeController implements Initializable {
         return (KeyEvent e) -> {
             if (e.getCode() == KeyCode.TAB || e.getCode() == KeyCode.ENTER) {
                 String employeeIdValue = payrollEmployeeId.getText();
-                if(StringUtils.isNotNullCheckSpace(employeeIdValue))
+                if (StringUtils.isNotNullCheckSpace(employeeIdValue)) {
                     populateEmployeeDetailsForPayroll(Integer.valueOf(employeeIdValue));
+                }
             }
         };
     }
-    
+
     public EventHandler<KeyEvent> onPayrollAdvanceChange() {
         return (KeyEvent e) -> {
             if (e.getCode() == KeyCode.TAB || e.getCode() == KeyCode.ENTER) {
-                if(StringUtils.isNotNullCheckSpace(payrollAdvance.getText())){
+                if (StringUtils.isNotNullCheckSpace(payrollAdvance.getText())) {
                     refreshNetPayAmount();
                 }
             }
         };
     }
-    
+
     public EventHandler<KeyEvent> onPayrollBonusChange() {
         return (KeyEvent e) -> {
             if (e.getCode() == KeyCode.TAB || e.getCode() == KeyCode.ENTER) {
-                if(StringUtils.isNotNullCheckSpace(payrollBonus.getText())){
+                if (StringUtils.isNotNullCheckSpace(payrollBonus.getText())) {
                     refreshNetPayAmount();
                 }
-                
+
             }
         };
     }
 
     private void refreshNetPayAmount() throws NumberFormatException {
         double bonus = Double.valueOf("00.0");
-        if(StringUtils.isNotNullCheckSpace(payrollBonus.getText()))
+        if (StringUtils.isNotNullCheckSpace(payrollBonus.getText())) {
             bonus = Double.valueOf(payrollBonus.getText());
+        }
         double advance = Double.valueOf("00.0");
-        if(StringUtils.isNotNullCheckSpace(payrollAdvance.getText()))
+        if (StringUtils.isNotNullCheckSpace(payrollAdvance.getText())) {
             advance = Double.valueOf(payrollAdvance.getText());
+        }
         double salaryValue = Double.valueOf("00.0");
-        if(StringUtils.isNotNullCheckSpace(payrollSalary.getText()))
+        if (StringUtils.isNotNullCheckSpace(payrollSalary.getText())) {
             salaryValue = Double.valueOf(payrollSalary.getText());
-        payrollNetPay.setText(String.valueOf((salaryValue+bonus) - advance));
+        }
+        payrollNetPay.setText(String.valueOf((salaryValue + bonus) - advance));
     }
 
     private void initializePayrollTable() {
@@ -504,27 +508,27 @@ public class EmployeeController implements Initializable {
         col_payrollNetPay.setCellValueFactory(new PropertyValueFactory<>("netPay"));
         col_payrollAdvance.setCellFactory(TooltippedTableCell.forTableColumn());
         col_payrollAdvance.setCellFactory((TableColumn<PayrollViewObject, String> param) -> {
-        TextFieldTableCell<PayrollViewObject, String> myCell = new TextFieldTableCell<PayrollViewObject, String>(new DefaultStringConverter()) {
-        @Override
-        public void updateItem(final String value, final boolean empty) {
-            super.updateItem(value, empty);
-            TableRow row = this.getTableRow();
-            PayrollViewObject item = (PayrollViewObject) row.getItem();
-            if(item != null){
-                String history = item.getAdvanceHistory();
-                this.setText(item.getAdvance());
+            TextFieldTableCell<PayrollViewObject, String> myCell = new TextFieldTableCell<PayrollViewObject, String>(new DefaultStringConverter()) {
+                @Override
+                public void updateItem(final String value, final boolean empty) {
+                    super.updateItem(value, empty);
+                    TableRow row = this.getTableRow();
+                    PayrollViewObject item = (PayrollViewObject) row.getItem();
+                    if (item != null) {
+                        String history = item.getAdvanceHistory();
+                        this.setText(item.getAdvance());
 
-            //Add text as tooltip so that user can read text without editing it.
-            Tooltip tooltip = new Tooltip(history);
-            tooltip.setWrapText(true);
-            tooltip.prefWidthProperty().bind(this.widthProperty());
-            this.setTooltip(tooltip);
-            }
-        }
-        };
-        return myCell;
-    });
-        
+                        //Add text as tooltip so that user can read text without editing it.
+                        Tooltip tooltip = new Tooltip(history);
+                        tooltip.setWrapText(true);
+                        tooltip.prefWidthProperty().bind(this.widthProperty());
+                        this.setTooltip(tooltip);
+                    }
+                }
+            };
+            return myCell;
+        });
+
         populatePayrollTable();
     }
 
@@ -556,38 +560,38 @@ public class EmployeeController implements Initializable {
             payrollAdvance.setText("00.0");
             Payroll payroll = PayrollRepository.getUniqueInstance().fetchPayrollByMonthYear(
                     employee.getEmployeeId(),
-                    payrollMonth.getValue(), 
+                    payrollMonth.getValue(),
                     Integer.valueOf(payrollYear.getValue()));
-            if(payroll != null){
+            if (payroll != null) {
                 payrollBonus.setText(String.valueOf(payroll.getBonus()));
                 payrollId.setText(String.valueOf(payroll.getId()));
                 double salaryValue = payroll.getSalary();
-                if(payroll.getSalary() ==0){
+                if (payroll.getSalary() == 0) {
                     salaryValue = employee.getSalary();
-                }else if(payroll.getSalary() > 0){
+                } else if (payroll.getSalary() > 0) {
                     makePayrollFieldsEditable(false);
-                } 
+                }
                 double netPay = (salaryValue + payroll.getBonus()) - payroll.getAdvance();
                 payrollNetPay.setText(String.valueOf(netPay));
                 payrollAdvance.setUserData(payroll.getAdvanceHistory());
-            }else{
+            } else {
                 payrollNetPay.setText(String.valueOf(employee.getSalary()));
             }
             payrollEmployeeId.setEditable(false);
             payrollMonth.setDisable(true);
             payrollYear.setDisable(true);
-            if(EmployeeStatus.RESIGNED == employee.getEmployeeStatus()){
+            if (EmployeeStatus.RESIGNED == employee.getEmployeeStatus()) {
                 makePayrollFieldsEditable(false);
             }
-        }else{
+        } else {
             payrollEmployeeId.clear();
         }
     }
 
     @FXML
     private void onPayrollResetClick(ActionEvent event) {
-        
-       clearAllPayrollFields();
+
+        clearAllPayrollFields();
     }
 
     @FXML
@@ -605,26 +609,32 @@ public class EmployeeController implements Initializable {
             payroll.setLastName(payrollLastName.getText());
             payroll.setMonth(payrollMonth.getValue());
             payroll.setYear(Integer.valueOf(payrollYear.getValue()));
-            if(StringUtils.isNotNullCheckSpace(payrollSalary.getText()))
+            if (StringUtils.isNotNullCheckSpace(payrollSalary.getText())) {
                 payroll.setSalary(Double.valueOf(payrollSalary.getText()));
-            if(StringUtils.isNotNullCheckSpace(payrollNetPay.getText()))
+            }
+            if (StringUtils.isNotNullCheckSpace(payrollNetPay.getText())) {
                 payroll.setNetPay(Double.valueOf(payrollNetPay.getText()));
-            if(StringUtils.isNotNullCheckSpace(payrollAdvance.getText()))
-                payroll.setAdvance(Double.valueOf(payrollAdvance.getText()));
-            if(StringUtils.isNotNullCheckSpace(payrollBonus.getText()))
+            }
+            if (StringUtils.isNotNullCheckSpace(payrollBonus.getText())) {
                 payroll.setBonus(Double.valueOf(payrollBonus.getText()));
+            }
+
+            updateTotalAdvance(payroll);
+            payroll.setAdvanceHistory(updateAdvanceHistory(false));
+            payroll.setNetPay((payroll.getSalary() + payroll.getBonus()) - payroll.getAdvance());
+            payrollNetPay.setText(String.valueOf(payroll.getNetPay()));
             TransactionStatus status;
             if (StringUtils.isNotNullCheckSpace(payrollId.getText())) {
                 payroll.setId(Integer.valueOf(payrollId.getText()));
                 status = PayrollRepository.getUniqueInstance().update(payroll);
-            }else{
+            } else {
                 status = PayrollRepository.getUniqueInstance().create(payroll);
             }
             AlertHelper.showMessage(status);
             if (status.isSuccess()) {
                 makePayrollFieldsEditable(false);
                 populatePayrollTable();
-                        
+
             }
         }
     }
@@ -633,7 +643,7 @@ public class EmployeeController implements Initializable {
     private void onPayAdvanceButtonClick(ActionEvent event) {
 
         if (StringUtils.isNotNullCheckSpace(payrollAdvance.getText())
-                && StringUtils.isNotNullCheckSpace(payrollEmployeeId.getText()) 
+                && StringUtils.isNotNullCheckSpace(payrollEmployeeId.getText())
                 && Double.valueOf(payrollAdvance.getText()) > 0) {
             Payroll payroll = new Payroll();
             payroll.setEmployeeId(Integer.valueOf(payrollEmployeeId.getText()));
@@ -642,13 +652,13 @@ public class EmployeeController implements Initializable {
             payroll.setMonth(payrollMonth.getValue());
             payroll.setYear(Integer.valueOf(payrollYear.getValue()));
             payroll.setAdvance(Double.valueOf(payrollAdvance.getText()));
-            payroll.setAdvanceHistory(updateAdvanceHistory());
+            payroll.setAdvanceHistory(updateAdvanceHistory(true));
             TransactionStatus status;
             if (StringUtils.isNotNullCheckSpace(payrollId.getText())) {
                 payroll.setId(Integer.valueOf(payrollId.getText()));
                 updateTotalAdvance(payroll);
                 status = PayrollRepository.getUniqueInstance().update(payroll);
-            }else{
+            } else {
                 status = PayrollRepository.getUniqueInstance().create(payroll);
             }
             AlertHelper.showMessage(status);
@@ -660,7 +670,7 @@ public class EmployeeController implements Initializable {
     }
 
     private void makePayrollFieldsEditable(boolean flag) {
-        
+
         payrollAdvance.setEditable(flag);
         payrollBonus.setEditable(flag);
         payrollMonth.setDisable(!flag);
@@ -671,7 +681,7 @@ public class EmployeeController implements Initializable {
     }
 
     private void clearAllPayrollFields() {
-         payrollEmployeeId.clear();
+        payrollEmployeeId.clear();
         payrollAdvance.clear();
         payrollBonus.clear();
         payrollNetPay.clear();
@@ -687,73 +697,81 @@ public class EmployeeController implements Initializable {
         payrollEmployeeStatus.setText("");
         makePayrollFieldsEditable(true);
         payrollEmployeeId.setEditable(true);
+        payrollAdvance.setUserData(null);
     }
 
     private void populatePayrollTable() {
         payrollObservableList.clear();
         List<Payroll> payrolls = PayrollRepository.getUniqueInstance().fetchAllPayrollRecords();
-        if(payrolls != null && !payrolls.isEmpty()){
-            
+        if (payrolls != null && !payrolls.isEmpty()) {
+
             payrolls.stream().forEach((payroll) -> {
                 payrollObservableList.add(buildPayrollViewObject(payroll));
             });
             payrollTable.setItems(payrollObservableList);
-        
+
         }
     }
-    
-    private PayrollViewObject buildPayrollViewObject(Payroll payroll){
-        
+
+    private PayrollViewObject buildPayrollViewObject(Payroll payroll) {
+
         PayrollViewObject payrollViewObject = new PayrollViewObject(
-                String.valueOf(payroll.getEmployeeId()), 
-                payroll.getFirstName(), 
-                payroll.getLastName(), 
-                payroll.getMonth(), 
-                String.valueOf(payroll.getYear()), 
-                String.valueOf(payroll.getNetPay()), 
+                String.valueOf(payroll.getEmployeeId()),
+                payroll.getFirstName(),
+                payroll.getLastName(),
+                payroll.getMonth(),
+                String.valueOf(payroll.getYear()),
+                String.valueOf(payroll.getNetPay()),
                 String.valueOf(payroll.getBonus()),
                 String.valueOf(payroll.getAdvance()),
                 prettifyAdvanceHistory(payroll.getAdvanceHistory()));
         return payrollViewObject;
     }
 
-    private String updateAdvanceHistory() {
-        
+    private String updateAdvanceHistory(boolean isPayAdvance) {
+
         StringBuilder advanceHistory = new StringBuilder();
-        String newEntry = payrollAdvance.getText() + " : " + DateHelper.format(DateHelper.getToday());
-        if(payrollAdvance.getUserData() != null){
-            String currentHistory = (String) payrollAdvance.getUserData();
-            advanceHistory.append(currentHistory).append(",");
+        String currentHistory = "";
+        if (payrollAdvance.getUserData() != null) {
+            currentHistory = (String) payrollAdvance.getUserData();
+            if(StringUtils.isNotNullCheckSpace(currentHistory)){
+                advanceHistory.append(currentHistory);
+            }
         }
-        advanceHistory.append(newEntry);
+        if (isPayAdvance) {
+            String newEntry = payrollAdvance.getText() + " : " + DateHelper.format(DateHelper.getToday());
+            if(advanceHistory.length() > 0){
+                advanceHistory.append(",");
+            }
+            advanceHistory.append(newEntry);
+        }
+
         return advanceHistory.toString();
     }
 
     private void updateTotalAdvance(Payroll payroll) {
-        
+
         double existingAdvance = new Double("0.0");
-        if(payrollAdvance.getUserData() != null){
+        if (payrollAdvance.getUserData() != null) {
             String[] payrollHistory = payrollAdvance.getUserData().toString().split(",");
-            if(payrollHistory != null && payrollHistory.length >0){
-                for(String current: payrollHistory){
+            if (payrollHistory != null && payrollHistory.length > 0) {
+                for (String current : payrollHistory) {
                     String[] advance = current.split(":");
-                    if(advance != null && advance.length > 0 ){
-                        
-                    double eachAdvance = new Double(advance[0]);
-                    if(!Double.isNaN(eachAdvance)){
-                        existingAdvance += eachAdvance;
+                    if (advance != null && advance.length > 0) {
+
+                        double eachAdvance = new Double(advance[0]);
+                        if (!Double.isNaN(eachAdvance)) {
+                            existingAdvance += eachAdvance;
+                        }
                     }
                 }
-                }
-                
             }
         }
-        payroll.setAdvance(payroll.getAdvance()+existingAdvance);
+        payroll.setAdvance(payroll.getAdvance() + existingAdvance);
     }
 
-
     private String prettifyAdvanceHistory(String advanceHistory) {
-        
+
         return StringUtils.isNotNullCheckSpace(advanceHistory) ? advanceHistory.replaceAll(",", "\n") : "";
     }
 }

@@ -15,13 +15,21 @@ public class UpcomingEventsViewObject {
     private String receiptNumber;
     
     private String mobileNumber;
+    
+    private String remarks;
 
-    public UpcomingEventsViewObject(String eventDate, String category, String events, String receiptNumber, String mobileNumber) {
+    public UpcomingEventsViewObject(String eventDate, 
+            String category, 
+            String events, 
+            String receiptNumber, 
+            String mobileNumber, 
+            String remarks) {
         this.eventDate = eventDate;
         this.category = category;
         this.events = events;
         this.receiptNumber = receiptNumber;
         this.mobileNumber = mobileNumber;
+        this.remarks = remarks;
     }
 
     public String getEventDate() {
@@ -62,6 +70,14 @@ public class UpcomingEventsViewObject {
 
     public void setMobileNumber(String mobileNumber) {
         this.mobileNumber = mobileNumber;
+    }
+
+    public String getRemarks() {
+        return remarks;
+    }
+
+    public void setRemarks(String remarks) {
+        this.remarks = remarks;
     }
     
     
