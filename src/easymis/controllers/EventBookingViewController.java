@@ -278,6 +278,7 @@ public class EventBookingViewController implements Initializable {
     private void resetEventDetails(ActionEvent event) {
         makeFieldsEditable(true);
         clearFields();
+        initActionComboBox();
     }
 
     private void bookEventInUpdate() {
