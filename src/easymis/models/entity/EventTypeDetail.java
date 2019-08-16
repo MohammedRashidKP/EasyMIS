@@ -12,8 +12,6 @@ package easymis.models.entity;
 
     private boolean receptionSelected;
 
-    private boolean acSelected;
-
     private boolean additionalACSelected;
 
     private boolean ishaSelected;
@@ -42,14 +40,6 @@ package easymis.models.entity;
 
         public void setReceptionSelected(boolean receptionSelected) {
             this.receptionSelected = receptionSelected;
-        }
-
-        public boolean isAcSelected() {
-            return acSelected;
-        }
-
-        public void setAcSelected(boolean acSelected) {
-            this.acSelected = acSelected;
         }
 
         public boolean isAdditionalACSelected() {

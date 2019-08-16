@@ -9,7 +9,6 @@ public enum EventType {
     MEHANDI("Mehandi"),
     RECEPTION_3_PM("3 PM Reception"),
     RECEPTION_5_PM("5:30 PM Reception"),
-    NORMAL_AC("AC"),
     ADDITIONAL_AC("Additional AC"),
     ISHA_HALL_AC_DAY("Isha Hall Day"),
     ISHA_HALL_AC_EVE("Isha Hall Evening"),

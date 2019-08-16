@@ -192,12 +192,6 @@ public class SettingsController implements Initializable {
             setting.setAttributeValue(ishaHallEve.getText());
             settingsList.add(setting);
         }
-        if (StringUtils.isNotNullCheckSpace(normalAC.getText())) {
-            Settings setting = new Settings();
-            setting.setAttribute(EventType.NORMAL_AC.toString());
-            setting.setAttributeValue(normalAC.getText());
-            settingsList.add(setting);
-        }
         if (StringUtils.isNotNullCheckSpace(additionalAC.getText())) {
             Settings setting = new Settings();
             setting.setAttribute(EventType.ADDITIONAL_AC.toString());
@@ -255,8 +249,6 @@ public class SettingsController implements Initializable {
                 ishaHallEve.setText(setting.getAttributeValue());
             } else if(setting.getAttribute().equals(EventType.NICA_LONGUE_AC.toString())){
                 nicaHall.setText(setting.getAttributeValue());
-            } else if(setting.getAttribute().equals(EventType.NORMAL_AC.toString())){
-                normalAC.setText(setting.getAttributeValue());
             } else if(setting.getAttribute().equals(EventType.ADDITIONAL_AC.toString())){
                 additionalAC.setText(setting.getAttributeValue());
             }
